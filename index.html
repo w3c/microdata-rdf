@@ -9,25 +9,34 @@
   out in the same tree and use relative links so that they'll work offline,
   -->
 <script type="text/javascript"
-  src="http://darobin.github.com/respec/builds/respec-w3c-common.js" class="remove">
+  src="http://www.w3.org/Tools/respec/respec-w3c-common" async class="remove">
  </script>
 <script type="text/javascript" class="remove">
 // <!--
-    var preProc = {
-        apply:  function(c) {
-            // extend the bibliography entries
-            berjon.biblio["MICRODATA"] = "<cite><a href=\"http://www.w3.org/TR/2012/WD-microdata-20120329/\">HTML Microdata</a></cite> Ian Hickson Editor. W3C Working Draft. (Work in progress). 29 March 2012. This edition of the HTML Microdata specification is http://www.w3.org/TR/2012/WD-microdata-20120329/. The <a href=\"http://www.w3.org/TR/microdata/\">latest edition of HTML Microdata</a> is available at http://www.w3.org/TR/microdata/";
-            berjon.biblio["MICRODATA-RDF-SUPPLEMENT"] = "<cite><a href=\"http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-supplement/index.html\">Microdata to RDF Supplement</a></cite> Gregg Kellogg Editor. World Wide Web Consortium (work in progress). 22 January 2012.";
-            berjon.biblio["MICRODATA-RDF-TESTS"] = "<cite><a href=\"http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/index.html\">Microdata to RDF Tests</a></cite> Gregg Kellogg, Ivan Herman Editors. World Wide Web Consortium (work in progress). 22 March 2012.";
-        }
-    } ;
-
-
       var respecConfig = {
+          localBiblio: {
+            "MICRODATA-RDF-SUPPLEMENT": {
+              "authors": ["Gregg Kellogg"],
+              "title": "Microdata to RDF Supplement",
+              "href": "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-supplement/index.html",
+              "rawDate": "2012-01-22",
+              "status": "unofficial",
+              "publisher": "W3C"
+            },
+            "MICRODATA-RDF-TESTS": {
+              "authors": ["Gregg Kellogg", "Ivan Herman"],
+              "title": "Microdata to RDF Tests",
+              "href": "http://w3c.github.io/microdata-rdf/blob/gh-pages/tests/index.html",
+              "rawDate": "2012-01-22",
+              "status": "unofficial",
+              "publisher": "W3C"
+            }
+          },
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          specStatus:           "IG-NOTE",
+          //specStatus:           "IG-NOTE",
+          specStatus:           "ED",
           charterDisclosureURI: "http://www.w3.org/2006/07/swig-charter#Ipr",
-          publishDate:          "2012-10-09",
+          //publishDate:          "2012-10-09",
           copyrightStart:       "2011",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
@@ -36,35 +45,20 @@
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
-          previousPublishDate:  "2012-03-08",
+          previousPublishDate:  "2012-10-09",
           previousMaturity:     "IG-NOTE",
-          previousURI:          "http://www.w3.org/TR/2012/NOTE-microdata-rdf-20120308/",
-          diffTool:             "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+          previousURI:          "http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/",
 
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:           "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/index.html",
+          edDraftURI:           "http://w3c.github.io/microdata-rdf/blob/gh-pages/index.html",
+          testSuiteURI:         "http://w3c.github.io/microdata-rdf/blob/gh-pages/tests/index.html",
 
-          // if this is a LCWD, uncomment and set the end of its review period
-          // lcEnd: "2009-08-05",
+          issueBase: "http://github.com/w3c/html-data/issues",
 
-          // if you want to have extra CSS, append them to this list
-          // it is recommended that the respec.css stylesheet be kept
-          //extraCSS:             [
-          //    "http://dev.w3.org/2009/dap/ReSpec.js/css/respec.css"
-          //],
-
-          issueBase: "http://www.w3.org/2011/htmldata/track/issues/",
-
-          // editors, add as many as you like
-          // only "name" is required
           editors:  [
               { name: "Gregg Kellogg", url: "http://greggkellogg.net/",
                 company: "Kellogg Associates" }
           ],
-
-          // authors, add as many as you like.
-          // This is optional, uncomment if you have authors as well as editors.
-          // only "name" is required. Same format as editors.
 
           authors:  [
               { name: "Ian Hickson", url: "mailto:ian@hixie.ch",
@@ -86,15 +80,28 @@
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "semantic-web",
 
-          // URI of the patent status for this WG, for Rec-track documents
-          // !!!! IMPORTANT !!!!
-          // This is important for Rec-track documents, do not copy a patent URI from a random
-          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
-          // Team Contact.
-          wgPatentURI:  "",
-          maxTocLevel: 4,
-          preProcess: [ preProc ]
-          , alternateFormats: [ {uri: "diff-20120308.html", label: "diff to previous version"} ]
+          wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/68238/status",
+          otherLinks: [{
+            key: "Repository",
+            data: [{
+                value: "We are on Github",
+                href: "https://github.com/w3c/microdata-rdf"
+            }, {
+                value: "File a bug",
+                href: "https://github.com/w3c/microdata-rdf/issues"
+            }]
+            }, {
+            key: "Changes",
+              data: [{
+                value: "Diff to previous version"
+                //, href: "diff-20140327.html"
+              }, {
+                value: "Commit history",
+                href: "https://github.com/w3c/microdata-rdf/commits/gh-pages"
+            }]
+          }],
+          maxTocLevel: 4
+          //, alternateFormats: [ {uri: "diff-20120308.html", label: "diff to previous version"} ]
       };
 
       function _esc(s) {
@@ -136,7 +143,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 </style>
 </head>
 
-<body>
+<body lang="en">
 <section id="abstract">
   <p>HTML microdata [[!MICRODATA]] is an extension to HTML used to embed machine-readable data into HTML documents.
     Whereas the microdata specification describes a means of markup, the output format is JSON. This specification
@@ -268,7 +275,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
 <section class="informative">
   <h2>Issues</h2>
   <p>Decisions or open issues in the specification are tracked on the
-    <a href="http://www.w3.org/2011/htmldata/track/issues">Task Force Issue Tracker</a>. These include the
+    <a href="http://www.w3.org/2011/htmldata/track/issues">GitHub Issue Tracker</a>. These include the
     following:</p>
   <p class="issue" data-number="1">Vocabulary specific parsing for Microdata.
     This specification attempts to create generic
