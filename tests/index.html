@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Microdata to RDF Tests</title>
+<!--
+  === NOTA BENE ===
+  For the three scripts below, if your spec resides on dev.w3 you can check them
+  out in the same tree and use relative links so that they'll work offline,
+  --><script type="text/javascript" src="http://darobin.github.com/respec/builds/respec-w3c-common.js" class="remove">
+ </script><script type="text/javascript" class="remove">
+
+      var respecConfig = {
+          // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+          specStatus:           "unofficial",
+          charterDisclosureURI: "http://www.w3.org/2006/07/swig-charter#Ipr",
+          //publishDate:          "2012-02-13",
+          //copyrightStart:       "2011",
+
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "microdata-rdf-tests",
+          subtitle:             "Test suite for microdata to RDF",
+
+          edDraftURI:           "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/index.html",
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // if you want to have extra CSS, append them to this list
+          // it is recommended that the respec.css stylesheet be kept
+          extraCSS:             [
+              "http://dev.w3.org/2009/dap/ReSpec.js/css/respec.css"
+          ],
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors:  [
+              { name: "Gregg Kellogg", url: "http://greggkellogg.net/",
+                company: "Kellogg Associates" },
+              { name: "Iván Herman", url: "http://www.w3.org/People/Ivan/",
+                company: "W3C", companyURL: "http://www.w3.org" }
+          ],
+
+          // authors, add as many as you like.
+          // This is optional, uncomment if you have authors as well as editors.
+          // only "name" is required. Same format as editors.
+
+          //authors:  [],
+
+          // name of the WG
+          wg:           "HTML Data Task Force, Semantic Web Interest Group",
+
+          // URI of the public WG page
+          wgURI:        "http://www.w3.org/2001/sw/interest/",
+
+          // name (with the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "public-html-data-tf",
+
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          maxTocLevel: 4,
+          //alternateFormats: [ {uri: "diff-20111118.html", label: "diff to previous version"} ],
+      };
+  </script>
+</head>
+<body>
+<section id="abstract">
+  <p>This document serves as the manifest describing [[MICRODATA-RDF]] tests to be used by
+    processor implementations claiming conformance.</p>
+  <p>Alternative versions of the test manifest can be found in <a href="manifest.ttl">Turtle</a>
+    and <a href="manifest.jsonld">JSON-LD</a>.</p>  
+</section>
+<section><h2>Running tests</h2>
+  <p>Tests are described with individual HTML files containing microdata, which when processed,
+    generates exactly the triples specified in the result file.
+    <a href="#positive-tests">Positive processor
+    tests</a> tests MUST generate the specified triples and <a href="#negative-tests">Negative processor tests</a>
+    MUST NOT generate the specified triples.</p>
+  <p>All tests should be performed with an assumed base of <code>http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/</code>
+    along with the base-name of the specific test document (excluding any format extension).</p>
+  <p>This document serves as the test manifest for both positive and negative parser tests using the
+    <a href="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#">Data Access Test Manifest</a>
+    and <a href="http://www.w3.org/2001/sw/DataAccess/tests/test-query#">Data Access Test Query</a> vocabularies.</p>
+  <p>Properly parsing this document with a conforming Microdata to RDF processor, as well as the individual
+    test cases requires that the processor use the <a href="test-registry.json">Test Registry</a>. Additionally,
+    individual tests may require that the processor use a different registry using the
+    an additional <code>registry</code> property, indicating the URL of a registry to load to run the test,
+    typically a file co-located and numbered along with the test itself.</p>
+  <section><h3>Example Test Entry</h3>
+    <p>An example test entry parsed from this manifest might have the following form:</p>
+    <pre class="example">
+@prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs:	&lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix mf:     &lt;http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#&gt; .
+@prefix qt:     &lt;http://www.w3.org/2001/sw/DataAccess/tests/test-query#&gt; .
+
+[ rdf:type mf:Manifest ;
+  rdfs:comment &quot;Turtle good syntax test cases (must pass)&quot; ;
+  mf:entries (
+    [ a mf:ManifestEntry;
+      mf:name &quot;Test 0001&quot;;
+      rdfs:comment  &quot;Item with no itemtype and literal itemprop&quot;;
+      mf:action [qt:data &lt;0001.html&gt;];
+      mf:registry &lt;test-registry.json&gt;;
+      mf:result &lt;0001.ttl&gt;
+      mf:positiveTest &quot;true&quot;;
+    ]
+  )
+] .
+    </pre>
+  </section>
+</section>
+
+<section id="positive-tests"
+         itemscope="true"
+         itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#Manifest">
+  <h2 itemprop="http://www.w3.org/2000/01/rdf-schema#comment">Positive processor tests</h2>
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0001</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Item with no itemtype and literal itemprop</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0001.html">input</a>
+  </span> |
+  <a itemprop="result" href="0001.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0002</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Item with no itemtype and 2 elements with equivalent itemprop</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0002.html">input</a>
+  </span> |
+  <a itemprop="result" href="0002.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0003</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Item with itemprop having two properties</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0003.html">input</a>
+  </span> |
+  <a itemprop="result" href="0003.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0004</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of meta and @content</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0004.html">input</a>
+  </span> |
+  <a itemprop="result" href="0004.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0005</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of audio and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0005.html">input</a>
+  </span> |
+  <a itemprop="result" href="0005.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0006</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of embed and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0006.html">input</a>
+  </span> |
+  <a itemprop="result" href="0006.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0007</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of iframe and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0007.html">input</a>
+  </span> |
+  <a itemprop="result" href="0007.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0008</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of img and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0008.html">input</a>
+  </span> |
+  <a itemprop="result" href="0008.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0009</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of source and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0009.html">input</a>
+  </span> |
+  <a itemprop="result" href="0009.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0010</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of track and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0010.html">input</a>
+  </span> |
+  <a itemprop="result" href="0010.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0011</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of video and @src</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0011.html">input</a>
+  </span> |
+  <a itemprop="result" href="0011.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0012</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of a and @href</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0012.html">input</a>
+  </span> |
+  <a itemprop="result" href="0012.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0013</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of area and @href</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0013.html">input</a>
+  </span> |
+  <a itemprop="result" href="0013.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0014</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of link and @href</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0014.html">input</a>
+  </span> |
+  <a itemprop="result" href="0014.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0015</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of object and @data</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0015.html">input</a>
+  </span> |
+  <a itemprop="result" href="0015.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0016</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 1 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_1.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_1.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0017</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 2 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_2.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_2.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0018</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 3 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_3.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_3.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0019</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 4 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_4.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_4.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0020</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 5 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_5.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_5.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0021</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 6 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_6.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_6.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0022</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 7 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_7.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_7.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0023</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 8 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_8.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_8.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0024</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 9 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_9.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_9.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0025</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 10 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_10.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_10.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0026</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 11 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_11.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_11.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0027</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 12 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_12.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_12.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0028</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 13 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_13.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_13.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0029</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 14 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_14.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_14.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0030</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 15 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_15.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_15.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0031</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 16 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_16.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_16.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0032</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 17 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_17.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_17.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0033</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 18 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_18.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_18.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0034</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 19 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_19.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_19.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0035</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 20 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_20.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_20.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0036</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 21 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_21.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_21.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0037</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 22 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_22.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_22.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0038</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 23 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_23.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_23.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0039</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 24 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_24.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_24.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0040</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 25 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_25.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_25.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0041</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 26 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_26.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_26.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0042</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 27 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_27.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_27.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0043</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 28 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_28.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_28.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0044</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 29 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_29.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_29.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0045</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Web Schemas TF: Schema.org tests: test 30 (format md)</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="sdo_eg_md_30.html">input</a>
+  </span> |
+  <a itemprop="result" href="sdo_eg_md_30.ttl">result</a>
+  <link itemprop="registry" href="http://www.w3.org/ns/md"/>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0046</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of time with @datetime xsd:time</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0046.html">input</a>
+  </span> |
+  <a itemprop="result" href="0046.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0047</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of time with @datetime xsd:dateTime</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0047.html">input</a>
+  </span> |
+  <a itemprop="result" href="0047.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0048</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of time with @datetime xsd:duration</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0048.html">input</a>
+  </span> |
+  <a itemprop="result" href="0048.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0049</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Use of time with @datetime invalid</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0049.html">input</a>
+  </span> |
+  <a itemprop="result" href="0049.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0050</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >relative URL as object</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0050.html">input</a>
+  </span> |
+  <a itemprop="result" href="0050.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0051</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >relative URL as itemid</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0051.html">input</a>
+  </span> |
+  <a itemprop="result" href="0051.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0052</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >token property no @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0052.html">input</a>
+  </span> |
+  <a itemprop="result" href="0052.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0053</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >token property empty @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0053.html">input</a>
+  </span> |
+  <a itemprop="result" href="0053.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0054</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >token property and relative @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0054.html">input</a>
+  </span> |
+  <a itemprop="result" href="0054.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0055</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >token property and single @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0055.html">input</a>
+  </span> |
+  <a itemprop="result" href="0055.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0056</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >token property and multiple @itemtypes from different vocabularies</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0056.html">input</a>
+  </span> |
+  <a itemprop="result" href="0056.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0057</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >URI property no @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0057.html">input</a>
+  </span> |
+  <a itemprop="result" href="0057.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0058</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >URI property empty @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0058.html">input</a>
+  </span> |
+  <a itemprop="result" href="0058.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0059</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >URI property relative @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0059.html">input</a>
+  </span> |
+  <a itemprop="result" href="0059.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0060</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >URI property single @itemtype</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0060.html">input</a>
+  </span> |
+  <a itemprop="result" href="0060.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0061</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >inherited type and token property</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0061.html">input</a>
+  </span> |
+  <a itemprop="result" href="0061.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0062</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >@itemref to single id</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0062.html">input</a>
+  </span> |
+  <a itemprop="result" href="0062.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0063</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >@itemref generates property values</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0063.html">input</a>
+  </span> |
+  <a itemprop="result" href="0063.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0064</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >@itemref to single id with different types</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0064.html">input</a>
+  </span> |
+  <a itemprop="result" href="0064.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0065</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >@itemref to multiple ids</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0065.html">input</a>
+  </span> |
+  <a itemprop="result" href="0065.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0066</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >@itemref with chaining</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0066.html">input</a>
+  </span> |
+  <a itemprop="result" href="0066.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0067</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Shared @itemref</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0067.html">input</a>
+  </span> |
+  <a itemprop="result" href="0067.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0068</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Property URI generation (default) 1</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0068.html">input</a>
+  </span> |
+  <a itemprop="result" href="0068.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0069</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Property URI generation (default) 2</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0069.html">input</a>
+  </span> |
+  <a itemprop="result" href="0069.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0070</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Property URI generation (default) 3</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0070.html">input</a>
+  </span> |
+  <a itemprop="result" href="0070.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0071</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Property URI generation (contextual) 1</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0071.html">input</a>
+  </span> |
+  <a itemprop="result" href="0071.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0072</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Property URI generation (contextual) 2</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0072.html">input</a>
+  </span> |
+  <a itemprop="result" href="0072.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0073</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Vocabulary Expansion test with rdfs:subPropertyOf</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0073.html">input</a>
+  </span> |
+  <a itemprop="result" href="0073.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+<!-- Start Test Description -->
+<div itemprop="entries"
+     itemscope="true"
+     itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
+     class="test-entry">
+  <span itemprop="name">Test 0074</span>:
+  <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+    >Vocabulary Expansion test with owl:equivalentProperty</span>
+  (
+  <span itemprop="action"
+        itemscope="true"
+        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
+    <a itemprop="data" href="0074.html">input</a>
+  </span> |
+  <a itemprop="result" href="0074.ttl">result</a>
+  <meta itemprop="positiveTest" content="true"/>
+  )
+</div>
+<!-- End Test Description -->
+
+</section>
+
+<section id="negative-tests"
+         itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
+         itemscope="true"
+         itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#Manifest">
+  <h2 itemprop="http://www.w3.org/2000/01/rdf-schema#comment">Negative processor tests</h2>
+</section>
+</body>
+</html>

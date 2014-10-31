@@ -1,0 +1,1029 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "mf": "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
+    "mq": "http://www.w3.org/2001/sw/DataAccess/tests/test-query#",
+    "comment": "rdfs:comment",
+    "entries": {
+      "@id": "mf:entries",
+      "@container": "@list"
+    },
+    "name": "mf:name",
+    "action": "mf:action",
+    "data": {
+      "@id": "mq:data",
+      "@type": "@id"
+    },
+    "result": {
+      "@id": "mf:result",
+      "@type": "@id"
+    },
+    "registry": {
+      "@id": "mf:registry",
+      "@type": "@id"
+    },
+    "positiveTest": "mf:positiveTest"
+  },
+  "@graph": [
+    {
+      "@id": "_:ag7",
+      "@type": "mf:Manifest",
+      "comment": "Positive processor tests",
+      "entries": [
+        {
+          "@id": "_:u2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:u3",
+            "@type": "mq:QueryTest",
+            "data": "0001.html"
+          },
+          "comment": "Item with no itemtype and literal itemprop",
+          "name": "Test 0001",
+          "positiveTest": "true",
+          "result": "0001.ttl"
+        },
+        {
+          "@id": "_:v2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:v3",
+            "@type": "mq:QueryTest",
+            "data": "0002.html"
+          },
+          "comment": "Item with no itemtype and 2 elements with equivalent itemprop",
+          "name": "Test 0002",
+          "positiveTest": "true",
+          "result": "0002.ttl"
+        },
+        {
+          "@id": "_:z2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:z3",
+            "@type": "mq:QueryTest",
+            "data": "0003.html"
+          },
+          "comment": "Item with itemprop having two properties",
+          "name": "Test 0003",
+          "positiveTest": "true",
+          "result": "0003.ttl"
+        },
+        {
+          "@id": "_:aa2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:aa3",
+            "@type": "mq:QueryTest",
+            "data": "0004.html"
+          },
+          "comment": "Use of meta and @content",
+          "name": "Test 0004",
+          "positiveTest": "true",
+          "result": "0004.ttl"
+        },
+        {
+          "@id": "_:aa9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ab0",
+            "@type": "mq:QueryTest",
+            "data": "0005.html"
+          },
+          "comment": "Use of audio and @src",
+          "name": "Test 0005",
+          "positiveTest": "true",
+          "result": "0005.ttl"
+        },
+        {
+          "@id": "_:ab9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac0",
+            "@type": "mq:QueryTest",
+            "data": "0006.html"
+          },
+          "comment": "Use of embed and @src",
+          "name": "Test 0006",
+          "positiveTest": "true",
+          "result": "0006.ttl"
+        },
+        {
+          "@id": "_:ac6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac7",
+            "@type": "mq:QueryTest",
+            "data": "0007.html"
+          },
+          "comment": "Use of iframe and @src",
+          "name": "Test 0007",
+          "positiveTest": "true",
+          "result": "0007.ttl"
+        },
+        {
+          "@id": "_:y6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y7",
+            "@type": "mq:QueryTest",
+            "data": "0008.html"
+          },
+          "comment": "Use of img and @src",
+          "name": "Test 0008",
+          "positiveTest": "true",
+          "result": "0008.ttl"
+        },
+        {
+          "@id": "_:x6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x7",
+            "@type": "mq:QueryTest",
+            "data": "0009.html"
+          },
+          "comment": "Use of source and @src",
+          "name": "Test 0009",
+          "positiveTest": "true",
+          "result": "0009.ttl"
+        },
+        {
+          "@id": "_:ae2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x8",
+            "@type": "mq:QueryTest",
+            "data": "0010.html"
+          },
+          "comment": "Use of track and @src",
+          "name": "Test 0010",
+          "positiveTest": "true",
+          "result": "0010.ttl"
+        },
+        {
+          "@id": "_:ae9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y3",
+            "@type": "mq:QueryTest",
+            "data": "0011.html"
+          },
+          "comment": "Use of video and @src",
+          "name": "Test 0011",
+          "positiveTest": "true",
+          "result": "0011.ttl"
+        },
+        {
+          "@id": "_:w8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:w9",
+            "@type": "mq:QueryTest",
+            "data": "0012.html"
+          },
+          "comment": "Use of a and @href",
+          "name": "Test 0012",
+          "positiveTest": "true",
+          "result": "0012.ttl"
+        },
+        {
+          "@id": "_:af3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:af4",
+            "@type": "mq:QueryTest",
+            "data": "0013.html"
+          },
+          "comment": "Use of area and @href",
+          "name": "Test 0013",
+          "positiveTest": "true",
+          "result": "0013.ttl"
+        },
+        {
+          "@id": "_:ag4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ag5",
+            "@type": "mq:QueryTest",
+            "data": "0014.html"
+          },
+          "comment": "Use of link and @href",
+          "name": "Test 0014",
+          "positiveTest": "true",
+          "result": "0014.ttl"
+        },
+        {
+          "@id": "_:ag8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ah8",
+            "@type": "mq:QueryTest",
+            "data": "0015.html"
+          },
+          "comment": "Use of object and @data",
+          "name": "Test 0015",
+          "positiveTest": "true",
+          "result": "0015.ttl"
+        },
+        {
+          "@id": "_:ag9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ah4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_1.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 1 (format md)",
+          "name": "Test 0016",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_1.ttl"
+        },
+        {
+          "@id": "_:af8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:af5",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_2.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 2 (format md)",
+          "name": "Test 0017",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_2.ttl"
+        },
+        {
+          "@id": "_:af1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:w7",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_3.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 3 (format md)",
+          "name": "Test 0018",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_3.ttl"
+        },
+        {
+          "@id": "_:ae7",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ae5",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_4.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 4 (format md)",
+          "name": "Test 0019",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_4.ttl"
+        },
+        {
+          "@id": "_:ad9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ad6",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_5.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 5 (format md)",
+          "name": "Test 0020",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_5.ttl"
+        },
+        {
+          "@id": "_:ad3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y5",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_6.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 6 (format md)",
+          "name": "Test 0021",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_6.ttl"
+        },
+        {
+          "@id": "_:ac9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_7.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 7 (format md)",
+          "name": "Test 0022",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_7.ttl"
+        },
+        {
+          "@id": "_:ab7",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ab4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_8.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 8 (format md)",
+          "name": "Test 0023",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_8.ttl"
+        },
+        {
+          "@id": "_:aa7",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:aa4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_9.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 9 (format md)",
+          "name": "Test 0024",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_9.ttl"
+        },
+        {
+          "@id": "_:z7",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:z4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_10.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 10 (format md)",
+          "name": "Test 0025",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_10.ttl"
+        },
+        {
+          "@id": "_:v5",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:v0",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_11.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 11 (format md)",
+          "name": "Test 0026",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_11.ttl"
+        },
+        {
+          "@id": "_:u5",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:u0",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_12.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 12 (format md)",
+          "name": "Test 0027",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_12.ttl"
+        },
+        {
+          "@id": "_:w6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:w3",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_13.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 13 (format md)",
+          "name": "Test 0028",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_13.ttl"
+        },
+        {
+          "@id": "_:v8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t3",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_14.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 14 (format md)",
+          "name": "Test 0029",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_14.ttl"
+        },
+        {
+          "@id": "_:ah0",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ah5",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_15.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 15 (format md)",
+          "name": "Test 0030",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_15.ttl"
+        },
+        {
+          "@id": "_:ag1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:af7",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_16.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 16 (format md)",
+          "name": "Test 0031",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_16.ttl"
+        },
+        {
+          "@id": "_:x9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y0",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_17.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 17 (format md)",
+          "name": "Test 0032",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_17.ttl"
+        },
+        {
+          "@id": "_:ae8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ae6",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_18.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 18 (format md)",
+          "name": "Test 0033",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_18.ttl"
+        },
+        {
+          "@id": "_:ae0",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ad7",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_19.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 19 (format md)",
+          "name": "Test 0034",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_19.ttl"
+        },
+        {
+          "@id": "_:ad2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y4",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_20.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 20 (format md)",
+          "name": "Test 0035",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_20.ttl"
+        },
+        {
+          "@id": "_:ac8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac3",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_21.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 21 (format md)",
+          "name": "Test 0036",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_21.ttl"
+        },
+        {
+          "@id": "_:ab6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ab2",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_22.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 22 (format md)",
+          "name": "Test 0037",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_22.ttl"
+        },
+        {
+          "@id": "_:aa6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:aa0",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_23.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 23 (format md)",
+          "name": "Test 0038",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_23.ttl"
+        },
+        {
+          "@id": "_:z5",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:z0",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_24.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 24 (format md)",
+          "name": "Test 0039",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_24.ttl"
+        },
+        {
+          "@id": "_:v1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:u7",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_25.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 25 (format md)",
+          "name": "Test 0040",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_25.ttl"
+        },
+        {
+          "@id": "_:u1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t7",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_26.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 26 (format md)",
+          "name": "Test 0041",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_26.ttl"
+        },
+        {
+          "@id": "_:w2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:v9",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_27.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 27 (format md)",
+          "name": "Test 0042",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_27.ttl"
+        },
+        {
+          "@id": "_:t1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t2",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_28.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 28 (format md)",
+          "name": "Test 0043",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_28.ttl"
+        },
+        {
+          "@id": "_:ah1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ag6",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_29.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 29 (format md)",
+          "name": "Test 0044",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_29.ttl"
+        },
+        {
+          "@id": "_:af6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:af2",
+            "@type": "mq:QueryTest",
+            "data": "sdo_eg_md_30.html"
+          },
+          "comment": "Web Schemas TF: Schema.org tests: test 30 (format md)",
+          "name": "Test 0045",
+          "positiveTest": "true",
+          "registry": "http://www.w3.org/ns/md",
+          "result": "sdo_eg_md_30.ttl"
+        },
+        {
+          "@id": "_:af0",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x0",
+            "@type": "mq:QueryTest",
+            "data": "0046.html"
+          },
+          "comment": "Use of time with @datetime xsd:time",
+          "name": "Test 0046",
+          "positiveTest": "true",
+          "result": "0046.ttl"
+        },
+        {
+          "@id": "_:ae4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ae3",
+            "@type": "mq:QueryTest",
+            "data": "0047.html"
+          },
+          "comment": "Use of time with @datetime xsd:dateTime",
+          "name": "Test 0047",
+          "positiveTest": "true",
+          "result": "0047.ttl"
+        },
+        {
+          "@id": "_:ad5",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x5",
+            "@type": "mq:QueryTest",
+            "data": "0048.html"
+          },
+          "comment": "Use of time with @datetime xsd:duration",
+          "name": "Test 0048",
+          "positiveTest": "true",
+          "result": "0048.ttl"
+        },
+        {
+          "@id": "_:y8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y9",
+            "@type": "mq:QueryTest",
+            "data": "0049.html"
+          },
+          "comment": "Use of time with @datetime invalid",
+          "name": "Test 0049",
+          "positiveTest": "true",
+          "result": "0049.ttl"
+        },
+        {
+          "@id": "_:ac2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac1",
+            "@type": "mq:QueryTest",
+            "data": "0050.html"
+          },
+          "comment": "relative URL as object",
+          "name": "Test 0050",
+          "positiveTest": "true",
+          "result": "0050.ttl"
+        },
+        {
+          "@id": "_:ab3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ab1",
+            "@type": "mq:QueryTest",
+            "data": "0051.html"
+          },
+          "comment": "relative URL as itemid",
+          "name": "Test 0051",
+          "positiveTest": "true",
+          "result": "0051.ttl"
+        },
+        {
+          "@id": "_:aa1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:z9",
+            "@type": "mq:QueryTest",
+            "data": "0052.html"
+          },
+          "comment": "token property no @itemtype",
+          "name": "Test 0052",
+          "positiveTest": "true",
+          "result": "0052.ttl"
+        },
+        {
+          "@id": "_:z6",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:v6",
+            "@type": "mq:QueryTest",
+            "data": "0053.html"
+          },
+          "comment": "token property empty @itemtype",
+          "name": "Test 0053",
+          "positiveTest": "true",
+          "result": "0053.ttl"
+        },
+        {
+          "@id": "_:u9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:u6",
+            "@type": "mq:QueryTest",
+            "data": "0054.html"
+          },
+          "comment": "token property and relative @itemtype",
+          "name": "Test 0054",
+          "positiveTest": "true",
+          "result": "0054.ttl"
+        },
+        {
+          "@id": "_:t9",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t6",
+            "@type": "mq:QueryTest",
+            "data": "0055.html"
+          },
+          "comment": "token property and single @itemtype",
+          "name": "Test 0055",
+          "positiveTest": "true",
+          "result": "0055.ttl"
+        },
+        {
+          "@id": "_:w4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:w0",
+            "@type": "mq:QueryTest",
+            "data": "0056.html"
+          },
+          "comment": "token property and multiple @itemtypes from different vocabularies",
+          "name": "Test 0056",
+          "positiveTest": "true",
+          "result": "0056.ttl"
+        },
+        {
+          "@id": "_:t4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t5",
+            "@type": "mq:QueryTest",
+            "data": "0057.html"
+          },
+          "comment": "URI property no @itemtype",
+          "name": "Test 0057",
+          "positiveTest": "true",
+          "result": "0057.ttl"
+        },
+        {
+          "@id": "_:ah2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ah6",
+            "@type": "mq:QueryTest",
+            "data": "0058.html"
+          },
+          "comment": "URI property empty @itemtype",
+          "name": "Test 0058",
+          "positiveTest": "true",
+          "result": "0058.ttl"
+        },
+        {
+          "@id": "_:ag2",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:af9",
+            "@type": "mq:QueryTest",
+            "data": "0059.html"
+          },
+          "comment": "URI property relative @itemtype",
+          "name": "Test 0059",
+          "positiveTest": "true",
+          "result": "0059.ttl"
+        },
+        {
+          "@id": "_:x3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x4",
+            "@type": "mq:QueryTest",
+            "data": "0060.html"
+          },
+          "comment": "URI property single @itemtype",
+          "name": "Test 0060",
+          "positiveTest": "true",
+          "result": "0060.ttl"
+        },
+        {
+          "@id": "_:y1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:y2",
+            "@type": "mq:QueryTest",
+            "data": "0061.html"
+          },
+          "comment": "inherited type and token property",
+          "name": "Test 0061",
+          "positiveTest": "true",
+          "result": "0061.ttl"
+        },
+        {
+          "@id": "_:ae1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ad8",
+            "@type": "mq:QueryTest",
+            "data": "0062.html"
+          },
+          "comment": "@itemref to single id",
+          "name": "Test 0062",
+          "positiveTest": "true",
+          "result": "0062.ttl"
+        },
+        {
+          "@id": "_:ad4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ad1",
+            "@type": "mq:QueryTest",
+            "data": "0063.html"
+          },
+          "comment": "@itemref generates property values",
+          "name": "Test 0063",
+          "positiveTest": "true",
+          "result": "0063.ttl"
+        },
+        {
+          "@id": "_:ad0",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ac5",
+            "@type": "mq:QueryTest",
+            "data": "0064.html"
+          },
+          "comment": "@itemref to single id with different types",
+          "name": "Test 0064",
+          "positiveTest": "true",
+          "result": "0064.ttl"
+        },
+        {
+          "@id": "_:ab8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ab5",
+            "@type": "mq:QueryTest",
+            "data": "0065.html"
+          },
+          "comment": "@itemref to multiple ids",
+          "name": "Test 0065",
+          "positiveTest": "true",
+          "result": "0065.ttl"
+        },
+        {
+          "@id": "_:aa8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:aa5",
+            "@type": "mq:QueryTest",
+            "data": "0066.html"
+          },
+          "comment": "@itemref with chaining",
+          "name": "Test 0066",
+          "positiveTest": "true",
+          "result": "0066.ttl"
+        },
+        {
+          "@id": "_:z8",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:z1",
+            "@type": "mq:QueryTest",
+            "data": "0067.html"
+          },
+          "comment": "Shared @itemref",
+          "name": "Test 0067",
+          "positiveTest": "true",
+          "result": "0067.ttl"
+        },
+        {
+          "@id": "_:v4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:u8",
+            "@type": "mq:QueryTest",
+            "data": "0068.html"
+          },
+          "comment": "Property URI generation (default) 1",
+          "name": "Test 0068",
+          "positiveTest": "true",
+          "result": "0068.ttl"
+        },
+        {
+          "@id": "_:u4",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t8",
+            "@type": "mq:QueryTest",
+            "data": "0069.html"
+          },
+          "comment": "Property URI generation (default) 2",
+          "name": "Test 0069",
+          "positiveTest": "true",
+          "result": "0069.ttl"
+        },
+        {
+          "@id": "_:w5",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:w1",
+            "@type": "mq:QueryTest",
+            "data": "0070.html"
+          },
+          "comment": "Property URI generation (default) 3",
+          "name": "Test 0070",
+          "positiveTest": "true",
+          "result": "0070.ttl"
+        },
+        {
+          "@id": "_:v7",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:t0",
+            "@type": "mq:QueryTest",
+            "data": "0071.html"
+          },
+          "comment": "Property URI generation (contextual) 1",
+          "name": "Test 0071",
+          "positiveTest": "true",
+          "result": "0071.ttl"
+        },
+        {
+          "@id": "_:ah3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ah7",
+            "@type": "mq:QueryTest",
+            "data": "0072.html"
+          },
+          "comment": "Property URI generation (contextual) 2",
+          "name": "Test 0072",
+          "positiveTest": "true",
+          "result": "0072.ttl"
+        },
+        {
+          "@id": "_:ag3",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:ag0",
+            "@type": "mq:QueryTest",
+            "data": "0073.html"
+          },
+          "comment": "Vocabulary Expansion test with rdfs:subPropertyOf",
+          "name": "Test 0073",
+          "positiveTest": "true",
+          "result": "0073.ttl"
+        },
+        {
+          "@id": "_:x1",
+          "@type": "mf:ManifestEntry",
+          "action": {
+            "@id": "_:x2",
+            "@type": "mq:QueryTest",
+            "data": "0074.html"
+          },
+          "comment": "Vocabulary Expansion test with owl:equivalentProperty",
+          "name": "Test 0074",
+          "positiveTest": "true",
+          "result": "0074.ttl"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+@prefix md: <http://www.w3.org/ns/md#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfa: <http://www.w3.org/ns/rdfa#> .
+@prefix schema: <http://schema.org/> .
+
+<sdo_eg_md_16.html> md:item (
+ [ a schema:Table;
+   schema:about "list of presidents";
+   schema:mainContentOfPage "true"]);
+   rdfa:usesVocabulary schema: .
