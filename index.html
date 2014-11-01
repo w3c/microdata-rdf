@@ -143,6 +143,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 .aref:before {content: "@"; }
 
 .strike {text-decoration: line-through;}
+.strike span.note {text-decoration: none;}
 </style>
 </head>
 
@@ -240,6 +241,8 @@ this draft as a new version of the Interest Group Note after gathering and incor
 
 <section class="informative">
   <h2>Use Cases</h2>
+  <p class="issue">These use cases seem dated now. We should probably use this to describe
+    use cases from schema.org examples.</p>
   <p>During the period of the task force, a number of use cases were put forth for the use of microdata
     in generating RDF:</p>
   <ul>
@@ -292,6 +295,11 @@ this draft as a new version of the Interest Group Note after gathering and incor
     The consensus is that datatypes are only derived from HTML semantics, so that only &lt;time&gt; values have a datatype other than plain.</p>
   <!--<p class="issue" data-number="4">Should the <a>registry</a> allow a <a>name</a> or URL
     to be used as an alias for <a class="aref">itemid</a>.</p>-->
+  <p class="issue" data-number="5">Support <a class="aref">itemprop-reverse</a>.</p>
+  <p class="issue" data-number="6">Remove top-level md:item list.
+    This feature is of little value for RDF and adds unnecessary triples to the output.</p>
+
+  For each element <em>element</em> that has one or more <a>property names</a> and is one of the
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
     about the need for a <a>registry</a> and the details of processing. Among the options investigated by
@@ -677,15 +685,15 @@ this draft as a new version of the Interest Group Note after gathering and incor
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 @prefix schema: <http://schema.org/> .
 
-<> md:item [
-  a schema:MusicPlaylist;
-    schema:name "Classic Rock Playlist";
-    schema:byArtist ("Lynard Skynard" "AC/DC");
-    schema:numTracks "2";
-    schema:tracks _:track1, _:track2, (_:track1 _:track2)
-  ];
-  rdfa:usesVocabulary schema:
- .
+<> rdfa:usesVocabulary schema:
+  
+[ a schema:MusicPlaylist;
+  schema:name "Classic Rock Playlist";
+  schema:byArtist ("Lynard Skynard" "AC/DC");
+  schema:numTracks "2";
+  schema:tracks _:track1, _:track2, (_:track1 _:track2)
+] .
+  
 _:track1 a schema:MusicRecording;
   schema:byArtist ("Lynard Skynard");
   schema:name "Sweet Home Alabama";
@@ -800,12 +808,13 @@ _:track2 a schema:MusicRecording;
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 
-<> md:item (
-  [ a schema:Person;
-    schema:additionalType foaf:Person;
-    schema:email <mailto:mail@gmail.com>;
-    foaf:mbox <mailto:mail@gmail.com>]);
-  rdfa:usesVocabulary schema: .
+<>  rdfa:usesVocabulary schema: .
+
+[ a schema:Person;
+  schema:additionalType foaf:Person;
+  schema:email <mailto:mail@gmail.com>;
+  foaf:mbox <mailto:mail@gmail.com>
+] .
 
 schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
@@ -822,12 +831,12 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 
-<> md:item (
-  [ a schema:Person, foaf:Person;
-    schema:additionalType foaf:Person;
-    schema:email <mailto:mail@gmail.com>;
-    foaf:mbox <mailto:mail@gmail.com>]);
-  rdfa:usesVocabulary schema: .
+<> rdfa:usesVocabulary schema: .
+[ a schema:Person, foaf:Person;
+  schema:additionalType foaf:Person;
+  schema:email <mailto:mail@gmail.com>;
+  foaf:mbox <mailto:mail@gmail.com>
+] .  
 
 schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
@@ -1172,9 +1181,10 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       processing algorithm that results in the equivalent triples to those that the following
       algorithm generates:</p>
 
-    <p class="issue" data-number="6">Remove top-level md:item list.
-      This feature is of little value for RDF and adds unnecessary triples to the output.</p>
-    <p class="strike">Set <em>item list</em> to an empty list.</p>
+    <p class="strike">
+      <span class="note">(See <a href="#issues">issue 6</a>)</span>
+      Set <em>item list</em> to an empty list.</p>
+    </p>
 
     <ol class="algorithm">
       <li>For each element that is also a <a>top-level item</a> run the following algorithm:
@@ -1310,8 +1320,8 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         </ol>
       </li>
       <li>
-        <p class="issue" data-number="5">Support <a class="aref">itemprop-reverse</a>.</p>
-        For each element <em>element</em> that has one or more <a>property names</a> and is one of the
+        <span class="note">(See <a href="#issues">issue 5</a>).</span>
+        For each element <em>element</em> that has one or more <a>reverse property names</a> and is one of the
         <a title="reverse properties">reverse properties of the item</a> <em>item</em>, in the order those elements
         are given by the algorithm that returns the <a title="reverse properties">reverse properties of the item</a>,
         run the following substep:
@@ -1596,8 +1606,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 @prefix frbr: <http://purl.org/vocab/frbr/core#> .
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 
-<> md:item (<http://books.example.com/works/45U8QJGZSQKDH8N>) ;
-  rdfa:usesVocabulary frbr: .
+<> rdfa:usesVocabulary frbr: .
 
 <http://books.example.com/works/45U8QJGZSQKDH8N> a frbr:Work ;
   dc:creator "Wil Wheaton"@en ;
@@ -1649,18 +1658,18 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 @prefix hcard: <http://microformats.org/profile/hcard#> .
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
 
-<> md:item (
-  [ a <http://microformats.org/profile/hcard>;
-    hcard:fn "Princeton";
-    hcard:n [ hcard:given-name "Princeton" ];
-    hcard:adr _:a
-  ]
-  [ a <http://microformats.org/profile/hcard>;
-    hcard:fn "Trekkie";
-    hcard:n [ hcard:given-name "Trekkie" ];
-    hcard:adr _:a
-  ]) ;
-  rdfa:usesVocabulary <http://microformats.org/profile/hcard> .
+<> rdfa:usesVocabulary <http://microformats.org/profile/hcard> .
+
+[ a <http://microformats.org/profile/hcard>;
+  hcard:fn "Princeton";
+  hcard:n [ hcard:given-name "Princeton" ];
+  hcard:adr _:a
+] .
+[ a <http://microformats.org/profile/hcard>;
+  hcard:fn "Trekkie";
+  hcard:n [ hcard:given-name "Trekkie" ];
+  hcard:adr _:a
+] .
 
 _:a hcard:street-address "Avenue Q" .
 -->
@@ -1710,7 +1719,9 @@ _:a hcard:street-address "Avenue Q" .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 
-<> md:item ([ a schema:MusicPlaylist;
+<> rdfa:usesVocabulary schema: .
+
+[ a schema:MusicPlaylist;
   schema:name "Classic Rock Playlist";
   schema:byArtist ("Lynard Skynard" "AC/DC");
   schema:numTracks "2";
@@ -1725,8 +1736,8 @@ _:a hcard:street-address "Avenue Q" .
       schema:byArtist ("AC/DC");;
       schema:name "Shook you all Night Long";
       schema:url <shook-you-all-night-long>]
-  )]);
-  rdfa:usesVocabulary schema: .
+  )
+] .
   
 schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
