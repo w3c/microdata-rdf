@@ -328,12 +328,19 @@ this draft as a new version of the Interest Group Note after gathering and incor
       in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemprop</dfn></dt><dd>
-      An attribute used to identify one or more <a>name</a>s of an <a>item</a>s. An <a class="aref">itemprop</a>
-      contains a space separated list of <dfn>name</dfn>s which may either by <a>absolute URL</a>s or terms
+      An attribute used to identify one or more <a title="name">names</a> of an <a>item</a>s. An <a class="aref">itemprop</a>
+      contains a space separated list of <dfn title="name">names</dfn> which may either by <a>absolute URL</a>s or terms
       associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
       <a>item type</a>.
       (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#names:-the-itemprop-attribute">Items</a></cite>
       in [[!MICRODATA]]).
+    </dd>
+    <dt><dfn class="adef">itemprop-reverse</dfn></dt><dd>
+      An attribute used to identify one or more <a title="name">names</a> of an <a>item</a>s reversing the
+      sense of <a class="aref">itemprop</a>. An <a class="aref">itemprop-reverse</a>
+      contains a space separated list of <a title="name">names</a> which may either by <a>absolute URL</a>s or terms
+      associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
+      <a>item type</a>.
     </dd>
     <dt><dfn class="adef">itemref</dfn></dt><dd>
       An additional attribute on an element that references additional elements containing property
@@ -351,7 +358,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
       The <dfn>item type</dfn> of an <a>item</a> is the first value returned from
       <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>
       on the element.
-      The <a>item type</a> is also used to resolve non-URL <a>name</a>s to <a>absolute URL</a>s.
+      The <a>item type</a> is also used to resolve non-URL <a title="name">names</a> to <a>absolute URL</a>s.
       Available through the
       <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite> as
       <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>.
@@ -449,7 +456,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
 
 <section class="informative">
   <h2>Property URI Generation</h2>
-  <p>For <a>name</a>s which are not <a>absolute URL</a>s,
+  <p>For <a title="name">names</a> which are not <a>absolute URL</a>s,
     the <dfn><code>propertyURI</code></dfn> rule defines the algorithm for generating an <a>absolute URL</a>
     given an <a>evaluation context</a> including a <a>current type</a>, <a>current name</a> and
     <a>current vocabulary</a>.</p>
@@ -460,7 +467,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
     <dt><code>contextual</code></dt><dd>
       The <code>contextual</code> URI generation scheme guarantees that generated property URIs are
       unique based on the value of <a>current name</a>. This is
-      required as the microdata data model requires that <a>name</a>s are associated with specific
+      required as the microdata data model requires that <a title="name">names</a> are associated with specific
       items and do not have a global scope. (See <a href="#scheme-context">Step 5</a> in
       <a href="#generate-predicate-uri">Generate Predicate URI</a>).
       <div>
@@ -512,7 +519,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
       </div>
     </dd>
     <dt><code>vocabulary</code></dt><dd>
-      The <code>vocabulary</code> URI generation scheme appends <a>name</a>s that are not
+      The <code>vocabulary</code> URI generation scheme appends <a title="name">names</a> that are not
       <a>absolute URL</a>s to the <a>URI prefix</a>. When generating property URIs, if the <a>URI prefix</a>
       does not end with a '/' or '#', a '#' is appended to the <a>URI prefix</a>. (See <a href="#scheme-vocab">Step 4</a>
       in
@@ -757,7 +764,7 @@ _:track2 a schema:MusicRecording;
     <code>http://www.w3.org/2000/01/rdf-schema#subPropertyOf</code> or
     <code>http://www.w3.org/2002/07/owl#equivalentProperty</code> predicates.</p>
    <p>For example, the <a>registry</a> definition for the <em>additionalType</em> property
-    within schema.org, defines <em>additionalType</em> to have an <a>rdfs:subPropertyOf</a>
+    within schema.org, defines <em>additionalType</em> to have an <code>rdfs:subPropertyOf</code>
     relationship with <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>.</p>
 
 <pre class="example" data-transform="updateExample">
@@ -971,7 +978,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         An <a>item</a> may have multiple elements sharing the same <a>name</a>, creating
         a multi-valued <a>property</a>.
        </dd>
-     <dt><dfn>property names</dfn></dt><dd>
+      <dt><dfn>property names</dfn></dt><dd>
         The tokens of an element's <a class="aref">itemprop</a> attribute. Each token is a <a>name</a>.
         (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#property-names">Names: the
         itemprop attribute</a></cite> in [[!MICRODATA]]).
@@ -1112,6 +1119,14 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
               in [[!HTML5]] for determining the language of a node.</p>
           </dd>
         </dl>
+      </dd>
+      <dt><dfn>reverse properties</dfn></dt><dd>
+        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a> The list
+         of reverse properties is the result of transforming each space-separated-value of an item's <a class='aref'>itemprop-reverse</a>
+         to a URL as defined in <a href="#property-uri-generation">Property URI Generation</a>.
+      </dd>
+      <dt><dfn>reverse property names</dfn></dt><dd>
+        The tokens of an element's <a class="aref">itemprop-reverse</a> attribute. Each token is a <a>name</a>.
       </dd>
       <dt><dfn>top-level item</dfn></dt><dd>
         An <a>item</a> which does not contain an <a class="aref">itemprop</a> attribute.
@@ -1282,6 +1297,44 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
                 from those steps.
               </li>
+              <li>
+                Add <em>value</em> to <em>property list</em> for <em>predicate</em>.
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p class="issue" data-number="5">Support <a class="aref">itemprop-reverse</a>.</p>
+        For each element <em>element</em> that has one or more <a>property names</a> and is one of the
+        <a title="reverse properties">reverse properties of the item</a> <em>item</em>, in the order those elements
+        are given by the algorithm that returns the <a title="reverse properties">reverse properties of the item</a>,
+        run the following substep:
+        <ol class="algorithm">
+          <li>
+            For each <em>name</em> in the element's <a>reverse property names</a>, run the following substeps:
+            <ol class="algorithm">
+              <li>
+                Let <em>context</em> be a copy of <a>evaluation context</a> with <a>current type</a> set
+                to <em>type</em> and <a>current vocabulary</a> set to <em>vocab</em>.
+              </li>
+              <li>
+                Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
+                using <em>context</em> and <em>name</em>.
+                 Update <em>context</em> by setting <a>current name</a> to <em>predicate</em>.
+              </li>
+              <li>
+                Let <em>value</em> be the <a>property value</a> of <em>element</em>.
+              </li>
+              <li>
+                If <em>value</em> is an <a>item</a>, then <a href="#generate-the-triples">generate the
+                triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
+                from those steps.
+              </li>
+              <li>
+                Otherwise, if <em>value</em> is a <a>literal</a> ignore the <em>value</em>
+                and continue to the next <em>name</em>;
+                it is an error for the <em>value</em> of <a class="aref">itemprop-reverse</a> to be a <a>literal</a>.
               <li>
                 Add <em>value</em> to <em>property list</em> for <em>predicate</em>.
               </li>
