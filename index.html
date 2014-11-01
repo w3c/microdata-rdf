@@ -100,6 +100,7 @@
                 href: "https://github.com/w3c/microdata-rdf/commits/gh-pages"
             }]
           }],
+          inlineCSS: true,
           maxTocLevel: 4
           //, alternateFormats: [ {uri: "diff-20120308.html", label: "diff to previous version"} ]
       };
@@ -140,6 +141,8 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     color: #ff4500 !important;
 }
 .aref:before {content: "@"; }
+
+.strike {text-decoration: line-through;}
 </style>
 </head>
 
@@ -1169,28 +1172,30 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       processing algorithm that results in the equivalent triples to those that the following
       algorithm generates:</p>
 
-    <p>Set <em>item list</em> to an empty list.</p>
+    <p class="issue" data-number="6">Remove top-level md:item list.
+      This feature is of little value for RDF and adds unnecessary triples to the output.</p>
+    <p class="strike">Set <em>item list</em> to an empty list.</p>
 
     <ol class="algorithm">
       <li>For each element that is also a <a>top-level item</a> run the following algorithm:
         <ol class="algorithm">
           <li>
             <a href="#generate-the-triples">Generate the triples</a> for an item <em>item</em>, using the
-            <a>evaluation context</a>.
+            <a class="strike">evaluation context</a>.
             Let <em>result</em> be the (<a>URI reference</a> or <a>blank node</a>) subject returned.
           </li>
-          <li>
+          <li class="strike">
             Append <em>result</em> to <em>item list</em>.
           </li>
         </ol>
       </li>
-      <li>
+      <li class="strike">
         <a
         href="#generate-collection">Generate an RDF Collection</a> <em>list</em> from the ordered list of values.
         Set <em>value</em> to the value returned from <a href="#generate-collection">generate an RDF
         Collection</a>.
       </li>
-      <li>
+      <li class="strike">
         Generate the following triple:
         <dl class="triple">
           <dt>subject</dt>
