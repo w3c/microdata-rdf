@@ -299,7 +299,10 @@ this draft as a new version of the Interest Group Note after gathering and incor
   <p class="issue" data-number="6">Remove top-level md:item list.
     This feature is of little value for RDF and adds unnecessary triples to the output.</p>
   <p class="issue" data-number="7">Extract literal from <code>@content</code> of <code>meta</code> element.
-    The HTML meta element is used specifically to provide metadata using the value of the @content attribute.
+    The HTML <code>meta</code> element is used specifically to provide metadata using the value of the <code>@content</code> attribute.
+  </p>
+  <p class="issue" data-number="8">Extract literal from <code>@value</code> of <code>data</code> element.
+    The HTML <code>data</code> element is used specifically to provide metadata using the value of the <code>@value</code> attribute.
   </p>
   For each element <em>element</em> that has one or more <a>property names</a> and is one of the
 
@@ -1127,10 +1130,50 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             If the element is a <code>meta</code> element with a <code>@content</code> attribute.
           </dt>
           <dd>
-            The value is a <a>plain literal</a> created from the value with language information set from the
+            The value is a <a>plain literal</a> created from the value of the <code>@content</code> attribute
+            with language information set from the
             <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite>
             of the property element.
             (See <a href="#issues">issue 7</a>)
+          </dd>
+          <dt>
+            If the element is a <code>data</code> element with a <code>@value</code> attribute.
+          </dt>
+          <dd>The value is a <a>literal</a> created from the value of the <code>@content</code> attribute.
+            (See <a href="#issues">issue 8</a>).
+            <dl>
+              <dt>
+                If the value is a has the lexical form of
+                <cite><a
+                href="http://www.w3.org/TR/xmlschema-2/#integer">xsd:integer</a></cite> [[!RDF-SCHEMA]].
+              </dt>
+              <dd>
+                The value is a <a>typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#integer</code>.
+              </dd>
+              <dt>
+                If the value is a has the lexical form of
+                <cite><a
+                href="http://www.w3.org/TR/xmlschema-2/#float">xsd:float</a></cite> [[!RDF-SCHEMA]].
+              </dt>
+              <dd>
+                The value is a <a>typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#float</code>.
+              </dd>
+              <dt>
+                If the value is a has the lexical form of
+                <cite><a
+                href="http://www.w3.org/TR/xmlschema-2/#double">xsd:double</a></cite> [[!RDF-SCHEMA]].
+              </dt>
+              <dd>
+                The value is a <a>typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#double</code>.
+              </dd>
+              <dt>Otherwise</dt>
+              <dd>
+                The value is a <a>plain literal</a> created from the value.
+              </dd>
+            </dl>
           </dd>
           <dt>Otherwise</dt>
           <dd>The value is a <a>plain literal</a> created from the value with language information set from the
