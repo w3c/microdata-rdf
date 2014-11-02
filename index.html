@@ -298,7 +298,9 @@ this draft as a new version of the Interest Group Note after gathering and incor
   <p class="issue" data-number="5">Support <a class="aref">itemprop-reverse</a>.</p>
   <p class="issue" data-number="6">Remove top-level md:item list.
     This feature is of little value for RDF and adds unnecessary triples to the output.</p>
-
+  <p class="issue" data-number="7">Extract literal from <code>@content</code> of <code>meta</code> element.
+    The HTML meta element is used specifically to provide metadata using the value of the @content attribute.
+  </p>
   For each element <em>element</em> that has one or more <a>property names</a> and is one of the
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
@@ -1120,6 +1122,15 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 The <code>time</code> element
               </a></cite>
               in [[!HTML5]].</p>
+          </dd>
+          <dt>
+            If the element is a <code>meta</code> element with a <code>@content</code> attribute.
+          </dt>
+          <dd>
+            The value is a <a>plain literal</a> created from the value with language information set from the
+            <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite>
+            of the property element.
+            (See <a href="#issues">issue 7</a>)
           </dd>
           <dt>Otherwise</dt>
           <dd>The value is a <a>plain literal</a> created from the value with language information set from the
