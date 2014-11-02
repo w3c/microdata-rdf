@@ -304,6 +304,12 @@ this draft as a new version of the Interest Group Note after gathering and incor
   <p class="issue" data-number="8">Extract literal from <code>@value</code> of <code>data</code> element.
     The HTML <code>data</code> element is used specifically to provide metadata using the value of the <code>@value</code> attribute.
   </p>
+  <p class="issue" data-number="9">Extract literal from <code>@value</code> of <code>meter</code> element.
+    The `meter` element represents a scalar measurement within a known range, or
+    a fractional value; for example disk usage, the relevance of a query
+    result, or the fraction of a voting population to have selected a
+    particular candidate.
+  </p>
   For each element <em>element</em> that has one or more <a>property names</a> and is one of the
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
@@ -1137,10 +1143,10 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             (See <a href="#issues">issue 7</a>)
           </dd>
           <dt>
-            If the element is a <code>data</code> element with a <code>@value</code> attribute.
+            If the element is a <code>data</code> or <code>track</code> element with a <code>@value</code> attribute.
           </dt>
           <dd>The value is a <a>literal</a> created from the value of the <code>@content</code> attribute.
-            (See <a href="#issues">issue 8</a>).
+            (See <a href="#issues">issue 8</a> and <a href="#issues">issue 9</a>).
             <dl>
               <dt>
                 If the value is a has the lexical form of
