@@ -310,7 +310,14 @@ this draft as a new version of the Interest Group Note after gathering and incor
     The consensus is that datatypes are only derived from HTML semantics, so that only &lt;time&gt; values have a datatype other than plain.</p>
   <!--<p class="issue" data-number="4">Should the <a>registry</a> allow a <a>name</a> or URL
     to be used as an alias for <a class="aref">itemid</a>.</p>-->
-  <p class="issue" data-number="5">Support <a class="aref">itemprop-reverse</a>.</p>
+  <p class="issue" data-number="5">
+    Support <a class="aref">itemprop-reverse</a>.
+    This issue is more controversial, and specific feedback from the community is requested.
+    the base [[MICRODATA]] specification (also a NOTE, and not a REC), does not define
+    <a class="aref">itemprop-reverse</a>. Depending on W3C process requirements, this may
+    require that the [[MICRODATA]] NOTE be updated with a provision for the 
+    <a class="aref">itemprop-reverse</a> attribute.
+  </p>
   <p class="issue" data-number="6">Remove top-level md:item list.
     This feature is of little value for RDF and adds unnecessary triples to the output.</p>
   <p class="issue" data-number="7">Extract literal from <code>@content</code> of <code>meta</code> element.
@@ -1429,8 +1436,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       </li>
       <li>
         For each element <em>element</em> that has one or more <a>property names</a> and is one of the
-        <a title="item properties">properties of the item</a> <em>item</em>, in the order those elements
-        are given by the algorithm that returns the <a title="item properties">properties of the item</a>,
+        <a title="item properties">properties of the item</a> <em>item</em>,
         run the following substep:
         <ol class="algorithm">
           <li>
@@ -1453,8 +1459,15 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
                 from those steps.
               </li>
-              <li>
-                Add <em>value</em> to <em>property list</em> for <em>predicate</em>.
+              <li>Generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>subject</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>value</em></dd>
+                </dl>
               </li>
             </ol>
           </li>
@@ -1463,8 +1476,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <li>
         <span class="note">(See <a href="#issues">issue 5</a>).</span>
         For each element <em>element</em> that has one or more <a>reverse property names</a> and is one of the
-        <a title="reverse properties">reverse properties of the item</a> <em>item</em>, in the order those elements
-        are given by the algorithm that returns the <a title="reverse properties">reverse properties of the item</a>,
+        <a title="reverse properties">reverse properties of the item</a> <em>item</em>,
         run the following substep:
         <ol class="algorithm">
           <li>
@@ -1477,7 +1489,6 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
               <li>
                 Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
                 using <em>context</em> and <em>name</em>.
-                 <span class="strike">Update <em>context</em> by setting <a>current name</a> to <em>predicate</em>.</span>
               </li>
               <li>
                 Let <em>value</em> be the <a>property value</a> of <em>element</em>.
@@ -1491,18 +1502,17 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 Otherwise, if <em>value</em> is a <a>literal</a> ignore the <em>value</em>
                 and continue to the next <em>name</em>;
                 it is an error for the <em>value</em> of <a class="aref">itemprop-reverse</a> to be a <a>literal</a>.
-              <li>
-                Add <em>value</em> to <em>property list</em> for <em>predicate</em>.
+              <li>Generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>value</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>subject</em></dd>
+                </dl>
               </li>
             </ol>
-          </li>
-        </ol>
-      </li>
-      <li>
-        For each <em>predicate</em> in <em>property list</em>:
-        <ol class="algorithm">
-          <li><a href="#generate-property-values">Generate property values</a> <em>subject</em>, <em>predicate</em> and
-            the list of values associated with <em>predicate</em> from <em>property list</em> as <em>values</em>.
           </li>
         </ol>
       </li>
@@ -1594,33 +1604,33 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     </ol>
   </section>
   
-  <section>
+  <section class="strike">
     <h2>Generate Property Values</h2>
     <p>Property value serialization makes use of <em>subject</em>, <em>predicate</em> and <em>values</em>.</p>
     <p class="note">Support for the registry is being considered for removal
       (see <a href="#issues">issue 10</a>).</p>
 
     <ol class="algorithm">
-      <li class="strike">If the <a>registry</a> contains a URI prefix that is a character for character match of
+      <li>If the <a>registry</a> contains a URI prefix that is a character for character match of
         <em>predicate</em> up to the length of the URI prefix, set <em>vocab</em> as that URI prefix.
          Otherwise set <em>vocab</em> to null. (See <a href="#issues">issue 5</a>).</li>
-      <li class="strike">If <em>vocab</em> is not null
+      <li>If <em>vocab</em> is not null
         and <a>registry</a> has an entry for <em>vocab</em> that is a JSON Object, let
         <em>registry object</em> be that value. Otherwise set <em>registry object</em> to null.</li>
-      <li class="strike">If <em>registry object</em> is not null and <em>registry object</em> contains key
+      <li>If <em>registry object</em> is not null and <em>registry object</em> contains key
         <a><code>properties</code></a>
         which has a JSON Object value, let <em>properties</em> be that value. Otherwise, set <em>properties</em>
         to null.</li>
-      <li class="strike">If <em>properties</em> is not null, and <em>properties</em> contains a key, which after
+      <li>If <em>properties</em> is not null, and <em>properties</em> contains a key, which after
         <a href="#generate-predicate-uri">Generate Predicate URI</a> expansion has a value which is a JSON Object, let
         <em>property override</em> be that value. Otherwise, set <em>property override</em> to null.</li>
-      <li class="strike">If <em>property override</em> contains the key
+      <li>If <em>property override</em> contains the key
         <a><code>multipleValues</code></a>, set that as <em>method</em>.</li>
-      <li class="strike">Otherwise, if <em>registry object</em> con  contains the key
+      <li>Otherwise, if <em>registry object</em> con  contains the key
         <a><code>multipleValues</code></a>, set that as <em>method</em>.</li>
       <li>Otherwise, set <em>method</em> to <code>unordered</code>.</li>
-      <li id="values-unordered"><span class="strike">If <em>method</em> is <code>unordered</code>,</span>
-        For each <em>value</em> in <em>values</em>, generate the following triple:
+      <li id="values-unordered">If <em>method</em> is <code>unordered</code>,
+        for each <em>value</em> in <em>values</em>, generate the following triple:
         <dl class="triple">
           <dt>subject</dt>
           <dd><em>subject</em></dd>
@@ -1630,7 +1640,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           <dd><em>value</em></dd>
         </dl>
       </li>
-      <li class="strike" id="values-list">Otherwise, if <em>method</em> is <code>list</code>:
+      <li id="values-list">Otherwise, if <em>method</em> is <code>list</code>:
         <ol class="algorithm">
           <li>Set <em>value</em> to the value returned from <a href="#generate-collection">generate an RDF
             Collection</a>.
