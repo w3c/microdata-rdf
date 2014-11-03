@@ -296,7 +296,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
 <section class="informative">
   <h2>Issues</h2>
   <p>Decisions or open issues in the specification are tracked on the
-    <a href="http://www.w3.org/2011/htmldata/track/issues">GitHub Issue Tracker</a>. These include the
+    <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issue Tracker</a>. These include the
     following:</p>
   <p class="issue" data-number="1">Vocabulary specific parsing for Microdata.
     This specification attempts to create generic
@@ -371,13 +371,13 @@ this draft as a new version of the Interest Group Note after gathering and incor
   <p>
     The microdata specification [[!MICRODATA]] defines a number of attributes and the way in which those
     attributes are to be interpreted. The
-    <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">microdata DOM API</a></cite>
+    <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">microdata DOM API</a></cite>
     provides methods and attributes for retrieving microdata from the HTML DOM.</p>
   <p>For reference, attributes used for specifying and retrieving HTML microdata are referenced here:</p>
   <dl>
     <dt><dfn class="adef">itemid</dfn></dt><dd>
       An attribute containing a URL used to identify the subject of triples associated with this <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#attr-itemid">Items</a></cite>
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemid">itemid</a></cite>
       in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemprop</dfn></dt><dd>
@@ -385,7 +385,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
       contains a space separated list of <dfn title="name">names</dfn> which may either by <a title="absolute URL">absolute URLs</a> or terms
       associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
       <a>item type</a>.
-      (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#names:-the-itemprop-attribute">Items</a></cite>
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">itemprop</a></cite>
       in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemprop-reverse</dfn></dt><dd>
@@ -398,24 +398,24 @@ this draft as a new version of the Interest Group Note after gathering and incor
     <dt><dfn class="adef">itemref</dfn></dt><dd>
       An additional attribute on an element that references additional elements containing property
       definitions to be applied to the referencing <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#attr-itemref">Items</a></cite>
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemref">itemref</a></cite>
       in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemscope</dfn></dt><dd>
       An boolean attribute identifying an element as an <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#attr-itemscope">Items</a></cite>
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite>
       in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemtype</dfn></dt><dd>
       An additional attribute on an element used to specify one or more types of an <a>item</a>.
       The <dfn>item type</dfn> of an <a>item</a> is the first value returned from
-      <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>
+      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
       on the element.
       The <a>item type</a> is also used to resolve non-URL <a title="name">names</a> to <a title="absolute URL">absolute URLs</a>.
       Available through the
-      <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite> as
-      <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>.
-      (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#attr-itemtype">Items</a></cite>
+      <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
+      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemtype">itemtype</a></cite>
       in [[!MICRODATA]]).
     </dd>
   </dl>
@@ -685,7 +685,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
   <p>For items having multiple values for a given <a>property</a>,
     the <dfn><code>multipleValues</code></dfn> rule defines the algorithm for serializing these values.
     Microdata uses document order when generating <a title="property value">property values</a>, as defined in
-    <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite>
+    <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
     as <code>element.itemValue</code>. However, many RDF vocabularies expect multiple values to be generated
     as triples sharing a common subject and predicate. In some cases, it may be useful to retain value ordering.</p>
   <p>The procedure for generating <a title="property value">property values</a> is defined in
@@ -1035,15 +1035,15 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <dt><dfn>item</dfn></dt><dd>
          An <a>item</a> is described by an element containing an <a class="aref">itemscope</a> attribute. The list
          of top-level microdata items may be retrieved using the
-         <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite>
-         <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-document-getitems">document.getItems</a></cite></code>
+         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
+         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-document-getitems">document.getItems</a></cite></code>
          method.
       </dd>
       <dt><dfn>item properties</dfn></dt><dd>
         The mechanism for finding the <a title="item properties">properties of an item</a> The list
          of item properties items may be retrieved using the
-         <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite>
-         <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-properties">element.properties</a></cite></code>
+         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
+         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-properties">element.properties</a></cite></code>
          attribute.
       </dd>
       <dt><dfn>fragment-escape</dfn></dt><dd>
@@ -1067,7 +1067,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       </dd>
       <dt><dfn>global identifier</dfn></dt><dd>
         The value of an <a>item</a>'s <a>itemid</a> attribute, if it has one. (See <cite><a
-        href="http://www.w3.org/TR/2011/WD-microdata-20110525/#attr-itemscope">Items</a></cite> in
+        href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite> in
         [[!MICRODATA]]).
       </dd>
       <dt><dfn>literal</dfn></dt><dd>
@@ -1082,8 +1082,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
        </dd>
       <dt><dfn>property names</dfn></dt><dd>
         The tokens of an element's <a class="aref">itemprop</a> attribute. Each token is a <a>name</a>.
-        (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#property-names">Names: the
-        itemprop attribute</a></cite> in [[!MICRODATA]]).
+        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#property-names">property names</a></cite> in [[!MICRODATA]]).
       </dd>
       <dt><dfn>property value</dfn></dt><dd>
         The <a>property value</a> of a name-value pair added by an element with an <a class="aref">itemprop</a>
@@ -1101,12 +1100,12 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             <code>source</code>, <code>track</code> or <code>video</code>)</dt>
           <dd>
             The value is a <a>URI reference</a> created from <code><cite>
-              <a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemvalue">element.itemValue</a></cite></code>.
+              <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
               (See relevant attribute descriptions in [[!HTML5]]).
           </dd>
           <dt>If the element is a <code>time</code> element.</dt>
           <dd>The value is a <a>literal</a> made from <code><cite>
-            <a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemvalue">element.itemValue</a></cite></code>.
+            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
             <dl>
               <dt>
                 If the value is a
@@ -1282,9 +1281,9 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <dt><dfn>top-level item</dfn></dt><dd>
         An <a>item</a> which does not contain an <a class="aref">itemprop</a> attribute.
         Available through the <cite><a
-        href="http://www.w3.org/TR/2011/WD-microdata-20110525/#microdata-dom-api">Microdata DOM API</a></cite> as
+        href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
         <code>document.getItems</code>.
-        (See <cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#top-level-microdata-items">Associating names with items</a></cite> in [[!MICRODATA]]).
+        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#top-level-microdata-items">top-level microdata item</a></cite> in [[!MICRODATA]]).
       </dd>
       <dt><dfn>URI reference</dfn></dt><dd>
         URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
@@ -1382,7 +1381,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <li>Add a mapping from <em>item</em> to <em>subject</em> in <a>memory</a></li>
       <li>
         For each <em>type</em> returned from
-        <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>
+        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
         of the element defining the <a>item</a>.
         <ol class="algorithm">
           <li>If <em>type</em> is an <a>absolute URL</a>, generate the following triple:
@@ -1399,7 +1398,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       </li>
       <li>
         Set <em>type</em> to the first value returned from
-        <code><cite><a href="http://www.w3.org/TR/2011/WD-microdata-20110525/#dom-itemtype">element.itemType</a></cite></code>
+        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
         of the element defining the <a>item</a>.
       </li>
       <li class="strike">If <em>type</em> is an <a>absolute URL</a>, set <a>current name</a> in
