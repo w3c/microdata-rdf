@@ -1321,8 +1321,8 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       algorithm generates:</p>
 
     <p class="strike">
-      <span class="note">(See <a href="#issues">issue 6</a>)</span>
       Set <em>item list</em> to an empty list.</p>
+      <span class="note">(See <a href="#issues">issue 6</a>).</span>
     </p>
 
     <ol class="algorithm">
@@ -1332,9 +1332,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             <a href="#generate-the-triples">Generate the triples</a> for an item <em>item</em>, using the
             <a class="strike">evaluation context</a>.
             Let <em>result</em> be the (<a>URI reference</a> or <a>blank node</a>) subject returned.
+            <span class="note">(See <a href="#issues">issue 6</a>).</span>
           </li>
           <li class="strike">
             Append <em>result</em> to <em>item list</em>.
+            <span class="note">(See <a href="#issues">issue 6</a>).</span>
           </li>
         </ol>
       </li>
@@ -1343,9 +1345,10 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         href="#generate-collection">Generate an RDF Collection</a> <em>list</em> from the ordered list of values.
         Set <em>value</em> to the value returned from <a href="#generate-collection">generate an RDF
         Collection</a>.
+        <span class="note">(See <a href="#issues">issue 6</a>).</span>
       </li>
       <li class="strike">
-        Generate the following triple:
+        Generate the following triple <span class="note">(See <a href="#issues">issue 6</a>)</span>:
         <dl class="triple">
           <dt>subject</dt>
           <dd><a>document base</a></dd>
