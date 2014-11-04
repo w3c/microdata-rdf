@@ -333,15 +333,15 @@ this draft as a new version of the Interest Group Note after gathering and incor
     particular candidate.
   </p>
   <p class="issue" data-number="10">
-    Remove support for the Vocabulary Registry, <code>contextual</code>
-    <a><code>propertyURI</code></a> and <code>mulitpleValues</code>. The Vocabulary
+    Remove support for  <code>contextual</code>
+    <a><code>propertyURI</code></a> and <code>mulitpleValues</code> from the Registry. The Vocabulary
     Registry has not been kept up to date, and principle consumers of microdata
     (i.e., Search Engines) ignore this in any case. This issue proposes to
-    remove the Registry, along with support for independently setting
-    <a><code>propertyURI</code></a> and <a><code>multipleValues</code></a>. <a><code>propertyURI</code></a>
-    is treated like <a>vocabulary</a> if
-    there is an <a class="aref">itemtype</a>, otherwise, like <code>contextual</code> creating a property
-    relative to the document base and other properties in items lacking a type.
+    remove support for independently setting
+    <a><code>propertyURI</code></a> and <a><code>multipleValues</code></a> using the Registry.
+    <a><code>propertyURI</code></a> is treated like <a>vocabulary</a> if
+    there is an <a class="aref">itemtype</a>, otherwise, creating a property
+    as a fragment of the document base.
     <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
   </p>
   For each element <em>element</em> that has one or more <a>property names</a> and is one of the
@@ -468,30 +468,21 @@ this draft as a new version of the Interest Group Note after gathering and incor
 
 <section class="informative">
   <h1>Vocabulary Registry</h1>
-  <p class="note">(The registry is being considered for removal (see <a href="#issues">issue 10</a>).</span>
+  <p class="note">(The registry is being considered for revision (see <a href="#issues">issue 10</a>).</span>
   <p class="strike">In a perfect world, all processors would be able to generate the same output for a given input
     without regards to the requirements of a particular <a>vocabulary</a>. However, microdata doesn't
     provide sufficient syntactic help in making these decisions. Different vocabularies have different
     needs.</p>
-  <p class="strike">The registry is located at the namespace defined for microdata: <code>http://www.w3.org/ns/md</code> in
+  <p>The registry is located at the namespace defined for microdata: <code>http://www.w3.org/ns/md</code> in
     a variety of formats.</p>
-  <p class="strike">The <dfn>registry</dfn> associates a <dfn>URI prefix</dfn> with one or more key-value pairs denoting
-  processor behavior. A hypothetical JSON representation of such a registry might be the following:</p>
-<pre class="example strike" data-transform="updateExample">
+  <p>The <dfn>registry</dfn> associates a <dfn>URI prefix</dfn> with one or more key-value pairs denoting
+  processor behavior. The default JSON representation of such a registry might be the following:</p>
+<pre class="example" data-transform="updateExample">
 <!--
 {
   "http://schema.org/": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered",
     "properties": {
-      "tracks": {"multipleValues": "list"}
-    }
-  },
-  "http://microformats.org/profile/hcard": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "list",
-    "properties" {
-      "url": {"multipleValues": "unordered"}
+      "additionalType":  {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
     }
   }
 }
@@ -508,7 +499,10 @@ this draft as a new version of the Interest Group Note after gathering and incor
     rules is defined in the following sections. If an item has no <a>current type</a> or the
     <a>registry</a> contains no <a>URI prefix</a> matching <a>current type</a>, a conforming
     processor MUST use the default values defined for these rules.</p>
-  <p class="note strike">The concept of a <a>registry</a>, including a hypothetical format, location and updating rules
+  <p>This structure defines a single vocabulary <code>http://schema.org/</code> with a rule for
+    <code>additionalType</code> causing a <code>schema:additionalType rdf:subPropertyOf rdf:type .</code>
+    triple to be emitted, if the property is encountered during processing.</p>
+  <p class="note">The concept of a <a>registry</a>, including a hypothetical format, location and updating rules
     is presented as an abstract concept useful for describing the function of a microdata processor.
     There are issues surrounding update
     frequency, URL naming, and how updates are authorized. This spec
@@ -518,7 +512,7 @@ this draft as a new version of the Interest Group Note after gathering and incor
 <section class="informative">
   <h2>Property URI Generation</h2>
   <p>For <a title="name">names</a> which are not <a title="absolute URL">absolute URLs</a>,
-    <p class="strike">the <dfn><code>propertyURI</code></dfn></p>
+    <span class="strike">the <dfn><code>propertyURI</code></dfn></span>
     this rule defines the algorithm for generating an <a>absolute URL</a>
     given an <a>evaluation context</a> including a <a>current type</a>, <a class="strike">current name</a> and
     <a>current vocabulary</a>.</p>
@@ -859,25 +853,21 @@ _:track2 a schema:MusicRecording;
 
 <section>
   <h2 id="vocab_expansion">Vocabulary Expansion</h2>
-    <p class="note">Support for the registry is
-      being considered for removal
-      (see <a href="#issues">issue 10</a>). This section has a special case explicitly
-      for <code>http://schema.org/additionalType</code>.</p>
   <p>Microdata requires that all values of <a class="aref">itemtype</a> come from the same vocabulary. This
     is required as <a class="aref">itemprop</a> values are resolved relative to that vocabulary. However,
     it is often useful to define an <a>item</a> to have types from multiple different vocabularies.</p>
-  <p class="strike">Vocabulary expansion uses simple rules to generate additional triples based on 
+  <p>Vocabulary expansion uses simple rules to generate additional triples based on 
     rules and property relationships described in the <a>registry</a>.
     Within the <a>registry</a>, a property definition may have either <code>equivalentProperty</code>
     or <code>subPropertyOf</code> keys having a IRI value (or array of IRI values)
     of the associated property. Such an
     entry causes the processor to generate triples associating the source
     property IRI with the target property IRI using either
-    <code>http://www.w3.org/2000/01/rdf-schema#subPropertyOf</code> or
-    <code>http://www.w3.org/2002/07/owl#equivalentProperty</code> predicates.</p>
+    <code>rdf:subPropertyOf</code> or
+    <code>owl:equivalentProperty</code> predicates.</p>
   <p>The single expansion rule defined for this specification is for <em>additionalType</em>
     in the <code>schema.org</code> vocabulary;
-    <span class="strike">For example,</span> the <a>registry</a> definition for the <em>additionalType</em> property
+    For example, the <a>registry</a> definition for the <em>additionalType</em> property
     within schema.org, defines <em>additionalType</em> to have an <code>rdfs:subPropertyOf</code>
     relationship with <code>rdf:type</code>.</p>
 
@@ -892,7 +882,7 @@ _:track2 a schema:MusicRecording;
 -->
 </pre>
 
-  <p><span class="strike">The previous example, indicates a <a>registry</a> rule, which</span>
+  <p>The previous example, indicates a <a>registry</a> rule, which
     This causes the processor to emit
     an extra triple when first seeing the <code>additionalProperty</code> <a class="aref">itemprop</a>:</p>
 
@@ -1405,7 +1395,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         Otherwise, set <em>type</em> to <a>current type</a> from
         <a>evaluation context</a> if not empty.
       </li>
-      <li><span class="strike">Otherwise, </span>if type is not empty, construct <em>vocab</em> by removing everything following the last
+      <li>If type is not empty, construct <em>vocab</em> by removing everything following the last
         SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
       <li>Update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
       <li><span class="strike">If the <a>registry</a> contains a <a>URI prefix</a> that is a
@@ -1420,6 +1410,9 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           <dt>object</dt>
           <dd><em>vocab</em> (as a <a>URI reference</a>)</dd>
         </dl>
+      </li>
+      <li>If the <a>registry</a> contains a <a>URI prefix</a> for <em>vocab</em> 
+        set <em>registry entry</em> to its value.
       </li>
       <li>
         Set <em>property list</em> to an empty array mapping properties to one or more
@@ -1442,6 +1435,31 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 using <em>context</em> and <em>name</em>.
                  <span class="strike">Update <em>context</em> by setting <a>current name</a> to <em>predicate</em></span>.
               </li>
+              <li>If <em>registry entry</em> as an entry for <em>name</em> set <em>property entry</em> to that value.
+                <ol class="algorithm">
+                  <li>If <em>property entry</em> has an entry for <code>equivalentProperty</code>
+                    Generate the following triple:
+                    <dl class="triple">
+                      <dt>subject</dt>
+                      <dd><em>predicate</em></dd>
+                      <dt>predicate</dt>
+                      <dd><em>owl:equivalentProperty</em></dd>
+                      <dt>object</dt>
+                      <dd>value of <code>equivalentProperty</code> entry (as a <a>URI reference</a>)</dd>
+                    </dl>
+                  </li>
+                  <li>Otherwise,if <em>property entry</em> has an entry for <code>subPropertyOf</code>
+                    Generate the following triple:
+                    <dl class="triple">
+                      <dt>subject</dt>
+                      <dd><em>predicate</em></dd>
+                      <dt>predicate</dt>
+                      <dd><em>rdf:subPropertyOf</em></dd>
+                      <dt>object</dt>
+                      <dd>value of <code>subPropertyOf</code> entry (as a <a>URI reference</a>)</dd>
+                    </dl>
+                  </li>
+                </ol>
               <li>
                 Let <em>value</em> be the <a>property value</a> of <em>element</em>.
               </li>
@@ -1516,7 +1534,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     <p>Predicate URI generation makes use of <a>current type</a>,
       <a class="strike">current name</a>, and <a>current vocabulary</a> from an <a>evaluation
       context</a> <em>context</em> along with <em>name</em>.</p>
-    <p class="note">Support for the registry and <code>contextual</code> <em>schema</em> is
+    <p class="note">Support for the <code>contextual</code> <em>schema</em> is
       being considered for removal
       (see <a href="#issues">issue 10</a>).</p>
 
@@ -1598,7 +1616,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
   <section class="strike">
     <h2>Generate Property Values</h2>
     <p>Property value serialization makes use of <em>subject</em>, <em>predicate</em> and <em>values</em>.</p>
-    <p class="note">Support for the registry is being considered for removal
+    <p class="note">Support for the per-vocabulary processing rules is being considered for removal
       (see <a href="#issues">issue 10</a>).</p>
 
     <ol class="algorithm">
