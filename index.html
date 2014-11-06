@@ -143,7 +143,16 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 .aref:before {content: "@"; }
 
 .strike {text-decoration: line-through;}
-.strike span.note {text-decoration: none;}
+.nostrike {text-decoration: none;}
+.issue > .resolved {
+  color: gray;;
+}
+.issue > .resolved::after {
+  content: "Resolved";
+  color: black;
+  font-style: bold;
+  padding-left: 1em;
+}
 </style>
 </head>
 
@@ -192,10 +201,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <p>For background on the trade-offs between these options, see 
       <a href="http://www.w3.org/wiki/Mapping_Microdata_to_RDF">
         http://www.w3.org/wiki/Mapping_Microdata_to_RDF
-      </a> and
-      <a href="https://github.com/w3c/microdata-rdf/issues/10">
-        Issue 10
-      </a>.
+      </a> and <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issues</a>.
     </p>
   </div>
 <section class="informative">
@@ -223,7 +229,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
      always ordered; in RDF, property values are unordered unless they
      are explicitly listed in an <a>RDF Collection</a>.</li>
 
-   <li>A value in microdata is always a simple string which is interpreted
+   <li>Except for some specific element values, a value in microdata is always a simple string which is interpreted
      by the consuming application. In RDF, values can be tagged with a
      datatype or a language. According to the microdata specification, the
      HTML context of microdata markup should not change how microdata is
@@ -240,8 +246,8 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
      <a>vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
      This is facilitated by a <a>registry</a> that associates URIs with specific rules based on matching
      <a class="aref">itemtype</a> values against registered URI prefixes do determine a vocabulary and potentially
-     vocabulary-specific processing rules.
-     (see <a href="#issues">issue 10</a>)
+     vocabulary-specific processing rules
+     <span class="note nostrike">see <a href="#issues">issue 10</a></span>.
    </p>
 
    <p>This specification also assumes that consumers of RDF generated from
@@ -251,8 +257,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section class="informative">
   <h2>Use Cases</h2>
-  <p class="issue">These use cases seem dated now. We should probably use this to describe
-    use cases from schema.org examples.</p>
   <p>During the period of the task force, a number of use cases were put forth for the use of microdata
     in generating RDF:</p>
   <ul>
@@ -298,20 +302,18 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     rules for processing microdata with typical RDF vocabularies.
     A <a>registry</a> allows
     for exceptions to the default processing rules for certain well-known vocabularies.</p>
-  <!--<p class="issue" data-number="2">Should Microdata-RDF generate XMLLiteral values.
+  <p class="issue resolved" data-number="2">Should Microdata-RDF generate XMLLiteral values.
     This issue has been closed with no change
-    as this would violate microdata's data model.</p>-->
-  <p class="issue" data-number="3">Should the <a>registry</a> allow property datatype specification.
+    as this would violate microdata's data model.</p>
+  <p class="issue resolved" data-number="3">Should the <a>registry</a> allow property datatype specification.
     The consensus is that datatypes are only derived from HTML semantics, so that only &lt;time&gt; values have a datatype other than plain.</p>
-  <!--<p class="issue" data-number="4">Should the <a>registry</a> allow a <a>name</a> or URL
-    to be used as an alias for <a class="aref">itemid</a>.</p>-->
-  <p class="issue" data-number="5">
-    Support <a class="aref">itemprop-reverse</a>.
-    This issue is more controversial, and specific feedback from the community is requested.
-    the base [[MICRODATA]] specification (also a NOTE, and not a REC), does not define
-    <a class="aref">itemprop-reverse</a>. Depending on W3C process requirements, this may
-    require that the [[MICRODATA]] NOTE be updated with a provision for the 
-    <a class="aref">itemprop-reverse</a> attribute.
+  <p class="issue resolved" data-number="4">Should the <a>registry</a> allow a <a>name</a> or URL
+    to be used as an alias for <a class="aref">itemid</a>.</p>
+  <p class="issue atrisk" data-number="5">
+    Experimental support <a class="aref">itemprop-reverse</a>.
+    This attribute is not part of [[MICRODATA]] and is included as an experimental feature.
+    Specific feedback from the community is requested. Based on addoption, the attribute
+    may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.
   </p>
   <p class="issue" data-number="6">Remove top-level md:item list.
     This feature is of little value for RDF and adds unnecessary triples to the output.</p>
@@ -355,7 +357,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <li>When an item has multiple values for a given <a>property</a>, place the values in an RDF Collection.
       Alternatively, do not use collections, use an alternative such as <code>rdf:Seq</code>, or place all values,
       whether or not multiple, into some form of collection.
-      <span class="note">(This feature is being considered for removal (see <a href="#issues">issue 10</a>).</span>
     </li>
   </ul>
   <p>More examples and explanatory information are available in [[MICRODATA-RDF-SUPPLEMENT]], which may
@@ -732,47 +733,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
    element on which it is specified. In particular:</p>
   <ul>
     <li>URL property elements provide URLs</li>
-    <li><code>time</code> element provides dates and times</li>
+    <li><code>time</code> element provides dates, times and durations</li>
+    <li><code>data</code> and <code>meter</code> elements provides floats and integers</li>
   </ul>
-  <p class="issue">Using information about the content of the document where the microdata
-   is marked up <em>might</em> be a violation of the spirit of the microdata specification, though it does not explicitly say in
-   normative text that consumers cannot use other information from the HTML DOM to interpret microdata.</p>
-
-  <p class="strike">Additionally, one possible use of a <a>registry</a> would allow vocabularies to be marked with datatype information,
-    so that a <code>dc:time</code> value, for example, would be understood to represent a literal with datatype
-    <code>xsd:date</code>. This could be done by adding information for each property in the vocabulary requiring
-    special treatment.
-    (see <a href="#issues">issue 10</a>)
-  </p>
-  <p class="strike">This might be represented using a syntax such as the following:</p>
-  <pre class="example strike" data-transform="updateExample">
-<!--
-{
- "http://schema.org/": {
-   "propertyURI": "vocabulary",
-   "multipleValues": "unordered"****,
-   "properties": {
-     "dateCreated": {"datatype": "http://www.w3.org/2001/XMLSchema#date"}
-   }****
- }
-}
--->
-  </pre>
-  <p class="strike">The <code>datatype</code> identifies a URI to be used in constructing a <a>typed literal</a>.</p>
-
-  <p class="strike">In most cases, the relevant datatype for a value can be derived from
-    knowledge of what property the value is for and the syntax of the value
-    itself. Thus, values can be given datatypes in a post-processing step
-    after the mapping of microdata to RDF described by this specification.
-    However, where there is information in the HTML markup, such as knowledge
-    of what element was used to mark up the value, which can help with
-    determining its datatype, that information is used by this specification.</p>
-  <p class="strike">This concept is not explored further at this time, but could be developed further in
-    a future revision of this document.</p>
-
-  <p class="note strike">If property URI generation was fixed to <code>vocabulary</code>, multiple values always
-    generated both <code>unordered</code> and <code>ordered</code> representations, and there were <code>datatype</code>
-    support, the <a>registry</a> could be reduced to a simple list of URLs without any further structure necessary.</p>
 </section>
 </section>
 
@@ -938,7 +901,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     <code>registry</code> option passed to the microdata processor. If set to <code>true</code>,
     the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>,
     otherwise, if a URL, from that location, otherwise, the processor MUST act as if
-    an empty <a>registry</a> were passed (see <a href="#issues">issue 10</a>).</p>
+    an empty <a>registry</a> were passed <span class="note nostrike">see <a href="#issues">issue 10</a></span>.</p>
   <p>If vocabulary expansion is performed by the microdata processor, and the
     <code>vocab_expansion</code> option is passed to the microdata processor,
     the full [[RDFA-CORE]] entailment MUST also be performed.</p>
@@ -1176,14 +1139,14 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             The value is a <a>plain literal</a> created from the value of the <code>@content</code> attribute
             with language information set from the
             <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite>
-            of the property element.
-            (See <a href="#issues">issue 7</a>)
+            of the property element
+            <span class="note nostrike">see <a href="#issues">issue 7</a></span>.
           </dd>
           <dt>
             If the element is a <code>data</code> or <code>track</code> element with a <code>@value</code> attribute.
           </dt>
           <dd>The value is a <a>literal</a> created from the value of the <code>@content</code> attribute.
-            (See <a href="#issues">issue 8</a> and <a href="#issues">issue 9</a>).
+            <span class="note nostrike">See <a href="#issues">issue 8</a> and <a href="#issues">issue 9</a></span>.
             <dl>
               <dt>
                 If the value is a has the lexical form of
@@ -1270,8 +1233,8 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       algorithm generates:</p>
 
     <p class="strike">
-      Set <em>item list</em> to an empty list.
-      <span class="note">(See <a href="#issues">issue 6</a>).</span>
+      Set <em>item list</em> to an empty list
+      <span class="note nostrike">see <a href="#issues">issue 6</a>.</span>
     </p>
 
     <ol class="algorithm">
@@ -1280,12 +1243,12 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           <li>
             <a href="#generate-the-triples">Generate the triples</a> for an item <em>item</em>, using the
             <a class="strike">evaluation context</a>.
-            Let <em>result</em> be the (<a>URI reference</a> or <a>blank node</a>) subject returned.
-            <span class="note">(See <a href="#issues">issue 6</a>).</span>
+            Let <em>result</em> be the (<a>URI reference</a> or <a>blank node</a>) subject returned
+            <span class="note nostrike">see <a href="#issues">issue 6</a>.</span>
           </li>
           <li class="strike">
-            Append <em>result</em> to <em>item list</em>.
-            <span class="note">(See <a href="#issues">issue 6</a>).</span>
+            Append <em>result</em> to <em>item list</em>
+            <span class="note nostrike">see <a href="#issues">issue 6</a></span>
           </li>
         </ol>
       </li>
@@ -1293,11 +1256,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         <a
         href="#generate-collection">Generate an RDF Collection</a> <em>list</em> from the ordered list of values.
         Set <em>value</em> to the value returned from <a href="#generate-collection">generate an RDF
-        Collection</a>.
-        <span class="note">(See <a href="#issues">issue 6</a>).</span>
+        Collection</a>
+        <span class="note nostrike">See <a href="#issues">issue 6</a>.</span>
       </li>
       <li class="strike">
-        Generate the following triple <span class="note">(See <a href="#issues">issue 6</a>)</span>:
+        Generate the following triple <span class="note nostrike">See <a href="#issues">issue 6</a></span>:
         <dl class="triple">
           <dt>subject</dt>
           <dd><a>document base</a></dd>
@@ -1411,7 +1374,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         </ol>
       </li>
       <li>
-        <span class="note">(See <a href="#issues">issue 5</a>).</span>
+        <span class="note nostrike">See <a href="#issues">issue 5</a>.</span>
         For each element <em>element</em> that has one or more <a>reverse property names</a> and is one of the
         <a title="reverse properties">reverse properties of the item</a> <em>item</em>,
         run the following substep:
@@ -1851,43 +1814,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       "propertyURI":    "vocabulary",
       "multipleValues": "unordered",
       "properties": {
-        "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"},
-        "blogPosts": {"multipleValues": "list"},
-        "breadcrumb": {"multipleValues": "list"},
-        "byArtist": {"multipleValues": "list"},
-        "creator": {"multipleValues": "list"},
-        "episode": {"multipleValues": "list"},
-        "episodes": {"multipleValues": "list"},
-        "event": {"multipleValues": "list"},
-        "events": {"multipleValues": "list"},
-        "founder": {"multipleValues": "list"},
-        "founders": {"multipleValues": "list"},
-        "itemListElement": {"multipleValues": "list"},
-        "musicGroupMember": {"multipleValues": "list"},
-        "performerIn": {"multipleValues": "list"},
-        "actor": {"multipleValues": "list"},
-        "actors": {"multipleValues": "list"},
-        "performer": {"multipleValues": "list"},
-        "performers": {"multipleValues": "list"},
-        "producer": {"multipleValues": "list"},
-        "recipeInstructions": {"multipleValues": "list"},
-        "season": {"multipleValues": "list"},
-        "seasons": {"multipleValues": "list"},
-        "subEvent": {"multipleValues": "list"},
-        "subEvents": {"multipleValues": "list"},
-        "track": {"multipleValues": "list"},
-        "tracks": {"multipleValues": "list"}
-      }
-    },
-    "http://microformats.org/profile/hcard": {
-      "propertyURI":    "vocabulary",
-      "multipleValues": "unordered"
-    },
-    "http://microformats.org/profile/hcalendar#": {
-      "propertyURI":    "vocabulary",
-      "multipleValues": "unordered",
-      "properties": {
-        "categories": {"multipleValues": "list"}
+        "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
       }
     }
   }
