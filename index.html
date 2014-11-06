@@ -15,14 +15,6 @@
 // <!--
       var respecConfig = {
           localBiblio: {
-            "MICRODATA-RDF-SUPPLEMENT": {
-              "authors": ["Gregg Kellogg"],
-              "title": "Microdata to RDF Supplement",
-              "href": "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-supplement/index.html",
-              "rawDate": "2012-01-22",
-              "status": "unofficial",
-              "publisher": "W3C"
-            },
             "MICRODATA-RDF-TESTS": {
               "authors": ["Gregg Kellogg", "Ivan Herman"],
               "title": "Microdata to RDF Tests",
@@ -359,8 +351,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       whether or not multiple, into some form of collection.
     </li>
   </ul>
-  <p>More examples and explanatory information are available in [[MICRODATA-RDF-SUPPLEMENT]], which may
-    be updated from time to time.</p>
 </section>
 </section>
 
@@ -1805,14 +1795,12 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 </section>
 
 <section class="appendix informative">
-  <h1>Example <a>registry</a></h1>
-  <p>The following is an example <a>registry</a> in JSON format.</p>
+  <h1>Default <a>registry</a></h1>
+  <p>The following is the default <a>registry</a> in JSON format, as of the time of publication.</p>
 
   <pre class="example">
   {
     "http://schema.org/": {
-      "propertyURI":    "vocabulary",
-      "multipleValues": "unordered",
       "properties": {
         "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
       }
