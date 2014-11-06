@@ -1802,6 +1802,29 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
 </pre>
 
+<p>Simple use of <a class="aref">itemprop-reverse</a>
+  <span class="note nostrike">see <a href="#issues">issue 5</a></span>.</p>
+<pre class="example" data-transform="updateExample">
+<!--
+<div  itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name">William Shakespeare</span>
+  <link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd">
+</div>
+-->
+</pre>
+
+<p>Results in the following Turtle:</p>
+<pre class="example" data-transform="updateExample">
+<!--
+@prefix schema: <http://schema.org/> .
+<http://www.freebase.com/m/0yq9mqd> schema:creator [
+  a schema:Person;
+  schema:name "William Shakespeare"
+] .
+<> rdfa:usesVocabulary schema: .
+-->
+</pre>
+
 </section>
 
 <section class="appendix informative">
