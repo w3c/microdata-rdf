@@ -327,7 +327,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <a href="#vocabulary-entailment">Vocabulary Entailment</a>
     conditional on a runtime option. In the absense of a registry,
     <a><code>propertyURI</code></a> defaults to <a>vocabulary</a> if there is an <a class="aref">itemtype</a> and
-    <code>multipleValues</code> defaults to <code>false</code>, where values are never placed in an <code>rdf:List.</code>
+    <code>multipleValues</code> defaults to <strong>false</strong>, where values are never placed in an <code>rdf:List.</code>
   </p>
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
@@ -888,13 +888,23 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 <section>
   <h2>Control of Microdata Processors</h2>
   <p>The use of an external registry is controlled by the
-    <code>registry</code> option passed to the microdata processor. If set to <code>true</code>,
+    <code>registry</code> option passed to the microdata processor. If set to <strong>true</strong>,
     the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>,
     otherwise, if a URL, from that location, otherwise, the processor MUST act as if
-    an empty <a>registry</a> were passed <span class="note nostrike">see <a href="#issues">issue 10</a></span>.</p>
+    an empty <a>registry</a> were passed
+    <span class="note nostrike">see <a href="#issues">issue 10</a></span>.
+    The default value for <code>registry</code> is <strong>false</strong>.</p>
   <p>If vocabulary expansion is performed by the microdata processor, and the
     <code>vocab_expansion</code> option is passed to the microdata processor,
-    the full [[RDFA-CORE]] entailment MUST also be performed.</p>
+    the full [[RDFA-CORE]] entailment MUST also be performed.
+    The default value for <code>vocab_expansion</code> is <strong>false</strong>.</p>
+  <p>Setting <code>registry</code> and <code>vocab_expansion</code> is performed in a processor-specific way.</p>
+  <p>
+    When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors SHOULD use <code>registry</code> and <code>vocab_expansion</code>
+    query parameters. Acceptable values for <code>registry</code> are <strong>true</strong>, <strong>false</strong>, and a URI-encoded URL.
+    Acceptable values for <code>vocab_expansion</code> are <strong>true</strong> and <strong>false</strong>.
+    Web service processors SHOULD return the resulting RDF graph using a requested format specified by
+    HTTP Content Negotiation for an acceptable content type. Web service processors MUST support [[!N-TRIPLES]].
 </section>
 </section>
 
