@@ -1322,7 +1322,9 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       </li>
       <li>If the <a>registry</a> contains a <a>URI prefix</a> that is a
         character for character match of <em>type</em> up to the length of the 
-        <a>URI prefix</a>, set <em>vocab</em> as that <a>URI prefix</a> and
+        <a>URI prefix</a>,
+        and the processor is given the <code>vocab_expansion</code> option,
+        set <em>vocab</em> as that <a>URI prefix</a> and
         generate the following triple:
         <dl class="triple">
           <dt>subject</dt>
@@ -1821,7 +1823,6 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
   a schema:Person;
   schema:name "William Shakespeare"
 ] .
-<> rdfa:usesVocabulary schema: .
 -->
 </pre>
 
