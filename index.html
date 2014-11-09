@@ -322,10 +322,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     particular candidate.
   </p>
   <p class="issue" data-number="10">
-    Make use of the <a href="#vocabulary-registry">Vocabulary Registry</a>,
-    <a href="#vocab_expansion">Vocabulary Expansion</a>, and
+    Make use of the <a href="#vocab_expansion">Vocabulary Expansion</a>, and
     <a href="#vocabulary-entailment">Vocabulary Entailment</a>
-    conditional on a runtime option. In the absense of a registry,
+    conditional on a runtime option.
     <a><code>propertyURI</code></a> defaults to <a>vocabulary</a> if there is an <a class="aref">itemtype</a> and
     <code>multipleValues</code> defaults to <strong>false</strong>, where values are never placed in an <code>rdf:List.</code>
   </p>
@@ -449,14 +448,14 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section class="informative">
   <h1>Vocabulary Registry</h1>
-  <p class="note">The registry is being considered become controlled by a processor option (see <a href="#issues">issue 10</a>).</p>
+  <p class="note">The registry is controlled by a processor option (see <a href="#issues">issue 10</a>).</p>
   <p>In a perfect world, all processors would be able to generate the same output for a given input
     without regards to the requirements of a particular <a>vocabulary</a>. However, microdata doesn't
     provide sufficient syntactic help in making these decisions. Different vocabularies have different
     needs.</p>
   <p>The registry is located at the namespace defined for microdata: <code>http://www.w3.org/ns/md</code> in
-    a variety of formats. Under control of a runtime option, a processor will use this
-    registry, or another provided by reference, to affect processing.</p>
+    a variety of formats. Under control of a runtime option, a processor should use
+    another provided by reference, to affect processing.</p>
   <p>The <dfn>registry</dfn> associates a <dfn>URI prefix</dfn> with one or more key-value pairs denoting
   processor behavior. A hypothetical JSON representation of such a registry might be the following:</p>
 <pre class="example" data-transform="updateExample">
@@ -467,15 +466,16 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     "multipleValues": "unordered",
     "properties": {
       "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
-    }
+    },
+    "http://microformats.org/profile/hcard": {}
   }
 }
 -->
 </pre>
-  <p>This structure associates mappings for one vocabulary: <code>http://schema.org/</code>.
-    Items having an <a>item type</a> with a <a>URI prefix</a> from this <a>registry</a>
+  <p>This structure associates mappings for two URIs: <code>http://schema.org/</code> and
+    <code>http://microformats.org/profile/hcard</code>. Items having an <a>item type</a> with a <a>URI prefix</a> from this <a>registry</a>
     use the the rules described for that prefix within the scope of that
-    <a>item type</a>. This mapping currently defines a single property: <code>additionalType</code>
+    <a>item type</a>. Sor <code>http://schema.org/</code>, this mapping currently defines a single property: <code>additionalType</code>
     with a value to indicate specific behavior. It also allows overrides
     on a per-property basis; the <a><code>properties</code></a> key associates an individual <a>name</a>
     with overrides for default behavior.
@@ -587,7 +587,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       </div>
     </dd>
   </dl>
-  <p>If there is no <a>registry</a>, or if the <a>registry</a> contains no match for <a>current type</a> implementations act as if
+  <p>If the <a>registry</a> contains no match for <a>current type</a> implementations MUST act as if
     there is a <a>URI prefix</a> made from the first <a class="aref">itemtype</a> value by stripping either the
     <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or
     <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>,
@@ -887,13 +887,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 
 <section>
   <h2>Control of Microdata Processors</h2>
-  <p>The use of an external registry is controlled by the
-    <code>registry</code> option passed to the microdata processor. If set to <strong>true</strong>,
-    the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>,
-    otherwise, if a URL, from that location, otherwise, the processor MUST act as if
-    an empty <a>registry</a> were passed
+  <p>The external registry may be controlled by the
+    <code>registry</code> option passed to the microdata processor. If specified, the registry
+    must be loaded from the location indicated as the option value, Otherwise,
+    the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>.
     <span class="note nostrike">see <a href="#issues">issue 10</a></span>.
-    The default value for <code>registry</code> is <strong>false</strong>.</p>
   <p>If vocabulary expansion is performed by the microdata processor, and the
     <code>vocab_expansion</code> option is passed to the microdata processor,
     the full [[RDFA-CORE]] entailment MUST also be performed.
@@ -901,7 +899,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
   <p>Setting <code>registry</code> and <code>vocab_expansion</code> is performed in a processor-specific way.</p>
   <p>
     When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors SHOULD use <code>registry</code> and <code>vocab_expansion</code>
-    query parameters. Acceptable values for <code>registry</code> are <strong>true</strong>, <strong>false</strong>, and a URI-encoded URL.
+    query parameters. Acceptable values for <code>registry</code> is a URI-encoded URL.
     Acceptable values for <code>vocab_expansion</code> are <strong>true</strong> and <strong>false</strong>.
     Web service processors SHOULD return the resulting RDF graph using a requested format specified by
     HTTP Content Negotiation for an acceptable content type. Web service processors MUST support [[!N-TRIPLES]].
