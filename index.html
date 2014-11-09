@@ -328,6 +328,19 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <a><code>propertyURI</code></a> defaults to <a>vocabulary</a> if there is an <a class="aref">itemtype</a> and
     <code>multipleValues</code> defaults to <strong>false</strong>, where values are never placed in an <code>rdf:List.</code>
   </p>
+  <p class="issue" data-number="11">
+    Use full RDFa Entailment if <code>vocab_expansion</code> option given.
+    The current spec duplicates rules for vocabulary entailment from RDFa, but also
+    allows RDFa entailment. Issue #10 suggests making vocabulary expansion (and
+    entailment) controlled by a processor option. Also, since original publication,
+    schema.org is now publishing an RDFs vocabulary at
+    http://schema.org/docs/schema_org_rdfa.html. If this vocabulary contained the
+    following statement:<br/>
+    <code>schema:additionalType rdfs:subPropertyOf rdf:type .</code><br/>
+    the need for special registry rules for additionalType would be removed,
+    provided that RDFa vocabulary expansion is performed, where the schema.org
+    vocabulary is used to perform entailment operations.
+  </p>
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
     about the need for a <a>registry</a> and the details of processing. Among the options investigated by
@@ -842,7 +855,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     a separate entailment algorithm. To allow [[RDFA-CORE]] processors to be used for microdata vocabulary expansion, microdata acts as if there is an implicit <code>@vocab</code> RDFa attribute set to a detected vocabulary by emitting
     a triple using the <code>rdfa:usesVocabulary</code> predicate.</p>
 
-  <p class="note">The entailment described in this section is the <em>minimum</em>
+  <p class="note"><a href="#issues">Issue 11</a></span> suggests making the use of RDFa entailment
+    the requirement, as vocabulary expansion is now proposed to be under the control of the
+    <code>vocab_expansion</code> option.</p>
+
+  <p class="note strike">The entailment described in this section is the <em>minimum</em>
     useful level for microdata. Processors may, of course, choose to follow
     more powerful entailment regimes, e.g., include full RDFS [[!RDF-MT]]
     or OWL2 [[!OWL2-OVERVIEW]] entailments. Using those entailments
