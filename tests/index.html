@@ -72,7 +72,7 @@
     <a href="#positive-tests">Positive processor
     tests</a> tests MUST generate the specified triples and <a href="#negative-tests">Negative processor tests</a>
     MUST NOT generate the specified triples.</p>
-  <p>All tests should be performed with an assumed base of <code>http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/</code>
+  <p>All tests should be performed with an assumed base of <code>http://w3c.github.io/microdata-rdf/tests/</code>
     along with the base-name of the specific test document (excluding any format extension).</p>
   <p>This document serves as the test manifest for both positive and negative parser tests using the
     <a href="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#">Data Access Test Manifest</a>
@@ -98,6 +98,7 @@
       rdfs:comment  &quot;Item with no itemtype and literal itemprop&quot;;
       mf:action [qt:data &lt;0001.html&gt;];
       mf:registry &lt;test-registry.json&gt;;
+      mf:vocab_expansion &quot;true&quot;;
       mf:result &lt;0001.ttl&gt;
       mf:positiveTest &quot;true&quot;;
     ]
@@ -1597,6 +1598,7 @@
     <a itemprop="data" href="0073.html">input</a>
   </span> |
   <a itemprop="result" href="0073.ttl">result</a>
+  <meta itemprop="vocab_expansion" content="true"/>
   <meta itemprop="positiveTest" content="true"/>
   )
 </div>
@@ -1617,6 +1619,7 @@
     <a itemprop="data" href="0074.html">input</a>
   </span> |
   <a itemprop="result" href="0074.ttl">result</a>
+  <meta itemprop="vocab_expansion" content="true"/>
   <meta itemprop="positiveTest" content="true"/>
   )
 </div>

@@ -11,6 +11,7 @@
     "action": "mf:action",
     "data": {"@id": "mq:data", "@type": "@id"},
     "result": {"@id": "mf:result", "@type": "@id"},
+    "vocab_expansion": {"@id": "mf:vocab_expansion"},
     "registry": {"@id": "mf:registry", "@type": "@id"},
     "positiveTest": "mf:positiveTest"
   },

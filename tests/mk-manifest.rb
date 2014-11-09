@@ -6,7 +6,7 @@ require 'json/ld'
 BASE = "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/"
 graph = RDF::Graph.load("./index.html",
   :base_uri => BASE,
-  :registry_uri => "./test-registry.json")
+  :registry => "./test-registry.json")
 
 # Turtle version
 ttl = graph.dump(:ttl,

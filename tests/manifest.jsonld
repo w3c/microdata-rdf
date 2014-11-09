@@ -19,6 +19,9 @@
       "@id": "mf:result",
       "@type": "@id"
     },
+    "vocab_expansion": {
+      "@id": "mf:vocab_expansion"
+    },
     "registry": {
       "@id": "mf:registry",
       "@type": "@id"
@@ -27,15 +30,15 @@
   },
   "@graph": [
     {
-      "@id": "_:ag7",
+      "@id": "_:b93",
       "@type": "mf:Manifest",
       "comment": "Positive processor tests",
       "entries": [
         {
-          "@id": "_:u2",
+          "@id": "_:b77",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:u3",
+            "@id": "_:b68",
             "@type": "mq:QueryTest",
             "data": "0001.html"
           },
@@ -45,10 +48,10 @@
           "result": "0001.ttl"
         },
         {
-          "@id": "_:v2",
+          "@id": "_:b31",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:v3",
+            "@id": "_:b32",
             "@type": "mq:QueryTest",
             "data": "0002.html"
           },
@@ -58,10 +61,10 @@
           "result": "0002.ttl"
         },
         {
-          "@id": "_:z2",
+          "@id": "_:b19",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:z3",
+            "@id": "_:b20",
             "@type": "mq:QueryTest",
             "data": "0003.html"
           },
@@ -71,10 +74,10 @@
           "result": "0003.ttl"
         },
         {
-          "@id": "_:aa2",
+          "@id": "_:b0",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:aa3",
+            "@id": "_:b1",
             "@type": "mq:QueryTest",
             "data": "0004.html"
           },
@@ -84,10 +87,10 @@
           "result": "0004.ttl"
         },
         {
-          "@id": "_:aa9",
+          "@id": "_:b92",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ab0",
+            "@id": "_:b80",
             "@type": "mq:QueryTest",
             "data": "0005.html"
           },
@@ -97,10 +100,10 @@
           "result": "0005.ttl"
         },
         {
-          "@id": "_:ab9",
+          "@id": "_:b47",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac0",
+            "@id": "_:b39",
             "@type": "mq:QueryTest",
             "data": "0006.html"
           },
@@ -110,10 +113,10 @@
           "result": "0006.ttl"
         },
         {
-          "@id": "_:ac6",
+          "@id": "_:b94",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac7",
+            "@id": "_:b144",
             "@type": "mq:QueryTest",
             "data": "0007.html"
           },
@@ -123,10 +126,10 @@
           "result": "0007.ttl"
         },
         {
-          "@id": "_:y6",
+          "@id": "_:b95",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y7",
+            "@id": "_:b131",
             "@type": "mq:QueryTest",
             "data": "0008.html"
           },
@@ -136,10 +139,10 @@
           "result": "0008.ttl"
         },
         {
-          "@id": "_:x6",
+          "@id": "_:b52",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x7",
+            "@id": "_:b53",
             "@type": "mq:QueryTest",
             "data": "0009.html"
           },
@@ -149,10 +152,10 @@
           "result": "0009.ttl"
         },
         {
-          "@id": "_:ae2",
+          "@id": "_:b71",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x8",
+            "@id": "_:b63",
             "@type": "mq:QueryTest",
             "data": "0010.html"
           },
@@ -162,10 +165,10 @@
           "result": "0010.ttl"
         },
         {
-          "@id": "_:ae9",
+          "@id": "_:b26",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y3",
+            "@id": "_:b27",
             "@type": "mq:QueryTest",
             "data": "0011.html"
           },
@@ -175,10 +178,10 @@
           "result": "0011.ttl"
         },
         {
-          "@id": "_:w8",
+          "@id": "_:b15",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:w9",
+            "@id": "_:b16",
             "@type": "mq:QueryTest",
             "data": "0012.html"
           },
@@ -188,10 +191,10 @@
           "result": "0012.ttl"
         },
         {
-          "@id": "_:af3",
+          "@id": "_:b56",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:af4",
+            "@id": "_:b57",
             "@type": "mq:QueryTest",
             "data": "0013.html"
           },
@@ -201,10 +204,10 @@
           "result": "0013.ttl"
         },
         {
-          "@id": "_:ag4",
+          "@id": "_:b96",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ag5",
+            "@id": "_:b78",
             "@type": "mq:QueryTest",
             "data": "0014.html"
           },
@@ -214,10 +217,10 @@
           "result": "0014.ttl"
         },
         {
-          "@id": "_:ag8",
+          "@id": "_:b45",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ah8",
+            "@id": "_:b34",
             "@type": "mq:QueryTest",
             "data": "0015.html"
           },
@@ -227,10 +230,10 @@
           "result": "0015.ttl"
         },
         {
-          "@id": "_:ag9",
+          "@id": "_:b97",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ah4",
+            "@id": "_:b21",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_1.html"
           },
@@ -241,10 +244,10 @@
           "result": "sdo_eg_md_1.ttl"
         },
         {
-          "@id": "_:af8",
+          "@id": "_:b98",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:af5",
+            "@id": "_:b129",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_2.html"
           },
@@ -255,10 +258,10 @@
           "result": "sdo_eg_md_2.ttl"
         },
         {
-          "@id": "_:af1",
+          "@id": "_:b90",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:w7",
+            "@id": "_:b79",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_3.html"
           },
@@ -269,10 +272,10 @@
           "result": "sdo_eg_md_3.ttl"
         },
         {
-          "@id": "_:ae7",
+          "@id": "_:b40",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ae5",
+            "@id": "_:b25",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_4.html"
           },
@@ -283,10 +286,10 @@
           "result": "sdo_eg_md_4.ttl"
         },
         {
-          "@id": "_:ad9",
+          "@id": "_:b17",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ad6",
+            "@id": "_:b18",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_5.html"
           },
@@ -297,10 +300,10 @@
           "result": "sdo_eg_md_5.ttl"
         },
         {
-          "@id": "_:ad3",
+          "@id": "_:b59",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y5",
+            "@id": "_:b49",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_6.html"
           },
@@ -311,10 +314,10 @@
           "result": "sdo_eg_md_6.ttl"
         },
         {
-          "@id": "_:ac9",
+          "@id": "_:b73",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac4",
+            "@id": "_:b65",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_7.html"
           },
@@ -325,10 +328,10 @@
           "result": "sdo_eg_md_7.ttl"
         },
         {
-          "@id": "_:ab7",
+          "@id": "_:b99",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ab4",
+            "@id": "_:b143",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_8.html"
           },
@@ -339,10 +342,10 @@
           "result": "sdo_eg_md_8.ttl"
         },
         {
-          "@id": "_:aa7",
+          "@id": "_:b100",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:aa4",
+            "@id": "_:b134",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_9.html"
           },
@@ -353,10 +356,10 @@
           "result": "sdo_eg_md_9.ttl"
         },
         {
-          "@id": "_:z7",
+          "@id": "_:b101",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:z4",
+            "@id": "_:b128",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_10.html"
           },
@@ -367,10 +370,10 @@
           "result": "sdo_eg_md_10.ttl"
         },
         {
-          "@id": "_:v5",
+          "@id": "_:b62",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:v0",
+            "@id": "_:b42",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_11.html"
           },
@@ -381,10 +384,10 @@
           "result": "sdo_eg_md_11.ttl"
         },
         {
-          "@id": "_:u5",
+          "@id": "_:b102",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:u0",
+            "@id": "_:b23",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_12.html"
           },
@@ -395,10 +398,10 @@
           "result": "sdo_eg_md_12.ttl"
         },
         {
-          "@id": "_:w6",
+          "@id": "_:b6",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:w3",
+            "@id": "_:b7",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_13.html"
           },
@@ -409,10 +412,10 @@
           "result": "sdo_eg_md_13.ttl"
         },
         {
-          "@id": "_:v8",
+          "@id": "_:b84",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t3",
+            "@id": "_:b76",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_14.html"
           },
@@ -423,10 +426,10 @@
           "result": "sdo_eg_md_14.ttl"
         },
         {
-          "@id": "_:ah0",
+          "@id": "_:b36",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ah5",
+            "@id": "_:b37",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_15.html"
           },
@@ -437,10 +440,10 @@
           "result": "sdo_eg_md_15.ttl"
         },
         {
-          "@id": "_:ag1",
+          "@id": "_:b13",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:af7",
+            "@id": "_:b14",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_16.html"
           },
@@ -451,10 +454,10 @@
           "result": "sdo_eg_md_16.ttl"
         },
         {
-          "@id": "_:x9",
+          "@id": "_:b87",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y0",
+            "@id": "_:b88",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_17.html"
           },
@@ -465,10 +468,10 @@
           "result": "sdo_eg_md_17.ttl"
         },
         {
-          "@id": "_:ae8",
+          "@id": "_:b70",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ae6",
+            "@id": "_:b61",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_18.html"
           },
@@ -479,10 +482,10 @@
           "result": "sdo_eg_md_18.ttl"
         },
         {
-          "@id": "_:ae0",
+          "@id": "_:b103",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ad7",
+            "@id": "_:b141",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_19.html"
           },
@@ -493,10 +496,10 @@
           "result": "sdo_eg_md_19.ttl"
         },
         {
-          "@id": "_:ad2",
+          "@id": "_:b104",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y4",
+            "@id": "_:b3",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_20.html"
           },
@@ -507,10 +510,10 @@
           "result": "sdo_eg_md_20.ttl"
         },
         {
-          "@id": "_:ac8",
+          "@id": "_:b105",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac3",
+            "@id": "_:b82",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_21.html"
           },
@@ -521,10 +524,10 @@
           "result": "sdo_eg_md_21.ttl"
         },
         {
-          "@id": "_:ab6",
+          "@id": "_:b44",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ab2",
+            "@id": "_:b33",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_22.html"
           },
@@ -535,10 +538,10 @@
           "result": "sdo_eg_md_22.ttl"
         },
         {
-          "@id": "_:aa6",
+          "@id": "_:b24",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:aa0",
+            "@id": "_:b8",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_23.html"
           },
@@ -549,10 +552,10 @@
           "result": "sdo_eg_md_23.ttl"
         },
         {
-          "@id": "_:z5",
+          "@id": "_:b106",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:z0",
+            "@id": "_:b58",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_24.html"
           },
@@ -563,10 +566,10 @@
           "result": "sdo_eg_md_24.ttl"
         },
         {
-          "@id": "_:v1",
+          "@id": "_:b75",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:u7",
+            "@id": "_:b67",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_25.html"
           },
@@ -577,10 +580,10 @@
           "result": "sdo_eg_md_25.ttl"
         },
         {
-          "@id": "_:u1",
+          "@id": "_:b107",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t7",
+            "@id": "_:b140",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_26.html"
           },
@@ -591,10 +594,10 @@
           "result": "sdo_eg_md_26.ttl"
         },
         {
-          "@id": "_:w2",
+          "@id": "_:b108",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:v9",
+            "@id": "_:b132",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_27.html"
           },
@@ -605,10 +608,10 @@
           "result": "sdo_eg_md_27.ttl"
         },
         {
-          "@id": "_:t1",
+          "@id": "_:b109",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t2",
+            "@id": "_:b89",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_28.html"
           },
@@ -619,10 +622,10 @@
           "result": "sdo_eg_md_28.ttl"
         },
         {
-          "@id": "_:ah1",
+          "@id": "_:b48",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ag6",
+            "@id": "_:b38",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_29.html"
           },
@@ -633,10 +636,10 @@
           "result": "sdo_eg_md_29.ttl"
         },
         {
-          "@id": "_:af6",
+          "@id": "_:b110",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:af2",
+            "@id": "_:b12",
             "@type": "mq:QueryTest",
             "data": "sdo_eg_md_30.html"
           },
@@ -647,10 +650,10 @@
           "result": "sdo_eg_md_30.ttl"
         },
         {
-          "@id": "_:af0",
+          "@id": "_:b54",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x0",
+            "@id": "_:b55",
             "@type": "mq:QueryTest",
             "data": "0046.html"
           },
@@ -660,10 +663,10 @@
           "result": "0046.ttl"
         },
         {
-          "@id": "_:ae4",
+          "@id": "_:b83",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ae3",
+            "@id": "_:b72",
             "@type": "mq:QueryTest",
             "data": "0047.html"
           },
@@ -673,10 +676,10 @@
           "result": "0047.ttl"
         },
         {
-          "@id": "_:ad5",
+          "@id": "_:b41",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x5",
+            "@id": "_:b28",
             "@type": "mq:QueryTest",
             "data": "0048.html"
           },
@@ -686,10 +689,10 @@
           "result": "0048.ttl"
         },
         {
-          "@id": "_:y8",
+          "@id": "_:b111",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y9",
+            "@id": "_:b9",
             "@type": "mq:QueryTest",
             "data": "0049.html"
           },
@@ -699,10 +702,10 @@
           "result": "0049.ttl"
         },
         {
-          "@id": "_:ac2",
+          "@id": "_:b4",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac1",
+            "@id": "_:b5",
             "@type": "mq:QueryTest",
             "data": "0050.html"
           },
@@ -712,10 +715,10 @@
           "result": "0050.ttl"
         },
         {
-          "@id": "_:ab3",
+          "@id": "_:b112",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ab1",
+            "@id": "_:b81",
             "@type": "mq:QueryTest",
             "data": "0051.html"
           },
@@ -725,10 +728,10 @@
           "result": "0051.ttl"
         },
         {
-          "@id": "_:aa1",
+          "@id": "_:b46",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:z9",
+            "@id": "_:b35",
             "@type": "mq:QueryTest",
             "data": "0052.html"
           },
@@ -738,10 +741,10 @@
           "result": "0052.ttl"
         },
         {
-          "@id": "_:z6",
+          "@id": "_:b113",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:v6",
+            "@id": "_:b22",
             "@type": "mq:QueryTest",
             "data": "0053.html"
           },
@@ -751,10 +754,10 @@
           "result": "0053.ttl"
         },
         {
-          "@id": "_:u9",
+          "@id": "_:b114",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:u6",
+            "@id": "_:b2",
             "@type": "mq:QueryTest",
             "data": "0054.html"
           },
@@ -764,10 +767,10 @@
           "result": "0054.ttl"
         },
         {
-          "@id": "_:t9",
+          "@id": "_:b115",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t6",
+            "@id": "_:b91",
             "@type": "mq:QueryTest",
             "data": "0055.html"
           },
@@ -777,10 +780,10 @@
           "result": "0055.ttl"
         },
         {
-          "@id": "_:w4",
+          "@id": "_:b64",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:w0",
+            "@id": "_:b43",
             "@type": "mq:QueryTest",
             "data": "0056.html"
           },
@@ -790,10 +793,10 @@
           "result": "0056.ttl"
         },
         {
-          "@id": "_:t4",
+          "@id": "_:b116",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t5",
+            "@id": "_:b142",
             "@type": "mq:QueryTest",
             "data": "0057.html"
           },
@@ -803,10 +806,10 @@
           "result": "0057.ttl"
         },
         {
-          "@id": "_:ah2",
+          "@id": "_:b117",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ah6",
+            "@id": "_:b133",
             "@type": "mq:QueryTest",
             "data": "0058.html"
           },
@@ -816,10 +819,10 @@
           "result": "0058.ttl"
         },
         {
-          "@id": "_:ag2",
+          "@id": "_:b50",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:af9",
+            "@id": "_:b51",
             "@type": "mq:QueryTest",
             "data": "0059.html"
           },
@@ -829,10 +832,10 @@
           "result": "0059.ttl"
         },
         {
-          "@id": "_:x3",
+          "@id": "_:b69",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x4",
+            "@id": "_:b60",
             "@type": "mq:QueryTest",
             "data": "0060.html"
           },
@@ -842,10 +845,10 @@
           "result": "0060.ttl"
         },
         {
-          "@id": "_:y1",
+          "@id": "_:b118",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:y2",
+            "@id": "_:b139",
             "@type": "mq:QueryTest",
             "data": "0061.html"
           },
@@ -855,10 +858,10 @@
           "result": "0061.ttl"
         },
         {
-          "@id": "_:ae1",
+          "@id": "_:b119",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ad8",
+            "@id": "_:b135",
             "@type": "mq:QueryTest",
             "data": "0062.html"
           },
@@ -868,10 +871,10 @@
           "result": "0062.ttl"
         },
         {
-          "@id": "_:ad4",
+          "@id": "_:b85",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ad1",
+            "@id": "_:b86",
             "@type": "mq:QueryTest",
             "data": "0063.html"
           },
@@ -881,10 +884,10 @@
           "result": "0063.ttl"
         },
         {
-          "@id": "_:ad0",
+          "@id": "_:b74",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ac5",
+            "@id": "_:b66",
             "@type": "mq:QueryTest",
             "data": "0064.html"
           },
@@ -894,10 +897,10 @@
           "result": "0064.ttl"
         },
         {
-          "@id": "_:ab8",
+          "@id": "_:b29",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ab5",
+            "@id": "_:b30",
             "@type": "mq:QueryTest",
             "data": "0065.html"
           },
@@ -907,10 +910,10 @@
           "result": "0065.ttl"
         },
         {
-          "@id": "_:aa8",
+          "@id": "_:b10",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:aa5",
+            "@id": "_:b11",
             "@type": "mq:QueryTest",
             "data": "0066.html"
           },
@@ -920,10 +923,10 @@
           "result": "0066.ttl"
         },
         {
-          "@id": "_:z8",
+          "@id": "_:b120",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:z1",
+            "@id": "_:b145",
             "@type": "mq:QueryTest",
             "data": "0067.html"
           },
@@ -933,10 +936,10 @@
           "result": "0067.ttl"
         },
         {
-          "@id": "_:v4",
+          "@id": "_:b121",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:u8",
+            "@id": "_:b146",
             "@type": "mq:QueryTest",
             "data": "0068.html"
           },
@@ -946,10 +949,10 @@
           "result": "0068.ttl"
         },
         {
-          "@id": "_:u4",
+          "@id": "_:b122",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t8",
+            "@id": "_:b147",
             "@type": "mq:QueryTest",
             "data": "0069.html"
           },
@@ -959,10 +962,10 @@
           "result": "0069.ttl"
         },
         {
-          "@id": "_:w5",
+          "@id": "_:b123",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:w1",
+            "@id": "_:b130",
             "@type": "mq:QueryTest",
             "data": "0070.html"
           },
@@ -972,10 +975,10 @@
           "result": "0070.ttl"
         },
         {
-          "@id": "_:v7",
+          "@id": "_:b124",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:t0",
+            "@id": "_:b148",
             "@type": "mq:QueryTest",
             "data": "0071.html"
           },
@@ -985,10 +988,10 @@
           "result": "0071.ttl"
         },
         {
-          "@id": "_:ah3",
+          "@id": "_:b125",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ah7",
+            "@id": "_:b136",
             "@type": "mq:QueryTest",
             "data": "0072.html"
           },
@@ -998,30 +1001,32 @@
           "result": "0072.ttl"
         },
         {
-          "@id": "_:ag3",
+          "@id": "_:b126",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:ag0",
+            "@id": "_:b137",
             "@type": "mq:QueryTest",
             "data": "0073.html"
           },
           "comment": "Vocabulary Expansion test with rdfs:subPropertyOf",
           "name": "Test 0073",
           "positiveTest": "true",
-          "result": "0073.ttl"
+          "result": "0073.ttl",
+          "vocab_expansion": "true"
         },
         {
-          "@id": "_:x1",
+          "@id": "_:b127",
           "@type": "mf:ManifestEntry",
           "action": {
-            "@id": "_:x2",
+            "@id": "_:b138",
             "@type": "mq:QueryTest",
             "data": "0074.html"
           },
           "comment": "Vocabulary Expansion test with owl:equivalentProperty",
           "name": "Test 0074",
           "positiveTest": "true",
-          "result": "0074.ttl"
+          "result": "0074.ttl",
+          "vocab_expansion": "true"
         }
       ]
     }
