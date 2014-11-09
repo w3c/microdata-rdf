@@ -777,5 +777,65 @@
         mf:positiveTest "true";
         mf:result <0074.ttl>;
         mf:vocab_expansion "true"
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of data and xsd:float";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0075.html>
+        ];
+        mf:name "Test 0075";
+        mf:positiveTest "true";
+        mf:result <0075.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of data and xsd:integer";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0076.html>
+        ];
+        mf:name "Test 0076";
+        mf:positiveTest "true";
+        mf:result <0076.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of data and string";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0077.html>
+        ];
+        mf:name "Test 0077";
+        mf:positiveTest "true";
+        mf:result <0077.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of meter and xsd:float";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0078.html>
+        ];
+        mf:name "Test 0078";
+        mf:positiveTest "true";
+        mf:result <0078.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of meter and xsd:integer";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0079.html>
+        ];
+        mf:name "Test 0079";
+        mf:positiveTest "true";
+        mf:result <0079.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Use of meter and xsd:string";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0080.html>
+        ];
+        mf:name "Test 0080";
+        mf:positiveTest "true";
+        mf:result <0080.ttl>
       ])
  ] .
