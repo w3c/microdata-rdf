@@ -837,5 +837,45 @@
         mf:name "Test 0080";
         mf:positiveTest "true";
         mf:result <0080.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "Simple @itemprop-reverse (experimental)";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0081.html>
+        ];
+        mf:name "Test 0081";
+        mf:positiveTest "true";
+        mf:result <0081.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "@itemprop-reverse with @itemscope value (experimental)";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0082.html>
+        ];
+        mf:name "Test 0082";
+        mf:positiveTest "true";
+        mf:result <0082.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "@itemprop-reverse with literal value (experimental)";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0083.html>
+        ];
+        mf:name "Test 0083";
+        mf:positiveTest "true";
+        mf:result <0083.ttl>
+      ] [
+        a mf:ManifestEntry;
+        rdfs:comment "@itemprop-reverse with @itemprop (experimental)";
+        mf:action [
+          a mq:QueryTest;
+          mq:data <0084.html>
+        ];
+        mf:name "Test 0084";
+        mf:positiveTest "true";
+        mf:result <0084.ttl>
       ])
  ] .
