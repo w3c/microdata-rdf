@@ -307,7 +307,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     Specific feedback from the community is requested. Based on addoption, the attribute
     may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.
   </p>
-  <p class="issue" data-number="6">Remove top-level md:item list.
+  <p class="issue resolved" data-number="6">Remove top-level md:item list.
     This feature is of little value for RDF and adds unnecessary triples to the output.</p>
   <p class="issue" data-number="7">Extract literal from <code>@content</code> of <code>meta</code> element.
     The HTML <code>meta</code> element is used specifically to provide metadata using the value of the <code>@content</code> attribute.
@@ -514,7 +514,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       items and do not have a global scope. (See <a href="#scheme-context">Step 5</a> in
       <a href="#generate-predicate-uri">Generate Predicate URI</a>).
       <div>
-        <span class="note">(contextual URI generation with an in-scope itemtype is being considered for removal (see <a href="#issues">issue 6</a>).</span>
+        <span class="note">(contextual URI generation with an in-scope itemtype is being considered for removal (see <a href="#issues">issue 10</a>).</span>
         <p>URI creation uses a base URI with query parameters to indicate the in-scope
           type and <a>name</a> list. Consider the following example:</p>
         <pre class="example" data-transform="updateExample">
@@ -1244,23 +1244,12 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       processing algorithm that results in the equivalent triples to those that the following
       algorithm generates:</p>
 
-    <p class="strike">
-      Set <em>item list</em> to an empty list
-      <span class="note nostrike">see <a href="#issues">issue 6</a>.</span>
-    </p>
-
     <ol class="algorithm">
       <li>For each element that is also a <a>top-level item</a> run the following algorithm:
         <ol class="algorithm">
           <li>
             <a href="#generate-the-triples">Generate the triples</a> for an item <em>item</em>, using the
-            <a class="strike">evaluation context</a>.
-            Let <em>result</em> be the (<a>URI reference</a> or <a>blank node</a>) subject returned
-            <span class="note nostrike">see <a href="#issues">issue 6</a>.</span>
-          </li>
-          <li class="strike">
-            Append <em>result</em> to <em>item list</em>
-            <span class="note nostrike">see <a href="#issues">issue 6</a></span>
+            <a>evaluation context</a>.
           </li>
         </ol>
       </li>
