@@ -809,7 +809,7 @@
         mf:result <0077.ttl>
       ] [
         a mf:ManifestEntry;
-        rdfs:comment "Use of meter and xsd:float";
+        rdfs:comment "Use of meter and xsd:double";
         mf:action [
           a mq:QueryTest;
           mq:data <0078.html>
