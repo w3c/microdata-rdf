@@ -4,8 +4,5 @@
 
 [ a <http://expansion/MainType>, <http://expansion/AdditionalType>;
   <http://expansion/equivalentProperty>
-    <http://expansion/AdditionalType>, <http://expansion/MainType>
+    <http://expansion/AdditionalType>
 ] .
-
-<> rdfa:usesVocabulary <http://expansion/> .
-<http://expansion/equivalentProperty> owl:equivalentProperty rdf:type .

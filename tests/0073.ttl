@@ -6,6 +6,3 @@
   a <http://expansion/MainType>, <http://expansion/AdditionalType>;
   <http://expansion/subPropertyOf> <http://expansion/AdditionalType>
 ] .
-
-<> rdfa:usesVocabulary <http://expansion/> .
-<http://expansion/subPropertyOf> rdfs:subPropertyOf rdf:type .

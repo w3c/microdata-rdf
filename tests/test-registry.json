@@ -13,30 +13,6 @@
       "typed": {"datatype": "http://typed"}
     }
   },
-  "http://vocabulary.list/": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "list",
-    "properties": {
-      "list": {"multipleValues": "list"},
-      "typed": {"datatype": "http://typed"}
-    }
-  },
-  "http://contextual.unordered/": {
-    "propertyURI":    "contextual",
-    "multipleValues": "unordered",
-    "properties": {
-      "list": {"multipleValues": "list"},
-      "typed": {"datatype": "http://typed"}
-    }
-  },
-  "http://contextual.list/": {
-    "propertyURI":    "contextual",
-    "multipleValues": "list",
-    "properties": {
-      "list": {"multipleValues": "list"},
-      "typed": {"datatype": "http://typed"}
-    }
-  },
   "http://expansion/": {
     "propertyURI":  "vocabulary",
     "multipleValues": "unordered",

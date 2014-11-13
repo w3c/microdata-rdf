@@ -1,8 +1,0 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfa: <http://www.w3.org/ns/rdfa#> .
-
-[ a <http://contextual.unordered/>;
-  <http://www.w3.org/ns/md?type=http://contextual.unordered/&prop=bar> [
-    <http://www.w3.org/ns/md?type=http://contextual.unordered/&prop=bar.baz> "Baz"
-  ]
-] .
