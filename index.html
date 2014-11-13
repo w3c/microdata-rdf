@@ -165,7 +165,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 <p>This Working Draft is an update of the <a href="/TR/2012/NOTE-microdata-rdf-20121009/">W3C
   Interest Group Note</a>, published in October 2012.
   <span>
-    This update adds ...
+    XXX
   </span>
   The intention is to publish 
   this draft as a new version of the Interest Group Note after gathering and incorporating community input.
@@ -181,12 +181,12 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <p>There are a variety of ways in which a mapping from microdata to
       RDF might be configured to give a result that is closer to the required result for a particular vocabulary.
       This specification defines terms that can be used as hooks for
-      optional vocabulary-specific behavior, which could be defined within a
-      <a>registry</a> or on an implementation-defined basis. However, the
+      vocabulary-specific behavior, which could be defined within a
+      <a>registry</a> or on an implementation-defined basis. <span class="strike"> However, the
       HTML Data TF recommends the adoption of a single method of mapping in
-      which every vocabulary is treated as if:
+      which every vocabulary is treated as if:</span>
     </p>
-    <ul>
+    <ul class="strike">
       <li><a><code>propertyURI</code></a> is set to <code>vocabulary</code></li>
       <li><a><code>multipleValues</code></a> is set to <code>unordered</code></li>
     </ul>
@@ -234,7 +234,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
      the microdata specification. This specification highlights where such
      violations occur and the reasons for them.</p>
 
-   <p>This specification optionally allows for 
+   <p>This specification allows for 
      <a>vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
      This is facilitated by a <a>registry</a> that associates URIs with specific rules based on matching
      <a class="aref">itemtype</a> values against registered URI prefixes do determine a vocabulary and potentially
@@ -322,11 +322,15 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     particular candidate.
   </p>
   <p class="issue" data-number="10">
-    Make use of the <a href="#vocab_expansion">Vocabulary Expansion</a>, and
-    <a href="#vocabulary-entailment">Vocabulary Entailment</a>
-    conditional on a runtime option.
-    <a><code>propertyURI</code></a> defaults to <a>vocabulary</a> if there is an <a class="aref">itemtype</a> and
-    <code>multipleValues</code> defaults to <strong>false</strong>, where values are never placed in an <code>rdf:List.</code>
+    Remove support for <code>contextual</code>
+    <a><code>propertyURI</code></a> and <code>mulitpleValues</code>. This issue proposes to
+    remove support for independently setting
+    <a><code>propertyURI</code></a> and <a><code>multipleValues</code></a>.
+    The former <a><code>propertyURI</code></a>
+    is treated like the former <a>vocabulary</a> scheme if
+    there is an <a class="aref">itemtype</a>, otherwise, like <code>contextual</code> creating a property
+    as a fragment of the document base.
+    The former <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
   </p>
   <p class="issue" data-number="11">
     Use full RDFa Entailment if <code>vocab_expansion</code> option given.
@@ -461,7 +465,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section class="informative">
   <h1>Vocabulary Registry</h1>
-  <p class="note">The registry is controlled by a processor option (see <a href="#issues">issue 10</a>).</p>
+  <p class="note">(The registry is being considered for revision (see <a href="#issues">issue 10</a>).</p>
   <p>In a perfect world, all processors would be able to generate the same output for a given input
     without regards to the requirements of a particular <a>vocabulary</a>. However, microdata doesn't
     provide sufficient syntactic help in making these decisions. Different vocabularies have different
@@ -475,8 +479,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 <!--
 {
   "http://schema.org/": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered",
     "properties": {
       "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
     },
@@ -500,14 +502,15 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 <section class="informative">
   <h2>Property URI Generation</h2>
   <p>For <a title="name">names</a> which are not <a title="absolute URL">absolute URLs</a>,
-    the <dfn><code>propertyURI</code></dfn> rule defines the algorithm for generating an <a>absolute URL</a>
-    given an <a>evaluation context</a> including a <a>current type</a>, <a>current name</a> and
+    <span class="strike">the <dfn><code>propertyURI</code></dfn></span>
+    this <span class="strike">rule</span> section defines the algorithm for generating an <a>absolute URL</a>
+    given an <a>evaluation context</a> including a <a>current type</a>, <a class="strike">current name</a> and
     <a>current vocabulary</a>.</p>
   <p>The procedure for generating property URIs is defined in
     <a href="#generate-predicate-uri">Generate Predicate URI</a>.</p>
-  <p>Possible values for <a><code>propertyURI</code></a> are the following:</p>
+  <p class="strike">Possible values for <a><code>propertyURI</code></a> are the following:</p>
   <dl>
-    <dt><code>contextual</code></dt><dd>
+    <dt class="strike"><code>contextual</code></dt><dd class="strike">
       The <code>contextual</code> URI generation scheme guarantees that generated property URIs are
       unique based on the value of <a>current name</a>. This is
       required as the microdata data model requires that <a title="name">names</a> are associated with specific
@@ -562,8 +565,8 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         <p>This would generate <code>http://www.w3.org/ns/md?type=http://schema.org/Person&amp;prop=name</code>.</p>
       </div>
     </dd>
-    <dt><code>vocabulary</code></dt><dd>
-      The <code>vocabulary</code> URI generation scheme appends <a title="name">names</a> that are not
+    <dt class="strike"><code>vocabulary</code></dt><dd>
+      The <code class="strike">vocabulary</code> URI generation scheme appends <a title="name">names</a> that are not
       <a title="absolute URL">absolute URLs</a> to the <a>URI prefix</a>. When generating property URIs, if the <a>URI prefix</a>
       does not end with a '/' or '#', a '#' is appended to the <a>URI prefix</a>. (See <a href="#scheme-vocab">Step 4</a>
       in
@@ -613,10 +616,10 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     is a violation of the microdata specification which is necessary to
     support the use of existing vocabularies designed for use with RDF, and
     shared or inherited properties within all vocabularies.</p>
-  <p>The default value of <a><code>propertyURI</code></a> is <code>vocabulary</code>.</p>
+  <p class="strike">The default value of <a><code>propertyURI</code></a> is <code>vocabulary</code>.</p>
   <pre class="example" data-transform="updateExample">
 <!--
-<div itemscope itemtype="http://schema.org/Book">
+<div itemscope itemtype="http://example.org/Book">
   <h2 itemprop="title">Just a Geek</h2>
 </div>
 -->
@@ -624,9 +627,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   <p>In this example, assuming no matching entry in the <a>registry</a>,
     the <a>URI prefix</a> is constructed by removing the
     <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, leaving the URI
-    <code>http://schema.org/</code>. As there is no explicit <a><code>propertyURI</code></a>,
-        the default <code>vocabulary</code> is used, and the resulting property URI would be
-    <code>http://schema.org/title</code>.</p>
+    <code>http://example.org/</code>. <span class="strike">As there is no explicit <a><code>propertyURI</code></a>,
+        the default <code>vocabulary</code> is used, and</span> The resulting property URI would be
+    <code>http://example.org/title</code>.</p>
 
     <div>
       <p>If there is no in-scope <a class="aref">itemtype</a>, property URIs are generated
@@ -667,8 +670,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 </section>
 
-<section class="informative">
+<section class="informative strike">
   <h2>Value Ordering</h2>
+  <p class="note">(Value Ordering is being considered for removal (see <a href="#issues">issue 10</a>).
   <p>For items having multiple values for a given <a>property</a>,
     the <dfn><code>multipleValues</code></dfn> rule defines the algorithm for serializing these values.
     Microdata uses document order when generating <a title="property value">property values</a>, as defined in
@@ -744,6 +748,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section>
   <h2 id="vocab_expansion">Vocabulary Expansion</h2>
+   <p class="note">Support for the registry is
+      being amended
+      (see <a href="#issues">issue 10</a>).</p>
   <p>Microdata requires that all values of <a class="aref">itemtype</a> come from the same vocabulary. This
     is required as <a class="aref">itemprop</a> values are resolved relative to that vocabulary. However,
     it is often useful to define an <a>item</a> to have types from multiple different vocabularies.</p>
@@ -782,15 +789,11 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 
-<>  rdfa:usesVocabulary schema: .
-
 [ a schema:Person;
   schema:additionalType foaf:Person;
   schema:email <mailto:mail@gmail.com>;
   foaf:mbox <mailto:mail@gmail.com>
 ] .
-
-schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
 </pre>
 
@@ -810,8 +813,6 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
   schema:email <mailto:mail@gmail.com>;
   foaf:mbox <mailto:mail@gmail.com>
 ] .  
-
-schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
 </pre>
 </section>
@@ -949,7 +950,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           <dt><dfn>memory</dfn></dt><dd>
             a mapping of items to subjects, initially empty;
           </dd>
-          <dt><dfn>current name</dfn></dt><dd>
+          <dt class="strike"><dfn>current name</dfn></dt><dd class="strike">
             an <a>absolute URL</a> for the in-scope <a>name</a>, used for generating URIs
             for properties of items without an <a>item type</a>;
             <div class="note">
@@ -1247,7 +1248,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       algorithm generates:</p>
 
     <ol class="algorithm">
-      <li>For each element that is also a <a>top-level item</a> run the following algorithm:
+      <li>For each element that is also a <a>top-level item</a> <span class="strike">run the following algorithm</span>:
         <ol class="algorithm">
           <li>
             <a href="#generate-the-triples">Generate the triples</a> for an item <em>item</em>, using the
@@ -1317,7 +1318,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
         of the element defining the <a>item</a>.
       </li>
-      <li>If <em>type</em> is an <a>absolute URL</a>, set <a>current name</a> in
+      <li class="strike">If <em>type</em> is an <a>absolute URL</a>, set <a>current name</a> in
         <a>evaluation context</a> to null.</li>
       <li>
         Otherwise, set <em>type</em> to <a>current type</a> from
@@ -1341,14 +1342,14 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <li>Otherwise, if type is not empty, construct <em>vocab</em> by removing everything following the last
         SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
       <li>Update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
-      <li>
+      <li class="strike">
         Set <em>property list</em> to an empty array mapping properties to one or more
         <em>values</em> as established below.
       </li>
       <li>
         For each element <em>element</em> that has one or more <a>property names</a> and is one of the
-        <a title="item properties">properties of the item</a> <em>item</em>, in the order those elements
-        are given by the algorithm that returns the <a title="item properties">properties of the item</a>,
+        <a title="item properties">properties of the item</a> <em>item</em><span class="strike">, in the order those elements
+        are given by the algorithm that returns the <a title="item properties">properties of the item</a>,</span>
         run the following substep:
         <ol class="algorithm">
           <li>
@@ -1361,7 +1362,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
               <li>
                 Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
                 using <em>context</em> and <em>name</em>.
-                 Update <em>context</em> by setting <a>current name</a> to <em>predicate</em>.
+                 <span class="strike">Update <em>context</em> by setting <a>current name</a> to <em>predicate</em></span>.
               </li>
               <li>
                 Let <em>value</em> be the <a>property value</a> of <em>element</em>.
@@ -1371,8 +1372,15 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
                 triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
                 from those steps.
               </li>
-              <li>
-                Add <em>value</em> to <em>property list</em> for <em>predicate</em>.
+              <li>Generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>subject</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>value</em></dd>
+                </dl>
               </li>
             </ol>
           </li>
@@ -1421,7 +1429,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           </li>
         </ol>
       </li>
-      <li>
+      <li class="strike">
         For each <em>predicate</em> in <em>property list</em>:
         <ol class="algorithm">
           <li><a href="#generate-property-values">Generate property values</a> <em>subject</em>, <em>predicate</em> and
@@ -1436,8 +1444,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
   <section>
     <h3>Generate Predicate URI</h3>
     <p>Predicate URI generation makes use of <a>current type</a>,
-      <a>current name</a>, and <a>current vocabulary</a> from an <a>evaluation
+      <a class="strike">current name</a>, and <a>current vocabulary</a> from an <a>evaluation
       context</a> <em>context</em> along with <em>name</em>.</p>
+    <p class="note">Support for the <code>contextual</code> <em>schema</em> is
+      being considered for removal
+      (see <a href="#issues">issue 10</a>).</p>
 
     <ol class="algorithm">
       <li>If <em>name</em> is an <a>absolute URL</a>, return <em>name</em>
@@ -1456,18 +1467,18 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
           <code>http://example.org/doc#title</code>.
         </div>
       </li>
-      <li>Otherwise, if <a>current vocabulary</a> from <em>context</em>
+      <li class="strike">Otherwise, if <a>current vocabulary</a> from <em>context</em>
         is not null and <a>registry</a> has an entry for <a>current vocabulary</a>
         having a <a>propertyURI</a> entry that is not null, set that as
         <em>scheme</em>. Otherwise, set <em>scheme</em> to
         <code>vocabulary</code>.</li>
-      <li id="scheme-vocab">If <em>scheme</em> is <code>vocabulary</code>
+      <li id="scheme-vocab"><span class="strike">If <em>scheme</em> is <code>vocabulary</code></span>
         set <em>expandedURI</em> to the <a>URI reference</a> constructed by
         appending the <a>fragment-escape</a>d value of <em>name</em> to <a>current
         vocabulary</a>, separated by a U+0023 NUMBER SIGN character (#) unless the
         <a>current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
         (#) or SOLIDUS U+002F (/).</li>
-      <li id="scheme-context">Otherwise, if <em>scheme</em> is
+      <li class="strike" id="scheme-context">Otherwise, if <em>scheme</em> is
         <code>contextual</code>, set <em>expandedURI</em> to the <a>URI
         reference</a> constructed as follows:
         <ol class="algorithm">
@@ -1483,7 +1494,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
             <em>name</em>. </li>
         </ol>
       </li>
-      <li>If the <a>registry</a> entry for <a>propertyURI</a>
+      <li class="strike">If the <a>registry</a> entry for <a>propertyURI</a>
         has an <code>equivalentProperty</code> key,
         generate the following triple using the
         <em>value</em> of that key:
@@ -1497,7 +1508,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
         </dl>
         <p>If the value is an array, generate a triple for each value of that array.</p>
       </li>
-      <li>If the <a>registry</a> entry for <a>propertyURI</a>
+      <li class="strike">If the <a>registry</a> entry for <a>propertyURI</a>
         has an <code>subPropertyOf</code> key, generate the following triple using the
         <em>value</em> of that key:
         <dl class="triple">
@@ -1514,9 +1525,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     </ol>
   </section>
   
-  <section>
+  <section class="strike">
     <h2>Generate Property Values</h2>
     <p>Property value serialization makes use of <em>subject</em>, <em>predicate</em> and <em>values</em>.</p>
+    <p class="note">Support for the per-vocabulary processing rules is being considered for removal
+      (see <a href="#issues">issue 10</a>).</p>
 
     <ol class="algorithm">
       <li>If the <a>registry</a> contains a URI prefix that is a character for character match of
@@ -1569,8 +1582,11 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
     </ol>
   </section>
 
-  <section id="generate-collection">
+  <section class="strike" id="generate-collection">
     <h2>Generate RDF Collection</h2>
+    <p class="note">Support for the registry, and therefore the generation of RDF Collections
+      is being considered for removal
+      (see <a href="#issues">issue 10</a>).</p>
     <p>
       An <dfn>RDF Collection</dfn> is a mechanism for defining ordered sequences of objects in RDF (See <cite><a
       href="http://www.w3.org/TR/rdf-syntax/#collections">RDF Collections</a></cite> in
@@ -1578,7 +1594,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
       <code>rdf:first</code> and <code>rdf:next </code>is required to be able to specify a particular order.
     </p>
     <p>
-      In the microdata to RDF mapping, <a>RDF Collection</a>s are used when an item has more than one value
+      In the microdata to RDF mapping, <a title="RDF Collection">RDF Collections</a> are used when an item has more than one value
       associated with a given property to ensure that the original document order is maintained. The following
       procedure should be used to generate triples when an <a>item</a> property has more than one value
       (contained in <em>list</em>):
@@ -1661,7 +1677,7 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 </pre>
 
 <p>Assuming that <a>registry</a> contains a an entry for <code>http://purl.org/vocab/frbr/core#</code>
-  with <a><code>propertyURI</code></a> set to <code>vocabulary</code>,
+  <span class="strike">with <a><code>propertyURI</code></a> set to <code>vocabulary</code>,</span>
   this is equivalent to the following Turtle:</p>
 <pre class="example" data-transform="updateExample">
 <!--
@@ -1719,8 +1735,6 @@ schema:additionalType rdfs:subPropertyOf rdf:type .
 <!--
 @prefix hcard: <http://microformats.org/profile/hcard#> .
 @prefix rdfa: <http://www.w3.org/ns/rdfa#> .
-
-<> rdfa:usesVocabulary <http://microformats.org/profile/hcard> .
 
 [ a <http://microformats.org/profile/hcard>;
   hcard:fn "Princeton";
@@ -1780,8 +1794,6 @@ _:a hcard:street-address "Avenue Q" .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 
-<> rdfa:usesVocabulary schema: .
-
 [ a schema:MusicPlaylist;
   schema:name "Classic Rock Playlist";
   schema:byArtist ("Lynard Skynard" "AC/DC");
@@ -1799,8 +1811,6 @@ _:a hcard:street-address "Avenue Q" .
       schema:url <shook-you-all-night-long>]
   )
 ] .
-  
-schema:additionalType rdfs:subPropertyOf rdf:type .
 -->
 </pre>
 
