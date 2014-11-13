@@ -332,18 +332,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     as a fragment of the document base.
     The former <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
   </p>
-  <p class="issue" data-number="11">
-    Use full RDFa Entailment if <code>vocab_expansion</code> option given.
-    The current spec duplicates rules for vocabulary entailment from RDFa, but also
-    allows RDFa entailment. Issue #10 suggests making vocabulary expansion (and
-    entailment) controlled by a processor option. Also, since original publication,
-    schema.org is now publishing an RDFs vocabulary at
-    http://schema.org/docs/schema_org_rdfa.html. If this vocabulary contained the
-    following statement:<br/>
-    <code>schema:additionalType rdfs:subPropertyOf rdf:type .</code><br/>
-    the need for special registry rules for additionalType would be removed,
-    provided that RDFa vocabulary expansion is performed, where the schema.org
-    vocabulary is used to perform entailment operations.
+  <p class="issue strike resolved" data-number="11">
+    The use of Entailment to facilitate vocabulary expansion is replaced with direc triple
+    generation during the core processing algorithm.
   </p>
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
@@ -815,9 +806,20 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 ] .  
 -->
 </pre>
+
+  <p class="note">The <code>owl:equivalentProperty</code> rule is more powerfull than <code>rdfs:subPropertyOf</code>,
+    in that if any equivalent property matches, then the source property would also cause a triple to be generated.
+    For example, if the registry stated that <code>name</code> was equivalent to <code>rdfs:label</code>,
+    than any use of <code>name</code> in a <a class="aref">itemprop</a> would cause a triple using
+    <code>rdfs:label</code> to be emitted, as with <code>rdfs:subPropertyOf</code>. However, logically,
+    any use of <code>label</code> where the current voabulary were <code>rdfs:</code> could also cause
+    a triple using <code>schema:name</code> to be emitted. To simplify processing, this specification
+    requires that all values of a <code>owl:equivalentProperty</code> registry entry have their
+    own rules with those values as keys within the <code>property</code> section of their respective
+    vocabularies.</p>
 </section>
 
-<section>
+<section class="strike">
   <h2>Vocabulary Entailment</h2>
   <p>Formally, and for the purpose of vocabulary processing, microdata uses a very
     restricted subset of the OWL2 vocabulary and is based on the RDF-Based Semantics of OWL2 [[!OWL2-RDF-BASED-SEMANTICS]].
@@ -854,7 +856,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     a separate entailment algorithm. To allow [[RDFA-CORE]] processors to be used for microdata vocabulary expansion, microdata acts as if there is an implicit <code>@vocab</code> RDFa attribute set to a detected vocabulary by emitting
     a triple using the <code>rdfa:usesVocabulary</code> predicate.</p>
 
-  <p class="note"><a href="#issues">Issue 11</a></span> suggests making the use of RDFa entailment
+  <p class="note strike"><a href="#issues">Issue 11</a></span> suggests making the use of RDFa entailment
     the requirement, as vocabulary expansion is now proposed to be under the control of the
     <code>vocab_expansion</code> option.</p>
 
@@ -907,15 +909,15 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     must be loaded from the location indicated as the option value, Otherwise,
     the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>.
     <span class="note nostrike">see <a href="#issues">issue 10</a></span>.
-  <p>If vocabulary expansion is performed by the microdata processor, and the
+  <p class="strike">If vocabulary expansion is performed by the microdata processor, and the
     <code>vocab_expansion</code> option is passed to the microdata processor,
     the full [[RDFA-CORE]] entailment MUST also be performed.
     The default value for <code>vocab_expansion</code> is <strong>false</strong>.</p>
-  <p>Setting <code>registry</code> and <code>vocab_expansion</code> is performed in a processor-specific way.</p>
+  <p>Setting <code>registry</code> <span class="strike">and <code>vocab_expansion</code></span> is performed in a processor-specific way.</p>
   <p>
-    When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors SHOULD use <code>registry</code> and <code>vocab_expansion</code>
-    query parameters. Acceptable values for <code>registry</code> is a URI-encoded URL.
-    Acceptable values for <code>vocab_expansion</code> are <strong>true</strong> and <strong>false</strong>.
+    When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors SHOULD use <code>registry</code> <span class="strike">and <code>vocab_expansion</code></span>
+    query parameter<span class="strike">s</span>. Acceptable values for <code>registry</code> is a URI-encoded URL.
+    <span class="strike">Acceptable values for <code>vocab_expansion</code> are <strong>true</strong> and <strong>false</strong>.</span>
     Web service processors SHOULD return the resulting RDF graph using a requested format specified by
     HTTP Content Negotiation for an acceptable content type. Web service processors MUST support [[!N-TRIPLES]].
 </section>
@@ -1274,7 +1276,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           <dd><em>value</em></dd>
         </dl>
       </li>
-      <li>
+      <li class="strike">
         If the processor is given the <code>vocab_expansion</code> option, perform <a href="#vocabulary-entailment">Vocabulary Entailment</a>.</li>
     </ol>
   </section>
@@ -1324,7 +1326,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         Otherwise, set <em>type</em> to <a>current type</a> from
         <a>evaluation context</a> if not empty.
       </li>
-      <li>If the <a>registry</a> contains a <a>URI prefix</a> that is a
+      <li class="strike">If the <a>registry</a> contains a <a>URI prefix</a> that is a
         character for character match of <em>type</em> up to the length of the 
         <a>URI prefix</a>,
         and the processor is given the <code>vocab_expansion</code> option,
@@ -1378,6 +1380,19 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                   <dd><em>subject</em></dd>
                   <dt>predicate</dt>
                   <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>value</em></dd>
+                </dl>
+              </li>
+              <li>
+                If an entry exists in the <a>registry</a> for <em>name</em> in the vocabulary
+                associated with <em>vocab</em> having the key <code>subPropertyOf</code> or
+                <code>equivalentProperty</code>, for each such value <em>equiv</em>, generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>subject</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>equiv</em></dd>
                   <dt>object</dt>
                   <dd><em>value</em></dd>
                 </dl>
@@ -1446,7 +1461,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <p>Predicate URI generation makes use of <a>current type</a>,
       <a class="strike">current name</a>, and <a>current vocabulary</a> from an <a>evaluation
       context</a> <em>context</em> along with <em>name</em>.</p>
-    <p class="note">Support for the <code>contextual</code> <em>schema</em> is
+    <p class="note">Support for the <code>contextual</code> <em>scheme</em> is
       being considered for removal
       (see <a href="#issues">issue 10</a>).</p>
 
