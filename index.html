@@ -1061,6 +1061,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
         of the element defining the <a>item</a>.
       </li>
+      <li>Otherwise, set <em>type</em> to <a>current type</a> from <a>evaluation context</a> if not empty.</li>
       <li>If the <a>registry</a> contains a <a>URI prefix</a> that is a
         character for character match of <em>type</em> up to the length of the 
         <a>URI prefix</a>,
@@ -1068,8 +1069,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       </li>
       <li>Otherwise, if type is not empty, construct <em>vocab</em> by removing everything following the last
         SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
-      <li>If <em>vocab</em> has been set, update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
-      <li>Otherwise, set <em>type</em> to <a>current type</a> from <a>evaluation context</a> if not empty.</li>
+      <li>Update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
       <li>For each element <em>element</em> that has one or more <a>property names</a> and is one of the
         <a title="item properties">properties of the item</a> <em>item</em>
         run the following substep:

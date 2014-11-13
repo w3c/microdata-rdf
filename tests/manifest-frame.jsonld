@@ -6,7 +6,7 @@
     "mq": "http://www.w3.org/2001/sw/DataAccess/tests/test-query#",
     
     "comment": "rdfs:comment",
-    "entries": {"@id": "mf:entries", "@container": "@list"},
+    "entries": {"@id": "mf:entries"},
     "name": "mf:name",
     "action": "mf:action",
     "data": {"@id": "mq:data", "@type": "@id"},
