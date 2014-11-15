@@ -161,13 +161,54 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   or consumers, should note that it may change prior to any possible publication as a Recommendation.</p>
 
 <p>This Working Draft is an update of the <a href="/TR/2012/NOTE-microdata-rdf-20121009/">W3C
-  Interest Group Note</a>, published in October 2012.
-  <span>
-    XXX
-  </span>
-  The intention is to publish 
-  this draft as a new version of the Interest Group Note after gathering and incorporating community input.
-</p> 
+  Interest Group Note</a>, published in October 2012. This update simplifies
+  processing using the following mechanisms:</p>
+<ul>
+  <li>Experimental support for <a class="aref">itemprop-reverse</a> has been added.
+    This attribute is not part of [[MICRODATA]] and is included as an experimental feature.
+    Specific feedback from the community is requested. Based on addoption, the attribute
+    may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/5">issue 5</a>)</li>
+  <li><a title="top-level item">Top-level items</a> were prviously included in a <code>md:item</code>
+    RDF Collection to reconstruct the order that items appear in the DOM. This has also proven to
+    not be useful and has been dropped.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/6">issue 6</a>)</li>
+  <li>A property value may be extracted from the <code>@content</code> attribute
+    of the <code>meta</code> element.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/7">issue 7</a>)</li>
+  <li>A property value may be extracted from the <code>@value</code> attribute
+    of the <code>data</code> or <code>meter</code> elements. If this value has
+    numeric form, it will produce a datatyped literal using the appropriate datatype
+    from [[XMLSCHEMA11-2]]
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/8">issue 8</a>
+    and <a href="https://github.com/w3c/microdata-rdf/issues/9">issue 9</a>)</li>
+  <li>Property URI generation was under control of the <code>propertyURI</code> <a>registry</a>
+    setting. This setting could previously have taken either the <code>vocabulary</code> or
+    <code>contextual</code> settings. As <code>contextual</code> was never used, and usage
+    in the wild favors the <code>vocabulary</code> setting, support for <code>contextual</code>
+    has been eliminated, and consequently support for the <code>propertyURI</code> element
+    within the <a>registry</a>.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+  <li>An item having multiple values for a given property could previously having been placed
+    in an RDF Collection if the <code>multipleValues</code> <a>registry</a> setting were set
+    to <code>list</code>. Although the previous registry did have such a setting for some
+    schema.org values, this is not honored by most search engines, and so has been dropped,
+    and consequently support for the <code>multipeValues</code> element with the <a>registry</a>.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+  <li>Lastly, the previous update introduced <a href="#vocabulary_expansion">Vocabulary Expansion</a>
+    using <em>entailment</em> rules adopted from [[RDFA-CORE]] under control of the <code>vocab_expansion</code>
+    option. Support for <a href="#vocabulary_expansion">Vocabulary Expansion</a> has been substantially
+    simplified, and is no longer under control of an option.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+</ul>
+<p>The intention is to publish 
+  this draft as a new version of the Interest Group Note after gathering and incorporating community input.</p> 
 </section>
 
 <section class="informative">
@@ -281,37 +322,11 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   <p>Decisions or open issues in the specification are tracked on the
     <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issue Tracker</a>. These include the
     following:</p>
-  <p class="issue resolved" data-number="1">Vocabulary specific parsing for Microdata.
-    This specification attempts to create generic
-    rules for processing microdata with typical RDF vocabularies.
-    A <a>registry</a> allows
-    for exceptions to the default processing rules for certain well-known vocabularies.</p>
-  <p class="issue resolved" data-number="2">Should Microdata-RDF generate XMLLiteral values.
-    This issue has been closed with no change
-    as this would violate microdata's data model.</p>
-  <p class="issue resolved" data-number="3">Should the <a>registry</a> allow property datatype specification.
-    The consensus is that datatypes are only derived from HTML semantics, so that only &lt;time&gt; values have a datatype other than plain.</p>
-  <p class="issue resolved" data-number="4">Should the <a>registry</a> allow a <a>name</a> or URL
-    to be used as an alias for <a class="aref">itemid</a>.</p>
   <p class="issue atrisk" data-number="5">
     Experimental support <a class="aref">itemprop-reverse</a>.
     This attribute is not part of [[MICRODATA]] and is included as an experimental feature.
     Specific feedback from the community is requested. Based on addoption, the attribute
     may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.
-  </p>
-  <p class="issue resolved" data-number="6">Remove top-level md:item list.
-    This feature is of little value for RDF and adds unnecessary triples to the output.</p>
-  <p class="issue resolved" data-number="7">Extract literal from <code>@content</code> of <code>meta</code> element.
-    The HTML <code>meta</code> element is used specifically to provide metadata using the value of the <code>@content</code> attribute.
-  </p>
-  <p class="issue resolved" data-number="8">Extract literal from <code>@value</code> of <code>data</code> element.
-    The HTML <code>data</code> element is used specifically to provide metadata using the value of the <code>@value</code> attribute.
-  </p>
-  <p class="issue resolved" data-number="9">Extract literal from <code>@value</code> of <code>meter</code> element.
-    The `meter` element represents a scalar measurement within a known range, or
-    a fractional value; for example disk usage, the relevance of a query
-    result, or the fraction of a voting population to have selected a
-    particular candidate.
   </p>
   <p class="issue" data-number="10">
     Remove support for <code>contextual</code>
@@ -339,7 +354,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <li>When there are multiple <a title="top-level item">top-level items</a> in a document, place items in an RDF Collection.
       Alternatively, simply list the items as multiple values, or do not generate an
       <code>http://www.w3.org/ns/md#item</code> mapping at all.
-      <span class="note">(This feature is being considered for removal (see <a href="#issues">issue 6</a>).</span>
     </li>
     <li>When an item has multiple values for a given <a>property</a>, place the values in an RDF Collection.
       Alternatively, do not use collections, use an alternative such as <code>rdf:Seq</code>, or place all values,
@@ -816,7 +830,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                 </a></cite>
                 having the lexical form of
                 <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:date</a></cite> [[!RDF-SCHEMA]].
+                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:date</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -828,7 +842,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                   valid time string
                 </a></cite>
                 having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#time">xsd:time</a></cite> [[!RDF-SCHEMA]].
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#time">xsd:time</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -844,7 +858,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                   valid global date and time string
                 </a></cite>
                 having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></cite> [[!RDF-SCHEMA]].
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -856,7 +870,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                   valid month string
                 </a></cite>
                 having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth">xsd:gYearMonth</a></cite> [[!RDF-SCHEMA]].
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth">xsd:gYearMonth</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -868,7 +882,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                   valid non-negative integer
                 </a></cite>
                 having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYear">xsd:gYear</a></cite> [[!RDF-SCHEMA]].
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYear">xsd:gYear</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -877,15 +891,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               <dt>
                 If the value has the lexical form of
                 <cite><a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a></cite>
-                [[!RDF-SCHEMA]].
-                <!--
-                If the value is a
-                <cite><a href="http://dev.w3.org/html5/spec/Overview.html#valid-duration-string">
-                  valid duration string
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a></cite> [[!RDF-SCHEMA]].
-                -->
+                [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -920,18 +926,16 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
             with language information set from the
             <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite>
             of the property element
-            <span class="note">see <a href="#issues">issue 7</a></span>.
           </dd>
           <dt>
             If the element is a <code>data</code> or <code>track</code> element with a <code>@value</code> attribute.
           </dt>
           <dd>The value is a <a>literal</a> created from the value of the <code>@content</code> attribute.
-            <span class="note">See <a href="#issues">issue 8</a> and <a href="#issues">issue 9</a></span>.
             <dl>
               <dt>
                 If the value is a has the lexical form of
                 <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#integer">xsd:integer</a></cite> [[!RDF-SCHEMA]].
+                href="http://www.w3.org/TR/xmlschema-2/#integer">xsd:integer</a></cite> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -942,7 +946,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                 <cite><a
                 href="http://www.w3.org/TR/xmlschema-2/#float">xsd:float</a></cite> or
                 <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#double">xsd:double</a></cite>[[!RDF-SCHEMA]].
+                href="http://www.w3.org/TR/xmlschema-2/#double">xsd:double</a></cite>[[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and

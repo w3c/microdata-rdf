@@ -3,7 +3,7 @@ require 'rdf/microdata'
 require 'rdf/turtle'
 require 'json/ld'
 
-BASE = "http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/tests/"
+BASE = "https://w3c.github.io/microdata-rdf/tests/"
 graph = RDF::Graph.load("./index.html",
   :base_uri => BASE,
   :registry => "./test-registry.json")
