@@ -1,0 +1,12341 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
+<head>
+<title>Microdata to RDF – Second Edition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--
+  === NOTA BENE ===
+  For the three scripts below, if your spec resides on dev.w3 you can check them
+  out in the same tree and use relative links so that they'll work offline,
+  -->
+
+
+<style type="text/css">
+.diff { font-weight:bold; color:#0a3; }
+dl.triple { padding: 0 0 0 1em; }
+dl.triple dt, dl.triple dd { margin: 0; display: inline }
+dl.triple dt:after { content: ':'; }
+dl.triple dd:after { content: '\A'; white-space: pre; }
+.adef { 
+	font-family: monospace; 
+	font-weight: bold; 
+    color: #ff4500 !important;
+}
+
+.aref { 
+	font-family: monospace; 
+	font-weight: bold; 
+    color: #ff4500 !important;
+}
+.aref:before {content: "@"; }
+
+.issue > .resolved {
+  color: gray;;
+}
+.issue > .resolved::after {
+  content: "Resolved";
+  color: black;
+  font-style: bold;
+  padding-left: 1em;
+}
+</style>
+<style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #C83500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+</style><style>/* --- EXAMPLES --- */
+div.example-title {
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.example-title span {
+    text-transform: uppercase;   
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;    
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example div.example-title {
+    color: #999;
+}
+</style><style>/* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title { color: #2b2; }
+div.issue-title span, div.note-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .issue > p:first-child { margin-top: 0 }
+.issue, .note {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.issue { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+:focus { border: thin red solid}
+</style>
+</head>
+
+
+<body lang="en" class="h-entry" style="" role="document" id="respecDocument">
+<div class="head" role="contentinfo" id="respecHeader">
+<p>
+<a href="http://www.w3.org/">
+<img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C">
+</a>
+</p>
+<h1 class="title p-name" id="title" property="dcterms:title">
+Microdata
+to
+RDF
+<ins class="diff-new">–
+Second
+Edition
+</ins>
+</h1>
+<h2 property="bibo:subtitle" id="subtitle">
+Transformation
+from
+HTML+Microdata
+to
+RDF
+</h2>
+<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-03T03:25:23.000Z" id="w3c-editor-s-draft-02-december-2014">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+<del class="diff-old">Interest
+Group
+Note
+09
+October
+2012
+</del>
+<ins class="diff-chg">Editor's
+Draft
+</ins><time class="dt-published" datetime="2014-12-02"><ins class="diff-chg">
+02
+December
+2014
+</ins></time>
+</h2>
+<dl>
+<dt>
+This
+version:
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/
+</del>
+<a class="u-url" href="http://w3c.github.io/microdata-rdf/">
+<ins class="diff-chg">http://w3c.github.io/microdata-rdf/
+</ins>
+</a>
+</dd>
+<dt>
+Latest
+published
+version:
+</dt>
+<dd>
+<a href="http://www.w3.org/TR/microdata-rdf/">
+http://www.w3.org/TR/microdata-rdf/
+</a>
+</dd>
+<dt>
+Latest
+editor's
+draft:
+</dt>
+<dd>
+<del class="diff-old">http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/index.html
+</del>
+<a href="http://w3c.github.io/microdata-rdf/">
+<ins class="diff-chg">http://w3c.github.io/microdata-rdf/
+</ins>
+</a>
+</dd>
+<dt>
+<del class="diff-old">Previous
+version:
+</del>
+<ins class="diff-chg">Test
+suite:
+</ins>
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/TR/2012/NOTE-microdata-rdf-20120308/
+</del>
+<a href="http://w3c.github.io/microdata-rdf/tests/">
+<ins class="diff-chg">http://w3c.github.io/microdata-rdf/tests/
+</ins>
+</a>
+</dd>
+<dt>
+Editor:
+</dt>
+<dd class="p-author h-card vcard" rel="bibo:editor" inlist="">
+<span typeof="foaf:Person">
+<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">
+Gregg
+Kellogg
+</a>,
+Kellogg
+Associates
+</span>
+</dd>
+<dt>
+Authors:
+</dt>
+<dd class="p-author h-card vcard" rel="dcterms:contributor">
+<span typeof="foaf:Person">
+<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ian Hickson" href="mailto:ian@hixie.ch">
+Ian
+Hickson
+</a>,
+Google,
+Inc.
+</span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor">
+<span typeof="foaf:Person">
+<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">
+Gregg
+Kellogg
+</a>,
+Kellogg
+Associates
+</span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor">
+<span typeof="foaf:Person">
+<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Jeni Tennison" href="http://www.jenitennison.com/">
+Jeni
+Tennison
+</a>,
+<del class="diff-old">Independent
+</del>
+<a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://theodi.org/">
+<ins class="diff-chg">Open
+Data
+Institute
+</ins></a></span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor">
+<span typeof="foaf:Person">
+<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ivan Herman" href="http://www.w3.org/People/Ivan/">
+Ivan
+Herman
+</a>,
+<a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.w3.org">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+</a>
+</span>
+</dd>
+<del class="diff-old">This
+document
+is
+also
+available
+in
+this
+non-normative
+format:
+diff
+</del>
+<dt>
+<ins class="diff-chg">Repository:
+</ins></dt><dd><a href="https://github.com/w3c/microdata-rdf"><ins class="diff-chg">
+We
+are
+on
+Github
+</ins></a></dd><dd><a href="https://github.com/w3c/microdata-rdf/issues"><ins class="diff-chg">
+Open
+and
+closed
+issues
+</ins></a></dd><dt><ins class="diff-chg">
+Changes:
+</ins></dt><dd><ins class="diff-chg">
+Diff
+</ins>
+to
+previous
+version
+</dd>
+<dd>
+<a href="https://github.com/w3c/microdata-rdf/commits/gh-pages">
+<ins class="diff-new">Commit
+history
+</ins>
+</a>
+</dd>
+</dl>
+<p class="copyright">
+<a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">
+Copyright
+</a>
+<del class="diff-old">Â©
+2011-2012
+</del>
+<ins class="diff-chg">©
+2011-2014
+</ins>
+<a href="http://www.w3.org/">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+</a>
+<sup>
+<del class="diff-old">Â®
+</del>
+<ins class="diff-chg">®
+</ins>
+</sup>
+(
+<a href="http://www.csail.mit.edu/">
+<abbr title="Massachusetts Institute of Technology">
+MIT
+</abbr>
+</a>,
+<a href="http://www.ercim.eu/">
+<abbr title="European Research Consortium for Informatics and Mathematics">
+ERCIM
+</abbr>
+</a>,
+<a href="http://www.keio.ac.jp/">
+Keio
+</a>,
+<a href="http://ev.buaa.edu.cn/">
+<ins class="diff-new">Beihang
+</ins>
+</a>
+),
+All
+Rights
+Reserved.
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+<a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">
+liability
+</a>,
+<a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">
+trademark
+</a>
+and
+<a href="http://www.w3.org/Consortium/Legal/copyright-documents">
+document
+use
+</a>
+rules
+apply.
+</p>
+<hr>
+</div>
+<section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter">
+<h2 role="heading" id="h2_abstract">
+Abstract
+</h2>
+<p>
+HTML
+microdata
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]
+is
+an
+extension
+to
+HTML
+used
+to
+embed
+machine-readable
+data
+into
+HTML
+documents.
+Whereas
+the
+microdata
+specification
+describes
+a
+means
+of
+markup,
+the
+output
+format
+is
+JSON.
+This
+specification
+describes
+processing
+rules
+that
+may
+be
+used
+to
+extract
+RDF
+[
+<cite>
+<a class="bibref" href="#bib-RDF-CONCEPTS">
+RDF-CONCEPTS
+</a>
+</cite>
+]
+from
+an
+HTML
+document
+containing
+microdata.
+</p>
+</section>
+<section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter">
+<h2 role="heading" id="h2_sotd">
+Status
+of
+This
+Document
+</h2>
+<p>
+<em>
+This
+section
+describes
+the
+status
+of
+this
+document
+at
+the
+time
+of
+its
+publication.
+Other
+documents
+may
+supersede
+this
+document.
+A
+list
+of
+current
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+publications
+and
+the
+latest
+revision
+of
+this
+technical
+report
+can
+be
+found
+in
+the
+<a href="http://www.w3.org/TR/">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+technical
+reports
+index
+</a>
+at
+http://www.w3.org/TR/.
+</em>
+</p>
+<p>
+This
+document
+is
+an
+experimental
+work
+in
+progress.
+The
+concepts
+described
+herein
+are
+intended
+to
+provide
+guidance
+for
+a
+possible
+future
+Working
+Group
+chartered
+to
+provide
+a
+Recommendation
+for
+this
+transformation.
+As
+a
+consequence,
+implementers
+of
+this
+specification,
+either
+producers
+or
+consumers,
+should
+note
+that
+it
+may
+change
+prior
+to
+any
+possible
+publication
+as
+a
+Recommendation.
+</p>
+<p>
+This
+Working
+Draft
+is
+an
+update
+of
+the
+<a href="/TR/2012/NOTE-microdata-rdf-20121009/">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Interest
+Group
+Note
+</a>,
+published
+in
+<del class="diff-old">March
+</del>
+<ins class="diff-chg">October
+</ins>
+2012.
+This
+update
+<del class="diff-old">adds
+</del>
+<ins class="diff-chg">simplifies
+processing
+using
+</ins>
+the
+<del class="diff-old">Vocabulary
+Expansion
+</del>
+<ins class="diff-chg">following
+mechanisms:
+</ins></p><ul><li><ins class="diff-chg">
+Experimental
+support
+for
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+itemprop-reverse
+</ins>
+</a>
+<del class="diff-old">feature
+</del>
+<ins class="diff-chg">has
+been
+added.
+This
+attribute
+is
+not
+part
+of
+[
+</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+MICRODATA
+</ins></a></cite><ins class="diff-chg">
+]
+and
+is
+included
+as
+an
+experimental
+feature.
+Specific
+feedback
+from
+the
+community
+is
+requested.
+Based
+on
+addoption,
+the
+attribute
+may
+be
+considered
+for
+inclusion
+in
+forthcoming
+versions
+of
+[
+</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+MICRODATA
+</ins></a></cite><ins class="diff-chg">
+]
+and
+this
+note.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/5"><ins class="diff-chg">
+issue
+5
+</ins></a><ins class="diff-chg">
+)
+</ins></li><li><a title="top-level item" href="#dfn-top-level-item" class="internalDFN"><ins class="diff-chg">
+Top-level
+items
+</ins></a><ins class="diff-chg">
+were
+prviously
+included
+in
+a
+</ins><code><ins class="diff-chg">
+md:item
+</ins></code><ins class="diff-chg">
+RDF
+Collection
+</ins>
+to
+<ins class="diff-new">reconstruct
+</ins>
+the
+<del class="diff-old">conversion
+algorithm,
+</del>
+<ins class="diff-chg">order
+that
+items
+appear
+</ins>
+in
+<del class="diff-old">response
+</del>
+<ins class="diff-chg">the
+DOM.
+This
+has
+also
+proven
+</ins>
+to
+<ins class="diff-new">not
+be
+useful
+and
+has
+been
+dropped.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/6"><ins class="diff-new">
+issue
+6
+</ins></a><ins class="diff-new">
+)
+</ins></li><li><ins class="diff-new">
+A
+property
+value
+may
+be
+extracted
+from
+</ins>
+the
+<del class="diff-old">evolution
+</del>
+<code>
+<ins class="diff-chg">@content
+</ins></code><ins class="diff-chg">
+attribute
+</ins>
+of
+<del class="diff-old">vocabularies
+discussed
+</del>
+<ins class="diff-chg">the
+</ins><code><ins class="diff-chg">
+meta
+</ins></code><ins class="diff-chg">
+element.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/7"><ins class="diff-chg">
+issue
+7
+</ins></a><ins class="diff-chg">
+)
+</ins></li><li><ins class="diff-chg">
+A
+property
+value
+may
+be
+extracted
+from
+the
+</ins><code><ins class="diff-chg">
+@value
+</ins></code><ins class="diff-chg">
+attribute
+of
+the
+</ins><code><ins class="diff-chg">
+data
+</ins></code><ins class="diff-chg">
+or
+</ins><code><ins class="diff-chg">
+meter
+</ins></code><ins class="diff-chg">
+elements.
+If
+this
+value
+has
+numeric
+form,
+it
+will
+produce
+a
+datatyped
+literal
+using
+the
+appropriate
+datatype
+from
+[
+</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-chg">
+XMLSCHEMA11-2
+</ins></a></cite><ins class="diff-chg">
+]
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/8"><ins class="diff-chg">
+issue
+8
+</ins></a><ins class="diff-chg">
+and
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/9"><ins class="diff-chg">
+issue
+9
+</ins></a><ins class="diff-chg">
+)
+</ins></li><li><ins class="diff-chg">
+Property
+URI
+generation
+was
+under
+control
+of
+the
+</ins><code><ins class="diff-chg">
+propertyURI
+</ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a><ins class="diff-chg">
+setting.
+This
+setting
+could
+previously
+have
+taken
+either
+the
+</ins><code><ins class="diff-chg">
+vocabulary
+</ins></code><ins class="diff-chg">
+or
+</ins><code><ins class="diff-chg">
+contextual
+</ins></code><ins class="diff-chg">
+settings.
+As
+</ins><code><ins class="diff-chg">
+contextual
+</ins></code><ins class="diff-chg">
+was
+never
+used,
+and
+usage
+in
+the
+wild
+favors
+the
+</ins><code><ins class="diff-chg">
+vocabulary
+</ins></code><ins class="diff-chg">
+setting,
+support
+for
+</ins><code><ins class="diff-chg">
+contextual
+</ins></code><ins class="diff-chg">
+has
+been
+eliminated,
+and
+consequently
+support
+for
+the
+</ins><code><ins class="diff-chg">
+propertyURI
+</ins></code><ins class="diff-chg">
+element
+within
+the
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a>.<ins class="diff-chg">
+This
+issue
+remains
+open
+pending
+community
+review;
+specifically,
+anyone
+depending
+</ins>
+on
+<ins class="diff-new">this
+feature
+should
+provide
+feedback
+as
+requested
+below.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-new">
+issue
+10
+</ins></a><ins class="diff-new">
+)
+</ins></li><li><ins class="diff-new">
+An
+item
+having
+multiple
+values
+for
+a
+given
+property
+could
+previously
+having
+been
+placed
+in
+an
+RDF
+Collection
+if
+</ins>
+the
+<del class="diff-old">Web
+Schemas
+Task
+Force
+</del>
+<code>
+<ins class="diff-chg">multipleValues
+</ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a><ins class="diff-chg">
+setting
+were
+set
+to
+</ins><code><ins class="diff-chg">
+list
+</ins></code>.<ins class="diff-chg">
+Although
+the
+previous
+registry
+did
+have
+such
+a
+setting
+for
+some
+schema.org
+values,
+this
+is
+not
+honored
+by
+most
+search
+engines,
+and
+so
+has
+been
+dropped,
+and
+consequently
+support
+for
+the
+</ins><code><ins class="diff-chg">
+multipeValues
+</ins></code><ins class="diff-chg">
+element
+with
+the
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a>.<ins class="diff-chg">
+This
+issue
+remains
+open
+pending
+community
+review;
+specifically,
+anyone
+depending
+on
+this
+feature
+should
+provide
+feedback
+as
+requested
+below.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
+issue
+10
+</ins>
+</a>
+<ins class="diff-new">)
+</ins></li><li><ins class="diff-new">
+Lastly,
+the
+previous
+update
+introduced
+</ins><a href="#vocabulary_expansion"><ins class="diff-new">
+Vocabulary
+Expansion
+</ins></a><ins class="diff-new">
+using
+</ins><em><ins class="diff-new">
+entailment
+</ins></em><ins class="diff-new">
+rules
+adopted
+from
+[
+</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-new">
+RDFA-CORE
+</ins></a></cite><ins class="diff-new">
+]
+under
+control
+</ins>
+of
+the
+<del class="diff-old">Semantic
+Web
+Interest
+Group
+</del>
+<code>
+<ins class="diff-chg">vocab_expansion
+</ins></code><ins class="diff-chg">
+option.
+Support
+for
+</ins><a href="#vocabulary_expansion"><ins class="diff-chg">
+Vocabulary
+Expansion
+</ins>
+</a>
+<del class="diff-old">at
+W3C
+.
+</del>
+<ins class="diff-chg">has
+been
+substantially
+simplified,
+and
+is
+no
+longer
+under
+control
+of
+an
+option.
+This
+issue
+remains
+open
+pending
+community
+review;
+specifically,
+anyone
+depending
+on
+this
+feature
+should
+provide
+feedback
+as
+requested
+below.
+(see
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
+issue
+10
+</ins></a><ins class="diff-chg">
+)
+</ins></li></ul><p>
+The
+intention
+is
+to
+publish
+this
+draft
+as
+a
+new
+version
+of
+the
+Interest
+Group
+Note
+after
+gathering
+and
+incorporating
+community
+input.
+</p>
+<p>
+This
+document
+was
+published
+by
+the
+<a href="http://www.w3.org/2001/sw/interest/">
+Semantic
+Web
+Interest
+Group
+</a>
+as
+an
+<del class="diff-old">Interest
+Group
+Note.
+</del>
+<ins class="diff-chg">Editor's
+Draft.
+</ins>
+If
+you
+wish
+to
+make
+comments
+regarding
+this
+document,
+please
+send
+them
+to
+<a href="mailto:semantic-web@w3.org">
+semantic-web@w3.org
+</a>
+(
+<a href="mailto:semantic-web-request@w3.org?subject=subscribe">
+subscribe
+</a>,
+<a href="http://lists.w3.org/Archives/Public/semantic-web/">
+archives
+</a>
+).
+All
+<del class="diff-old">feedback
+is
+</del>
+<ins class="diff-chg">comments
+are
+</ins>
+welcome.
+</p>
+<p>
+Publication
+as
+an
+<del class="diff-old">Interest
+Group
+Note
+</del>
+<ins class="diff-chg">Editor's
+Draft
+</ins>
+does
+not
+imply
+endorsement
+by
+the
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Membership.
+This
+is
+a
+draft
+document
+and
+may
+be
+updated,
+replaced
+or
+obsoleted
+by
+other
+documents
+at
+any
+time.
+It
+is
+inappropriate
+to
+cite
+this
+document
+as
+other
+than
+work
+in
+progress.
+</p>
+<p>
+<del class="diff-old">The
+disclosure
+obligations
+</del>
+<ins class="diff-chg">This
+document
+was
+produced
+by
+a
+group
+operating
+under
+the
+</ins><a id="sotd_patent" about="" rel="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/"><ins class="diff-chg">
+5
+February
+2004
+</ins><abbr title="World Wide Web Consortium"><ins class="diff-chg">
+W3C
+</ins></abbr><ins class="diff-chg">
+Patent
+Policy
+</ins></a>.<abbr title="World Wide Web Consortium"><ins class="diff-chg">
+W3C
+</ins></abbr><ins class="diff-chg">
+maintains
+a
+</ins><a href="http://www.w3.org/2004/01/pp-impl/68238/status" rel="disclosure"><ins class="diff-chg">
+public
+list
+</ins>
+of
+<ins class="diff-new">any
+patent
+disclosures
+</ins></a><ins class="diff-new">
+made
+in
+connection
+with
+</ins>
+the
+<del class="diff-old">Participants
+</del>
+<ins class="diff-chg">deliverables
+</ins>
+of
+<del class="diff-old">this
+group
+are
+described
+</del>
+<ins class="diff-chg">the
+group;
+that
+page
+also
+includes
+instructions
+for
+disclosing
+a
+patent.
+An
+individual
+who
+has
+actual
+knowledge
+of
+a
+patent
+which
+the
+individual
+believes
+contains
+</ins><a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential"><ins class="diff-chg">
+Essential
+Claim(s)
+</ins></a><ins class="diff-chg">
+must
+disclose
+the
+information
+</ins>
+in
+<ins class="diff-new">accordance
+with
+</ins><a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure"><ins class="diff-new">
+section
+6
+of
+</ins>
+the
+<del class="diff-old">charter
+</del>
+<abbr title="World Wide Web Consortium">
+<ins class="diff-chg">W3C
+</ins></abbr><ins class="diff-chg">
+Patent
+Policy
+</ins></a>.</p><p><ins class="diff-chg">
+This
+document
+is
+governed
+by
+the
+</ins><a id="w3c_process_revision" href="http://www.w3.org/2014/Process-20140801/"><ins class="diff-chg">
+1
+August
+2014
+</ins><abbr title="World Wide Web Consortium"><ins class="diff-chg">
+W3C
+</ins></abbr><ins class="diff-chg">
+Process
+Document
+</ins>
+</a>.
+</p>
+</section>
+<section id="toc">
+<h2 class="introductory" role="heading" id="h2_toc">
+Table
+of
+Contents
+</h2>
+<ul class="toc" role="directory" id="respecContents">
+<li class="tocline">
+<a href="#introduction" class="tocxref">
+<span class="secno">
+1.
+</span>
+Introduction
+</a>
+<ul class="toc">
+<li class="tocline">
+<a href="#background" class="tocxref">
+<span class="secno">
+1.1
+</span>
+Background
+</a>
+</li>
+<li class="tocline">
+<a href="#use-cases" class="tocxref">
+<span class="secno">
+1.2
+</span>
+Use
+Cases
+</a>
+</li>
+<li class="tocline">
+<a href="#issues" class="tocxref">
+<span class="secno">
+1.3
+</span>
+Issues
+</a>
+</li>
+</ul>
+</li>
+<li class="tocline">
+<a href="#attributes-and-syntax" class="tocxref">
+<span class="secno">
+2.
+</span>
+Attributes
+and
+Syntax
+</a>
+</li>
+<li class="tocline">
+<a href="#vocabulary-registry" class="tocxref">
+<span class="secno">
+3.
+</span>
+Vocabulary
+Registry
+</a>
+<ul class="toc">
+<li class="tocline">
+<a href="#property-uri-generation" class="tocxref">
+<span class="secno">
+3.1
+</span>
+Property
+URI
+Generation
+</a>
+</li>
+<li class="tocline">
+<del class="diff-old">3.2
+Value
+Ordering
+</del>
+<a href="#value-typing" class="tocxref">
+<span class="secno">
+<del class="diff-old">3.3
+</del>
+<ins class="diff-chg">3.2
+</ins>
+</span>
+Value
+Typing
+</a>
+</li>
+</ul>
+</li>
+<li class="tocline">
+<a href="#vocabulary-expansion" class="tocxref">
+<span class="secno">
+4.
+</span>
+Vocabulary
+Expansion
+</a>
+<del class="diff-old">4.1
+Vocabulary
+Entailment
+</del>
+</li>
+<li class="tocline">
+<a href="#control-of-microdata-processors" class="tocxref">
+<span class="secno">
+<del class="diff-old">4.2
+</del>
+<ins class="diff-chg">5.
+</ins>
+</span>
+<del class="diff-old">Vocabulary
+Expansion
+</del>
+Control
+of
+Microdata
+Processors
+</a>
+</li>
+<li class="tocline">
+<a href="#algorithm" class="tocxref">
+<span class="secno">
+<del class="diff-old">5.
+</del>
+<ins class="diff-chg">6.
+</ins>
+</span>
+Algorithm
+</a>
+<ul class="toc">
+<li class="tocline">
+<a href="#algorithm-terms" class="tocxref">
+<span class="secno">
+<del class="diff-old">5.1
+</del>
+<ins class="diff-chg">6.1
+</ins>
+</span>
+Algorithm
+Terms
+</a>
+</li>
+<li class="tocline">
+<a href="#rdf-conversion-algorithm" class="tocxref">
+<span class="secno">
+<del class="diff-old">5.2
+</del>
+<ins class="diff-chg">6.2
+</ins>
+</span>
+RDF
+Conversion
+Algorithm
+</a>
+</li>
+<li class="tocline">
+<a href="#generate-the-triples" class="tocxref">
+<span class="secno">
+<del class="diff-old">5.3
+</del>
+<ins class="diff-chg">6.3
+</ins>
+</span>
+Generate
+the
+triples
+</a>
+</li>
+<li class="tocline">
+<a href="#generate-predicate-uri" class="tocxref">
+<span class="secno">
+<del class="diff-old">5.4
+</del>
+<ins class="diff-chg">6.4
+</ins>
+</span>
+Generate
+Predicate
+URI
+</a>
+</li>
+<del class="diff-old">5.5
+Generate
+Property
+Values
+5.6
+Generate
+RDF
+Collection
+</del>
+</ul>
+</li>
+<li class="tocline">
+<a href="#testing" class="tocxref">
+<span class="secno">
+A.
+</span>
+Testing
+</a>
+</li>
+<li class="tocline">
+<a href="#markup-examples" class="tocxref">
+<span class="secno">
+B.
+</span>
+Markup
+Examples
+</a>
+</li>
+<li class="tocline">
+<a href="#default-registry" class="tocxref">
+<span class="secno">
+C.
+</span>
+<del class="diff-old">Example
+</del>
+<ins class="diff-chg">Default
+</ins>
+<span class="formerLink">
+registry
+</span>
+</a>
+</li>
+<li class="tocline">
+<a href="#acknowledgements" class="tocxref">
+<span class="secno">
+D.
+</span>
+Acknowledgements
+</a>
+</li>
+<li class="tocline">
+<a href="#references" class="tocxref">
+<span class="secno">
+E.
+</span>
+References
+</a>
+<ul class="toc">
+<li class="tocline">
+<a href="#normative-references" class="tocxref">
+<span class="secno">
+E.1
+</span>
+Normative
+references
+</a>
+</li>
+<li class="tocline">
+<a href="#informative-references" class="tocxref">
+<span class="secno">
+E.2
+</span>
+Informative
+references
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="informative" id="introduction">
+<h2 role="heading" id="h2_introduction">
+<span class="secno">
+1.
+</span>
+Introduction
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+This
+document
+describes
+a
+means
+of
+transforming
+HTML
+containing
+microdata
+into
+RDF.
+HTML
+Microdata
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]
+is
+an
+extension
+to
+HTML
+used
+to
+embed
+machine-readable
+data
+to
+HTML
+documents.
+This
+specification
+describes
+transformation
+directly
+to
+RDF
+[
+<cite>
+<a class="bibref" href="#bib-RDF-CONCEPTS">
+RDF-CONCEPTS
+</a>
+</cite>
+].
+</p>
+<div class="note">
+<div class="note-title" aria-level="1" role="heading" id="h_note_1">
+<span>
+Note
+</span>
+</div>
+<div class="">
+<p>
+There
+are
+a
+variety
+of
+ways
+in
+which
+a
+mapping
+from
+microdata
+to
+RDF
+might
+be
+configured
+to
+give
+a
+result
+that
+is
+closer
+to
+the
+required
+result
+for
+a
+particular
+vocabulary.
+This
+specification
+defines
+terms
+that
+can
+be
+used
+as
+hooks
+for
+vocabulary-specific
+behavior,
+which
+could
+be
+defined
+within
+a
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+or
+on
+an
+implementation-defined
+basis.
+<del class="diff-old">However,
+the
+HTML
+Data
+TF
+recommends
+the
+adoption
+of
+a
+single
+method
+of
+mapping
+in
+which
+every
+vocabulary
+is
+treated
+as
+if:
+</del>
+</p>
+<del class="diff-old">propertyURI
+is
+set
+to
+vocabulary
+multipleValues
+is
+set
+to
+unordered
+</del>
+<p>
+For
+background
+on
+the
+trade-offs
+between
+these
+options,
+see
+<a href="http://www.w3.org/wiki/Mapping_Microdata_to_RDF">
+http://www.w3.org/wiki/Mapping_Microdata_to_RDF
+</a>
+<ins class="diff-new">and
+</ins><a href="https://github.com/w3c/microdata-rdf/issues"><ins class="diff-new">
+GitHub
+Issues
+</ins>
+</a>.
+</p>
+</div>
+</div>
+<section class="informative" id="background">
+<h3 role="heading" id="h3_background">
+<span class="secno">
+1.1
+</span>
+Background
+</h3>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+Microdata
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]
+is
+a
+way
+of
+embedding
+data
+in
+HTML
+documents
+using
+attributes.
+The
+HTML
+DOM
+is
+extended
+to
+provide
+an
+API
+for
+accessing
+microdata
+information,
+and
+the
+microdata
+specification
+defines
+how
+to
+generate
+a
+JSON
+representation
+from
+microdata
+markup.
+</p>
+<p>
+Mapping
+microdata
+to
+RDF
+enables
+consumers
+to
+merge
+data
+expressed
+in
+other
+RDF-based
+formats
+with
+microdata.
+It
+facilitates
+the
+use
+of
+RDF
+vocabularies
+within
+microdata,
+and
+enables
+microdata
+to
+be
+used
+with
+the
+full
+RDF
+toolchain.
+Some
+use
+cases
+for
+this
+mapping
+are
+described
+in
+<a href="#use-cases">
+Section
+1.2
+</a>
+below.
+</p>
+<p>
+Microdata's
+data
+model
+does
+not
+align
+neatly
+with
+RDF.
+</p>
+<ul>
+<li>
+Non-URL
+microdata
+properties
+are
+disambiguated
+based
+on
+microdata
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>
+;
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+with
+the
+type
+<code>
+http://example.org/Cat
+</code>
+can
+have
+both
+the
+property
+<code>
+color
+</code>
+and
+the
+property
+<code>
+http://example.org/color
+</code>,
+and
+these
+properties
+are
+semantically
+distinct
+under
+microdata.
+In
+RDF,
+all
+properties
+have
+IRIs.
+</li>
+<li>
+When
+an
+item
+has
+multiple
+properties
+with
+the
+same
+name,
+the
+values
+are
+always
+ordered;
+in
+RDF,
+property
+values
+are
+unordered
+unless
+they
+are
+explicitly
+listed
+in
+an
+<em>
+RDF
+Collection
+<del class="diff-old">.
+</del>
+</em>.
+</li>
+<li>
+<del class="diff-old">A
+</del>
+<ins class="diff-chg">Except
+for
+some
+specific
+element
+values,
+a
+</ins>
+value
+in
+microdata
+is
+always
+a
+simple
+string
+which
+is
+interpreted
+by
+the
+consuming
+application.
+In
+RDF,
+values
+can
+be
+tagged
+with
+a
+datatype
+or
+a
+language.
+According
+to
+the
+microdata
+specification,
+the
+HTML
+context
+of
+microdata
+markup
+should
+not
+change
+how
+microdata
+is
+interpreted,
+so
+although
+element
+names
+and
+HTML
+<code>
+@lang
+</code>
+attributes
+could
+be
+used
+to
+provide
+datatype
+and
+language
+information
+for
+RDF
+data,
+this
+would
+be
+contrary
+to
+the
+microdata
+specification.
+</li>
+</ul>
+<p>
+Thus,
+in
+some
+places
+the
+needs
+of
+RDF
+consumers
+violate
+requirements
+of
+the
+microdata
+specification.
+This
+specification
+highlights
+where
+such
+violations
+occur
+and
+the
+reasons
+for
+them.
+</p>
+<p>
+This
+specification
+allows
+for
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>
+-specific
+rules
+that
+affect
+the
+generation
+of
+property
+URIs
+and
+value
+serializations.
+This
+is
+facilitated
+by
+a
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+that
+associates
+URIs
+with
+specific
+rules
+based
+on
+matching
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+values
+against
+registered
+URI
+prefixes
+do
+determine
+a
+vocabulary
+and
+potentially
+vocabulary-specific
+processing
+<del class="diff-old">rules.
+</del>
+<ins class="diff-chg">rules
+</ins><span class="note"><ins class="diff-chg">
+see
+</ins><a href="#issues"><ins class="diff-chg">
+issue
+10
+</ins></a></span>.
+</p>
+<p>
+This
+specification
+also
+assumes
+that
+consumers
+of
+RDF
+generated
+from
+microdata
+may
+have
+to
+process
+the
+results
+in
+order
+to,
+for
+example,
+assign
+appropriate
+datatypes
+to
+<a title="property value" href="#dfn-property-value" class="internalDFN">
+property
+<del class="diff-old">value
+s.
+</del>
+<ins class="diff-chg">values
+</ins></a>.
+</p>
+</section>
+<section class="informative" id="use-cases">
+<h3 role="heading" id="h3_use-cases">
+<span class="secno">
+1.2
+</span>
+Use
+Cases
+</h3>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+During
+the
+period
+of
+the
+task
+force,
+a
+number
+of
+use
+cases
+were
+put
+forth
+for
+the
+use
+of
+microdata
+in
+generating
+RDF:
+</p>
+<ul>
+<li>
+Semantic
+search
+engines
+such
+as
+<a href="http://sindice.com/">
+Sindice
+</a>
+use
+RDF
+as
+their
+backend
+data
+model.
+They
+want
+to
+gather
+information
+expressed
+using
+microdata
+alongside
+information
+expressed
+in
+RDF-based
+formats
+and
+make
+it
+available
+to
+others
+to
+use,
+as
+a
+service.
+In
+these
+cases,
+the
+ultimate
+consumer,
+who
+will
+need
+to
+understand
+the
+vocabularies
+used
+within
+the
+microdata,
+is
+the
+program
+or
+person
+who
+pulls
+out
+data
+from
+Sindice.
+Sindice
+needs
+to
+retain
+the
+distinctions
+in
+the
+original
+microdata
+(e.g.
+ordering
+of
+items)
+and
+might
+not
+have
+built-in
+knowledge
+about
+the
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>
+of
+interest
+to
+the
+ultimate
+consumer.
+In
+this
+case,
+the
+ultimate
+consumer
+is
+likely
+to
+have
+to
+map/validate/handle
+errors
+in
+the
+data
+they
+get
+from
+Sindice.
+</li>
+<li>
+A
+consumer
+such
+as
+<a href="http://openelectiondata.org">
+openelectiondata.org
+</a>
+wants
+to
+support
+microdata-based
+markup
+of
+their
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>
+as
+well
+as
+RDFa-based
+markup,
+both
+going
+into
+an
+RDF-based
+data
+store.
+They
+want
+to
+use
+an
+off-the-shelf
+tool
+to
+extract
+the
+microdata.
+They
+want
+to
+configure
+the
+tool
+to
+give
+them
+the
+RDF
+that
+is
+appropriate
+for
+their
+known
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>.
+</li>
+<li>
+A
+browser
+plugin
+that
+captures
+data
+for
+the
+user
+uses
+an
+RDF
+model
+as
+its
+backend
+store.
+Any
+time
+it
+encounters
+microdata
+on
+a
+page,
+it
+wants
+to
+pull
+that
+microdata
+into
+the
+store
+on
+the
+fly.
+</li>
+<li>
+<a href="http://purl.org/goodrelations/">
+GoodRelations
+</a>
+properties
+do
+not
+take
+<code>
+rdf:List
+</code>
+values;
+when
+they
+take
+multiple
+values
+they
+are
+unordered.
+The
+<code>
+rdfs:range
+</code>
+of
+a
+GoodRelations
+property
+indicates
+the
+datatype
+of
+the
+expected
+value,
+and
+GoodRelations
+processors
+will
+expect
+values
+to
+be
+cast
+to
+that
+type.
+Language
+information
+from
+the
+HTML
+needs
+to
+be
+captured
+as
+it
+is
+common
+that
+multiple
+values
+will
+be
+used
+to
+specify
+the
+same
+information
+in
+different
+languages.
+</li>
+<li>
+<a href="http://schema.org/">
+Schema.org
+</a>
+has
+an
+<a href="http://schema.org/docs/extension.html">
+extension
+mechanism
+</a>
+to
+allow
+authors
+to
+express
+information
+that
+is
+more
+detail
+than
+the
+pre-defined
+types,
+properties
+and
+enumerations.
+Property
+URIs
+are
+all
+in
+the
+same
+flat-namespace
+as
+types,
+but
+authors
+can
+add
+more
+detail
+by
+using
+a
+'/'
+after
+the
+type
+or
+property
+to
+provide
+more
+detail.
+For
+example,
+schema.org
+defines
+a
+<em>
+musicGroupMember
+</em>
+property
+having
+a
+URI
+of
+<code>
+http://schema.org/musicGroupMember
+</code>,
+and
+an
+author
+might
+express
+more
+detail
+through
+an
+ad-hoc
+sub-property
+<em>
+musicGroupMember/leadVocalist
+</em>,
+having
+the
+URI
+<code>
+http://schema.org/musicGroupMember/leadVocalist
+</code>.
+</li>
+</ul>
+</section>
+<section class="informative" id="issues">
+<h3 role="heading" id="h3_issues">
+<span class="secno">
+1.3
+</span>
+Issues
+</h3>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+Decisions
+or
+open
+issues
+in
+the
+specification
+are
+tracked
+on
+the
+<del class="diff-old">Task
+Force
+</del>
+<a href="https://github.com/w3c/microdata-rdf/issues">
+<ins class="diff-chg">GitHub
+</ins>
+Issue
+Tracker
+</a>.
+These
+include
+the
+following:
+</p>
+<div class="issue">
+<div class="issue-title" aria-level="2" role="heading" id="h_issue_1">
+<a href="http://github.com/w3c/microdata-rdf/issues/5">
+<span>
+Issue
+<del class="diff-old">1
+</del>
+<ins class="diff-chg">5
+</ins>
+</span>
+</a>
+</div>
+<del class="diff-old">Vocabulary
+specific
+parsing
+for
+Microdata.
+</del>
+<div class="">
+<h3 id="experimental-feature">
+<ins class="diff-chg">Experimental
+Feature
+</ins></h3><p><ins class="diff-chg">
+Experimental
+support
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+itemprop-reverse
+</ins></a>.
+This
+<del class="diff-old">specification
+attempts
+to
+create
+generic
+rules
+for
+processing
+microdata
+with
+typical
+RDF
+vocabularies.
+A
+registry
+</del>
+<ins class="diff-chg">attribute
+is
+not
+part
+of
+[
+</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+MICRODATA
+</ins>
+</a>
+<del class="diff-old">allows
+for
+exceptions
+to
+</del>
+</cite>
+<ins class="diff-chg">]
+and
+is
+included
+as
+an
+experimental
+feature.
+Specific
+feedback
+from
+</ins>
+the
+<del class="diff-old">default
+processing
+rules
+</del>
+<ins class="diff-chg">community
+is
+requested.
+Based
+on
+addoption,
+the
+attribute
+may
+be
+considered
+</ins>
+for
+<del class="diff-old">certain
+well-known
+vocabularies.
+Issue
+2
+</del>
+<ins class="diff-chg">inclusion
+in
+forthcoming
+versions
+of
+[
+</ins><cite>
+<a class="bibref" href="#bib-MICRODATA">
+<ins class="diff-new">MICRODATA
+</ins>
+</a>
+<del class="diff-old">Should
+Microdata-RDF
+generate
+XMLLiteral
+values.
+This
+issue
+has
+been
+closed
+with
+no
+change
+as
+</del>
+</cite>
+<ins class="diff-chg">]
+and
+</ins>
+this
+<del class="diff-old">would
+violate
+microdata's
+data
+model.
+</del>
+<ins class="diff-chg">note.
+</ins>
+</p>
+</div>
+</div>
+<div class="issue">
+<div class="issue-title" aria-level="2" role="heading" id="h_issue_2">
+<a href="http://github.com/w3c/microdata-rdf/issues/10">
+<span>
+Issue
+<del class="diff-old">3
+</del>
+<ins class="diff-chg">10
+</ins>
+</span>
+</a>
+</div>
+<p class="">
+<del class="diff-old">Should
+the
+registry
+allow
+property
+datatype
+specification.
+</del>
+<ins class="diff-chg">Remove
+support
+for
+</ins><code><ins class="diff-chg">
+contextual
+</ins></code><code><ins class="diff-chg">
+propertyURI
+</ins></code><ins class="diff-chg">
+and
+</ins><code><ins class="diff-chg">
+mulitpleValues
+</ins></code>.<ins class="diff-chg">
+This
+issue
+proposes
+to
+remove
+support
+for
+independently
+setting
+</ins><code><ins class="diff-chg">
+propertyURI
+</ins></code><ins class="diff-chg">
+and
+code&gt;multipleValues.
+</ins>
+The
+<del class="diff-old">consensus
+</del>
+<ins class="diff-chg">former
+</ins><code><ins class="diff-chg">
+propertyURI
+</ins></code>
+is
+<del class="diff-old">that
+datatypes
+are
+only
+derived
+from
+HTML
+semantics,
+so
+that
+only
+&lt;time&gt;
+values
+have
+a
+datatype
+other
+than
+plain.
+Issue
+4
+Should
+</del>
+<ins class="diff-chg">treated
+like
+</ins>
+the
+<del class="diff-old">registry
+</del>
+<ins class="diff-chg">former
+</ins><a href="#dfn-vocabulary" class="internalDFN"><ins class="diff-chg">
+vocabulary
+</ins>
+</a>
+<del class="diff-old">allow
+</del>
+<ins class="diff-chg">scheme
+if
+there
+is
+an
+</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-chg">
+itemtype
+</ins></a>,<ins class="diff-chg">
+otherwise,
+like
+</ins><code><ins class="diff-chg">
+contextual
+</ins></code><ins class="diff-chg">
+creating
+</ins>
+a
+<del class="diff-old">name
+or
+URL
+to
+be
+used
+</del>
+<ins class="diff-chg">property
+</ins>
+as
+<ins class="diff-new">a
+fragment
+of
+the
+document
+base.
+The
+former
+</ins><code><ins class="diff-new">
+multipleValues
+</ins></code><ins class="diff-new">
+is
+treated
+like
+false,
+where
+values
+are
+never
+placed
+in
+</ins>
+an
+<del class="diff-old">alias
+for
+itemid
+.
+</del>
+<code>
+<ins class="diff-chg">rdf:List.
+</ins></code>
+</p>
+</div>
+<p>
+The
+purpose
+of
+this
+specification
+is
+to
+provide
+input
+to
+a
+future
+working
+group
+that
+can
+make
+decisions
+about
+the
+need
+for
+a
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+and
+the
+details
+of
+processing.
+Among
+the
+options
+investigated
+by
+the
+Task
+Force
+are
+the
+following:
+</p>
+<ul>
+<li>
+Property
+URI
+generation
+using
+the
+original
+microdata
+specification
+with
+a
+base
+URI
+and
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.5">
+fragment
+</a>
+</cite>
+made
+up
+of
+the
+in-scope
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>
+and
+<a href="#dfn-item-properties" class="internalDFN">
+<ins class="diff-chg">item
+</ins>
+properties
+</a>.
+</li>
+<li>
+Vocabulary-based
+URI
+generation,
+where
+the
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>
+is
+determined
+from
+the
+in-scope
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>,
+either
+through
+an
+algorithmic
+modification
+of
+the
+type
+URL
+or
+by
+matching
+the
+URL
+against
+a
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>.
+The
+vocabulary
+URI
+is
+then
+used
+to
+generate
+property
+URIs
+in
+a
+namespace
+parallel
+to
+the
+type
+URI.
+</li>
+<li>
+When
+there
+are
+multiple
+<a title="top-level item" href="#dfn-top-level-item" class="internalDFN">
+top-level
+<del class="diff-old">item
+</del>
+<ins class="diff-chg">items
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+in
+a
+document,
+place
+items
+in
+an
+RDF
+Collection.
+Alternatively,
+simply
+list
+the
+items
+as
+multiple
+values,
+or
+do
+not
+generate
+an
+<code>
+http://www.w3.org/ns/md#item
+</code>
+mapping
+at
+all.
+</li>
+<li>
+When
+an
+item
+has
+multiple
+values
+for
+a
+given
+<a href="#dfn-property" class="internalDFN">
+property
+</a>,
+place
+the
+values
+in
+an
+RDF
+Collection.
+Alternatively,
+do
+not
+use
+collections,
+use
+an
+alternative
+such
+as
+<code>
+rdf:Seq
+</code>,
+or
+place
+all
+values,
+whether
+or
+not
+multiple,
+into
+some
+form
+of
+collection.
+</li>
+</ul>
+<del class="diff-old">More
+examples
+and
+explanatory
+information
+are
+available
+in
+[
+MICRODATA-RDF-SUPPLEMENT
+],
+which
+may
+be
+updated
+from
+time
+to
+time.
+</del>
+</section>
+</section>
+<section id="attributes-and-syntax">
+<h2 role="heading" id="h2_attributes-and-syntax">
+<span class="secno">
+2.
+</span>
+Attributes
+and
+Syntax
+</h2>
+<p>
+The
+microdata
+specification
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]
+defines
+a
+number
+of
+attributes
+and
+the
+way
+in
+which
+those
+attributes
+are
+to
+be
+interpreted.
+The
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">
+microdata
+DOM
+API
+</a>
+</cite>
+provides
+methods
+and
+attributes
+for
+retrieving
+microdata
+from
+the
+HTML
+DOM.
+</p>
+<p>
+For
+reference,
+attributes
+used
+for
+specifying
+and
+retrieving
+HTML
+microdata
+are
+referenced
+here:
+</p>
+<dl>
+<dt>
+<dfn class="adef" id="dfn-itemid">
+itemid
+</dfn>
+</dt>
+<dd>
+An
+attribute
+containing
+a
+URL
+used
+to
+identify
+the
+subject
+of
+triples
+associated
+with
+this
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemid">
+<ins class="diff-chg">itemid
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn class="adef" id="dfn-itemprop">
+itemprop
+</dfn>
+</dt>
+<dd>
+An
+attribute
+used
+to
+identify
+one
+or
+more
+<del class="diff-old">name
+</del>
+<a title="name" href="#dfn-name" class="internalDFN">
+<ins class="diff-chg">names
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+of
+an
+<del class="diff-old">item
+s.
+</del>
+<a title="item" href="#dfn-item" class="internalDFN">
+<ins class="diff-chg">items
+</ins></a>.
+An
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+contains
+a
+space
+separated
+list
+of
+<del class="diff-old">name
+</del>
+<dfn title="name" id="dfn-name">
+<ins class="diff-chg">names
+</ins>
+</dfn>
+<del class="diff-old">s
+</del>
+which
+may
+either
+by
+<a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
+absolute
+<del class="diff-old">URL
+</del>
+<ins class="diff-chg">URLs
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+or
+terms
+associated
+with
+the
+type
+of
+the
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+as
+defined
+by
+the
+referencing
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+'s
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">
+<ins class="diff-chg">itemprop
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn class="adef" id="dfn-itemprop-reverse">
+<ins class="diff-new">itemprop-reverse
+</ins></dfn></dt><dd><ins class="diff-new">
+An
+attribute
+used
+to
+identify
+one
+or
+more
+</ins><a title="name" href="#dfn-name" class="internalDFN"><ins class="diff-new">
+names
+</ins></a><ins class="diff-new">
+of
+an
+</ins><a title="item" href="#dfn-item" class="internalDFN"><ins class="diff-new">
+items
+</ins></a><ins class="diff-new">
+reversing
+the
+sense
+of
+</ins><a class="aref internalDFN" href="#dfn-itemprop"><ins class="diff-new">
+itemprop
+</ins></a>.<ins class="diff-new">
+An
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-new">
+itemprop-reverse
+</ins></a><ins class="diff-new">
+contains
+a
+space
+separated
+list
+of
+</ins><a title="name" href="#dfn-name" class="internalDFN"><ins class="diff-new">
+names
+</ins></a><ins class="diff-new">
+which
+may
+either
+by
+</ins><a title="absolute URL" href="#dfn-absolute-url" class="internalDFN"><ins class="diff-new">
+absolute
+URLs
+</ins></a><ins class="diff-new">
+or
+terms
+associated
+with
+the
+type
+of
+the
+</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-new">
+item
+</ins></a><ins class="diff-new">
+as
+defined
+by
+the
+referencing
+</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-new">
+item
+</ins></a><ins class="diff-new">
+'s
+</ins><a href="#dfn-item-type" class="internalDFN"><ins class="diff-new">
+item
+type
+</ins></a>.</dd><dt>
+<dfn class="adef" id="dfn-itemref">
+itemref
+</dfn>
+</dt>
+<dd>
+An
+additional
+attribute
+on
+an
+element
+that
+references
+additional
+elements
+containing
+property
+definitions
+to
+be
+applied
+to
+the
+referencing
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemref">
+<ins class="diff-chg">itemref
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn class="adef" id="dfn-itemscope">
+itemscope
+</dfn>
+</dt>
+<dd>
+An
+boolean
+attribute
+identifying
+an
+element
+as
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">
+<ins class="diff-chg">itemscope
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn class="adef" id="dfn-itemtype">
+itemtype
+</dfn>
+</dt>
+<dd>
+An
+additional
+attribute
+on
+an
+element
+used
+to
+specify
+one
+or
+more
+types
+of
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+The
+<dfn id="dfn-item-type">
+item
+type
+</dfn>
+of
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+is
+the
+first
+value
+returned
+from
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">
+element.itemType
+</a>
+</cite>
+</code>
+on
+the
+element.
+The
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>
+is
+also
+used
+to
+resolve
+non-URL
+<del class="diff-old">name
+</del>
+<a title="name" href="#dfn-name" class="internalDFN">
+<ins class="diff-chg">names
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+to
+<a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
+absolute
+<del class="diff-old">URL
+s.
+</del>
+<ins class="diff-chg">URLs
+</ins></a>.
+Available
+through
+the
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">
+Microdata
+DOM
+API
+</a>
+</cite>
+as
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">
+element.itemType
+</a>
+</cite>
+</code>.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemtype">
+<ins class="diff-chg">itemtype
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+</dl>
+<p>
+In
+RDF,
+it
+is
+common
+for
+people
+to
+shorten
+vocabulary
+terms
+via
+abbreviated
+URIs
+that
+use
+a
+'prefix'
+and
+a
+'reference'.
+throughout
+this
+document
+assume
+that
+the
+following
+vocabulary
+prefixes
+have
+been
+defined:
+</p>
+<table>
+<tbody>
+<tr>
+<td>
+dc:
+</td>
+<td>
+http://purl.org/dc/terms/
+</td>
+</tr>
+<tr>
+<td>
+md:
+</td>
+<td>
+http://www.w3.org/ns/md#
+</td>
+</tr>
+<tr>
+<td>
+rdf:
+</td>
+<td>
+http://www.w3.org/1999/02/22-rdf-syntax-ns#
+</td>
+</tr>
+<tr>
+<td>
+rdf:
+</td>
+<td>
+http://www.w3.org/1999/02/22-rdf-syntax-ns#
+</td>
+</tr>
+<tr>
+<td>
+rdfa:
+</td>
+<td>
+http://www.w3.org/ns/rdfa#
+</td>
+</tr>
+<tr>
+<td>
+xsd:
+</td>
+<td>
+http://www.w3.org/2001/XMLSchema#
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="informative" id="vocabulary-registry">
+<h2 role="heading" id="h2_vocabulary-registry">
+<span class="secno">
+3.
+</span>
+Vocabulary
+Registry
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<div class="note">
+<div class="note-title" aria-level="1" role="heading" id="h_note_2">
+<span>
+<ins class="diff-new">Note
+</ins></span></div><p class=""><ins class="diff-new">
+(The
+registry
+is
+being
+considered
+for
+revision
+(see
+</ins><a href="#issues"><ins class="diff-new">
+issue
+10
+</ins></a><ins class="diff-new">
+).
+</ins></p></div>
+<p>
+In
+a
+perfect
+world,
+all
+processors
+would
+be
+able
+to
+generate
+the
+same
+output
+for
+a
+given
+input
+without
+regards
+to
+the
+requirements
+of
+a
+particular
+<a href="#dfn-vocabulary" class="internalDFN">
+vocabulary
+</a>.
+However,
+microdata
+doesn't
+provide
+sufficient
+syntactic
+help
+in
+making
+these
+decisions.
+Different
+vocabularies
+have
+different
+needs.
+</p>
+<p>
+The
+registry
+is
+located
+at
+the
+namespace
+defined
+for
+microdata:
+<code>
+http://www.w3.org/ns/md
+</code>
+in
+a
+variety
+of
+formats.
+<ins class="diff-new">Under
+control
+of
+a
+runtime
+option,
+a
+processor
+should
+use
+another
+provided
+by
+reference,
+to
+affect
+processing.
+</ins>
+</p>
+<p>
+The
+<dfn id="dfn-registry">
+registry
+</dfn>
+associates
+a
+<dfn id="dfn-uri-prefix">
+URI
+prefix
+</dfn>
+with
+one
+or
+more
+key-value
+pairs
+denoting
+processor
+behavior.
+A
+hypothetical
+JSON
+representation
+of
+such
+a
+registry
+might
+be
+the
+following:
+</p>
+<del class="diff-old">{
+  "http://schema.org/": {
+    "propertyURI":    "vocabulary",
+    "multipleValues": "unordered",
+    "properties": {
+      "tracks": {"multipleValues": "list"}
+    }
+  },
+  "http://microformats.org/profile/hcard": {
+    "propertyURI":    "vocabulary",
+    "multipleValues": "list",
+    "properties" {
+      "url": {"multipleValues": "unordered"}
+    }
+  }
+</del>
+<div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example">{
+<ins class="diff-chg">  "http://schema.org/": {
+    "properties": {
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
+    },
+    "http://microformats.org/profile/hcard": {}
+  }
+</ins>
+}
+</pre>
+</div>
+<p>
+This
+structure
+associates
+mappings
+for
+two
+<del class="diff-old">URIs,
+</del>
+<ins class="diff-chg">URIs:
+</ins>
+<code>
+http://schema.org/
+</code>
+and
+<code>
+http://microformats.org/profile/hcard
+</code>.
+Items
+having
+an
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>
+with
+a
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+from
+this
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+use
+the
+the
+rules
+described
+for
+that
+prefix
+within
+the
+scope
+of
+that
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>.
+<del class="diff-old">This
+</del>
+<ins class="diff-chg">For
+</ins><code><ins class="diff-chg">
+http://schema.org/
+</ins></code>,<ins class="diff-chg">
+this
+</ins>
+mapping
+currently
+defines
+<del class="diff-old">two
+rules:
+propertyURI
+and
+</del>
+<ins class="diff-chg">a
+single
+property:
+</ins>
+<code>
+<del class="diff-old">multipleValues
+</del>
+<ins class="diff-chg">additionalType
+</ins>
+</code>
+with
+<del class="diff-old">values
+</del>
+<ins class="diff-chg">a
+value
+</ins>
+to
+indicate
+specific
+behavior.
+It
+also
+allows
+overrides
+on
+a
+per-property
+basis;
+the
+<a href="#dfn-item-properties" class="internalDFN">
+<code>
+<ins class="diff-new">item
+</ins>
+properties
+</code>
+</a>
+key
+associates
+an
+individual
+<a href="#dfn-name" class="internalDFN">
+name
+</a>
+with
+overrides
+for
+default
+behavior.
+The
+interpretation
+of
+these
+rules
+is
+defined
+in
+the
+following
+sections.
+If
+an
+item
+has
+no
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>
+or
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+no
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+matching
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>,
+a
+conforming
+processor
+<del class="diff-old">must
+</del>
+<em class="rfc2119" title="MUST">
+<ins class="diff-chg">MUST
+</ins>
+</em>
+use
+the
+default
+values
+defined
+for
+these
+rules.
+</p>
+<del class="diff-old">Note
+The
+concept
+of
+a
+registry
+,
+including
+a
+hypothetical
+format,
+location
+and
+updating
+rules
+is
+presented
+as
+an
+abstract
+concept
+useful
+for
+describing
+the
+function
+of
+a
+microdata
+processor.
+There
+are
+issues
+surrounding
+update
+frequency,
+URL
+naming,
+and
+how
+updates
+are
+authorized.
+This
+spec
+just
+considers
+the
+semantic
+content
+of
+such
+a
+registry
+and
+how
+it
+can
+be
+used
+to
+affect
+processing
+without
+defining
+its
+representation
+or
+update
+policies.
+</del>
+<section class="informative" id="property-uri-generation">
+<h3 role="heading" id="h3_property-uri-generation">
+<span class="secno">
+3.1
+</span>
+Property
+URI
+Generation
+</h3>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+For
+<del class="diff-old">name
+</del>
+<a title="name" href="#dfn-name" class="internalDFN">
+<ins class="diff-chg">names
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+which
+are
+not
+<a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
+absolute
+<del class="diff-old">URL
+s,
+the
+propertyURI
+rule
+</del>
+<ins class="diff-chg">URLs
+</ins></a>,<ins class="diff-chg">
+this
+section
+</ins>
+defines
+the
+algorithm
+for
+generating
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>
+given
+an
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>
+including
+a
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+<del class="diff-old">,
+current
+name
+</del>
+</a>
+and
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>.
+</p>
+<p>
+The
+procedure
+for
+generating
+property
+URIs
+is
+defined
+in
+<a href="#generate-predicate-uri">
+Generate
+Predicate
+URI
+</a>.
+</p>
+<p>
+<del class="diff-old">Possible
+values
+for
+propertyURI
+are
+the
+following:
+contextual
+The
+contextual
+URI
+generation
+scheme
+guarantees
+that
+generated
+property
+URIs
+are
+unique
+based
+on
+the
+value
+of
+current
+name
+.
+This
+is
+required
+as
+the
+microdata
+data
+model
+requires
+that
+name
+s
+are
+associated
+with
+specific
+items
+and
+do
+not
+have
+a
+global
+scope.
+(See
+Step
+5
+in
+Generate
+Predicate
+URI
+).
+URI
+creation
+uses
+a
+base
+URI
+with
+query
+parameters
+to
+indicate
+the
+in-scope
+type
+and
+name
+list.
+Consider
+the
+following
+example:
+        &lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+  &lt;span itemprop="n" itemscope&gt;
+    &lt;span itemprop="given-name"&gt;
+      Princeton
+    &lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+The
+first
+name
+n
+generates
+the
+URI
+http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop=n
+.
+However,
+the
+included
+name
+given-name
+is
+included
+in
+untyped
+item.
+The
+inherited
+property
+URI
+is
+used
+to
+create
+a
+new
+property
+URI:
+http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop=n.given-name
+.
+This
+scheme
+is
+compatible
+with
+the
+needs
+of
+other
+RDF
+serialization
+formats
+such
+as
+RDF/XML
+[
+RDF-SYNTAX-GRAMMAR
+],
+which
+rely
+on
+QNames
+for
+expressing
+properties.
+For
+example,
+the
+generated
+property
+URIs
+can
+be
+split
+as
+follows:
+        &lt;rdf:Description xmlns:hcard="http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop="
+                 rdf:type="http://microformats.org/profile/hcard"&gt;
+  &lt;hcard:n&gt;
+    &lt;rdf:Description&gt;
+      &lt;hcard:n.given-name&gt;
+        Princeton
+      &lt;/hcard:n.given-name&gt;
+    &lt;/rdf:Description&gt;
+  &lt;/hcard:n&gt;
+&lt;/rdf:Description&gt;
+Looking
+at
+another
+example:
+        &lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
+&lt;/div&gt;
+This
+would
+generate
+http://www.w3.org/ns/md?type=http://schema.org/Person&amp;prop=name
+.
+vocabulary
+</del>
+The
+<del class="diff-old">vocabulary
+</del>
+URI
+generation
+scheme
+appends
+<del class="diff-old">name
+</del>
+<a title="name" href="#dfn-name" class="internalDFN">
+<ins class="diff-chg">names
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+that
+are
+not
+<a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
+absolute
+<del class="diff-old">URL
+</del>
+<ins class="diff-chg">URLs
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+to
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>.
+When
+generating
+property
+URIs,
+if
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+does
+not
+end
+with
+a
+'/'
+or
+'#',
+a
+'#'
+is
+appended
+to
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>.
+(See
+<a href="#scheme-vocab">
+Step
+4
+</a>
+in
+<a href="#generate-predicate-uri">
+Generate
+Predicate
+URI
+</a>.)
+</p>
+<p>
+URI
+creation
+uses
+a
+base
+URL
+with
+query
+parameters
+to
+indicate
+the
+in-scope
+type
+and
+<a href="#dfn-name" class="internalDFN">
+name
+</a>
+list.
+Consider
+the
+following
+example:
+</p>
+<del class="diff-old">        &lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+  &lt;span itemprop="n" itemscope&gt;
+    &lt;span itemprop="given-name"&gt;
+      Princeton
+    &lt;/span&gt;
+  &lt;/span&gt;
+</del>
+  <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example">&lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+<ins class="diff-chg">  &lt;span itemprop="n" itemscope&gt;
+    &lt;span itemprop="given-name"&gt;
+      Princeton
+    &lt;/span&gt;
+  &lt;/span&gt;
+</ins>
+&lt;/span&gt;
+</pre>
+</div>
+<p>
+Given
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+<code>
+http://microformats.org/profile/hcard
+</code>,
+this
+would
+generate
+<code>
+http://microformats.org/profile/hcard#n
+</code>
+and
+<code>
+http://microformats.org/profile/hcard#given-name
+</code>.
+Note
+that
+the
+'#'
+is
+automatically
+added
+as
+a
+separator.
+</p>
+<p>
+Looking
+at
+another
+example:
+</p>
+<del class="diff-old">        &lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
+</del>
+  <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+<ins class="diff-chg">  &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
+</ins>
+&lt;/div&gt;
+</pre>
+</div>
+<p>
+Given
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+<code>
+http://schema.org/
+</code>,
+this
+would
+generate
+<code>
+http://schema.org/name
+</code>.
+Note
+that
+if
+the
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+were
+<code>
+http://schema.org/Person/Teacher
+</code>,
+this
+would
+generate
+the
+same
+property
+URI.
+</p>
+<p>
+If
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+no
+match
+for
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>
+implementations
+<em class="rfc2119" title="MUST">
+<ins class="diff-new">MUST
+</ins></em>
+act
+as
+if
+there
+is
+a
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+made
+from
+the
+first
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+value
+by
+stripping
+either
+the
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.5">
+fragment
+</a>
+</cite>
+content
+or
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.3">
+last
+path
+segment
+</a>
+</cite>,
+if
+the
+value
+has
+no
+fragment
+(See
+[
+<cite>
+<a class="bibref" href="#bib-RFC3986">
+RFC3986
+</a>
+</cite>
+]).
+</p>
+<p>
+<ins class="diff-new">The
+vocabulary
+</ins><a href="#dfn-uri-prefix" class="internalDFN"><ins class="diff-new">
+URI
+prefix
+</ins></a><ins class="diff-new">
+is
+made
+from
+the
+first
+</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-new">
+itemtype
+</ins></a><ins class="diff-new">
+value
+by
+stripping
+either
+the
+</ins><cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5"><ins class="diff-new">
+fragment
+</ins></a></cite><ins class="diff-new">
+content
+or
+</ins><cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3"><ins class="diff-new">
+last
+path
+segment
+</ins></a></cite>,<ins class="diff-new">
+if
+the
+value
+has
+no
+fragment
+(See
+[
+</ins><cite><a class="bibref" href="#bib-RFC3986"><ins class="diff-new">
+RFC3986
+</ins></a></cite><ins class="diff-new">
+]).
+</ins></p>
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_3">
+<span>
+Note
+</span>
+</div>
+<p class="">
+Deconstructing
+the
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+URL
+to
+create
+or
+identify
+a
+vocabulary
+URI
+is
+a
+violation
+of
+the
+microdata
+specification
+which
+is
+necessary
+to
+support
+the
+use
+of
+existing
+vocabularies
+designed
+for
+use
+with
+RDF,
+and
+shared
+or
+inherited
+properties
+within
+all
+vocabularies.
+</p>
+</div>
+<del class="diff-old">The
+default
+value
+of
+propertyURI
+is
+vocabulary
+.
+  &lt;div itemscope itemtype="http://schema.org/Book"&gt;
+  &lt;h2 itemprop="title"&gt;Just a Geek&lt;/h2&gt;
+</del>
+  <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example">&lt;div itemscope itemtype="http://example.org/Book"&gt;
+<ins class="diff-chg">  &lt;h2 itemprop="title"&gt;Just a Geek&lt;/h2&gt;
+</ins>
+&lt;/div&gt;
+</pre>
+</div>
+<p>
+In
+this
+example,
+assuming
+no
+matching
+entry
+in
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>,
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+is
+constructed
+by
+removing
+the
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.3">
+last
+path
+segment
+</a>
+</cite>,
+leaving
+the
+URI
+<code>
+<del class="diff-old">http://schema.org/
+</del>
+<ins class="diff-chg">http://example.org/
+</ins>
+</code>.
+<del class="diff-old">As
+there
+is
+no
+explicit
+propertyURI
+,
+the
+default
+vocabulary
+is
+used,
+and
+the
+</del>
+<ins class="diff-chg">The
+</ins>
+resulting
+property
+URI
+would
+be
+<code>
+<del class="diff-old">http://schema.org/title
+</del>
+<ins class="diff-chg">http://example.org/title
+</ins>
+</code>.
+</p>
+<del class="diff-old">3.2
+Value
+Ordering
+</del>
+<div>
+<p>
+<del class="diff-old">This
+section
+</del>
+<ins class="diff-chg">If
+there
+</ins>
+is
+<del class="diff-old">non-normative.
+For
+items
+having
+multiple
+values
+for
+a
+given
+property
+</del>
+<ins class="diff-chg">no
+in-scope
+</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-chg">
+itemtype
+</ins>
+</a>,
+<ins class="diff-new">property
+URIs
+are
+generated
+using
+</ins>
+the
+<del class="diff-old">multipleValues
+rule
+defines
+</del>
+<ins class="diff-chg">base
+URI
+of
+</ins>
+the
+<del class="diff-old">algorithm
+for
+serializing
+these
+values.
+Microdata
+uses
+</del>
+document
+<del class="diff-old">order
+when
+generating
+property
+value
+s,
+as
+defined
+in
+Microdata
+DOM
+API
+as
+element.itemValue
+.
+However,
+many
+RDF
+vocabularies
+expect
+multiple
+values
+to
+be
+generated
+as
+triples
+sharing
+a
+common
+subject
+</del>
+and
+<del class="diff-old">predicate.
+In
+some
+cases,
+it
+may
+be
+useful
+to
+retain
+value
+ordering.
+The
+procedure
+for
+generating
+property
+value
+s
+is
+defined
+in
+Generate
+Property
+Values
+.
+Possible
+values
+for
+multipleValues
+are
+</del>
+the
+<del class="diff-old">following:
+unordered
+Values
+are
+serialized
+without
+ordering
+using
+a
+common
+subject
+and
+predicate.
+(See
+Step
+7
+in
+Generate
+Property
+Values
+).
+list
+Multi-valued
+itemprop
+s
+are
+serialized
+using
+an
+RDF
+Collection
+.
+(See
+Step
+8
+in
+Generate
+Property
+Values
+</del>
+<a href="#dfn-name" class="internalDFN">
+<ins class="diff-chg">name
+</ins>
+</a>
+<del class="diff-old">).
+An
+example
+of
+how
+this
+might
+be
+specified
+in
+</del>
+<ins class="diff-chg">as
+</ins>
+a
+<del class="diff-old">registry
+is
+</del>
+<ins class="diff-chg">fragment
+Consider
+</ins>
+the
+<del class="diff-old">following:
+</del>
+<ins class="diff-chg">following
+example:
+</ins>
+</p>
+<del class="diff-old">  {
+  "http://schema.org/": {
+    "propertyURI":    "vocabulary",
+    
+  },
+  "http://microformats.org/profile/hcard": {
+    "propertyURI":    "vocabulary",
+    
+  }
+}
+</del>
+      <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example">&lt;div itemscope&gt;
+<ins class="diff-chg">&lt;p itemscope itemprop='bar'&gt;
+  &lt;span itemprop='baz'&gt;Baz&lt;/span&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+</ins>
+</pre>
+</div>
+<p>
+<del class="diff-old">Additionally,
+some
+vocabularies
+may
+wish
+to
+specify
+this
+on
+a
+per-property
+basis.
+For
+example,
+within
+http://schema.org/MusicPlaylist
+</del>
+<ins class="diff-chg">If
+</ins>
+the
+<ins class="diff-new">document
+is
+located
+at
+</ins>
+<code>
+<del class="diff-old">tracks
+property
+might
+depend
+on
+</del>
+<ins class="diff-chg">http://example/author
+</ins></code>,
+the
+<del class="diff-old">order
+of
+values
+to
+to
+reproduce
+associated
+MusicRecording
+values.
+  {
+ "http://schema.org/": {
+   "propertyURI": "vocabulary",
+   "multipleValues": "unordered",
+   "properties": {
+     "tracks": {"multipleValues": "list"}
+   }
+ }
+}
+The
+properties
+key
+takes
+a
+JSON
+Object
+as
+a
+value,
+which
+in
+turn
+has
+keys
+for
+each
+property
+that
+is
+to
+be
+given
+alternate
+semantics.
+Each
+</del>
+<a href="#dfn-name" class="internalDFN">
+name
+</a>
+<del class="diff-old">is
+implicitly
+expanded
+to
+it's
+URI
+representation
+as
+defined
+in
+Generate
+Predicate
+URI
+,
+so
+that
+the
+behavior
+is
+</del>
+<em>
+<ins class="diff-chg">bar
+</ins></em><ins class="diff-chg">
+generates
+</ins>
+the
+<del class="diff-old">same
+whether
+or
+not
+</del>
+<ins class="diff-chg">URI
+</ins><code><ins class="diff-chg">
+http://example/author#bar
+</ins></code>.<ins class="diff-chg">
+However,
+</ins>
+the
+<ins class="diff-new">included
+</ins>
+<a href="#dfn-name" class="internalDFN">
+name
+</a>
+<em>
+<ins class="diff-new">baz
+</ins></em>
+is
+<del class="diff-old">listed
+as
+an
+absolute
+URL
+.
+</del>
+<ins class="diff-chg">included
+in
+untyped
+item.
+</ins>
+The
+<del class="diff-old">default
+value
+of
+multipleValues
+</del>
+<ins class="diff-chg">inherited
+property
+URI
+</ins>
+is
+<ins class="diff-new">used
+to
+create
+a
+new
+property
+URI:
+</ins>
+<code>
+<del class="diff-old">unordered
+</del>
+<ins class="diff-chg">http://example/author#baz
+</ins>
+</code>.
+</p>
+<del class="diff-old">Note
+</del>
+<p>
+<ins class="diff-chg">This
+scheme
+is
+compatible
+with
+the
+needs
+of
+other
+RDF
+serialization
+formats
+such
+as
+RDF/XML
+[
+</ins><cite>
+<a class="bibref" href="#bib-RDF-SYNTAX-GRAMMAR">
+<ins class="diff-chg">RDF-SYNTAX-GRAMMAR
+</ins></a>
+<del class="diff-old">An
+alternative
+mechanism
+would
+output
+</del>
+</cite>
+<ins class="diff-chg">],
+which
+rely
+on
+</ins>
+<em>
+<del class="diff-old">both
+</del>
+<ins class="diff-chg">QNames
+</ins>
+</em>
+<del class="diff-old">unordered
+and
+ordered
+values,
+to
+allow
+an
+application
+to
+choose
+the
+most
+useful
+representation.
+</del>
+<ins class="diff-chg">for
+expressing
+properties.
+</ins>
+For
+example,
+<del class="diff-old">consider
+</del>
+the
+<del class="diff-old">following:
+&lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
+  &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
+  &lt;meta itemprop="numTracks" content="2"/&gt;
+  &lt;p&gt;Including works by
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt; and
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;&lt;/p&gt;.
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    1.&lt;span itemprop="name"&gt;Sweet Home Alabama&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt;
+    &lt;link href="sweet-home-alabama" itemprop="url" /&gt;
+   &lt;/div&gt;
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    2.&lt;span itemprop="name"&gt;Shook you all Night Long&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;
+    &lt;link href="shook-you-all-night-long" itemprop="url" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+This
+might
+generate
+the
+following
+Turtle:
+@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+&lt;&gt; md:item [
+  a schema:MusicPlaylist;
+    schema:name "Classic Rock Playlist";
+    schema:byArtist ("Lynard Skynard" "AC/DC");
+    schema:numTracks "2";
+    schema:tracks _:track1, _:track2, (_:track1 _:track2)
+  ];
+  rdfa:usesVocabulary schema:
+ .
+_:track1 a schema:MusicRecording;
+  schema:byArtist ("Lynard Skynard");
+  schema:name "Sweet Home Alabama";
+  schema:url &lt;sweet-home-alabama&gt; .
+_:track2 a schema:MusicRecording;
+  schema:byArtist ("AC/DC");
+  schema:name "Shook you all Night Long";
+schema:url
+&lt;shook-you-all-night-long&gt;
+.
+By
+providing
+both
+_:track1
+and
+_:track2
+as
+object
+values
+of
+the
+playlist
+along
+with
+an
+RDF
+Collection
+containing
+the
+ordered
+values,
+the
+data
+may
+</del>
+<ins class="diff-chg">generated
+property
+URIs
+can
+</ins>
+be
+<del class="diff-old">queried
+via
+a
+simple
+query
+using
+the
+playlist
+subject,
+or
+</del>
+<ins class="diff-chg">split
+</ins>
+as
+<del class="diff-old">an
+ordered
+collection.
+</del>
+<ins class="diff-chg">follows:
+</ins>
+</p>
+      <div class="example"><div class="example-title"><span>Example 6</span></div><pre class="example">&lt;rdf:Description xmlns:base="http://example/author#"
+<ins class="diff-chg">               rdf:type="http://microformats.org/profile/hcard"&gt;
+&lt;base:bar&gt;
+  &lt;rdf:Description&gt;
+    &lt;base:baz&gt;Baz&lt;/base:baz&gt;
+  &lt;/rdf:Description&gt;
+&lt;/base:bar&gt;
+&lt;/rdf:Description&gt;
+</ins></pre>
+</div>
+</div>
+</section>
+<section class="informative" id="value-typing">
+<h3 role="heading" id="h3_value-typing">
+<span class="secno">
+<del class="diff-old">3.3
+</del>
+<ins class="diff-chg">3.2
+</ins>
+</span>
+Value
+Typing
+</h3>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+In
+microdata,
+all
+values
+are
+strings.
+In
+RDF,
+values
+may
+be
+resources
+or
+may
+be
+typed
+with
+an
+appropriate
+datatype.
+</p>
+<p>
+In
+some
+cases,
+the
+type
+of
+a
+microdata
+value
+can
+be
+determined
+from
+the
+element
+on
+which
+it
+is
+specified.
+In
+particular:
+</p>
+<ul>
+<li>
+URL
+property
+elements
+provide
+URLs
+</li>
+<li>
+<code>
+time
+</code>
+element
+provides
+<del class="diff-old">dates
+and
+</del>
+<ins class="diff-chg">dates,
+</ins>
+times
+<ins class="diff-new">and
+durations
+</ins>
+</li>
+<del class="diff-old">Issue
+Using
+information
+about
+the
+content
+of
+the
+document
+where
+the
+microdata
+is
+marked
+up
+might
+be
+a
+violation
+of
+the
+spirit
+of
+the
+microdata
+specification,
+though
+it
+does
+not
+explicitly
+say
+in
+normative
+text
+that
+consumers
+cannot
+use
+other
+information
+from
+the
+HTML
+DOM
+to
+interpret
+microdata.
+</del>
+<li>
+<del class="diff-old">Additionally,
+one
+possible
+use
+of
+a
+registry
+would
+allow
+vocabularies
+to
+be
+marked
+with
+datatype
+information,
+so
+that
+a
+</del>
+<code>
+<del class="diff-old">dc:time
+</del>
+<ins class="diff-chg">data
+</ins>
+</code>
+<del class="diff-old">value,
+for
+example,
+would
+be
+understood
+to
+represent
+a
+literal
+with
+datatype
+xsd:date
+.
+This
+could
+be
+done
+by
+adding
+information
+for
+each
+property
+in
+the
+vocabulary
+requiring
+special
+treatment.
+This
+might
+be
+represented
+using
+a
+syntax
+such
+as
+the
+following:
+  {
+ "http://schema.org/": {
+   "propertyURI": "vocabulary",
+   "multipleValues": "unordered",
+   "properties": {
+     "dateCreated": {"datatype": "http://www.w3.org/2001/XMLSchema#date"}
+   }
+ }
+}
+The
+</del>
+<ins class="diff-chg">and
+</ins>
+<code>
+<del class="diff-old">datatype
+</del>
+<ins class="diff-chg">meter
+</ins>
+</code>
+<del class="diff-old">identifies
+a
+URI
+to
+be
+used
+in
+constructing
+a
+typed
+literal
+.
+In
+most
+cases,
+the
+relevant
+datatype
+for
+a
+value
+can
+be
+derived
+from
+knowledge
+of
+what
+property
+the
+value
+is
+for
+</del>
+<ins class="diff-chg">elements
+provides
+doubles
+</ins>
+and
+<del class="diff-old">the
+syntax
+of
+the
+value
+itself.
+Thus,
+values
+can
+be
+given
+datatypes
+in
+a
+post-processing
+step
+after
+the
+mapping
+of
+microdata
+to
+RDF
+described
+by
+this
+specification.
+However,
+where
+there
+is
+information
+in
+the
+HTML
+markup,
+such
+as
+knowledge
+of
+what
+element
+was
+used
+to
+mark
+up
+the
+value,
+which
+can
+help
+with
+determining
+its
+datatype,
+that
+information
+is
+used
+by
+this
+specification.
+This
+concept
+is
+not
+explored
+further
+at
+this
+time,
+but
+could
+be
+developed
+further
+in
+a
+future
+revision
+of
+this
+document.
+</del>
+<ins class="diff-chg">integers
+</ins></li></ul></section></section><section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion"><h2 id="vocab_expansion" role="heading"><span class="secno"><ins class="diff-chg">
+4.
+</ins></span><ins class="diff-chg">
+Vocabulary
+Expansion
+</ins></h2>
+<div class="note">
+<div class="note-title" aria-level="1" role="heading" id="h_note_4">
+<span>
+Note
+</span>
+</div>
+<p class="">
+<del class="diff-old">If
+property
+URI
+generation
+was
+fixed
+to
+vocabulary
+,
+multiple
+values
+always
+generated
+both
+unordered
+and
+ordered
+representations,
+and
+there
+were
+datatype
+support,
+</del>
+<ins class="diff-chg">Support
+for
+</ins>
+the
+registry
+<ins class="diff-new">is
+being
+amended
+(see
+</ins><a href="#issues"><ins class="diff-new">
+issue
+10
+</ins>
+</a>
+<del class="diff-old">could
+be
+reduced
+to
+a
+simple
+list
+of
+URLs
+without
+any
+further
+structure
+necessary.
+</del>
+<ins class="diff-chg">).
+</ins>
+</p>
+</div>
+<del class="diff-old">4.
+Vocabulary
+Expansion
+</del>
+<p>
+Microdata
+requires
+that
+all
+values
+of
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+come
+from
+the
+same
+vocabulary.
+This
+is
+required
+as
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+values
+are
+resolved
+relative
+to
+that
+vocabulary.
+However,
+it
+is
+often
+useful
+to
+define
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+to
+have
+types
+from
+multiple
+different
+vocabularies.
+</p>
+<p>
+Vocabulary
+expansion
+uses
+simple
+rules
+to
+generate
+additional
+triples
+based
+on
+rules
+and
+property
+relationships
+described
+in
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>.
+Within
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>,
+a
+property
+definition
+may
+have
+either
+<code>
+equivalentProperty
+</code>
+or
+<code>
+subPropertyOf
+</code>
+keys
+having
+a
+IRI
+value
+(or
+array
+of
+IRI
+values)
+of
+the
+associated
+property.
+Such
+an
+entry
+causes
+the
+processor
+to
+generate
+triples
+associating
+the
+source
+property
+IRI
+with
+the
+target
+property
+IRI
+using
+either
+<code>
+<del class="diff-old">http://www.w3.org/2000/01/rdf-schema#subPropertyOf
+</del>
+<ins class="diff-chg">rdf:subPropertyOf
+</ins>
+</code>
+or
+<code>
+<del class="diff-old">http://www.w3.org/2002/07/owl#equivalentProperty
+</del>
+<ins class="diff-chg">owl:equivalentProperty
+</ins>
+</code>
+predicates.
+</p>
+<p>
+For
+example,
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+definition
+for
+the
+<em>
+additionalType
+</em>
+property
+within
+schema.org,
+defines
+<em>
+additionalType
+</em>
+to
+have
+an
+<code>
+rdfs:subPropertyOf
+</code>
+relationship
+with
+<code>
+<del class="diff-old">http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+</del>
+<ins class="diff-chg">rdf:type
+</ins>
+</code>.
+</p>
+<del class="diff-old">{
+  "http://schema.org/": {
+    "properties": {
+      
+    }
+}
+&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;link itemprop="additionalType" href="http://xmlns.com/foaf/0.1/Person"/&gt;
+  &lt;a itemprop="email http://xmlns.com/foaf/0.1/mbox" href="mailto:mail@gmail.com"&gt;
+    mail@gmail.com
+  &lt;/a&gt;
+</del>
+<div class="example"><div class="example-title"><span>Example 7</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+<ins class="diff-chg">  &lt;link itemprop="additionalType" href="http://xmlns.com/foaf/0.1/Person"/&gt;
+  &lt;a itemprop="email http://xmlns.com/foaf/0.1/mbox" href="mailto:mail@gmail.com"&gt;
+    mail@gmail.com
+  &lt;/a&gt;
+</ins>
+&lt;/div&gt;
+</pre>
+</div>
+<p>
+The
+previous
+example,
+indicates
+a
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+rule,
+which
+causes
+the
+processor
+to
+emit
+an
+extra
+triple
+when
+first
+seeing
+the
+<code>
+additionalProperty
+</code>
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>:
+</p>
+<del class="diff-old">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+&lt;&gt; md:item (
+  [ a schema:Person;
+    schema:additionalType foaf:Person;
+    schema:email &lt;mailto:mail@gmail.com&gt;;
+    foaf:mbox &lt;mailto:mail@gmail.com&gt;]);
+  rdfa:usesVocabulary schema: .
+schema:additionalType
+rdfs:subPropertyOf
+rdf:type
+</del>
+<div class="example"><div class="example-title"><span>Example 8</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+<ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+[ a schema:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
+]
+</ins>
+.
+</pre>
+</div>
+<p>
+After
+performing
+vocabulary
+expansion,
+an
+additional
+<code>
+rdf:type
+</code>
+triple
+is
+generated:
+</p>
+<del class="diff-old">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+&lt;&gt; md:item (
+  [ a schema:Person, foaf:Person;
+    schema:additionalType foaf:Person;
+    schema:email &lt;mailto:mail@gmail.com&gt;;
+    foaf:mbox &lt;mailto:mail@gmail.com&gt;]);
+  rdfa:usesVocabulary schema: .
+schema:additionalType
+rdfs:subPropertyOf
+rdf:type
+</del>
+<div class="example"><div class="example-title"><span>Example 9</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+<ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+&lt;&gt; rdfa:usesVocabulary schema: .
+[ a schema:Person, foaf:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
+]
+</ins>
+.
+</pre>
+</div>
+<del class="diff-old">4.1
+Vocabulary
+Entailment
+Formally,
+and
+for
+the
+purpose
+of
+vocabulary
+processing,
+microdata
+uses
+a
+very
+restricted
+subset
+of
+the
+OWL2
+vocabulary
+and
+is
+based
+on
+the
+RDF-Based
+Semantics
+of
+OWL2
+[
+OWL2-RDF-BASED-SEMANTICS
+].
+Vocabulary
+Entailment
+uses
+the
+following
+terms:
+rdfs:subPropertyOf
+owl:equivalentProperty
+Vocabulary
+Entailment
+considers
+only
+the
+entailment
+on
+individuals
+(i.e.,
+not
+on
+the
+relationships
+that
+can
+be
+deduced
+on
+the
+properties
+or
+the
+classes
+themselves.)
+</del>
+<div class="note">
+<div class="note-title" aria-level="1" role="heading" id="h_note_5">
+<span>
+Note
+</span>
+</div>
+<p class="">
+<del class="diff-old">While
+the
+formal
+definition
+of
+the
+Entailment
+refers
+to
+the
+general
+OWL
+2
+Semantics,
+practical
+implementations
+may
+rely
+on
+a
+subset
+of
+the
+OWL
+2
+RL
+Profileâ€™s
+entailment
+expressed
+in
+rules
+(
+section
+4.3
+of
+[
+OWL2-PROFILES
+]).
+</del>
+The
+<del class="diff-old">relevant
+rules
+are,
+using
+the
+rule
+identifications
+in
+section
+4.3
+of
+[
+OWL2-PROFILES
+]):
+</del>
+<code>
+<del class="diff-old">prp-spo1
+,
+</del>
+<ins class="diff-chg">owl:equivalentProperty
+</ins></code><ins class="diff-chg">
+rule
+is
+more
+powerfull
+than
+</ins>
+<code>
+<del class="diff-old">prp-eqp1
+</del>
+<ins class="diff-chg">rdfs:subPropertyOf
+</ins>
+</code>,
+<del class="diff-old">and
+prp-eqp2
+.
+[
+RDFA-CORE
+]
+implements
+a
+more
+complete
+form
+of
+vocabulary
+entailement,
+including
+retrieving
+</del>
+<ins class="diff-chg">in
+that
+if
+any
+equivalent
+property
+matches,
+then
+</ins>
+the
+<del class="diff-old">vocabulary
+URI
+to
+find
+additional
+class
+and
+</del>
+<ins class="diff-chg">source
+</ins>
+property
+<del class="diff-old">expansion
+definitions,
+as
+described
+in
+RDFa
+Vocabulary
+Entailment
+.
+Microdata
+implementations
+may
+use
+RDFa
+Vocabulary
+Entailment
+as
+an
+alternative
+to
+implementing
+</del>
+<ins class="diff-chg">would
+also
+cause
+</ins>
+a
+<del class="diff-old">separate
+entailment
+algorithm.
+To
+allow
+[
+RDFA-CORE
+]
+processors
+</del>
+<ins class="diff-chg">triple
+</ins>
+to
+be
+<del class="diff-old">used
+for
+microdata
+vocabulary
+expansion,
+microdata
+acts
+as
+</del>
+<ins class="diff-chg">generated.
+For
+example,
+</ins>
+if
+<del class="diff-old">there
+is
+an
+implicit
+</del>
+<ins class="diff-chg">the
+registry
+stated
+that
+</ins>
+<code>
+<del class="diff-old">@vocab
+</del>
+<ins class="diff-chg">name
+</ins>
+</code>
+<del class="diff-old">RDFa
+attribute
+set
+</del>
+<ins class="diff-chg">was
+equivalent
+</ins>
+to
+<code>
+<ins class="diff-new">rdfs:label
+</ins></code>,<ins class="diff-new">
+than
+any
+use
+of
+</ins><code><ins class="diff-new">
+name
+</ins></code><ins class="diff-new">
+in
+</ins>
+a
+<del class="diff-old">detected
+vocabulary
+by
+emitting
+</del>
+<a class="aref internalDFN" href="#dfn-itemprop">
+<ins class="diff-chg">itemprop
+</ins></a><ins class="diff-chg">
+would
+cause
+</ins>
+a
+triple
+using
+<del class="diff-old">the
+</del>
+<code>
+<del class="diff-old">rdfa:usesVocabulary
+</del>
+<ins class="diff-chg">rdfs:label
+</ins>
+</code>
+<del class="diff-old">predicate.
+Note
+The
+entailment
+described
+in
+this
+section
+is
+the
+minimum
+useful
+level
+for
+microdata.
+Processors
+may,
+of
+course,
+choose
+</del>
+to
+<del class="diff-old">follow
+more
+powerful
+entailment
+regimes,
+e.g.,
+include
+full
+RDFS
+[
+RDF-MT
+]
+or
+OWL2
+[
+OWL2-OVERVIEW
+]
+entailments.
+Using
+those
+entailments
+applications
+may
+perform
+datatype
+validation
+by
+checking
+</del>
+<ins class="diff-chg">be
+emitted,
+as
+with
+</ins>
+<code>
+<del class="diff-old">rdfs:range
+</del>
+<ins class="diff-chg">rdfs:subPropertyOf
+</ins></code>.<ins class="diff-chg">
+However,
+logically,
+any
+use
+of
+</ins><code><ins class="diff-chg">
+label
+</ins>
+</code>
+<ins class="diff-new">where
+the
+current
+voabulary
+were
+</ins><code><ins class="diff-new">
+rdfs:
+</ins></code><ins class="diff-new">
+could
+also
+cause
+a
+triple
+using
+</ins><code><ins class="diff-new">
+schema:name
+</ins></code><ins class="diff-new">
+to
+be
+emitted.
+To
+simplify
+processing,
+this
+specification
+requires
+that
+all
+values
+</ins>
+of
+a
+<del class="diff-old">property,
+or
+use
+</del>
+<code>
+<ins class="diff-chg">owl:equivalentProperty
+</ins></code><ins class="diff-chg">
+registry
+entry
+have
+their
+own
+rules
+with
+those
+values
+as
+keys
+within
+</ins>
+the
+<del class="diff-old">advanced
+facilities
+offered
+by,
+e.g.,
+OWL2â€™s
+</del>
+<code>
+property
+<del class="diff-old">chains
+to
+interlink
+vocabularies
+further.
+</del>
+</code>
+<ins class="diff-chg">section
+of
+their
+respective
+vocabularies.
+</ins>
+</p>
+</div>
+</section>
+<section id="control-of-microdata-processors">
+<h2 role="heading" id="h2_control-of-microdata-processors">
+<span class="secno">
+<del class="diff-old">4.2
+</del>
+<ins class="diff-chg">5.
+</ins>
+</span>
+<del class="diff-old">Vocabulary
+Expansion
+</del>
+Control
+of
+Microdata
+Processors
+</h2>
+<p>
+<del class="diff-old">Conforming
+processors
+</del>
+<ins class="diff-chg">The
+external
+registry
+may
+be
+controlled
+by
+the
+</ins><code><ins class="diff-chg">
+registry
+</ins></code><ins class="diff-chg">
+option
+passed
+to
+the
+microdata
+processor.
+If
+specified,
+the
+registry
+</ins>
+must
+<ins class="diff-new">be
+loaded
+from
+the
+location
+indicated
+as
+the
+option
+value,
+Otherwise,
+the
+processor
+</ins><em class="rfc2119" title="MUST"><ins class="diff-new">
+MUST
+</ins>
+</em>
+<del class="diff-old">perform
+</del>
+<ins class="diff-chg">load
+</ins>
+the
+<del class="diff-old">basic
+vocabulary
+expansion.
+</del>
+<ins class="diff-chg">default
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a><ins class="diff-chg">
+from
+</ins><code><ins class="diff-chg">
+http://www.w3.org/ns/md
+</ins></code>.<span class="note"><ins class="diff-chg">
+see
+</ins><a href="#issues"><ins class="diff-chg">
+issue
+10
+</ins></a></span>.
+</p>
+<p>
+<del class="diff-old">If
+vocabulary
+expansion
+</del>
+<ins class="diff-chg">Setting
+</ins><code><ins class="diff-chg">
+registry
+</ins></code>
+is
+performed
+<del class="diff-old">by
+the
+microdata
+processor
+</del>
+<ins class="diff-chg">in
+a
+processor-specific
+way.
+</ins></p><p><ins class="diff-chg">
+When
+accessed
+as
+a
+</ins><strong><ins class="diff-chg">
+web
+service
+</ins></strong>
+using
+<del class="diff-old">[
+RDFA-CORE
+]
+vocabulary
+expansion,
+and
+the
+</del>
+<ins class="diff-chg">HTTP
+GET,
+POST
+or
+similar
+action,
+processors
+</ins><em class="rfc2119" title="SHOULD"><ins class="diff-chg">
+SHOULD
+</ins></em><ins class="diff-chg">
+use
+</ins>
+<code>
+<del class="diff-old">vocab_expansion
+</del>
+<ins class="diff-chg">registry
+</ins></code><ins class="diff-chg">
+query
+parameter.
+Acceptable
+values
+for
+</ins><code><ins class="diff-chg">
+registry
+</ins>
+</code>
+<del class="diff-old">option
+</del>
+is
+<del class="diff-old">passed
+to
+the
+microdata
+processor,
+</del>
+<ins class="diff-chg">a
+URI-encoded
+URL.
+Web
+service
+processors
+</ins><em class="rfc2119" title="SHOULD"><ins class="diff-chg">
+SHOULD
+</ins></em><ins class="diff-chg">
+return
+</ins>
+the
+<del class="diff-old">full
+</del>
+<ins class="diff-chg">resulting
+RDF
+graph
+using
+a
+requested
+format
+specified
+by
+HTTP
+Content
+Negotiation
+for
+an
+acceptable
+content
+type.
+Web
+service
+processors
+</ins><em class="rfc2119" title="MUST"><ins class="diff-chg">
+MUST
+</ins></em><ins class="diff-chg">
+support
+</ins>
+[
+<cite>
+<del class="diff-old">RDFA-CORE
+</del>
+<a class="bibref" href="#bib-N-TRIPLES">
+<ins class="diff-chg">N-TRIPLES
+</ins>
+</a>
+</cite>
+<del class="diff-old">]
+expansion
+must
+also
+be
+performed.
+</del>
+<ins class="diff-chg">].
+</ins>
+</p>
+</section>
+<section id="algorithm">
+<h2 role="heading" id="h2_algorithm">
+<span class="secno">
+<del class="diff-old">5.
+</del>
+<ins class="diff-chg">6.
+</ins>
+</span>
+Algorithm
+</h2>
+<p>
+Transformation
+of
+Microdata
+to
+RDF
+makes
+use
+of
+general
+processing
+rules
+described
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]
+for
+the
+treatment
+of
+<del class="diff-old">item
+s.
+</del>
+<a title="item" href="#dfn-item" class="internalDFN">
+<ins class="diff-chg">items
+</ins></a>.
+</p>
+<section id="algorithm-terms">
+<h3 role="heading" id="h3_algorithm-terms">
+<span class="secno">
+<del class="diff-old">5.1
+</del>
+<ins class="diff-chg">6.1
+</ins>
+</span>
+Algorithm
+Terms
+</h3>
+<dl>
+<dt>
+<dfn id="dfn-absolute-url">
+absolute
+URL
+</dfn>
+</dt>
+<dd>
+The
+term
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">
+absolute
+URL
+</a>
+</cite>
+is
+defined
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+].
+</dd>
+<dt>
+<dfn id="dfn-blank-node">
+blank
+node
+</dfn>
+</dt>
+<dd>
+A
+blank
+node
+is
+a
+node
+in
+a
+graph
+that
+is
+neither
+a
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+nor
+a
+<a href="#dfn-literal" class="internalDFN">
+literal
+</a>.
+<a href="#dfn-item" class="internalDFN">
+Item
+</a>
+s
+without
+a
+<a href="#dfn-global-identifier" class="internalDFN">
+global
+identifier
+</a>
+have
+a
+blank
+node
+allocated
+to
+them.
+(See
+[
+<cite>
+<a class="bibref" href="#bib-RDF-CONCEPTS">
+RDF-CONCEPTS
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn id="dfn-document-base">
+document
+base
+</dfn>
+</dt>
+<dd>
+The
+base
+address
+of
+the
+document
+being
+processed,
+as
+defined
+in
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#resolving-urls">
+Resolving
+URLs
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+].
+</dd>
+<dt>
+<dfn id="dfn-evaluation-context">
+evaluation
+context
+</dfn>
+</dt>
+<dd>
+A
+data
+structure
+including
+the
+following
+elements:
+<dl>
+<dt>
+<dfn id="dfn-memory">
+memory
+</dfn>
+</dt>
+<dd>
+a
+mapping
+of
+items
+to
+subjects,
+initially
+empty;
+</dd>
+<dt>
+<del class="diff-old">current
+name
+an
+absolute
+URL
+for
+the
+in-scope
+name
+,
+used
+for
+generating
+URIs
+for
+properties
+of
+items
+without
+an
+item
+type
+;
+Note
+current
+name
+is
+required
+for
+the
+contextual
+property
+URI
+generation
+scheme.
+Without
+this
+scheme,
+this
+evaluation
+context
+component
+would
+not
+be
+required.
+</del>
+<dfn id="dfn-current-type">
+current
+type
+</dfn>
+</dt>
+<dd>
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>
+for
+the
+<em>
+current
+type
+</em>,
+used
+when
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+does
+not
+contain
+an
+<a href="#dfn-item-type" class="internalDFN">
+item
+type
+</a>
+;
+</dd>
+<dt>
+<dfn id="dfn-current-vocabulary">
+current
+vocabulary
+</dfn>
+</dt>
+<dd>
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>
+for
+the
+<em>
+current
+vocabulary
+</em>,
+from
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>.
+</dd>
+</dl>
+</dd>
+<dt>
+<dfn id="dfn-item">
+item
+</dfn>
+</dt>
+<dd>
+An
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+is
+described
+by
+an
+element
+containing
+an
+<a class="aref internalDFN" href="#dfn-itemscope">
+itemscope
+</a>
+attribute.
+The
+list
+of
+top-level
+microdata
+items
+may
+be
+retrieved
+using
+the
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">
+Microdata
+DOM
+API
+</a>
+</cite>
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-document-getitems">
+document.getItems
+</a>
+</cite>
+</code>
+method.
+</dd>
+<dt>
+<dfn id="dfn-item-properties">
+item
+properties
+</dfn>
+</dt>
+<dd>
+The
+mechanism
+for
+finding
+the
+<a title="item properties" href="#dfn-item-properties" class="internalDFN">
+properties
+of
+an
+item
+</a>
+The
+list
+of
+item
+properties
+items
+may
+be
+retrieved
+using
+the
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">
+Microdata
+DOM
+API
+</a>
+</cite>
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-properties">
+element.properties
+</a>
+</cite>
+</code>
+attribute.
+</dd>
+<dt>
+<dfn id="dfn-fragment-escape">
+fragment-escape
+</dfn>
+</dt>
+<dd>
+The
+term
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#fragment-escaped">
+fragment-escape
+</a>
+</cite>
+is
+defined
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+].
+This
+involves
+transforming
+elements
+added
+to
+URLs
+to
+ensure
+that
+the
+result
+remains
+a
+valid
+URL.
+The
+following
+characters
+are
+subject
+to
+percent
+escaping:
+<ul>
+<li>
+U+0022
+QUOTATION
+MARK
+character
+(")
+</li>
+<li>
+U+0023
+NUMBER
+SIGN
+character
+(#)
+</li>
+<li>
+U+0025
+PERCENT
+SIGN
+character
+(%)
+</li>
+<li>
+U+003C
+LESS-THAN
+SIGN
+character
+(&lt;)
+</li>
+<li>
+U+003E
+GREATER-THAN
+SIGN
+character
+(&gt;)
+</li>
+<li>
+U+005B
+LEFT
+SQUARE
+BRACKET
+character
+([)
+</li>
+<li>
+U+005C
+REVERSE
+SOLIDUS
+character
+(\)
+</li>
+<li>
+U+005D
+RIGHT
+SQUARE
+BRACKET
+character
+(])
+</li>
+<li>
+U+005E
+CIRCUMFLEX
+ACCENT
+character
+(^)
+</li>
+<li>
+U+007B
+LEFT
+CURLY
+BRACKET
+character
+({)
+</li>
+<li>
+U+007C
+VERTICAL
+LINE
+character
+(|)
+</li>
+<li>
+U+007D
+RIGHT
+CURLY
+BRACKET
+character
+(})
+</li>
+</ul>
+</dd>
+<dt>
+<dfn id="dfn-global-identifier">
+global
+identifier
+</dfn>
+</dt>
+<dd>
+The
+value
+of
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+'s
+<a href="#dfn-itemid" class="internalDFN">
+itemid
+</a>
+attribute,
+if
+it
+has
+one.
+(See
+<cite>
+<del class="diff-old">Items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">
+<ins class="diff-chg">itemscope
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn id="dfn-literal">
+literal
+</dfn>
+</dt>
+<dd>
+Literals
+are
+values
+such
+as
+strings
+and
+dates,
+including
+<dfn id="dfn-typed-literal">
+typed
+literal
+</dfn>
+s
+and
+<dfn id="dfn-plain-literal">
+plain
+literal
+</dfn>
+s.
+(See
+[
+<cite>
+<a class="bibref" href="#bib-RDF-CONCEPTS">
+RDF-CONCEPTS
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn id="dfn-property">
+property
+</dfn>
+</dt>
+<dd>
+Each
+<a href="#dfn-name" class="internalDFN">
+name
+</a>
+identifies
+a
+<a href="#dfn-property" class="internalDFN">
+property
+</a>
+of
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+An
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+may
+have
+multiple
+elements
+sharing
+the
+same
+<a href="#dfn-name" class="internalDFN">
+name
+</a>,
+creating
+a
+multi-valued
+<a href="#dfn-property" class="internalDFN">
+property
+</a>.
+</dd>
+<dt>
+<dfn id="dfn-property-names">
+property
+names
+</dfn>
+</dt>
+<dd>
+The
+tokens
+of
+an
+element's
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+attribute.
+Each
+token
+is
+a
+<a href="#dfn-name" class="internalDFN">
+name
+</a>.
+(See
+<cite>
+<del class="diff-old">Names:
+the
+itemprop
+attribute
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#property-names">
+<ins class="diff-chg">property
+names
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn id="dfn-property-value">
+property
+value
+</dfn>
+</dt>
+<dd>
+The
+<a href="#dfn-property-value" class="internalDFN">
+property
+value
+</a>
+of
+a
+name-value
+pair
+added
+by
+an
+element
+with
+an
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+attribute
+depends
+on
+the
+element.
+<dl>
+<dt>
+If
+the
+element
+has
+no
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+attribute
+</dt>
+<dd>
+The
+value
+is
+null
+and
+no
+triple
+should
+be
+generated.
+</dd>
+<dt>
+If
+the
+element
+creates
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+(by
+having
+an
+<a class="aref internalDFN" href="#dfn-itemscope">
+itemscope
+</a>
+attribute)
+</dt>
+<dd>
+The
+value
+is
+the
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+or
+<a href="#dfn-blank-node" class="internalDFN">
+blank
+node
+</a>
+returned
+from
+<a href="#generate-the-triples">
+generate
+the
+triples
+</a>
+for
+that
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+</dd>
+<dt>
+If
+the
+element
+is
+a
+URL
+property
+element
+(
+<code>
+a
+</code>,
+<code>
+area
+</code>,
+<code>
+audio
+</code>,
+<code>
+embed
+</code>,
+<code>
+iframe
+</code>,
+<code>
+img
+</code>,
+<code>
+link
+</code>,
+<code>
+object
+</code>,
+<code>
+source
+</code>,
+<code>
+track
+</code>
+or
+<code>
+video
+</code>
+)
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+created
+from
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">
+element.itemValue
+</a>
+</cite>
+</code>.
+(See
+relevant
+attribute
+descriptions
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+]).
+</dd>
+<dt>
+If
+the
+element
+is
+a
+<code>
+time
+</code>
+element.
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-literal" class="internalDFN">
+literal
+</a>
+made
+from
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">
+element.itemValue
+</a>
+</cite>
+</code>.
+<dl>
+<dt>
+If
+the
+value
+is
+a
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-date-string">
+valid
+date
+string
+</a>
+</cite>
+having
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#date">
+xsd:date
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#date
+</code>.
+</dd>
+<dt>
+If
+the
+value
+is
+a
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-time-string">
+valid
+time
+string
+</a>
+</cite>
+having
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#time">
+xsd:time
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#time
+</code>.
+</dd>
+<dt>
+If
+the
+value
+is
+a
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-local-date-and-time-string">
+valid
+local
+date
+and
+time
+string
+</a>
+</cite>
+or
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-global-date-and-time-string">
+valid
+global
+date
+and
+time
+string
+</a>
+</cite>
+having
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#dateTime">
+xsd:dateTime
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#dateTime
+</code>.
+</dd>
+<dt>
+If
+the
+value
+is
+a
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-month-string">
+valid
+month
+string
+</a>
+</cite>
+having
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth">
+xsd:gYearMonth
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#gYearMonth
+</code>.
+</dd>
+<dt>
+If
+the
+value
+is
+a
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-non-negative-integer">
+valid
+non-negative
+integer
+</a>
+</cite>
+having
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#gYear">
+xsd:gYear
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#gYear
+</code>.
+</dd>
+<dt>
+If
+the
+value
+has
+the
+lexical
+form
+of
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#duration">
+xsd:duration
+</a>
+</cite>
+[
+<cite>
+<del class="diff-old">RDF-SCHEMA
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
+</a>
+</cite>
+].
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-typed-literal" class="internalDFN">
+typed
+literal
+</a>
+composed
+of
+the
+value
+and
+<code>
+http://www.w3.org/2001/XMLSchema#duration
+</code>.
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_6">
+<span>
+Note
+</span>
+</div>
+<p class="">
+The
+referenced
+version
+of
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+]
+does
+not
+include
+a
+<em>
+duration
+</em>
+data
+type,
+but
+it
+is
+in
+the
+Editor's
+Draft
+and
+is
+expected
+to
+be
+included
+in
+a
+forthcoming
+update
+to
+the
+Working
+Draft
+</p>
+</div>
+</dd>
+<dt>
+Otherwise
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-plain-literal" class="internalDFN">
+plain
+literal
+</a>
+created
+from
+the
+value
+with
+language
+information
+set
+from
+the
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">
+language
+</a>
+</cite>
+of
+the
+property
+element.
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_7">
+<span>
+Note
+</span>
+</div>
+<p class="">
+The
+HTML
+<em>
+valid
+yearless
+date
+string
+</em>
+is
+similar
+to
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay">
+xsd:gMonthDay
+</a>
+</cite>,
+but
+the
+lexical
+forms
+differ,
+so
+it
+is
+not
+included
+in
+this
+conversion.
+</p>
+</div>
+</dd>
+</dl>
+<p>
+See
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/rendering.html#the-time-element-0">
+The
+<code>
+time
+</code>
+element
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+].
+</p>
+</dd>
+<dt>
+<ins class="diff-new">If
+the
+element
+is
+a
+</ins><code><ins class="diff-new">
+meta
+</ins></code><ins class="diff-new">
+element
+with
+a
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute.
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
+plain
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value
+of
+the
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute
+with
+language
+information
+set
+from
+the
+</ins><cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language"><ins class="diff-new">
+language
+</ins></a></cite><ins class="diff-new">
+of
+the
+property
+element
+</ins></dd><dt><ins class="diff-new">
+If
+the
+element
+is
+a
+</ins><code><ins class="diff-new">
+data
+</ins></code><ins class="diff-new">
+or
+</ins><code><ins class="diff-new">
+track
+</ins></code><ins class="diff-new">
+element
+with
+a
+</ins><code><ins class="diff-new">
+@value
+</ins></code><ins class="diff-new">
+attribute.
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value
+of
+the
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute.
+</ins><dl><dt><ins class="diff-new">
+If
+the
+value
+is
+a
+has
+the
+lexical
+form
+of
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#integer"><ins class="diff-new">
+xsd:integer
+</ins></a></cite><ins class="diff-new">
+[
+</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+XMLSCHEMA11-2
+</ins></a></cite><ins class="diff-new">
+].
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+typed
+literal
+</ins></a><ins class="diff-new">
+composed
+of
+the
+value
+and
+</ins><code><ins class="diff-new">
+http://www.w3.org/2001/XMLSchema#integer
+</ins></code>.</dd><dt><ins class="diff-new">
+If
+the
+value
+is
+a
+has
+the
+lexical
+form
+of
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#float"><ins class="diff-new">
+xsd:float
+</ins></a></cite><ins class="diff-new">
+or
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#double"><ins class="diff-new">
+xsd:double
+</ins></a></cite><ins class="diff-new">
+[
+</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+XMLSCHEMA11-2
+</ins></a></cite><ins class="diff-new">
+].
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+typed
+literal
+</ins></a><ins class="diff-new">
+composed
+of
+the
+value
+and
+</ins><code><ins class="diff-new">
+http://www.w3.org/2001/XMLSchema#double
+</ins></code>.</dd><dt><ins class="diff-new">
+Otherwise
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
+plain
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value.
+</ins></dd></dl></dd><dt>
+Otherwise
+</dt>
+<dd>
+The
+value
+is
+a
+<a href="#dfn-plain-literal" class="internalDFN">
+plain
+literal
+</a>
+created
+from
+the
+value
+with
+language
+information
+set
+from
+the
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">
+language
+</a>
+</cite>
+of
+the
+property
+element.
+<p>
+See
+<cite>
+<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#the-lang-and-xml:lang-attributes">
+The
+<code>
+lang
+</code>
+and
+<code>
+xml:lang
+</code>
+attributes
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-HTML5">
+HTML5
+</a>
+</cite>
+]
+for
+determining
+the
+language
+of
+a
+node.
+</p>
+</dd>
+</dl>
+</dd>
+<dt>
+<dfn id="dfn-reverse-properties">
+<ins class="diff-new">reverse
+properties
+</ins></dfn></dt><dd><ins class="diff-new">
+The
+mechanism
+for
+finding
+the
+</ins><a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN"><ins class="diff-new">
+reverse
+properties
+of
+an
+item
+</ins></a><ins class="diff-new">
+The
+list
+of
+reverse
+properties
+is
+the
+result
+of
+transforming
+each
+space-separated-value
+of
+an
+item's
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-new">
+itemprop-reverse
+</ins></a><ins class="diff-new">
+to
+a
+URL
+as
+defined
+in
+</ins><a href="#property-uri-generation"><ins class="diff-new">
+Property
+URI
+Generation
+</ins></a>.</dd><dt><dfn id="dfn-reverse-property-names"><ins class="diff-new">
+reverse
+property
+names
+</ins></dfn></dt><dd><ins class="diff-new">
+The
+tokens
+of
+an
+element's
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-new">
+itemprop-reverse
+</ins></a><ins class="diff-new">
+attribute.
+Each
+token
+is
+a
+</ins><a href="#dfn-name" class="internalDFN"><ins class="diff-new">
+name
+</ins></a>.</dd><dt>
+<dfn id="dfn-top-level-item">
+top-level
+item
+</dfn>
+</dt>
+<dd>
+An
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+which
+does
+not
+contain
+an
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+attribute.
+Available
+through
+the
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">
+Microdata
+DOM
+API
+</a>
+</cite>
+as
+<code>
+document.getItems
+</code>.
+(See
+<cite>
+<del class="diff-old">Associating
+names
+with
+items
+</del>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#top-level-microdata-items">
+<ins class="diff-chg">top-level
+microdata
+item
+</ins>
+</a>
+</cite>
+in
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+]).
+</dd>
+<dt>
+<dfn id="dfn-uri-reference">
+URI
+reference
+</dfn>
+</dt>
+<dd>
+URI
+references
+are
+suitable
+to
+be
+used
+in
+<em>
+subject
+</em>,
+<em>
+predicate
+</em>
+or
+<em>
+object
+</em>
+positions
+within
+an
+RDF
+triple,
+as
+opposed
+to
+a
+<a href="#dfn-literal" class="internalDFN">
+literal
+</a>
+value
+that
+may
+contain
+a
+string
+representation
+of
+a
+URI.
+(See
+[
+<cite>
+<a class="bibref" href="#bib-RDF-CONCEPTS">
+RDF-CONCEPTS
+</a>
+</cite>
+]).
+<div class="issue">
+<div class="issue-title" aria-level="2" role="heading" id="h_issue_3">
+<span>
+Issue
+</span>
+</div>
+<div class="">
+<p>
+The
+HTML5/microdata
+content
+model
+for
+<code>
+@href
+</code>,
+<code>
+@src
+</code>,
+<code>
+@data
+</code>,
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+and
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+and
+<a class="aref internalDFN" href="#dfn-itemid">
+itemid
+</a>
+is
+that
+of
+a
+URL,
+not
+a
+URI
+or
+IRI.
+</p>
+<p>
+A
+proposed
+mechanism
+for
+specifying
+the
+range
+of
+<a title="property value" href="#dfn-property-value" class="internalDFN">
+property
+<del class="diff-old">value
+</del>
+<ins class="diff-chg">values
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+to
+be
+URI
+reference
+or
+IRI
+could
+allow
+these
+to
+be
+specified
+as
+subject
+or
+object
+using
+a
+<code>
+@content
+</code>
+attribute.
+</p>
+</div>
+</div>
+</dd>
+<dt>
+<dfn id="dfn-vocabulary">
+vocabulary
+</dfn>
+</dt>
+<dd>
+A
+vocabulary
+is
+a
+collection
+of
+URIs,
+suitable
+for
+use
+as
+an
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+or
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+value,
+that
+share
+a
+common
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>.
+That
+prefix
+is
+the
+vocabulary
+URI.
+A
+vocabulary
+URI
+is
+not
+allowed
+to
+be
+a
+prefix
+of
+another
+vocabulary
+URI.
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_8">
+<span>
+Note
+</span>
+</div>
+<div class="">
+This
+definition
+differs
+from
+the
+language
+in
+the
+HTML
+spec
+and
+is
+just
+for
+the
+purpose
+of
+this
+document.
+In
+HTML,
+a
+vocabulary
+is
+a
+specification,
+and
+doesn't
+have
+a
+URI.
+In
+our
+view,
+if
+one
+specification
+defines
+ten
+<a class="aref internalDFN" href="#dfn-itemtype">
+itemtype
+</a>
+s,
+then
+these
+could
+be
+treated
+as
+one
+vocabulary
+or
+as
+ten
+distinct
+vocabularies;
+it
+is
+entirely
+up
+to
+the
+vocabulary
+creator.
+</div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="rdf-conversion-algorithm">
+<h3 role="heading" id="h3_rdf-conversion-algorithm">
+<span class="secno">
+<del class="diff-old">5.2
+</del>
+<ins class="diff-chg">6.2
+</ins>
+</span>
+RDF
+Conversion
+Algorithm
+</h3>
+<p>
+A
+HTML
+document
+containing
+microdata
+<del class="diff-old">may
+</del>
+<em class="rfc2119" title="MAY">
+<ins class="diff-chg">MAY
+</ins>
+</em>
+be
+converted
+to
+any
+other
+RDF-compatible
+document
+format
+using
+the
+algorithm
+specified
+in
+this
+section.
+</p>
+<p>
+A
+conforming
+microdata
+processor
+implementing
+RDF
+conversion
+<del class="diff-old">must
+</del>
+<em class="rfc2119" title="MUST">
+<ins class="diff-chg">MUST
+</ins>
+</em>
+implement
+a
+processing
+algorithm
+that
+results
+in
+the
+equivalent
+triples
+to
+those
+that
+the
+following
+algorithm
+generates:
+</p>
+<del class="diff-old">Set
+item
+list
+to
+an
+empty
+list.
+</del>
+<ol class="algorithm">
+<li>
+For
+each
+element
+that
+is
+also
+a
+<a href="#dfn-top-level-item" class="internalDFN">
+top-level
+item
+<del class="diff-old">run
+the
+following
+algorithm:
+</del>
+</a>,
+<a href="#generate-the-triples">
+Generate
+the
+triples
+</a>
+for
+<del class="diff-old">an
+item
+</del>
+<ins class="diff-chg">that
+</ins>
+item
+<del class="diff-old">,
+</del>
+using
+the
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>.
+<del class="diff-old">Let
+result
+be
+the
+(
+URI
+reference
+or
+blank
+node
+)
+subject
+returned.
+Append
+result
+to
+item
+list
+.
+Generate
+an
+RDF
+Collection
+list
+from
+the
+ordered
+list
+of
+values.
+Set
+value
+to
+the
+value
+returned
+from
+generate
+an
+RDF
+Collection
+.
+Generate
+the
+following
+triple:
+subject
+document
+base
+predicate
+http://www.w3.org/ns/md#item
+object
+value
+Perform
+Vocabulary
+Entailment
+.
+</del>
+</li>
+</ol>
+</section>
+<section id="generate-the-triples">
+<h3 role="heading" id="h3_generate-the-triples">
+<span class="secno">
+<del class="diff-old">5.3
+</del>
+<ins class="diff-chg">6.3
+</ins>
+</span>
+Generate
+the
+triples
+</h3>
+<p>
+When
+the
+user
+agent
+is
+to
+Generate
+triples
+for
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>
+<em>
+item
+</em>,
+given
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>,
+it
+must
+run
+the
+following
+steps:
+</p>
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_9">
+<span>
+Note
+</span>
+</div>
+<p class="">
+This
+algorithm
+has
+undergone
+substantial
+change
+from
+the
+original
+microdata
+specification
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
+MICRODATA
+</a>
+</cite>
+].
+</p>
+</div>
+<ol class="algorithm">
+<li>
+If
+there
+is
+an
+entry
+for
+<em>
+item
+</em>
+in
+<a href="#dfn-memory" class="internalDFN">
+memory
+</a>,
+then
+let
+<em>
+subject
+</em>
+be
+the
+subject
+of
+that
+entry.
+Otherwise,
+if
+<em>
+item
+</em>
+has
+a
+<a href="#dfn-global-identifier" class="internalDFN">
+global
+identifier
+</a>
+and
+that
+<a href="#dfn-global-identifier" class="internalDFN">
+global
+identifier
+</a>
+is
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>,
+let
+<em>
+subject
+</em>
+be
+that
+<a href="#dfn-global-identifier" class="internalDFN">
+global
+identifier
+</a>.
+Otherwise,
+let
+<em>
+subject
+</em>
+be
+a
+new
+<a href="#dfn-blank-node" class="internalDFN">
+blank
+node
+</a>.
+</li>
+<li>
+Add
+a
+mapping
+from
+<em>
+item
+</em>
+to
+<em>
+subject
+</em>
+in
+<a href="#dfn-memory" class="internalDFN">
+memory
+</a>
+</li>
+<li>
+For
+each
+<em>
+type
+</em>
+returned
+from
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">
+element.itemType
+</a>
+</cite>
+</code>
+of
+the
+element
+defining
+the
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+<ol class="algorithm">
+<li>
+If
+<em>
+type
+</em>
+is
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>,
+generate
+the
+following
+triple:
+<dl class="triple">
+<dt>
+subject
+</dt>
+<dd>
+<em>
+subject
+</em>
+</dd>
+<dt>
+predicate
+</dt>
+<dd>
+<code>
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+</code>
+</dd>
+<dt>
+object
+</dt>
+<dd>
+<em>
+type
+</em>
+(as
+a
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+)
+</dd>
+</dl>
+</li>
+</ol>
+</li>
+<li>
+Set
+<em>
+type
+</em>
+to
+the
+first
+value
+returned
+from
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">
+element.itemType
+</a>
+</cite>
+</code>
+of
+the
+element
+defining
+the
+<a href="#dfn-item" class="internalDFN">
+item
+</a>.
+</li>
+<li>
+<del class="diff-old">If
+type
+is
+an
+absolute
+URL
+,
+set
+current
+name
+in
+evaluation
+context
+to
+null.
+</del>
+Otherwise,
+set
+<em>
+type
+</em>
+to
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>
+from
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>
+if
+not
+empty.
+</li>
+<li>
+If
+the
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+a
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>
+that
+is
+a
+character
+for
+character
+match
+of
+<em>
+type
+</em>
+up
+to
+the
+length
+of
+the
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+</a>,
+set
+<em>
+vocab
+</em>
+as
+that
+<a href="#dfn-uri-prefix" class="internalDFN">
+URI
+prefix
+<del class="diff-old">and
+generate
+the
+following
+triple:
+subject
+document
+base
+predicate
+http://www.w3.org/ns/rdfa#usesVocabulary
+object
+vocab
+(as
+a
+URI
+reference
+)
+</del>
+</a>.
+</li>
+<li>
+Otherwise,
+if
+type
+is
+not
+empty,
+construct
+<em>
+vocab
+</em>
+by
+removing
+everything
+following
+the
+last
+SOLIDUS
+U+002F
+("/")
+or
+NUMBER
+SIGN
+U+0023
+("#")
+from
+the
+<em>
+path
+</em>
+component
+of
+<em>
+type
+</em>.
+</li>
+<li>
+Update
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>
+setting
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>
+to
+<em>
+vocab
+</em>.
+</li>
+<li>
+<del class="diff-old">Set
+property
+list
+to
+an
+empty
+array
+mapping
+properties
+to
+one
+or
+more
+value
+s
+as
+established
+below.
+</del>
+For
+each
+element
+<em>
+element
+</em>
+that
+has
+one
+or
+more
+<a href="#dfn-property-names" class="internalDFN">
+property
+names
+</a>
+and
+is
+one
+of
+the
+<a title="item properties" href="#dfn-item-properties" class="internalDFN">
+properties
+of
+the
+item
+</a>
+<em>
+item
+<del class="diff-old">,
+in
+the
+order
+those
+elements
+are
+given
+by
+the
+algorithm
+that
+returns
+the
+properties
+of
+the
+item
+,
+</del>
+</em>
+run
+the
+following
+substep:
+<ol class="algorithm">
+<li>
+For
+each
+<em>
+name
+</em>
+in
+the
+element's
+<a href="#dfn-property-names" class="internalDFN">
+property
+names
+</a>,
+run
+the
+following
+substeps:
+<ol class="algorithm">
+<li>
+Let
+<em>
+context
+</em>
+be
+a
+copy
+of
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>
+with
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>
+set
+to
+<em>
+type
+</em>.
+</li>
+<li>
+Let
+<em>
+predicate
+</em>
+be
+the
+result
+of
+<a href="#generate-predicate-uri">
+generate
+predicate
+URI
+</a>
+using
+<em>
+context
+</em>
+and
+<em>
+name
+</em>.
+<del class="diff-old">Update
+context
+by
+setting
+current
+name
+to
+predicate
+.
+</del>
+</li>
+<li>
+Let
+<em>
+value
+</em>
+be
+the
+<a href="#dfn-property-value" class="internalDFN">
+property
+value
+</a>
+of
+<em>
+element
+</em>.
+</li>
+<li>
+If
+<em>
+value
+</em>
+is
+an
+<a href="#dfn-item" class="internalDFN">
+item
+</a>,
+then
+<a href="#generate-the-triples">
+generate
+the
+triples
+</a>
+for
+<em>
+value
+</em>
+using
+<em>
+context
+</em>.
+Replace
+<em>
+value
+</em>
+by
+the
+subject
+returned
+from
+those
+steps.
+</li>
+<li>
+<del class="diff-old">Add
+</del>
+<ins class="diff-chg">Generate
+the
+following
+triple:
+</ins><dl class="triple"><dt><ins class="diff-chg">
+subject
+</ins></dt><dd><em><ins class="diff-chg">
+subject
+</ins></em></dd><dt><ins class="diff-chg">
+predicate
+</ins></dt><dd><em><ins class="diff-chg">
+predicate
+</ins></em></dd><dt><ins class="diff-chg">
+object
+</ins></dt><dd>
+<em>
+value
+</em>
+<del class="diff-old">to
+</del>
+</dd>
+</dl>
+</li>
+<li>
+<ins class="diff-chg">If
+an
+entry
+exists
+in
+the
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+registry
+</ins></a><ins class="diff-chg">
+for
+</ins>
+<em>
+<del class="diff-old">property
+list
+</del>
+<ins class="diff-chg">name
+</ins>
+</em>
+<ins class="diff-new">in
+the
+vocabulary
+associated
+with
+</ins><em><ins class="diff-new">
+vocab
+</ins></em><ins class="diff-new">
+having
+the
+key
+</ins><code><ins class="diff-new">
+subPropertyOf
+</ins></code><ins class="diff-new">
+or
+</ins><code><ins class="diff-new">
+equivalentProperty
+</ins></code>,
+for
+<ins class="diff-new">each
+such
+value
+</ins>
+<em>
+<ins class="diff-new">equiv
+</ins></em>,<ins class="diff-new">
+generate
+the
+following
+triple:
+</ins><dl class="triple"><dt><ins class="diff-new">
+subject
+</ins></dt><dd><em><ins class="diff-new">
+subject
+</ins></em></dd><dt>
+predicate
+<del class="diff-old">.
+</del>
+</dt>
+<dd>
+<em>
+<ins class="diff-chg">equiv
+</ins></em></dd><dt><ins class="diff-chg">
+object
+</ins></dt><dd><em><ins class="diff-chg">
+value
+</ins></em></dd></dl>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<span class="note">
+<ins class="diff-new">See
+</ins><a href="#issues"><ins class="diff-new">
+issue
+5
+</ins></a>.</span>
+For
+each
+<ins class="diff-new">element
+</ins>
+<em>
+<del class="diff-old">predicate
+</del>
+<ins class="diff-chg">element
+</ins>
+</em>
+<del class="diff-old">in
+</del>
+<ins class="diff-chg">that
+has
+one
+or
+more
+</ins><a href="#dfn-reverse-property-names" class="internalDFN"><ins class="diff-chg">
+reverse
+</ins>
+property
+<del class="diff-old">list
+:
+</del>
+<ins class="diff-chg">names
+</ins></a><ins class="diff-chg">
+and
+is
+one
+of
+the
+</ins><a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN"><ins class="diff-chg">
+reverse
+properties
+of
+the
+item
+</ins></a><em><ins class="diff-chg">
+item
+</ins></em>,<ins class="diff-chg">
+run
+the
+following
+substep:
+</ins>
+<ol class="algorithm">
+<li>
+<del class="diff-old">Generate
+</del>
+<ins class="diff-chg">For
+each
+</ins><em><ins class="diff-chg">
+name
+</ins></em><ins class="diff-chg">
+in
+the
+element's
+</ins><a href="#dfn-reverse-property-names" class="internalDFN"><ins class="diff-chg">
+reverse
+</ins>
+property
+<del class="diff-old">values
+</del>
+<ins class="diff-chg">names
+</ins></a>,<ins class="diff-chg">
+run
+the
+following
+substeps:
+</ins><ol class="algorithm"><li><ins class="diff-chg">
+Let
+</ins><em><ins class="diff-chg">
+context
+</ins></em><ins class="diff-chg">
+be
+a
+copy
+of
+</ins><a href="#dfn-evaluation-context" class="internalDFN"><ins class="diff-chg">
+evaluation
+context
+</ins>
+</a>
+<ins class="diff-new">with
+</ins><a href="#dfn-current-type" class="internalDFN"><ins class="diff-new">
+current
+type
+</ins></a><ins class="diff-new">
+set
+to
+</ins>
+<em>
+<del class="diff-old">subject
+,
+</del>
+<ins class="diff-chg">type
+</ins></em><ins class="diff-chg">
+and
+</ins><a href="#dfn-current-vocabulary" class="internalDFN"><ins class="diff-chg">
+current
+vocabulary
+</ins></a><ins class="diff-chg">
+set
+to
+</ins><em><ins class="diff-chg">
+vocab
+</ins></em>.</li><li><ins class="diff-chg">
+Let
+</ins>
+<em>
+predicate
+</em>
+<del class="diff-old">and
+</del>
+<ins class="diff-chg">be
+</ins>
+the
+<del class="diff-old">list
+</del>
+<ins class="diff-chg">result
+</ins>
+of
+<del class="diff-old">values
+associated
+with
+</del>
+<a href="#generate-predicate-uri">
+<ins class="diff-chg">generate
+</ins>
+predicate
+<ins class="diff-new">URI
+</ins></a><ins class="diff-new">
+using
+</ins><em><ins class="diff-new">
+context
+</ins>
+</em>
+<del class="diff-old">from
+</del>
+<ins class="diff-chg">and
+</ins>
+<em>
+<ins class="diff-new">name
+</ins></em>.</li><li><ins class="diff-new">
+Let
+</ins><em><ins class="diff-new">
+value
+</ins></em><ins class="diff-new">
+be
+the
+</ins><a href="#dfn-property-value" class="internalDFN">
+property
+<del class="diff-old">list
+</del>
+<ins class="diff-chg">value
+</ins></a><ins class="diff-chg">
+of
+</ins><em><ins class="diff-chg">
+element
+</ins></em>.</li><li><ins class="diff-chg">
+If
+</ins><em><ins class="diff-chg">
+value
+</ins>
+</em>
+<del class="diff-old">as
+</del>
+<ins class="diff-chg">is
+an
+</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-chg">
+item
+</ins></a>,<ins class="diff-chg">
+then
+</ins><a href="#generate-the-triples"><ins class="diff-chg">
+generate
+the
+triples
+</ins></a><ins class="diff-chg">
+for
+</ins>
+<em>
+<del class="diff-old">values
+</del>
+<ins class="diff-chg">value
+</ins></em><ins class="diff-chg">
+using
+</ins><em><ins class="diff-chg">
+context
+</ins>
+</em>.
+<ins class="diff-new">Replace
+</ins><em><ins class="diff-new">
+value
+</ins></em><ins class="diff-new">
+by
+the
+subject
+returned
+from
+those
+steps.
+</ins></li><li><ins class="diff-new">
+Otherwise,
+if
+</ins><em><ins class="diff-new">
+value
+</ins></em><ins class="diff-new">
+is
+a
+</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
+literal
+</ins></a><ins class="diff-new">
+ignore
+the
+</ins><em><ins class="diff-new">
+value
+</ins></em><ins class="diff-new">
+and
+continue
+to
+the
+next
+</ins><em><ins class="diff-new">
+name
+</ins></em><ins class="diff-new">
+;
+it
+is
+an
+error
+for
+the
+</ins><em><ins class="diff-new">
+value
+</ins></em><ins class="diff-new">
+of
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-new">
+itemprop-reverse
+</ins></a><ins class="diff-new">
+to
+be
+a
+</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
+literal
+</ins></a>.</li><li><ins class="diff-new">
+Generate
+the
+following
+triple:
+</ins><dl class="triple"><dt><ins class="diff-new">
+subject
+</ins></dt><dd><em><ins class="diff-new">
+value
+</ins></em></dd><dt><ins class="diff-new">
+predicate
+</ins></dt><dd><em><ins class="diff-new">
+predicate
+</ins></em></dd><dt><ins class="diff-new">
+object
+</ins></dt><dd><em><ins class="diff-new">
+subject
+</ins></em></dd></dl></li></ol>
+</li>
+</ol>
+</li>
+<li>
+Return
+<em>
+subject
+</em>
+</li>
+</ol>
+</section>
+<section id="generate-predicate-uri">
+<h3 role="heading" id="h3_generate-predicate-uri">
+<span class="secno">
+<del class="diff-old">5.4
+</del>
+<ins class="diff-chg">6.4
+</ins>
+</span>
+Generate
+Predicate
+URI
+</h3>
+<p>
+Predicate
+URI
+generation
+makes
+use
+of
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+<del class="diff-old">,
+current
+name
+,
+</del>
+</a>
+and
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>
+from
+an
+<a href="#dfn-evaluation-context" class="internalDFN">
+evaluation
+context
+</a>
+<em>
+context
+</em>
+along
+with
+<em>
+name
+</em>.
+</p>
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_10">
+<span>
+<ins class="diff-new">Note
+</ins></span></div><p class=""><ins class="diff-new">
+Support
+for
+the
+</ins><code><ins class="diff-new">
+contextual
+</ins></code><em><ins class="diff-new">
+scheme
+</ins></em><ins class="diff-new">
+is
+being
+considered
+for
+removal
+(see
+</ins><a href="#issues"><ins class="diff-new">
+issue
+10
+</ins></a><ins class="diff-new">
+).
+</ins></p></div>
+<ol class="algorithm">
+<li>
+If
+<em>
+name
+</em>
+is
+an
+<a href="#dfn-absolute-url" class="internalDFN">
+absolute
+URL
+</a>,
+return
+<em>
+name
+</em>
+as
+a
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>.
+</li>
+<li>
+If
+<a href="#dfn-current-type" class="internalDFN">
+current
+type
+</a>
+from
+<em>
+context
+</em>
+is
+null,
+there
+can
+be
+no
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>.
+Return
+the
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+that
+is
+the
+<a href="#dfn-document-base" class="internalDFN">
+document
+base
+</a>
+with
+its
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.5">
+fragment
+</a>
+</cite>
+set
+to
+the
+<a href="#dfn-fragment-escape" class="internalDFN">
+fragment-escape
+</a>
+d
+value
+of
+<em>
+name
+</em>.
+<div class="note">
+<div class="note-title" aria-level="2" role="heading" id="h_note_11">
+<span>
+Note
+</span>
+</div>
+<div class="">
+This
+rule
+is
+intended
+to
+allow
+for
+a
+the
+case
+where
+no
+type
+is
+set,
+and
+therefore
+there
+is
+no
+vocabulary
+from
+which
+to
+extract
+rules.
+For
+example,
+if
+there
+is
+a
+<a href="#dfn-document-base" class="internalDFN">
+document
+base
+</a>
+of
+<code>
+http://example.org/doc
+</code>
+and
+an
+<a class="aref internalDFN" href="#dfn-itemprop">
+itemprop
+</a>
+of
+'title',
+a
+URI
+will
+be
+constructed
+to
+be
+<code>
+http://example.org/doc#title
+</code>.
+</div>
+</div>
+</li>
+<del class="diff-old">Otherwise,
+if
+current
+vocabulary
+from
+context
+is
+not
+null
+and
+registry
+has
+an
+entry
+for
+current
+vocabulary
+having
+a
+propertyURI
+entry
+that
+is
+not
+null,
+set
+that
+as
+scheme
+.
+Otherwise,
+set
+scheme
+to
+vocabulary
+.
+</del>
+<li id="scheme-vocab">
+<del class="diff-old">If
+scheme
+is
+vocabulary
+set
+</del>
+<ins class="diff-chg">Set
+</ins>
+<em>
+expandedURI
+</em>
+to
+the
+<a href="#dfn-uri-reference" class="internalDFN">
+URI
+reference
+</a>
+constructed
+by
+appending
+the
+<a href="#dfn-fragment-escape" class="internalDFN">
+fragment-escape
+</a>
+d
+value
+of
+<em>
+name
+</em>
+to
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>,
+separated
+by
+a
+U+0023
+NUMBER
+SIGN
+character
+(#)
+unless
+the
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>
+ends
+with
+either
+a
+U+0023
+NUMBER
+SIGN
+character
+(#)
+or
+SOLIDUS
+U+002F
+(/).
+</li>
+<del class="diff-old">Otherwise,
+if
+scheme
+is
+contextual
+,
+set
+expandedURI
+to
+the
+URI
+reference
+constructed
+as
+follows:
+Let
+s
+be
+current
+name
+from
+context
+.
+If
+http://www.w3.org/ns/md?type=
+is
+a
+prefix
+of
+s
+,
+return
+the
+concatenation
+of
+s
+,
+a
+U+002E
+FULL
+STOP
+character
+(.)
+and
+the
+fragment-escape
+d
+value
+of
+name
+.
+Otherwise,
+return
+the
+concatenation
+of
+http://www.w3.org/ns/md?type=
+,
+the
+fragment-escape
+d
+value
+of
+current
+type
+,
+the
+string
+&amp;prop=
+,
+and
+the
+fragment-escape
+d
+value
+of
+name
+.
+If
+the
+registry
+entry
+for
+propertyURI
+has
+an
+equivalentProperty
+key,
+generate
+the
+following
+triple
+using
+the
+value
+of
+that
+key:
+subject
+expandedURI
+predicate
+http://www.w3.org/2002/07/owl#equivalentProperty
+object
+value
+If
+the
+value
+is
+an
+array,
+generate
+a
+triple
+for
+each
+value
+of
+that
+array.
+If
+the
+registry
+entry
+for
+propertyURI
+has
+an
+subPropertyOf
+key,
+generate
+the
+following
+triple
+using
+the
+value
+of
+that
+key:
+subject
+expandedURI
+predicate
+http://www.w3.org/2000/01/rdf-schema#subPropertyOf
+object
+value
+If
+the
+value
+is
+an
+array,
+generate
+a
+triple
+for
+each
+value
+of
+that
+array.
+</del>
+<li>
+Return
+<em>
+expandedURI
+</em>.
+</li>
+</ol>
+</section>
+<del class="diff-old">5.5
+Generate
+Property
+Values
+Property
+value
+serialization
+makes
+use
+of
+subject
+,
+predicate
+and
+values
+.
+If
+the
+registry
+contains
+a
+URI
+prefix
+that
+is
+a
+character
+for
+character
+match
+of
+predicate
+up
+to
+the
+length
+of
+the
+URI
+prefix,
+set
+vocab
+as
+that
+URI
+prefix.
+Otherwise
+set
+vocab
+to
+null.
+If
+vocab
+is
+not
+null
+and
+registry
+has
+an
+entry
+for
+vocab
+that
+is
+a
+JSON
+Object,
+let
+registry
+object
+be
+that
+value.
+Otherwise
+set
+registry
+object
+to
+null.
+If
+registry
+object
+is
+not
+null
+and
+registry
+object
+contains
+key
+properties
+which
+has
+a
+JSON
+Object
+value,
+let
+properties
+be
+that
+value.
+Otherwise,
+set
+properties
+to
+null.
+If
+properties
+is
+not
+null,
+and
+properties
+contains
+a
+key,
+which
+after
+Generate
+Predicate
+URI
+expansion
+has
+a
+value
+which
+is
+a
+JSON
+Object,
+let
+property
+override
+be
+that
+value.
+Otherwise,
+set
+property
+override
+to
+null.
+If
+property
+override
+contains
+the
+key
+multipleValues
+,
+set
+that
+as
+method
+.
+Otherwise,
+if
+registry
+object
+con
+contains
+the
+key
+multipleValues
+,
+set
+that
+as
+method
+.
+Otherwise,
+set
+method
+to
+unordered
+.
+If
+method
+is
+unordered
+,
+for
+each
+value
+in
+values
+,
+generate
+the
+following
+triple:
+subject
+subject
+predicate
+predicate
+object
+value
+Otherwise,
+if
+method
+is
+list
+:
+Set
+value
+to
+the
+value
+returned
+from
+generate
+an
+RDF
+Collection
+.
+Generate
+the
+following
+triple:
+subject
+subject
+predicate
+predicate
+object
+value
+5.6
+Generate
+RDF
+Collection
+An
+RDF
+Collection
+is
+a
+mechanism
+for
+defining
+ordered
+sequences
+of
+objects
+in
+RDF
+(See
+RDF
+Collections
+in
+[
+RDF-SCHEMA
+]).
+As
+the
+RDF
+data-model
+is
+that
+of
+an
+unordered
+graph,
+a
+linking
+method
+using
+properties
+rdf:first
+and
+rdf:next
+is
+required
+to
+be
+able
+to
+specify
+a
+particular
+order.
+In
+the
+microdata
+to
+RDF
+mapping,
+RDF
+Collection
+s
+are
+used
+when
+an
+item
+has
+more
+than
+one
+value
+associated
+with
+a
+given
+property
+to
+ensure
+that
+the
+original
+document
+order
+is
+maintained.
+The
+following
+procedure
+should
+be
+used
+to
+generate
+triples
+when
+an
+item
+property
+has
+more
+than
+one
+value
+(contained
+in
+list
+):
+Create
+a
+new
+array
+array
+containing
+a
+blank
+node
+for
+every
+value
+in
+list
+.
+For
+each
+pair
+of
+bnode
+from
+array
+and
+value
+from
+list
+the
+following
+triple
+is
+generated:
+subject
+bnode
+predicate
+http://www.w3.org/1999/02/22-rdf-syntax-ns#first
+object
+value
+For
+each
+bnode
+in
+array
+the
+following
+triple
+is
+generated:
+subject
+bnode
+predicate
+http://www.w3.org/1999/02/22-rdf-syntax-ns#rest
+object
+next
+bnode
+in
+array
+or,
+if
+that
+does
+not
+exist,
+http://www.w3.org/1999/02/22-rdf-syntax-ns#nil
+Return
+the
+first
+blank
+node
+from
+array
+.
+</del>
+</section>
+<section class="appendix informative" id="testing">
+<h2 role="heading" id="h2_testing">
+<span class="secno">
+A.
+</span>
+Testing
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+A
+test
+suite
+[
+<cite>
+<a class="bibref" href="#bib-MICRODATA-RDF-TESTS">
+MICRODATA-RDF-TESTS
+</a>
+</cite>
+]
+under
+development
+to
+help
+processor
+developers
+verify
+conformance
+to
+this
+specification.
+</p>
+</section>
+<section class="appendix informative" id="markup-examples">
+<h2 role="heading" id="h2_markup-examples">
+<span class="secno">
+B.
+</span>
+Markup
+Examples
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+The
+microdata
+example
+below
+expresses
+book
+information
+as
+an
+FRBR
+Work
+item.
+</p>
+<del class="diff-old">&lt;dl itemscope
+    itemtype="http://purl.org/vocab/frbr/core#Work"
+    itemid="http://books.example.com/works/45U8QJGZSQKDH8N"
+    lang="en"&gt;
+ &lt;dt&gt;Title&lt;/dt&gt;
+ &lt;dd&gt;&lt;cite itemprop="http://purl.org/dc/terms/title"&gt;Just a Geek&lt;/cite&gt;&lt;/dd&gt;
+ &lt;dt&gt;By&lt;/dt&gt;
+ &lt;dd&gt;&lt;span itemprop="http://purl.org/dc/terms/creator"&gt;Wil Wheaton&lt;/span&gt;&lt;/dd&gt;
+ &lt;dt&gt;Format&lt;/dt&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596007683.BOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/BOOK"&gt;
+  Print
+ &lt;/dd&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596802189.EBOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/EBOOK"&gt;
+  Ebook
+ &lt;/dd&gt;
+</del>
+<div class="example"><div class="example-title"><span>Example 10</span></div><pre class="example">&lt;dl itemscope
+<ins class="diff-chg">    itemtype="http://purl.org/vocab/frbr/core#Work"
+    itemid="http://books.example.com/works/45U8QJGZSQKDH8N"
+    lang="en"&gt;
+ &lt;dt&gt;Title&lt;/dt&gt;
+ &lt;dd&gt;&lt;cite itemprop="http://purl.org/dc/terms/title"&gt;Just a Geek&lt;/cite&gt;&lt;/dd&gt;
+ &lt;dt&gt;By&lt;/dt&gt;
+ &lt;dd&gt;&lt;span itemprop="http://purl.org/dc/terms/creator"&gt;Wil Wheaton&lt;/span&gt;&lt;/dd&gt;
+ &lt;dt&gt;Format&lt;/dt&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596007683.BOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/BOOK"&gt;
+  Print
+ &lt;/dd&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596802189.EBOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/EBOOK"&gt;
+  Ebook
+ &lt;/dd&gt;
+</ins>
+&lt;/dl&gt;
+</pre>
+</div>
+<p>
+Assuming
+that
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+a
+an
+entry
+for
+<code>
+http://purl.org/vocab/frbr/core#
+</code>
+<del class="diff-old">with
+propertyURI
+set
+to
+vocabulary
+,
+</del>
+this
+is
+equivalent
+to
+the
+following
+Turtle:
+</p>
+<del class="diff-old">@prefix dc: &lt;http://purl.org/dc/terms/&gt; .
+@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix frbr: &lt;http://purl.org/vocab/frbr/core#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+&lt;&gt; md:item (&lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt;) ;
+  rdfa:usesVocabulary frbr: .
+&lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt; a frbr:Work ;
+  dc:creator "Wil Wheaton"@en ;
+  dc:title "Just a Geek"@en ;
+  frbr:realization &lt;http://books.example.com/products/9780596007683.BOOK&gt;,
+    &lt;http://books.example.com/products/9780596802189.EBOOK&gt; .
+&lt;http://books.example.com/products/9780596007683.BOOK&gt; a frbr:Expression ;
+  dc:type &lt;http://books.example.com/product-types/BOOK&gt; .
+&lt;http://books.example.com/products/9780596802189.EBOOK&gt; a frbr:Expression ;
+</del>
+<div class="example"><div class="example-title"><span>Example 11</span></div><pre class="example">@prefix dc: &lt;http://purl.org/dc/terms/&gt; .
+<ins class="diff-chg">@prefix frbr: &lt;http://purl.org/vocab/frbr/core#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+
+&lt;&gt; rdfa:usesVocabulary frbr: .
+
+&lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt; a frbr:Work ;
+  dc:creator "Wil Wheaton"@en ;
+  dc:title "Just a Geek"@en ;
+  frbr:realization &lt;http://books.example.com/products/9780596007683.BOOK&gt;,
+    &lt;http://books.example.com/products/9780596802189.EBOOK&gt; .
+
+&lt;http://books.example.com/products/9780596007683.BOOK&gt; a frbr:Expression ;
+  dc:type &lt;http://books.example.com/product-types/BOOK&gt; .
+
+&lt;http://books.example.com/products/9780596802189.EBOOK&gt; a frbr:Expression ;
+</ins>
+dc:type
+&lt;http://books.example.com/product-types/EBOOK&gt;
+.
+</pre>
+</div>
+<p>
+The
+following
+snippet
+of
+HTML
+has
+microdata
+for
+two
+people
+with
+the
+same
+address.
+This
+illustrates
+two
+<del class="diff-old">item
+</del>
+<a title="item" href="#dfn-item" class="internalDFN">
+<ins class="diff-chg">items
+</ins>
+</a>
+<del class="diff-old">s
+</del>
+referencing
+a
+third
+item,
+and
+how
+only
+a
+single
+RDF
+resource
+definition
+is
+created
+for
+that
+third
+item.
+</p>
+<del class="diff-old">&lt;p&gt;
+ Both
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+       &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Princeton&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ and
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+     &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Trekkie&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ live at
+ &lt;span id="home" itemprop="adr" itemscope&gt;
+   &lt;span itemprop="street-address"&gt;Avenue Q&lt;/span&gt;.
+ &lt;/span&gt;
+</del>
+<div class="example"><div class="example-title"><span>Example 12</span></div><pre class="example">&lt;p&gt;
+<ins class="diff-chg"> Both
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+       &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Princeton&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ and
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+     &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Trekkie&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ live at
+ &lt;span id="home" itemprop="adr" itemscope&gt;
+   &lt;span itemprop="street-address"&gt;Avenue Q&lt;/span&gt;.
+ &lt;/span&gt;
+</ins>
+&lt;/p&gt;
+</pre>
+</div>
+<p>
+Assuming
+that
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+a
+an
+entry
+for
+<code>
+http://microformats.org/profile/hcard
+</code>
+<del class="diff-old">with
+propertyURI
+set
+to
+vocabulary
+,
+</del>
+it
+generates
+these
+triples
+expressed
+in
+Turtle:
+</p>
+<del class="diff-old">@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+&lt;&gt; md:item (
+  [ a &lt;http://microformats.org/profile/hcard&gt;;
+    hcard:fn "Princeton";
+    hcard:n [ hcard:given-name "Princeton" ];
+    hcard:adr _:a
+  ]
+  [ a &lt;http://microformats.org/profile/hcard&gt;;
+    hcard:fn "Trekkie";
+    hcard:n [ hcard:given-name "Trekkie" ];
+    hcard:adr _:a
+  ]) ;
+  rdfa:usesVocabulary &lt;http://microformats.org/profile/hcard&gt; .
+</del>
+<div class="example"><div class="example-title"><span>Example 13</span></div><pre class="example">@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
+<ins class="diff-chg">@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Princeton";
+  hcard:n [ hcard:given-name "Princeton" ];
+  hcard:adr _:a
+] .
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Trekkie";
+  hcard:n [ hcard:given-name "Trekkie" ];
+  hcard:adr _:a
+] .
+
+</ins>
+_:a
+hcard:street-address
+"Avenue
+Q"
+.
+</pre>
+</div>
+<p>
+The
+following
+snippet
+of
+HTML
+has
+microdata
+for
+a
+<del class="diff-old">playlist,
+</del>
+<ins class="diff-chg">playlist
+</ins>
+and
+illustrates
+<del class="diff-old">overriding
+a
+property
+to
+place
+elements
+in
+an
+RDF
+Collection.
+This
+also
+illustrates
+</del>
+the
+use
+of
+the
+<code>
+schema:additionalType
+</code>
+property
+to
+relate
+recordings
+to
+the
+<cite>
+<a href="http://musicontology.com/">
+Music
+Ontology
+</a>
+</cite>:
+</p>
+<del class="diff-old">&lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
+  &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
+  &lt;meta itemprop="numTracks" content="2"/&gt;
+  &lt;p&gt;Including works by
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt; and
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;&lt;/p&gt;.
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    1.&lt;span itemprop="name"&gt;Sweet Home Alabama&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt;
+    &lt;link href="sweet-home-alabama" itemprop="url" /&gt;
+   &lt;/div&gt;
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    2.&lt;span itemprop="name"&gt;Shook you all Night Long&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;
+    &lt;link href="shook-you-all-night-long" itemprop="url" /&gt;
+  &lt;/div&gt;
+</del>
+<div class="example"><div class="example-title"><span>Example 14</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
+<ins class="diff-chg">  &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
+  &lt;meta itemprop="numTracks" content="2"/&gt;
+  &lt;p&gt;Including works by
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt; and
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;&lt;/p&gt;.
+
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    1.&lt;span itemprop="name"&gt;Sweet Home Alabama&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt;
+    &lt;link href="sweet-home-alabama" itemprop="url" /&gt;
+   &lt;/div&gt;
+
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    2.&lt;span itemprop="name"&gt;Shook you all Night Long&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;
+    &lt;link href="shook-you-all-night-long" itemprop="url" /&gt;
+  &lt;/div&gt;
+</ins>
+&lt;/div&gt;
+</pre>
+</div>
+<p>
+Assuming
+that
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+contains
+a
+an
+entry
+for
+<code>
+http://schema.org/
+</code>
+<del class="diff-old">with
+propertyURI
+set
+to
+vocabulary
+,
+multipleValues
+set
+to
+unordered
+with
+the
+properties
+track
+and
+byArtist
+having
+multipleValues
+set
+to
+list
+,
+</del>
+it
+generates
+these
+triples
+expressed
+in
+Turtle:
+</p>
+<del class="diff-old">@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
+@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+</del>
+<div class="example"><div class="example-title"><span>Example 15</span></div><pre class="example">@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
+<ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+[ a schema:MusicPlaylist;
+  schema:name "Classic Rock Playlist";
+  schema:byArtist "Lynard Skynard" "AC/DC";
+  schema:numTracks "2";
+  schema:tracks [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "Lynard Skynard";
+    schema:name "Sweet Home Alabama";
+    schema:url &lt;sweet-home-alabama&gt;
+  ], [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "AC/DC";;
+    schema:name "Shook you all Night Long";
+    schema:url &lt;shook-you-all-night-long&gt;
+  ]
+]
+.
+</ins></pre>
+<del class="diff-old">&lt;&gt; md:item ([ a schema:MusicPlaylist;
+  schema:name "Classic Rock Playlist";
+  schema:byArtist ("Lynard Skynard" "AC/DC");
+  schema:numTracks "2";
+  schema:tracks (
+    [ a schema:MusicRecording, mo:MusicalManifestation;
+      schema:additionalType mo:MusicalManifestation;
+      schema:byArtist ("Lynard Skynard");
+      schema:name "Sweet Home Alabama";
+      schema:url &lt;sweet-home-alabama&gt;]
+    [ a schema:MusicRecording, mo:MusicalManifestation;
+      schema:additionalType mo:MusicalManifestation;
+      schema:byArtist ("AC/DC");;
+      schema:name "Shook you all Night Long";
+      schema:url &lt;shook-you-all-night-long&gt;]
+  )]);
+  rdfa:usesVocabulary schema: .
+  
+schema:additionalType
+rdfs:subPropertyOf
+rdf:type
+</del>
+</div>
+<p>
+<ins class="diff-chg">Simple
+use
+of
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+itemprop-reverse
+</ins></a><span class="note"><ins class="diff-chg">
+see
+</ins><a href="#issues"><ins class="diff-chg">
+issue
+5
+</ins></a></span>.</p><div class="example"><div class="example-title"><span>Example 16</span></div><pre class="example">&lt;div  itemscope itemtype="http://schema.org/Person"&gt;<ins class="diff-chg">
+  &lt;span itemprop="name"&gt;William Shakespeare&lt;/span&gt;
+  &lt;link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd"&gt;
+&lt;/div&gt;
+</ins></pre></div><p><ins class="diff-chg">
+Results
+in
+the
+following
+Turtle:
+</ins></p><div class="example"><div class="example-title"><span>Example 17</span></div><pre class="example">@prefix schema: &lt;http://schema.org/&gt; .<ins class="diff-chg">
+&lt;http://www.freebase.com/m/0yq9mqd&gt; schema:creator [
+  a schema:Person;
+  schema:name "William Shakespeare"
+]
+</ins>
+.
+</pre>
+</div>
+</section>
+<section class="appendix informative" id="default-registry">
+<h2 role="heading" id="h2_default-registry">
+<span class="secno">
+C.
+</span>
+<del class="diff-old">Example
+</del>
+<ins class="diff-chg">Default
+</ins>
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+The
+following
+is
+<del class="diff-old">an
+example
+</del>
+<ins class="diff-chg">the
+default
+</ins>
+<a href="#dfn-registry" class="internalDFN">
+registry
+</a>
+in
+JSON
+<del class="diff-old">format.
+</del>
+<ins class="diff-chg">format,
+as
+of
+the
+time
+of
+publication.
+</ins>
+</p>
+<del class="diff-old">  {
+  "http://schema.org/": {
+    "propertyURI":    "vocabulary",
+    "multipleValues": "unordered",
+    "properties": {
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"},
+      "blogPosts": {"multipleValues": "list"},
+      "blogPosts": {"multipleValues": "list"},
+      "breadcrumb": {"multipleValues": "list"},
+      "byArtist": {"multipleValues": "list"},
+      "creator": {"multipleValues": "list"},
+      "episode": {"multipleValues": "list"},
+      "episodes": {"multipleValues": "list"},
+      "event": {"multipleValues": "list"},
+      "events": {"multipleValues": "list"},
+      "founder": {"multipleValues": "list"},
+      "founders": {"multipleValues": "list"},
+      "itemListElement": {"multipleValues": "list"},
+      "musicGroupMember": {"multipleValues": "list"},
+      "performerIn": {"multipleValues": "list"},
+      "actor": {"multipleValues": "list"},
+      "actors": {"multipleValues": "list"},
+      "performer": {"multipleValues": "list"},
+      "performers": {"multipleValues": "list"},
+      "producer": {"multipleValues": "list"},
+      "recipeInstructions": {"multipleValues": "list"},
+      "season": {"multipleValues": "list"},
+      "seasons": {"multipleValues": "list"},
+      "subEvent": {"multipleValues": "list"},
+      "subEvents": {"multipleValues": "list"},
+      "track": {"multipleValues": "list"},
+      "tracks": {"multipleValues": "list"}
+    }
+  },
+  "http://microformats.org/profile/hcard": {
+    "propertyURI":    "vocabulary",
+    "multipleValues": "unordered"
+  },
+  "http://microformats.org/profile/hcalendar#": {
+    "propertyURI":    "vocabulary",
+    "multipleValues": "unordered",
+    "properties": {
+      "categories": {"multipleValues": "list"}
+    }
+  }
+</del>
+  <div class="example"><div class="example-title"><span>Example 18</span></div><pre class="example">{
+<ins class="diff-chg">  "http://schema.org/": {
+    "properties": {
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
+    }
+  },
+  "http://microformats.org/profile/hcard": {}
+</ins>
+}
+</pre>
+</div>
+</section>
+<section class="appendix informative" id="acknowledgements">
+<h2 role="heading" id="h2_acknowledgements">
+<span class="secno">
+D.
+</span>
+Acknowledgements
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+Thanks
+to
+Richard
+Cyganiak
+for
+property
+URI
+and
+vocabulary
+terminology
+and
+the
+general
+excellent
+consideration
+of
+practical
+problems
+in
+generating
+RDF
+from
+microdata.
+</p>
+</section>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter">
+<h2 role="heading" id="h2_references">
+<span class="secno">
+E.
+</span>
+References
+</h2>
+<section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter">
+<h3 role="heading" id="h3_normative-references">
+<span class="secno">
+E.1
+</span>
+Normative
+references
+</h3>
+<dl class="bibliography" about="">
+<dt id="bib-HTML5">
+[HTML5]
+</dt>
+<dd rel="dcterms:requires">
+Ian
+Hickson;
+<del class="diff-old">David
+Hyatt.
+</del>
+<ins class="diff-chg">Robin
+Berjon;
+Steve
+Faulkner;
+Travis
+Leithead;
+Erika
+Doyle
+Navara;
+Edward
+O'Connor;
+Silvia
+Pfeiffer.
+</ins><a href="http://www.w3.org/TR/html5/">
+<cite>
+<del class="diff-old">HTML5.
+</del>
+<ins class="diff-chg">HTML5
+</ins>
+</cite>
+<del class="diff-old">29
+March
+2012.
+</del>
+</a>.
+<ins class="diff-chg">28
+October
+2014.
+</ins>
+W3C
+<del class="diff-old">Working
+Draft.
+(Work
+in
+progress.)
+</del>
+<ins class="diff-chg">Recommendation.
+</ins>
+URL:
+<del class="diff-old">http://www.w3.org/TR/html5
+</del>
+<a href="http://www.w3.org/TR/html5/">
+<ins class="diff-chg">http://www.w3.org/TR/html5/
+</ins>
+</a>
+</dd>
+<dt id="bib-MICRODATA">
+[MICRODATA]
+</dt>
+<del class="diff-old">HTML
+Microdata
+</del>
+<dd rel="dcterms:requires">
+Ian
+<del class="diff-old">Hickson
+Editor.
+W3C
+Working
+Draft.
+(Work
+in
+progress).
+29
+March
+2012.
+This
+edition
+of
+the
+HTML
+Microdata
+specification
+is
+http://www.w3.org/TR/2012/WD-microdata-20120329/.
+The
+</del>
+<ins class="diff-chg">Hickson.
+</ins>
+<a href="http://www.w3.org/TR/microdata/">
+<del class="diff-old">latest
+edition
+of
+HTML
+Microdata
+is
+available
+at
+http://www.w3.org/TR/microdata/
+[OWL2-OVERVIEW]
+W3C
+OWL
+Working
+Group.
+</del>
+<cite>
+<del class="diff-old">OWL
+2
+Web
+Ontology
+Language:
+Overview.
+27
+October
+2009.
+W3C
+Recommendation.
+URL:
+http://www.w3.org/TR/2009/REC-owl2-overview-20091027/
+[OWL2-PROFILES]
+Boris
+Motik;
+Bernardo
+Cuenca
+Grau;
+Ian
+Horrocks;
+Zhe
+Wu;
+Achille
+Fokoue;
+Carsten
+Lutz.
+OWL
+2
+Web
+Ontology
+Language:Profiles.
+</del>
+<ins class="diff-chg">HTML
+Microdata
+</ins>
+</cite>
+<del class="diff-old">27
+</del>
+</a>.
+<ins class="diff-chg">29
+</ins>
+October
+<del class="diff-old">2009.
+</del>
+<ins class="diff-chg">2013.
+</ins>
+W3C
+<del class="diff-old">Recommendation.
+</del>
+<ins class="diff-chg">Note.
+</ins>
+URL:
+<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-profiles-20091027/
+</del>
+<a href="http://www.w3.org/TR/microdata/">
+<ins class="diff-chg">http://www.w3.org/TR/microdata/
+</ins>
+</a>
+</dd>
+<del class="diff-old">[OWL2-RDF-BASED-SEMANTICS]
+</del>
+<dt id="bib-N-TRIPLES">
+<ins class="diff-chg">[N-TRIPLES]
+</ins>
+</dt>
+<del class="diff-old">Michael
+Schneider.
+</del>
+<dd rel="dcterms:requires">
+<ins class="diff-chg">Gavin
+Carothers;
+Andy
+Seaborne.
+</ins><a href="http://www.w3.org/TR/n-triples/">
+<cite>
+<del class="diff-old">OWL
+2
+Web
+Ontology
+Language:RDF-Based
+Semantics.
+</del>
+<ins class="diff-chg">RDF
+1.1
+N-Triples
+</ins>
+</cite>
+<del class="diff-old">27
+October
+2009.
+</del>
+</a>.
+<ins class="diff-chg">25
+February
+2014.
+</ins>
+W3C
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-rdf-based-semantics-20091027/
+</del>
+<a href="http://www.w3.org/TR/n-triples/">
+<ins class="diff-chg">http://www.w3.org/TR/n-triples/
+</ins>
+</a>
+</dd>
+<dt id="bib-RDF-CONCEPTS">
+[RDF-CONCEPTS]
+</dt>
+<dd rel="dcterms:requires">
+Graham
+Klyne;
+Jeremy
+<del class="diff-old">J.
+</del>
+Carroll.
+<a href="http://www.w3.org/TR/rdf-concepts/">
+<cite>
+Resource
+Description
+Framework
+(RDF):
+Concepts
+and
+Abstract
+<del class="diff-old">Syntax.
+10
+February
+2004.
+W3C
+Recommendation.
+URL:
+http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
+[RDF-MT]
+Patrick
+Hayes.
+RDF
+Semantics.
+10
+February
+2004.
+W3C
+Recommendation.
+URL:
+http://www.w3.org/TR/2004/REC-rdf-mt-20040210
+[RDF-SCHEMA]
+Dan
+Brickley;
+Ramanathan
+V.
+Guha.
+RDF
+Vocabulary
+Description
+Language
+1.0:
+RDF
+Schema.
+</del>
+<ins class="diff-chg">Syntax
+</ins>
+</cite>
+</a>.
+10
+February
+2004.
+W3C
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-schema-20040210
+</del>
+<a href="http://www.w3.org/TR/rdf-concepts/">
+<ins class="diff-chg">http://www.w3.org/TR/rdf-concepts/
+</ins>
+</a>
+</dd>
+<dt id="bib-RFC3986">
+[RFC3986]
+</dt>
+<dd rel="dcterms:requires">
+T.
+Berners-Lee;
+R.
+Fielding;
+L.
+Masinter.
+<a href="https://tools.ietf.org/html/rfc3986">
+<cite>
+Uniform
+Resource
+Identifier
+(URI):
+Generic
+<del class="diff-old">Syntax.
+</del>
+<ins class="diff-chg">Syntax
+</ins>
+</cite>
+</a>.
+January
+2005.
+Internet
+<del class="diff-old">RFC
+3986.
+</del>
+<ins class="diff-chg">Standard.
+</ins>
+URL:
+<del class="diff-old">http://www.ietf.org/rfc/rfc3986.txt
+</del>
+<a href="https://tools.ietf.org/html/rfc3986">
+<ins class="diff-chg">https://tools.ietf.org/html/rfc3986
+</ins></a></dd><dt id="bib-XMLSCHEMA11-2"><ins class="diff-chg">
+[XMLSCHEMA11-2]
+</ins></dt><dd rel="dcterms:requires"><ins class="diff-chg">
+David
+Peterson;
+Sandy
+Gao;
+Ashok
+Malhotra;
+Michael
+Sperberg-McQueen;
+Henry
+Thompson;
+Paul
+V.
+Biron
+et
+al.
+</ins><a href="http://www.w3.org/TR/xmlschema11-2/"><cite><ins class="diff-chg">
+W3C
+XML
+Schema
+Definition
+Language
+(XSD)
+1.1
+Part
+2:
+Datatypes
+</ins></cite></a>.<ins class="diff-chg">
+5
+April
+2012.
+W3C
+Recommendation.
+URL:
+</ins><a href="http://www.w3.org/TR/xmlschema11-2/"><ins class="diff-chg">
+http://www.w3.org/TR/xmlschema11-2/
+</ins>
+</a>
+</dd>
+</dl>
+</section>
+<section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter">
+<h3 role="heading" id="h3_informative-references">
+<span class="secno">
+E.2
+</span>
+Informative
+references
+</h3>
+<del class="diff-old">[MICRODATA-RDF-SUPPLEMENT]
+Microdata
+to
+RDF
+Supplement
+Gregg
+Kellogg
+Editor.
+World
+Wide
+Web
+Consortium
+(work
+in
+progress).
+22
+January
+2012.
+</del>
+<dl class="bibliography" about="">
+<dt id="bib-MICRODATA-RDF-TESTS">
+[MICRODATA-RDF-TESTS]
+</dt>
+<dd rel="dcterms:references">
+<ins class="diff-chg">Gregg
+Kellogg;
+Ivan
+Herman.
+</ins><a href="http://w3c.github.io/microdata-rdf/tests/">
+<cite>
+Microdata
+to
+RDF
+Tests
+</cite>
+<del class="diff-old">Gregg
+Kellogg,
+Ivan
+Herman
+Editors.
+World
+Wide
+Web
+Consortium
+(work
+in
+progress).
+22
+March
+2012.
+</del>
+</a>.
+<ins class="diff-chg">unofficial.
+URL:
+</ins><a href="http://w3c.github.io/microdata-rdf/tests/"><ins class="diff-chg">
+http://w3c.github.io/microdata-rdf/tests/
+</ins></a>
+</dd>
+<dt id="bib-RDF-SYNTAX-GRAMMAR">
+[RDF-SYNTAX-GRAMMAR]
+</dt>
+<del class="diff-old">Dave
+Beckett.
+</del>
+<dd rel="dcterms:references">
+<ins class="diff-chg">Fabien
+Gandon;
+Guus
+Schreiber.
+</ins><a href="http://www.w3.org/TR/rdf-syntax-grammar/">
+<cite>
+<del class="diff-old">RDF/XML
+</del>
+<ins class="diff-chg">RDF
+1.1
+XML
+</ins>
+Syntax
+<del class="diff-old">Specification
+(Revised).
+</del>
+</cite>
+<del class="diff-old">10
+</del>
+</a>.
+<ins class="diff-chg">25
+</ins>
+February
+<del class="diff-old">2004.
+</del>
+<ins class="diff-chg">2014.
+</ins>
+W3C
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210
+</del>
+<a href="http://www.w3.org/TR/rdf-syntax-grammar/">
+<ins class="diff-chg">http://www.w3.org/TR/rdf-syntax-grammar/
+</ins>
+</a>
+</dd>
+<dt id="bib-RDFA-CORE">
+[RDFA-CORE]
+</dt>
+<dd rel="dcterms:references">
+<ins class="diff-chg">Ben
+Adida;
+Mark
+Birbeck;
+</ins>
+Shane
+McCarron;
+<ins class="diff-new">Ivan
+Herman
+</ins>
+et
+al.
+<a href="http://www.w3.org/TR/rdfa-core/">
+<cite>
+RDFa
+Core
+<del class="diff-old">1.1:
+Syntax
+and
+processing
+rules
+for
+embedding
+RDF
+through
+attributes.
+</del>
+<ins class="diff-chg">1.1
+-
+Second
+Edition
+</ins>
+</cite>
+<del class="diff-old">7
+June
+2012.
+</del>
+</a>.
+<ins class="diff-chg">22
+August
+2013.
+</ins>
+W3C
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/2012/REC-rdfa-core-20120607/
+</del>
+<a href="http://www.w3.org/TR/rdfa-core/">
+<ins class="diff-chg">http://www.w3.org/TR/rdfa-core/
+</ins>
+</a>
+</dd>
+</dl>
+</section>
+</section>
+</body>
+</html>
