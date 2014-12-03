@@ -898,16 +898,17 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                <code>http://www.w3.org/2001/XMLSchema#gYear</code>.
               </dd>
               <dt>
-                If the value has the lexical form of
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string">
+                  valid duration string
+                </a></cite>
+                having the lexical form of
                 <cite><a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a></cite>
                 [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                 <code>http://www.w3.org/2001/XMLSchema#duration</code>.
-                <p class="note">The referenced version of [[!HTML5]] does not include a <em>duration</em> data type,
-                  but it is in the Editor's Draft and is expected to be included in a
-                  forthcoming update to the Working Draft</p>
               </dd>
               <dt>Otherwise</dt>
               <dd>
@@ -935,37 +936,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
             with language information set from the
             <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
             of the property element
-          </dd>
-          <dt>
-            If the element is a <code>data</code> or <code>track</code> element with a <code>@value</code> attribute.
-          </dt>
-          <dd>The value is a <a>literal</a> created from the value of the <code>@content</code> attribute.
-            <dl>
-              <dt>
-                If the value is a has the lexical form of
-                <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#integer">xsd:integer</a></cite> [[!XMLSCHEMA11-2]].
-              </dt>
-              <dd>
-                The value is a <a>typed literal</a> composed of the value and
-               <code>http://www.w3.org/2001/XMLSchema#integer</code>.
-              </dd>
-              <dt>
-                If the value is a has the lexical form of
-                <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#float">xsd:float</a></cite> or
-                <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#double">xsd:double</a></cite>[[!XMLSCHEMA11-2]].
-              </dt>
-              <dd>
-                The value is a <a>typed literal</a> composed of the value and
-               <code>http://www.w3.org/2001/XMLSchema#double</code>.
-              </dd>
-              <dt>Otherwise</dt>
-              <dd>
-                The value is a <a>plain literal</a> created from the value.
-              </dd>
-            </dl>
           </dd>
           <dt>Otherwise</dt>
           <dd>The value is a <a>plain literal</a> created from the value with language information set from the
