@@ -270,7 +270,7 @@ HTML+Microdata
 to
 RDF
 </h2>
-<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-03T03:25:23.000Z" id="w3c-editor-s-draft-02-december-2014">
+<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-03T23:58:41.000Z" id="w3c-editor-s-draft-03-december-2014">
 <abbr title="World Wide Web Consortium">
 W3C
 </abbr>
@@ -283,8 +283,8 @@ October
 </del>
 <ins class="diff-chg">Editor's
 Draft
-</ins><time class="dt-published" datetime="2014-12-02"><ins class="diff-chg">
-02
+</ins><time class="dt-published" datetime="2014-12-03"><ins class="diff-chg">
+03
 December
 2014
 </ins></time>
@@ -429,21 +429,19 @@ closed
 issues
 </ins></a></dd><dt><ins class="diff-chg">
 Changes:
-</ins></dt><dd><ins class="diff-chg">
+</ins></dt><dd><a href="diff-20121009.html"><ins class="diff-chg">
 Diff
 </ins>
 to
 previous
 version
+</a>
 </dd>
 <dd>
 <a href="https://github.com/w3c/microdata-rdf/commits/gh-pages">
-<ins class="diff-new">Commit
+<ins class="diff-chg">Commit
 history
-</ins>
-</a>
-</dd>
-</dl>
+</ins></a></dd></dl>
 <p class="copyright">
 <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">
 Copyright
@@ -1136,31 +1134,32 @@ below.
 </ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
 issue
 10
-</ins>
-</a>
-<ins class="diff-new">)
-</ins></li><li><ins class="diff-new">
+</ins></a><ins class="diff-chg">
+)
+</ins></li><li><ins class="diff-chg">
 Lastly,
 the
 previous
 update
 introduced
-</ins><a href="#vocabulary_expansion"><ins class="diff-new">
+</ins><a href="#vocabulary_expansion"><ins class="diff-chg">
 Vocabulary
 Expansion
-</ins></a><ins class="diff-new">
+</ins></a><ins class="diff-chg">
 using
-</ins><em><ins class="diff-new">
+</ins><em><ins class="diff-chg">
 entailment
-</ins></em><ins class="diff-new">
+</ins></em><ins class="diff-chg">
 rules
 adopted
 from
 [
-</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-new">
+</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-chg">
 RDFA-CORE
-</ins></a></cite><ins class="diff-new">
-]
+</ins>
+</a>
+</cite>
+<ins class="diff-new">]
 under
 control
 </ins>
@@ -5530,9 +5529,8 @@ properties.
 For
 example,
 <del class="diff-old">consider
-</del>
 the
-<del class="diff-old">following:
+following:
 &lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
   &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
   &lt;meta itemprop="numTracks" content="2"/&gt;
@@ -5597,8 +5595,9 @@ an
 RDF
 Collection
 containing
+</del>
 the
-ordered
+<del class="diff-old">ordered
 values,
 the
 data
@@ -6734,26 +6733,26 @@ use
 of
 </ins><code><ins class="diff-chg">
 label
-</ins>
-</code>
-<ins class="diff-new">where
+</ins></code><ins class="diff-chg">
+where
 the
 current
 voabulary
 were
-</ins><code><ins class="diff-new">
+</ins><code><ins class="diff-chg">
 rdfs:
-</ins></code><ins class="diff-new">
+</ins></code><ins class="diff-chg">
 could
 also
 cause
 a
 triple
 using
-</ins><code><ins class="diff-new">
+</ins><code><ins class="diff-chg">
 schema:name
-</ins></code><ins class="diff-new">
-to
+</ins>
+</code>
+<ins class="diff-new">to
 be
 emitted.
 To
@@ -7093,7 +7092,7 @@ URL
 The
 term
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#absolute-url">
 absolute
 URL
 </a>
@@ -7165,6 +7164,57 @@ RDF-CONCEPTS
 ]).
 </dd>
 <dt>
+<dfn id="dfn-canonicalized-fragment">
+<ins class="diff-new">canonicalized
+fragment
+</ins></dfn></dt><dd><ins class="diff-new">
+The
+term
+</ins><cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0"><ins class="diff-new">
+canonicalized
+fragment
+</ins></a></cite><ins class="diff-new">
+is
+defined
+in
+[
+</ins><cite><a class="bibref" href="#bib-URL"><ins class="diff-new">
+URL
+</ins></a></cite><ins class="diff-new">
+].
+This
+involves
+transforming
+elements
+added
+to
+URLs
+to
+ensure
+that
+the
+result
+remains
+a
+valid
+URL.
+Non-Unicode
+characters,
+and
+characters
+less
+than
+U+0020
+SPACE
+character
+("
+")
+are
+subject
+to
+percent
+escaping.
+</ins></dd><dt>
 <dfn id="dfn-document-base">
 document
 base
@@ -7183,7 +7233,7 @@ as
 defined
 in
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#resolving-urls">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#resolving-urls">
 Resolving
 URLs
 </a>
@@ -7428,27 +7478,15 @@ element.properties
 attribute.
 </dd>
 <dt>
-<dfn id="dfn-fragment-escape">
-fragment-escape
-</dfn>
-</dt>
-<dd>
+<del class="diff-old">fragment-escape
 The
 term
-<cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#fragment-escaped">
 fragment-escape
-</a>
-</cite>
 is
 defined
 in
 [
-<cite>
-<a class="bibref" href="#bib-HTML5">
 HTML5
-</a>
-</cite>
 ].
 This
 involves
@@ -7474,98 +7512,71 @@ subject
 to
 percent
 escaping:
-<ul>
-<li>
 U+0022
 QUOTATION
 MARK
 character
 (")
-</li>
-<li>
 U+0023
 NUMBER
 SIGN
 character
 (#)
-</li>
-<li>
 U+0025
 PERCENT
 SIGN
 character
 (%)
-</li>
-<li>
 U+003C
 LESS-THAN
 SIGN
 character
 (&lt;)
-</li>
-<li>
 U+003E
 GREATER-THAN
 SIGN
 character
 (&gt;)
-</li>
-<li>
 U+005B
 LEFT
 SQUARE
 BRACKET
 character
 ([)
-</li>
-<li>
 U+005C
 REVERSE
 SOLIDUS
 character
 (\)
-</li>
-<li>
 U+005D
 RIGHT
 SQUARE
 BRACKET
 character
 (])
-</li>
-<li>
 U+005E
 CIRCUMFLEX
 ACCENT
 character
 (^)
-</li>
-<li>
 U+007B
 LEFT
 CURLY
 BRACKET
 character
 ({)
-</li>
-<li>
 U+007C
 VERTICAL
 LINE
 character
 (|)
-</li>
-<li>
 U+007D
 RIGHT
 CURLY
 BRACKET
 character
 (})
-</li>
-</ul>
-</dd>
-<dt>
+</del>
 <dfn id="dfn-global-identifier">
 global
 identifier
@@ -7909,6 +7920,169 @@ element
 is
 a
 <code>
+<ins class="diff-new">meter
+</ins></code><ins class="diff-new">
+or
+</ins><code><ins class="diff-new">
+data
+</ins></code><ins class="diff-new">
+element.
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
+literal
+</ins></a><ins class="diff-new">
+made
+from
+</ins><code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue"><ins class="diff-new">
+element.itemValue
+</ins></a></cite></code>.<dl><dt><ins class="diff-new">
+If
+the
+value
+is
+a
+</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#numbers"><ins class="diff-new">
+valid
+integer
+</ins></a></cite><ins class="diff-new">
+having
+the
+lexical
+form
+of
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#date"><ins class="diff-new">
+xsd:integer
+</ins></a></cite><ins class="diff-new">
+[
+</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+XMLSCHEMA11-2
+</ins></a></cite><ins class="diff-new">
+]
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+typed
+literal
+</ins></a><ins class="diff-new">
+composed
+of
+the
+value
+and
+</ins><code><ins class="diff-new">
+http://www.w3.org/2001/XMLSchema#integer
+</ins></code>.</dd><dt><ins class="diff-new">
+If
+the
+value
+is
+a
+</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers"><ins class="diff-new">
+valid
+float
+number
+</ins></a></cite><ins class="diff-new">
+having
+the
+lexical
+form
+of
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#date"><ins class="diff-new">
+xsd:double
+</ins></a></cite><ins class="diff-new">
+[
+</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+XMLSCHEMA11-2
+</ins></a></cite><ins class="diff-new">
+]
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+typed
+literal
+</ins></a><ins class="diff-new">
+composed
+of
+the
+value
+and
+</ins><code><ins class="diff-new">
+http://www.w3.org/2001/XMLSchema#double
+</ins></code>.</dd><dt><ins class="diff-new">
+Otherwise
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
+plain
+literal
+</ins></a>.</dd></dl></dd><dt><ins class="diff-new">
+If
+the
+element
+is
+a
+</ins><code><ins class="diff-new">
+meta
+</ins></code><ins class="diff-new">
+element
+with
+a
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute.
+</ins></dt><dd><ins class="diff-new">
+The
+value
+is
+a
+</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
+plain
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value
+of
+the
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute
+with
+language
+information
+set
+from
+the
+</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-new">
+language
+</ins></a></cite><ins class="diff-new">
+of
+the
+property
+element
+</ins></dd><dt><ins class="diff-new">
+If
+the
+element
+is
+a
+</ins><code>
 time
 </code>
 element.
@@ -7938,7 +8112,7 @@ value
 is
 a
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-date-string">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#dates">
 valid
 date
 string
@@ -7990,7 +8164,7 @@ value
 is
 a
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-time-string">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#times">
 valid
 time
 string
@@ -8042,7 +8216,7 @@ value
 is
 a
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-local-date-and-time-string">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
 valid
 local
 date
@@ -8053,7 +8227,7 @@ string
 </cite>
 or
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-global-date-and-time-string">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
 valid
 global
 date
@@ -8108,7 +8282,7 @@ value
 is
 a
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-month-string">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#months">
 valid
 month
 string
@@ -8160,7 +8334,7 @@ value
 is
 a
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-non-negative-integer">
+<a href="http://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">
 valid
 non-negative
 integer
@@ -8209,7 +8383,17 @@ http://www.w3.org/2001/XMLSchema#gYear
 If
 the
 value
-has
+<del class="diff-old">has
+</del>
+<ins class="diff-chg">is
+a
+</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string"><ins class="diff-chg">
+valid
+duration
+string
+</ins></a></cite><ins class="diff-chg">
+having
+</ins>
 the
 lexical
 form
@@ -8247,31 +8431,19 @@ and
 <code>
 http://www.w3.org/2001/XMLSchema#duration
 </code>.
-<div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_6">
-<span>
-Note
-</span>
-</div>
-<p class="">
+<del class="diff-old">Note
 The
 referenced
 version
 of
 [
-<cite>
-<a class="bibref" href="#bib-HTML5">
 HTML5
-</a>
-</cite>
 ]
 does
 not
 include
 a
-<em>
 duration
-</em>
 data
 type,
 but
@@ -8295,8 +8467,7 @@ to
 the
 Working
 Draft
-</p>
-</div>
+</del>
 </dd>
 <dt>
 Otherwise
@@ -8321,7 +8492,7 @@ set
 from
 the
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">
+<a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">
 language
 </a>
 </cite>
@@ -8330,7 +8501,7 @@ the
 property
 element.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_7">
+<div class="note-title" aria-level="2" role="heading" id="h_note_6">
 <span>
 Note
 </span>
@@ -8372,7 +8543,7 @@ conversion.
 <p>
 See
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/rendering.html#the-time-element-0">
+<a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-time-element">
 The
 <code>
 time
@@ -8391,181 +8562,6 @@ HTML5
 </p>
 </dd>
 <dt>
-<ins class="diff-new">If
-the
-element
-is
-a
-</ins><code><ins class="diff-new">
-meta
-</ins></code><ins class="diff-new">
-element
-with
-a
-</ins><code><ins class="diff-new">
-@content
-</ins></code><ins class="diff-new">
-attribute.
-</ins></dt><dd><ins class="diff-new">
-The
-value
-is
-a
-</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
-plain
-literal
-</ins></a><ins class="diff-new">
-created
-from
-the
-value
-of
-the
-</ins><code><ins class="diff-new">
-@content
-</ins></code><ins class="diff-new">
-attribute
-with
-language
-information
-set
-from
-the
-</ins><cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language"><ins class="diff-new">
-language
-</ins></a></cite><ins class="diff-new">
-of
-the
-property
-element
-</ins></dd><dt><ins class="diff-new">
-If
-the
-element
-is
-a
-</ins><code><ins class="diff-new">
-data
-</ins></code><ins class="diff-new">
-or
-</ins><code><ins class="diff-new">
-track
-</ins></code><ins class="diff-new">
-element
-with
-a
-</ins><code><ins class="diff-new">
-@value
-</ins></code><ins class="diff-new">
-attribute.
-</ins></dt><dd><ins class="diff-new">
-The
-value
-is
-a
-</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
-literal
-</ins></a><ins class="diff-new">
-created
-from
-the
-value
-of
-the
-</ins><code><ins class="diff-new">
-@content
-</ins></code><ins class="diff-new">
-attribute.
-</ins><dl><dt><ins class="diff-new">
-If
-the
-value
-is
-a
-has
-the
-lexical
-form
-of
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#integer"><ins class="diff-new">
-xsd:integer
-</ins></a></cite><ins class="diff-new">
-[
-</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
-XMLSCHEMA11-2
-</ins></a></cite><ins class="diff-new">
-].
-</ins></dt><dd><ins class="diff-new">
-The
-value
-is
-a
-</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
-typed
-literal
-</ins></a><ins class="diff-new">
-composed
-of
-the
-value
-and
-</ins><code><ins class="diff-new">
-http://www.w3.org/2001/XMLSchema#integer
-</ins></code>.</dd><dt><ins class="diff-new">
-If
-the
-value
-is
-a
-has
-the
-lexical
-form
-of
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#float"><ins class="diff-new">
-xsd:float
-</ins></a></cite><ins class="diff-new">
-or
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#double"><ins class="diff-new">
-xsd:double
-</ins></a></cite><ins class="diff-new">
-[
-</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
-XMLSCHEMA11-2
-</ins></a></cite><ins class="diff-new">
-].
-</ins></dt><dd><ins class="diff-new">
-The
-value
-is
-a
-</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
-typed
-literal
-</ins></a><ins class="diff-new">
-composed
-of
-the
-value
-and
-</ins><code><ins class="diff-new">
-http://www.w3.org/2001/XMLSchema#double
-</ins></code>.</dd><dt><ins class="diff-new">
-Otherwise
-</ins></dt><dd><ins class="diff-new">
-The
-value
-is
-a
-</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
-plain
-literal
-</ins></a><ins class="diff-new">
-created
-from
-the
-value.
-</ins></dd></dl></dd><dt>
 Otherwise
 </dt>
 <dd>
@@ -8588,7 +8584,7 @@ set
 from
 the
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">
+<a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">
 language
 </a>
 </cite>
@@ -8599,7 +8595,7 @@ element.
 <p>
 See
 <cite>
-<a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#the-lang-and-xml:lang-attributes">
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 The
 <code>
 lang
@@ -8950,7 +8946,7 @@ another
 vocabulary
 URI.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_8">
+<div class="note-title" aria-level="2" role="heading" id="h_note_7">
 <span>
 Note
 </span>
@@ -9246,7 +9242,7 @@ following
 steps:
 </p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_9">
+<div class="note-title" aria-level="2" role="heading" id="h_note_8">
 <span>
 Note
 </span>
@@ -9857,17 +9853,17 @@ for
 list
 </del>
 <ins class="diff-chg">name
-</ins>
-</em>
-<ins class="diff-new">in
+</ins></em><ins class="diff-chg">
+in
 the
 vocabulary
 associated
 with
-</ins><em><ins class="diff-new">
+</ins><em><ins class="diff-chg">
 vocab
-</ins></em><ins class="diff-new">
-having
+</ins>
+</em>
+<ins class="diff-new">having
 the
 key
 </ins><code><ins class="diff-new">
@@ -9881,9 +9877,8 @@ for
 <ins class="diff-new">each
 such
 value
-</ins>
-<em>
-<ins class="diff-new">equiv
+</ins><em><ins class="diff-new">
+equiv
 </ins></em>,<ins class="diff-new">
 generate
 the
@@ -9891,8 +9886,9 @@ following
 triple:
 </ins><dl class="triple"><dt><ins class="diff-new">
 subject
-</ins></dt><dd><em><ins class="diff-new">
-subject
+</ins></dt><dd>
+<em>
+<ins class="diff-new">subject
 </ins></em></dd><dt>
 predicate
 <del class="diff-old">.
@@ -9999,14 +9995,14 @@ of
 </ins><a href="#dfn-evaluation-context" class="internalDFN"><ins class="diff-chg">
 evaluation
 context
-</ins>
-</a>
-<ins class="diff-new">with
-</ins><a href="#dfn-current-type" class="internalDFN"><ins class="diff-new">
+</ins></a><ins class="diff-chg">
+with
+</ins><a href="#dfn-current-type" class="internalDFN"><ins class="diff-chg">
 current
 type
-</ins></a><ins class="diff-new">
-set
+</ins>
+</a>
+<ins class="diff-new">set
 to
 </ins>
 <em>
@@ -10058,13 +10054,13 @@ context
 <del class="diff-old">from
 </del>
 <ins class="diff-chg">and
+</ins><em><ins class="diff-chg">
+name
+</ins></em>.</li><li><ins class="diff-chg">
+Let
 </ins>
 <em>
-<ins class="diff-new">name
-</ins></em>.</li><li><ins class="diff-new">
-Let
-</ins><em><ins class="diff-new">
-value
+<ins class="diff-new">value
 </ins></em><ins class="diff-new">
 be
 the
@@ -10240,7 +10236,7 @@ name
 </em>.
 </p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_10">
+<div class="note-title" aria-level="2" role="heading" id="h_note_9">
 <span>
 <ins class="diff-new">Note
 </ins></span></div><p class=""><ins class="diff-new">
@@ -10330,17 +10326,22 @@ fragment
 set
 to
 the
-<a href="#dfn-fragment-escape" class="internalDFN">
-fragment-escape
+<del class="diff-old">fragment-escape
+</del>
+<a href="#dfn-canonicalized-fragment" class="internalDFN">
+<ins class="diff-chg">canonicalized
+fragment
+</ins>
 </a>
-d
+<del class="diff-old">d
+</del>
 value
 of
 <em>
 name
 </em>.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_11">
+<div class="note-title" aria-level="2" role="heading" id="h_note_10">
 <span>
 Note
 </span>
@@ -10465,10 +10466,15 @@ constructed
 by
 appending
 the
-<a href="#dfn-fragment-escape" class="internalDFN">
-fragment-escape
+<del class="diff-old">fragment-escape
+</del>
+<a href="#dfn-canonicalized-fragment" class="internalDFN">
+<ins class="diff-chg">canonicalized
+fragment
+</ins>
 </a>
-d
+<del class="diff-old">d
+</del>
 value
 of
 <em>
@@ -10486,7 +10492,10 @@ U+0023
 NUMBER
 SIGN
 character
-(#)
+<del class="diff-old">(#)
+</del>
+<ins class="diff-chg">("#")
+</ins>
 unless
 the
 <a href="#dfn-current-vocabulary" class="internalDFN">
@@ -10501,13 +10510,15 @@ U+0023
 NUMBER
 SIGN
 character
-(#)
+<del class="diff-old">(#)
+</del>
+<ins class="diff-chg">("#")
+</ins>
 or
 SOLIDUS
 U+002F
-(/).
-</li>
-<del class="diff-old">Otherwise,
+<del class="diff-old">(/).
+Otherwise,
 if
 scheme
 is
@@ -10668,6 +10679,9 @@ of
 that
 array.
 </del>
+<ins class="diff-chg">("/").
+</ins>
+</li>
 <li>
 Return
 <em>
@@ -11910,9 +11924,7 @@ W3C
 OWL
 Working
 Group.
-</del>
-<cite>
-<del class="diff-old">OWL
+OWL
 2
 Web
 Ontology
@@ -11939,7 +11951,9 @@ Achille
 Fokoue;
 Carsten
 Lutz.
-OWL
+</del>
+<cite>
+<del class="diff-old">OWL
 2
 Web
 Ontology
@@ -12039,32 +12053,93 @@ Concepts
 and
 Abstract
 <del class="diff-old">Syntax.
+</del>
+<ins class="diff-chg">Syntax
+</ins>
+</cite>
+</a>.
 10
 February
 2004.
 W3C
 Recommendation.
 URL:
-http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
-[RDF-MT]
-Patrick
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
+</del>
+<a href="http://www.w3.org/TR/rdf-concepts/">
+<ins class="diff-chg">http://www.w3.org/TR/rdf-concepts/
+</ins>
+</a>
+</dd>
+<del class="diff-old">[RDF-MT]
+</del>
+<dt id="bib-RFC3986">
+<ins class="diff-chg">[RFC3986]
+</ins>
+</dt>
+<del class="diff-old">Patrick
 Hayes.
-RDF
+</del>
+<dd rel="dcterms:requires">
+<ins class="diff-chg">T.
+Berners-Lee;
+R.
+Fielding;
+L.
+Masinter.
+</ins><a href="https://tools.ietf.org/html/rfc3986">
+<cite>
+<del class="diff-old">RDF
 Semantics.
-10
+</del>
+<ins class="diff-chg">Uniform
+Resource
+Identifier
+(URI):
+Generic
+Syntax
+</ins>
+</cite>
+<del class="diff-old">10
 February
 2004.
 W3C
 Recommendation.
+</del>
+</a>.
+<ins class="diff-chg">January
+2005.
+Internet
+Standard.
+</ins>
 URL:
-http://www.w3.org/TR/2004/REC-rdf-mt-20040210
-[RDF-SCHEMA]
-Dan
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-mt-20040210
+</del>
+<a href="https://tools.ietf.org/html/rfc3986">
+<ins class="diff-chg">https://tools.ietf.org/html/rfc3986
+</ins>
+</a>
+</dd>
+<del class="diff-old">[RDF-SCHEMA]
+</del>
+<dt id="bib-URL">
+<ins class="diff-chg">[URL]
+</ins>
+</dt>
+<del class="diff-old">Dan
 Brickley;
 Ramanathan
 V.
 Guha.
-RDF
+</del>
+<dd rel="dcterms:requires">
+<ins class="diff-chg">Erik
+Arvidsson;
+Michael[tm]
+Smith.
+</ins><a href="http://www.w3.org/TR/url/">
+<cite>
+<del class="diff-old">RDF
 Vocabulary
 Description
 Language
@@ -12072,63 +12147,47 @@ Language
 RDF
 Schema.
 </del>
-<ins class="diff-chg">Syntax
+<ins class="diff-chg">URL
 </ins>
 </cite>
-</a>.
-10
+<del class="diff-old">10
 February
 2004.
+</del>
+</a>.
+<ins class="diff-chg">24
+May
+2012.
+</ins>
 W3C
-Recommendation.
+<del class="diff-old">Recommendation.
+</del>
+<ins class="diff-chg">Working
+Draft.
+</ins>
 URL:
 <del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-schema-20040210
 </del>
-<a href="http://www.w3.org/TR/rdf-concepts/">
-<ins class="diff-chg">http://www.w3.org/TR/rdf-concepts/
+<a href="http://www.w3.org/TR/url/">
+<ins class="diff-chg">http://www.w3.org/TR/url/
 </ins>
 </a>
 </dd>
-<dt id="bib-RFC3986">
-[RFC3986]
+<del class="diff-old">[RFC3986]
+</del>
+<dt id="bib-XMLSCHEMA11-2">
+<ins class="diff-chg">[XMLSCHEMA11-2]
+</ins>
 </dt>
-<dd rel="dcterms:requires">
-T.
+<del class="diff-old">T.
 Berners-Lee;
 R.
 Fielding;
 L.
 Masinter.
-<a href="https://tools.ietf.org/html/rfc3986">
-<cite>
-Uniform
-Resource
-Identifier
-(URI):
-Generic
-<del class="diff-old">Syntax.
 </del>
-<ins class="diff-chg">Syntax
-</ins>
-</cite>
-</a>.
-January
-2005.
-Internet
-<del class="diff-old">RFC
-3986.
-</del>
-<ins class="diff-chg">Standard.
-</ins>
-URL:
-<del class="diff-old">http://www.ietf.org/rfc/rfc3986.txt
-</del>
-<a href="https://tools.ietf.org/html/rfc3986">
-<ins class="diff-chg">https://tools.ietf.org/html/rfc3986
-</ins></a></dd><dt id="bib-XMLSCHEMA11-2"><ins class="diff-chg">
-[XMLSCHEMA11-2]
-</ins></dt><dd rel="dcterms:requires"><ins class="diff-chg">
-David
+<dd rel="dcterms:requires">
+<ins class="diff-chg">David
 Peterson;
 Sandy
 Gao;
@@ -12143,8 +12202,16 @@ V.
 Biron
 et
 al.
-</ins><a href="http://www.w3.org/TR/xmlschema11-2/"><cite><ins class="diff-chg">
-W3C
+</ins><a href="http://www.w3.org/TR/xmlschema11-2/">
+<cite>
+<del class="diff-old">Uniform
+Resource
+Identifier
+(URI):
+Generic
+Syntax.
+</del>
+<ins class="diff-chg">W3C
 XML
 Schema
 Definition
@@ -12154,15 +12221,26 @@ Language
 Part
 2:
 Datatypes
-</ins></cite></a>.<ins class="diff-chg">
-5
+</ins>
+</cite>
+<del class="diff-old">January
+2005.
+Internet
+RFC
+3986.
+</del>
+</a>.
+<ins class="diff-chg">5
 April
 2012.
 W3C
 Recommendation.
+</ins>
 URL:
-</ins><a href="http://www.w3.org/TR/xmlschema11-2/"><ins class="diff-chg">
-http://www.w3.org/TR/xmlschema11-2/
+<del class="diff-old">http://www.ietf.org/rfc/rfc3986.txt
+</del>
+<a href="http://www.w3.org/TR/xmlschema11-2/">
+<ins class="diff-chg">http://www.w3.org/TR/xmlschema11-2/
 </ins>
 </a>
 </dd>
