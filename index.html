@@ -721,7 +721,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <h2>Algorithm Terms</h2>
     <dl>
       <dt><dfn>absolute URL</dfn></dt><dd>
-        The term <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#absolute-url">absolute URL</a></cite>
+        The term <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#absolute-url">absolute URL</a></cite>
         is defined in [[!HTML5]].
       </dd>
       <dt><dfn>blank node</dfn></dt><dd>
@@ -731,7 +731,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       </dd>
       <dt><dfn>document base</dfn></dt><dd>
         The base address of the document being processed, as defined in <cite><a
-        href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#resolving-urls">Resolving URLs</a></cite> in
+        href="http://www.w3.org/TR/html5/infrastructure.html#resolving-urls">Resolving URLs</a></cite> in
         [[!HTML5]].
       </dd>
       <dt><dfn>evaluation context</dfn></dt><dd>
@@ -820,13 +820,34 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
               (See relevant attribute descriptions in [[!HTML5]]).
           </dd>
+          <dt>If the element is a <code>meter</code> or <code>data</code> element.</dt>
+          <dd>The value is a <a>literal</a> made from <code><cite>
+            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+            <dl>
+              <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#numbers">valid integer</a></cite> having the lexical form of <cite><a
+                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:integer</a></cite> [[!XMLSCHEMA11-2]]</dt>
+                <dd>The value is a <a>typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#integer</code>.
+              </dd>
+
+             <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">valid float number</a></cite> having the lexical form of <cite><a
+                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:double</a></cite> [[!XMLSCHEMA11-2]]</dt>
+                <dd>The value is a <a>typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#double</code>.
+              </dd>
+
+              <dt>Otherwise</dt>
+                <dd>The value is a <a>plain literal</a>.
+              </dd>
+            </dl>
+          </dd>
           <dt>If the element is a <code>time</code> element.</dt>
           <dd>The value is a <a>literal</a> made from <code><cite>
             <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
             <dl>
               <dt>
                 If the value is a
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-date-string">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#dates">
                   valid date string
                 </a></cite>
                 having the lexical form of
@@ -839,7 +860,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>
                 If the value is a
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-time-string">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#times">
                   valid time string
                 </a></cite>
                 having the lexical form of
@@ -851,11 +872,11 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>
                 If the value is a
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-local-date-and-time-string">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
                   valid local date and time string
                 </a></cite>
                 or
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-global-date-and-time-string">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
                   valid global date and time string
                 </a></cite>
                 having the lexical form of
@@ -867,7 +888,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>
                 If the value is a
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-month-string">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#months">
                   valid month string
                 </a></cite>
                 having the lexical form of
@@ -879,7 +900,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>
                 If the value is a
-                <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/common-microsyntaxes.html#valid-non-negative-integer">
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">
                   valid non-negative integer
                 </a></cite>
                 having the lexical form of
@@ -914,7 +935,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
             </dl>
             <p>See
-              <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/rendering.html#the-time-element-0">
+              <cite><a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-time-element">
                 The <code>time</code> element
               </a></cite>
               in [[!HTML5]].</p>
@@ -925,7 +946,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           <dd>
             The value is a <a>plain literal</a> created from the value of the <code>@content</code> attribute
             with language information set from the
-            <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite>
+            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
             of the property element
           </dd>
           <dt>
@@ -963,7 +984,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           <dd>The value is a <a>plain literal</a> created from the value with language information set from the
             <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#language">language</a></cite> of the property element.
             <p>See
-              <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#the-lang-and-xml:lang-attributes">
+              <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
                 The <code>lang</code> and <code>xml:lang</code> attributes
               </a></cite>
               in [[!HTML5]] for determining the language of a node.</p>
