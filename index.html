@@ -828,6 +828,15 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
             </dl>
           </dd>
+          <dt>
+            If the element is a <code>meta</code> element with a <code>@content</code> attribute.
+          </dt>
+          <dd>
+            The value is a <a>plain literal</a> created from the value of the <code>@content</code> attribute
+            with language information set from the
+            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
+            of the property element
+          </dd>
           <dt>If the element is a <code>time</code> element.</dt>
           <dd>The value is a <a>literal</a> made from <code><cite>
             <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
@@ -927,15 +936,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                 The <code>time</code> element
               </a></cite>
               in [[!HTML5]].</p>
-          </dd>
-          <dt>
-            If the element is a <code>meta</code> element with a <code>@content</code> attribute.
-          </dt>
-          <dd>
-            The value is a <a>plain literal</a> created from the value of the <code>@content</code> attribute
-            with language information set from the
-            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
-            of the property element
           </dd>
           <dt>Otherwise</dt>
           <dd>The value is a <a>plain literal</a> created from the value with language information set from the
