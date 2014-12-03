@@ -729,6 +729,12 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         <a>Item</a>s without a <a>global identifier</a> have a blank node allocated to them.
         (See [[RDF-CONCEPTS]]).
       </dd>
+      <dt><dfn>canonicalized fragment</dfn></dt><dd>
+        The term <cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">canonicalized fragment</a></cite>
+        is defined in [[!URL]]. This involves transforming elements added to URLs to ensure that the result
+        remains a valid URL. Non-Unicode characters, and characters less than U+0020 SPACE character
+        (" ") are subject to percent escaping.
+      </dd>
       <dt><dfn>document base</dfn></dt><dd>
         The base address of the document being processed, as defined in <cite><a
         href="http://www.w3.org/TR/html5/infrastructure.html#resolving-urls">Resolving URLs</a></cite> in
@@ -762,25 +768,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
          <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
          <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-properties">element.properties</a></cite></code>
          attribute.
-      </dd>
-      <dt><dfn>fragment-escape</dfn></dt><dd>
-        The term <cite><a href="http://www.w3.org/TR/2011/WD-html5-20110525/urls.html#fragment-escaped">fragment-escape</a></cite>
-        is defined in [[!HTML5]]. This involves transforming elements added to URLs to ensure that the result
-        remains a valid URL. The following characters are subject to percent escaping:
-        <ul>
-          <li>U+0022 QUOTATION MARK character (")</li>
-          <li>U+0023 NUMBER SIGN character (#)</li>
-          <li>U+0025 PERCENT SIGN character (%)</li>
-          <li>U+003C LESS-THAN SIGN character (&lt;)</li>
-          <li>U+003E GREATER-THAN SIGN character (&gt;)</li>
-          <li>U+005B LEFT SQUARE BRACKET character ([)</li>
-          <li>U+005C REVERSE SOLIDUS character (\)</li>
-          <li>U+005D RIGHT SQUARE BRACKET character (])</li>
-          <li>U+005E CIRCUMFLEX ACCENT character (^)</li>
-          <li>U+007B LEFT CURLY BRACKET character ({)</li>
-          <li>U+007C VERTICAL LINE character (|)</li>
-          <li>U+007D RIGHT CURLY BRACKET character (})</li>
-        </ul>
       </dd>
       <dt><dfn>global identifier</dfn></dt><dd>
         The value of an <a>item</a>'s <a>itemid</a> attribute, if it has one. (See <cite><a
@@ -1209,7 +1196,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         there can be no <a>current vocabulary</a>. Return the <a>URI reference</a>
         that is the <a>document base</a> with its <cite><a
         href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
-        set to the <a>fragment-escape</a>d value of <em>name</em>.
+        set to the <a>canonicalized fragment</a> value of <em>name</em>.
         <div class="note">
           This rule is intended to allow for a the case where no type is set, and
           therefore there is no vocabulary from which to extract rules. For
@@ -1220,10 +1207,10 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         </div>
       </li>
       <li id="scheme-vocab">Set <em>expandedURI</em> to the <a>URI reference</a> constructed by
-        appending the <a>fragment-escape</a>d value of <em>name</em> to <a>current
-        vocabulary</a>, separated by a U+0023 NUMBER SIGN character (#) unless the
+        appending the <a>canonicalized fragment</a> value of <em>name</em> to <a>current
+        vocabulary</a>, separated by a U+0023 NUMBER SIGN character ("#") unless the
         <a>current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
-        (#) or SOLIDUS U+002F (/).</li>
+        ("#") or SOLIDUS U+002F ("/").</li>
       <li>Return <em>expandedURI</em>.</li>
     </ol>
   </section>
