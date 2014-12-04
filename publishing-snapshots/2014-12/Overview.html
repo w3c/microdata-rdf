@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
+<head>
+<title>Microdata to RDF – Second Edition</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--
+  === NOTA BENE ===
+  For the three scripts below, if your spec resides on dev.w3 you can check them
+  out in the same tree and use relative links so that they'll work offline,
+  -->
+
+
+<style type="text/css">
+.diff { font-weight:bold; color:#0a3; }
+dl.triple { padding: 0 0 0 1em; }
+dl.triple dt, dl.triple dd { margin: 0; display: inline }
+dl.triple dt:after { content: ':'; }
+dl.triple dd:after { content: '\A'; white-space: pre; }
+.adef { 
+	font-family: monospace; 
+	font-weight: bold; 
+    color: #ff4500 !important;
+}
+
+.aref { 
+	font-family: monospace; 
+	font-weight: bold; 
+    color: #ff4500 !important;
+}
+.aref:before {content: "@"; }
+
+.issue > .resolved {
+  color: gray;;
+}
+.issue > .resolved::after {
+  content: "Resolved";
+  color: black;
+  font-style: bold;
+  padding-left: 1em;
+}
+</style>
+<style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #C83500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+</style><style>/* --- EXAMPLES --- */
+div.example-title {
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.example-title span {
+    text-transform: uppercase;   
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;    
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example div.example-title {
+    color: #999;
+}
+</style><style>/* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title { color: #2b2; }
+div.issue-title span, div.note-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .issue > p:first-child { margin-top: 0 }
+.issue, .note {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.issue { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+
+<body lang="en" class="h-entry" style="" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+  <p>
+      
+        
+            <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+        
+      
+  </p>
+  <h1 class="title p-name" id="title" property="dcterms:title">Microdata to RDF – Second Edition</h1>
+  
+    <h2 property="bibo:subtitle" id="subtitle">Transformation from HTML+Microdata to RDF</h2>
+  
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-05T06:55:36.000Z" id="w3c-editor-s-draft-04-december-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-12-04">04 December 2014</time></h2>
+  <dl>
+    
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="http://w3c.github.io/microdata-rdf/">http://w3c.github.io/microdata-rdf/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="http://www.w3.org/TR/microdata-rdf/">http://www.w3.org/TR/microdata-rdf/</a></dd>
+    
+    
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="http://w3c.github.io/microdata-rdf/">http://w3c.github.io/microdata-rdf/</a></dd>
+    
+    
+      <dt>Test suite:</dt>
+      <dd><a href="http://w3c.github.io/microdata-rdf/tests/">http://w3c.github.io/microdata-rdf/tests/</a></dd>
+    
+    
+    
+    
+      
+    
+    
+    
+    <dt>Editor:</dt>
+    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">Gregg Kellogg</a>, Kellogg Associates</span>
+</dd>
+
+    
+      <dt>Authors:</dt>
+      <dd class="p-author h-card vcard" rel="dcterms:contributor"><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ian Hickson" href="mailto:ian@hixie.ch">Ian Hickson</a>, Google, Inc.</span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor"><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">Gregg Kellogg</a>, Kellogg Associates</span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor"><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Jeni Tennison" href="http://www.jenitennison.com/">Jeni Tennison</a>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://theodi.org/">Open Data Institute</a></span>
+</dd>
+<dd class="p-author h-card vcard" rel="dcterms:contributor"><span typeof="foaf:Person"><a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ivan Herman" href="http://www.w3.org/People/Ivan/">Ivan Herman</a>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.w3.org"><abbr title="World Wide Web Consortium">W3C</abbr></a></span>
+</dd>
+
+    
+    
+      
+        
+          <dt>Repository:</dt>
+          
+             
+                
+                  <dd>
+                    <a href="https://github.com/w3c/microdata-rdf">
+                      We are on Github
+                    </a>
+                  </dd>
+                
+             
+                
+                  <dd>
+                    <a href="https://github.com/w3c/microdata-rdf/issues">
+                      Open and closed issues
+                    </a>
+                  </dd>
+                
+             
+          
+        
+      
+        
+          <dt>Changes:</dt>
+          
+             
+                
+                  <dd>
+                    <a href="diff-20121009.html">
+                      Diff to previous version
+                    </a>
+                  </dd>
+                
+             
+                
+                  <dd>
+                    <a href="https://github.com/w3c/microdata-rdf/commits/gh-pages">
+                      Commit history
+                    </a>
+                  </dd>
+                
+             
+          
+        
+      
+    
+  </dl>
+  
+  
+  
+  
+    
+      <p class="copyright">
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
+        2011-2014
+        
+        <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
+        (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+        <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), 
+        
+        All Rights Reserved.
+        
+        <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+        
+          <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>
+        
+        rules apply.
+      </p>
+    
+  
+  <hr>
+</div>
+<section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 role="heading" id="h2_abstract">Abstract</h2>
+  <p>HTML microdata [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] is an extension to HTML used to embed machine-readable data into HTML documents.
+    Whereas the microdata specification describes a means of markup, the output format is JSON. This specification
+    describes processing rules that may be used to extract RDF [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>] from an HTML document containing
+    microdata.</p>
+</section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 role="heading" id="h2_sotd">Status of This Document</h2>
+  
+    
+      
+        <p>
+          <em>This section describes the status of this document at the time of its publication.
+          Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the
+          latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
+          http://www.w3.org/TR/.</em>
+        </p>
+        
+        
+<p>This document is an experimental work in progress. The concepts described herein are intended to 
+  provide guidance for a possible future Working Group chartered to provide a Recommendation
+  for this transformation. As a consequence, implementers of this specification, either producers
+  or consumers, should note that it may change prior to any possible publication as a Recommendation.</p>
+
+<p>This Working Draft is an update of the <a href="/TR/2012/NOTE-microdata-rdf-20121009/"><abbr title="World Wide Web Consortium">W3C</abbr>
+  Interest Group Note</a>, published in October 2012. This update simplifies
+  processing using the following mechanisms:</p>
+<ul>
+  <li>Experimental support for <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a> has been added.
+    This attribute is not part of [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] and is included as an experimental feature.
+    Specific feedback from the community is requested. Based on addoption, the attribute
+    may be considered for inclusion in forthcoming versions of [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] and this note.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/5">issue 5</a>)</li>
+  <li><a title="top-level item" href="#dfn-top-level-item" class="internalDFN">Top-level items</a> were prviously included in a <code>md:item</code>
+    RDF Collection to reconstruct the order that items appear in the DOM. This has also proven to
+    not be useful and has been dropped.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/6">issue 6</a>)</li>
+  <li>A property value may be extracted from the <code>@content</code> attribute
+    of the <code>meta</code> element.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/7">issue 7</a>)</li>
+  <li>A property value may be extracted from the <code>@value</code> attribute
+    of the <code>data</code> or <code>meter</code> elements. If this value has
+    numeric form, it will produce a datatyped literal using the appropriate datatype
+    from [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>]
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/8">issue 8</a>
+    and <a href="https://github.com/w3c/microdata-rdf/issues/9">issue 9</a>)</li>
+  <li>Property URI generation was under control of the <code>propertyURI</code> <a href="#dfn-registry" class="internalDFN">registry</a>
+    setting. This setting could previously have taken either the <code>vocabulary</code> or
+    <code>contextual</code> settings. As <code>contextual</code> was never used, and usage
+    in the wild favors the <code>vocabulary</code> setting, support for <code>contextual</code>
+    has been eliminated, and consequently support for the <code>propertyURI</code> element
+    within the <a href="#dfn-registry" class="internalDFN">registry</a>.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+  <li>An item having multiple values for a given property could previously having been placed
+    in an RDF Collection if the <code>multipleValues</code> <a href="#dfn-registry" class="internalDFN">registry</a> setting were set
+    to <code>list</code>. Although the previous registry did have such a setting for some
+    schema.org values, this is not honored by most search engines, and so has been dropped,
+    and consequently support for the <code>multipeValues</code> element with the <a href="#dfn-registry" class="internalDFN">registry</a>.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+  <li>Lastly, the previous update introduced <a href="#vocabulary_expansion">Vocabulary Expansion</a>
+    using <em>entailment</em> rules adopted from [<cite><a class="bibref" href="#bib-RDFA-CORE">RDFA-CORE</a></cite>] under control of the <code>vocab_expansion</code>
+    option. Support for <a href="#vocabulary_expansion">Vocabulary Expansion</a> has been substantially
+    simplified, and is no longer under control of an option.
+    This issue remains open pending community review; specifically, anyone depending on this
+    feature should provide feedback as requested below.
+    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+</ul>
+<p>The intention is to publish 
+  this draft as a new version of the Interest Group Note after gathering and incorporating community input.</p> 
+
+        
+        <p>
+          This document was published by the <a href="http://www.w3.org/2001/sw/interest/">Semantic Web Interest Group</a> as an Editor's Draft.
+          
+          
+            If you wish to make comments regarding this document, please send them to 
+            <a href="mailto:semantic-web@w3.org">semantic-web@w3.org</a> 
+            (<a href="mailto:semantic-web-request@w3.org?subject=subscribe">subscribe</a>,
+            <a href="http://lists.w3.org/Archives/Public/semantic-web/">archives</a>).
+          
+          
+          
+          
+            All comments are welcome.
+          
+        </p>
+        
+        
+        
+          <p>
+            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+            Membership. This is a draft document and may be updated, replaced or obsoleted by other
+            documents at any time. It is inappropriate to cite this document as other than work in
+            progress.
+          </p>
+        
+        
+        
+        <p>
+          
+            This document was produced by a group operating under the 
+            <a id="sotd_patent" about="" rel="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+            Policy</a>.
+          
+          
+          
+            
+              <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="http://www.w3.org/2004/01/pp-impl/68238/status" rel="disclosure">public list of any patent
+              disclosures</a> 
+            
+            made in connection with the deliverables of the group; that page also includes
+            instructions for disclosing a patent. An individual who has actual knowledge of a patent
+            which the individual believes contains
+            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+            Claim(s)</a> must disclose the information in accordance with
+            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+            6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          
+          
+        </p>
+        
+          <p>This document is governed by the <a id="w3c_process_revision" href="http://www.w3.org/2014/Process-20140801/">1 August 2014 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+          </p>
+        
+        
+      
+    
+  
+</section><section id="toc"><h2 class="introductory" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a><ul class="toc"><li class="tocline"><a href="#background" class="tocxref"><span class="secno">1.1 </span>Background</a></li><li class="tocline"><a href="#use-cases" class="tocxref"><span class="secno">1.2 </span>Use Cases</a></li><li class="tocline"><a href="#issues" class="tocxref"><span class="secno">1.3 </span>Issues</a></li></ul></li><li class="tocline"><a href="#attributes-and-syntax" class="tocxref"><span class="secno">2. </span>Attributes and Syntax</a></li><li class="tocline"><a href="#vocabulary-registry" class="tocxref"><span class="secno">3. </span>Vocabulary Registry</a><ul class="toc"><li class="tocline"><a href="#property-uri-generation" class="tocxref"><span class="secno">3.1 </span>Property URI Generation</a></li><li class="tocline"><a href="#value-typing" class="tocxref"><span class="secno">3.2 </span>Value Typing</a></li></ul></li><li class="tocline"><a href="#vocabulary-expansion" class="tocxref"><span class="secno">4. </span>Vocabulary Expansion</a></li><li class="tocline"><a href="#control-of-microdata-processors" class="tocxref"><span class="secno">5. </span>Control of Microdata Processors</a></li><li class="tocline"><a href="#algorithm" class="tocxref"><span class="secno">6. </span>Algorithm</a><ul class="toc"><li class="tocline"><a href="#algorithm-terms" class="tocxref"><span class="secno">6.1 </span>Algorithm Terms</a></li><li class="tocline"><a href="#rdf-conversion-algorithm" class="tocxref"><span class="secno">6.2 </span>RDF Conversion Algorithm</a></li><li class="tocline"><a href="#generate-the-triples" class="tocxref"><span class="secno">6.3 </span>Generate the triples</a></li><li class="tocline"><a href="#generate-predicate-uri" class="tocxref"><span class="secno">6.4 </span>Generate Predicate URI</a></li></ul></li><li class="tocline"><a href="#reverse-itemprop" class="tocxref"><span class="secno">A. </span>Reverse <span class="formerLink">itemprop</span></a><ul class="toc"><li class="tocline"><a href="#algorithm-terms-1" class="tocxref"><span class="secno">A.1 </span>Algorithm Terms</a></li><li class="tocline"><a href="#generate-the-triples-1" class="tocxref"><span class="secno">A.2 </span>Generate the triples</a></li></ul></li><li class="tocline"><a href="#testing" class="tocxref"><span class="secno">B. </span>Testing</a></li><li class="tocline"><a href="#markup-examples" class="tocxref"><span class="secno">C. </span>Markup Examples</a></li><li class="tocline"><a href="#default-registry" class="tocxref"><span class="secno">D. </span>Default <span class="formerLink">registry</span></a></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">E. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">F. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">F.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">F.2 </span>Informative references</a></li></ul></li></ul></section>
+
+
+
+<section class="informative" id="introduction">
+  <!--OddPage--><h2 role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
+  <p>This document describes a means of transforming HTML containing microdata into RDF. HTML Microdata [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]
+    is an extension to HTML used to embed machine-readable data to HTML documents. This specification describes
+    transformation directly to RDF [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>].</p>
+  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+    <p>There are a variety of ways in which a mapping from microdata to
+      RDF might be configured to give a result that is closer to the required result for a particular vocabulary.
+      This specification defines terms that can be used as hooks for
+      vocabulary-specific behavior, which could be defined within a
+      <a href="#dfn-registry" class="internalDFN">registry</a> or on an implementation-defined basis.
+    </p>
+    <p>For background on the trade-offs between these options, see 
+      <a href="http://www.w3.org/wiki/Mapping_Microdata_to_RDF">
+        http://www.w3.org/wiki/Mapping_Microdata_to_RDF
+      </a> and <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issues</a>.
+    </p>
+  </div></div>
+<section class="informative" id="background">
+  <h3 role="heading" id="h3_background"><span class="secno">1.1 </span>Background</h3><p><em>This section is non-normative.</em></p>
+  <p>Microdata [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] is a way of embedding data in HTML documents
+    using attributes. The HTML DOM is extended to provide an API for
+    accessing microdata information, and the microdata specification
+    defines how to generate a JSON representation from microdata markup.</p>
+
+  <p>Mapping microdata to RDF enables consumers to merge data expressed
+    in other RDF-based formats with microdata. It facilitates the use of
+    RDF vocabularies within microdata, and enables microdata to be used
+    with the full RDF toolchain. Some use cases for this mapping are
+    described in <a href="#use-cases">Section 1.2</a> below.</p>
+
+  <p>Microdata's data model does not align neatly with RDF.</p>
+  <ul>
+   <li>Non-URL microdata properties are disambiguated based on microdata
+     <a href="#dfn-item-type" class="internalDFN">item type</a>; an <a href="#dfn-item" class="internalDFN">item</a> with the type <code>http://example.org/Cat</code> can have
+     both the property <code>color</code> and the property <code>http://example.org/color</code>,
+     and these properties are semantically distinct under microdata. In
+     RDF, all properties have IRIs.</li>
+
+   <li>When an item has multiple properties with the same name, the values are
+     always ordered; in RDF, property values are unordered unless they
+     are explicitly listed in an <em>RDF Collection</em>.</li>
+
+   <li>Except for some specific element values, a value in microdata is always a simple string which is interpreted
+     by the consuming application. In RDF, values can be tagged with a
+     datatype or a language. According to the microdata specification, the
+     HTML context of microdata markup should not change how microdata is
+     interpreted, so although element names and HTML <code>@lang</code> attributes could
+     be used to provide datatype and language information for RDF data, this
+     would be contrary to the microdata specification.</li>
+  </ul>
+
+   <p>Thus, in some places the needs of RDF consumers violate requirements of
+     the microdata specification. This specification highlights where such
+     violations occur and the reasons for them.</p>
+
+   <p>This specification allows for 
+     <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
+     This is facilitated by a <a href="#dfn-registry" class="internalDFN">registry</a> that associates URIs with specific rules based on matching
+     <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> values against registered URI prefixes do determine a vocabulary and potentially
+     vocabulary-specific processing rules
+     <span class="note">see <a href="#issues">issue 10</a></span>.
+   </p>
+
+   <p>This specification also assumes that consumers of RDF generated from
+     microdata may have to process the results in order to, for example,
+     assign appropriate datatypes to <a title="property value" href="#dfn-property-value" class="internalDFN">property values</a>.</p>
+</section>
+
+<section class="informative" id="use-cases">
+  <h3 role="heading" id="h3_use-cases"><span class="secno">1.2 </span>Use Cases</h3><p><em>This section is non-normative.</em></p>
+  <p>During the period of the task force, a number of use cases were put forth for the use of microdata
+    in generating RDF:</p>
+  <ul>
+    <li>Semantic search engines such as <a href="http://sindice.com/">Sindice</a> use RDF as their backend data model.
+      They want to gather information expressed using microdata alongside information expressed in RDF-based formats
+      and make it available to others to use, as a service. In these cases, the ultimate consumer, who will need to
+      understand the vocabularies used within the microdata, is the program or person who pulls out data from Sindice.
+      Sindice needs to retain the distinctions in the original microdata (e.g. ordering of items) and might not have
+      built-in knowledge about the <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a> of interest to the ultimate consumer. In this case, the ultimate consumer
+      is likely to have to map/validate/handle errors in the data they get from Sindice.</li>
+    <li>A consumer such as <a href="http://openelectiondata.org">openelectiondata.org</a> wants to support
+      microdata-based markup of their <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a> as well as RDFa-based markup, both going into an RDF-based data store.
+      They want to use an off-the-shelf tool to extract the microdata. They want to configure the tool to give them the
+      RDF that is appropriate for their known <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a>.</li>
+    <li>A browser plugin that captures data for the user uses an RDF model as its backend store.
+      Any time it encounters microdata on a page, it wants to pull that microdata into the store on the fly.</li>
+    <li><a href="http://purl.org/goodrelations/">GoodRelations</a> properties do not take
+      <code>rdf:List</code> values; when they take
+      multiple values they are unordered. The <code>rdfs:range</code> of a GoodRelations
+      property indicates the datatype of the expected value, and GoodRelations
+      processors will expect values to be cast to that type. Language
+      information from the HTML needs to be captured as it is common that
+      multiple values will be used to specify the same information in different
+      languages.</li>
+    <li><a href="http://schema.org/">Schema.org</a> has an 
+      <a href="http://schema.org/docs/extension.html">extension mechanism</a> to allow authors to express information
+      that is more detail than the pre-defined types, properties and enumerations. Property URIs are all in the same
+      flat-namespace as types, but authors can add more detail by using a '/' after the type or property to provide
+      more detail. For example, schema.org defines a <em>musicGroupMember</em> property having a URI of
+      <code>http://schema.org/musicGroupMember</code>, and an author might express more detail through an ad-hoc
+      sub-property <em>musicGroupMember/leadVocalist</em>, having the URI
+      <code>http://schema.org/musicGroupMember/leadVocalist</code>.</li>
+  </ul>
+</section>
+
+<section class="informative" id="issues">
+  <h3 role="heading" id="h3_issues"><span class="secno">1.3 </span>Issues</h3><p><em>This section is non-normative.</em></p>
+  <p>Decisions or open issues in the specification are tracked on the
+    <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issue Tracker</a>. These include the
+    following:</p>
+  <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_1"><a href="http://github.com/w3c/microdata-rdf/issues/5"><span>Issue 5</span></a></div><div class="">
+    <h3 id="experimental-feature">Experimental Feature</h3>
+    <p>Experimental support <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a>.
+    This attribute is not part of [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] and is included as an experimental feature.
+    Specific feedback from the community is requested. Based on addoption, the attribute
+    may be considered for inclusion in forthcoming versions of [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] and this note.</p>
+  </div></div>
+  <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_2"><a href="http://github.com/w3c/microdata-rdf/issues/10"><span>Issue 10</span></a></div><p class="">
+    Remove support for <code>contextual</code>
+    <code>propertyURI</code> and <code>mulitpleValues</code>. This issue proposes to
+    remove support for independently setting
+    <code>propertyURI</code> and code&gt;multipleValues.
+    The former <code>propertyURI</code>
+    is treated like the former <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a> scheme if
+    there is an <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>, otherwise, like <code>contextual</code> creating a property
+    as a fragment of the document base.
+    The former <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
+  </p></div>
+
+  <p>The purpose of this specification is to provide input to a future working group that can make decisions
+    about the need for a <a href="#dfn-registry" class="internalDFN">registry</a> and the details of processing. Among the options investigated by
+    the Task Force are the following:</p>
+  <ul>
+    <li>Property URI generation using the original microdata specification with a base URI and
+      <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> made up of the in-scope <a href="#dfn-item-type" class="internalDFN">item
+      type</a> and <a href="#dfn-item-properties" class="internalDFN">item properties</a>.</li>
+    <li>Vocabulary-based URI generation, where the <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a> is determined from the
+      in-scope <a href="#dfn-item-type" class="internalDFN">item type</a>, either through an algorithmic modification of the type URL or by matching the
+      URL against a <a href="#dfn-registry" class="internalDFN">registry</a>. The vocabulary URI is then used to generate property URIs in a namespace
+      parallel to the type URI.</li>
+    <li>When there are multiple <a title="top-level item" href="#dfn-top-level-item" class="internalDFN">top-level items</a> in a document, place items in an RDF Collection.
+      Alternatively, simply list the items as multiple values, or do not generate an
+      <code>http://www.w3.org/ns/md#item</code> mapping at all.
+    </li>
+    <li>When an item has multiple values for a given <a href="#dfn-property" class="internalDFN">property</a>, place the values in an RDF Collection.
+      Alternatively, do not use collections, use an alternative such as <code>rdf:Seq</code>, or place all values,
+      whether or not multiple, into some form of collection.
+    </li>
+  </ul>
+</section>
+</section>
+
+<section id="attributes-and-syntax">
+  <!--OddPage--><h2 role="heading" id="h2_attributes-and-syntax"><span class="secno">2. </span>Attributes and Syntax</h2>
+  <p>
+    The microdata specification [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] defines a number of attributes and the way in which those
+    attributes are to be interpreted. The
+    <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">microdata DOM API</a></cite>
+    provides methods and attributes for retrieving microdata from the HTML DOM.</p>
+  <p>For reference, attributes used for specifying and retrieving HTML microdata are referenced here:</p>
+  <dl>
+    <dt><dfn class="adef" id="dfn-itemid">itemid</dfn></dt><dd>
+      An attribute containing a URL used to identify the subject of triples associated with this <a href="#dfn-item" class="internalDFN">item</a>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemid">itemid</a></cite>
+      in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+    </dd>
+    <dt><dfn class="adef" id="dfn-itemprop">itemprop</dfn></dt><dd>
+      An attribute used to identify one or more <a title="name" href="#dfn-name" class="internalDFN">names</a> of an <a title="item" href="#dfn-item" class="internalDFN">items</a>. An <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>
+      contains a space separated list of <dfn title="name" id="dfn-name">names</dfn> which may either by <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">absolute URLs</a> or terms
+      associated with the type of the <a href="#dfn-item" class="internalDFN">item</a> as defined by the referencing <a href="#dfn-item" class="internalDFN">item</a>'s
+      <a href="#dfn-item-type" class="internalDFN">item type</a>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">itemprop</a></cite>
+      in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+    </dd>
+    <dt><dfn class="adef" id="dfn-itemref">itemref</dfn></dt><dd>
+      An additional attribute on an element that references additional elements containing property
+      definitions to be applied to the referencing <a href="#dfn-item" class="internalDFN">item</a>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemref">itemref</a></cite>
+      in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+    </dd>
+    <dt><dfn class="adef" id="dfn-itemscope">itemscope</dfn></dt><dd>
+      An boolean attribute identifying an element as an <a href="#dfn-item" class="internalDFN">item</a>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite>
+      in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+    </dd>
+    <dt><dfn class="adef" id="dfn-itemtype">itemtype</dfn></dt><dd>
+      An additional attribute on an element used to specify one or more types of an <a href="#dfn-item" class="internalDFN">item</a>.
+      The <dfn id="dfn-item-type">item type</dfn> of an <a href="#dfn-item" class="internalDFN">item</a> is the first value returned from
+      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
+      on the element.
+      The <a href="#dfn-item-type" class="internalDFN">item type</a> is also used to resolve non-URL <a title="name" href="#dfn-name" class="internalDFN">names</a> to <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">absolute URLs</a>.
+      Available through the
+      <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
+      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>.
+      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemtype">itemtype</a></cite>
+      in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+    </dd>
+  </dl>
+  <p>In RDF, it is common for people to shorten vocabulary terms via abbreviated URIs that use a 'prefix'
+    and a 'reference'. throughout this document assume that the following vocabulary
+    prefixes have been defined:</p>
+  <table><tbody>
+    <tr>
+      <td>dc:</td>
+      <td>http://purl.org/dc/terms/</td>
+    </tr>
+
+    <tr>
+      <td>md:</td>
+      <td>
+        http://www.w3.org/ns/md#</td>
+    </tr>
+
+    <tr>
+      <td>rdf:</td>
+      <td>
+        http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+    </tr>
+
+    <tr>
+      <td>rdf:</td>
+      <td>
+        http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+    </tr>
+
+    <tr>
+      <td>rdfa:</td>
+      <td>
+        http://www.w3.org/ns/rdfa#</td>
+    </tr>
+
+    <tr>
+      <td>xsd:</td>
+      <td>http://www.w3.org/2001/XMLSchema#</td>
+    </tr>
+  </tbody></table>
+</section>
+
+<section class="informative" id="vocabulary-registry">
+  <!--OddPage--><h2 role="heading" id="h2_vocabulary-registry"><span class="secno">3. </span>Vocabulary Registry</h2><p><em>This section is non-normative.</em></p>
+  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_2"><span>Note</span></div><p class="">(The registry is being considered for revision (see <a href="#issues">issue 10</a>).</p></div>
+  <p>In a perfect world, all processors would be able to generate the same output for a given input
+    without regards to the requirements of a particular <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a>. However, microdata doesn't
+    provide sufficient syntactic help in making these decisions. Different vocabularies have different
+    needs.</p>
+  <p>The registry is located at the namespace defined for microdata: <code>http://www.w3.org/ns/md</code> in
+    a variety of formats. Under control of a runtime option, a processor should use
+    another provided by reference, to affect processing.</p>
+  <p>The <dfn id="dfn-registry">registry</dfn> associates a <dfn id="dfn-uri-prefix">URI prefix</dfn> with one or more key-value pairs denoting
+  processor behavior. A hypothetical JSON representation of such a registry might be the following:</p>
+<div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example">{
+  "http://schema.org/": {
+    "properties": {
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
+    },
+    "http://microformats.org/profile/hcard": {}
+  }
+}</pre></div>
+  <p>This structure associates mappings for two URIs: <code>http://schema.org/</code> and
+    <code>http://microformats.org/profile/hcard</code>. Items having an <a href="#dfn-item-type" class="internalDFN">item type</a> with a <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> from this <a href="#dfn-registry" class="internalDFN">registry</a>
+    use the the rules described for that prefix within the scope of that
+    <a href="#dfn-item-type" class="internalDFN">item type</a>. For <code>http://schema.org/</code>, this mapping currently defines a single property: <code>additionalType</code>
+    with a value to indicate specific behavior. It also allows overrides
+    on a per-property basis; the <a href="#dfn-item-properties" class="internalDFN"><code>item properties</code></a> key associates an individual <a href="#dfn-name" class="internalDFN">name</a>
+    with overrides for default behavior.
+    The interpretation of these
+    rules is defined in the following sections. If an item has no <a href="#dfn-current-type" class="internalDFN">current type</a> or the
+    <a href="#dfn-registry" class="internalDFN">registry</a> contains no <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> matching <a href="#dfn-current-type" class="internalDFN">current type</a>, a conforming
+    processor <em class="rfc2119" title="MUST">MUST</em> use the default values defined for these rules.</p>
+
+<section class="informative" id="property-uri-generation">
+  <h3 role="heading" id="h3_property-uri-generation"><span class="secno">3.1 </span>Property URI Generation</h3><p><em>This section is non-normative.</em></p>
+  <p>For <a title="name" href="#dfn-name" class="internalDFN">names</a> which are not <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">absolute URLs</a>,
+    this section defines the algorithm for generating an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a>
+    given an <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a> including a <a href="#dfn-current-type" class="internalDFN">current type</a> and
+    <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a>.</p>
+  <p>The procedure for generating property URIs is defined in
+    <a href="#generate-predicate-uri">Generate Predicate URI</a>.</p>
+  <p>The URI generation scheme appends <a title="name" href="#dfn-name" class="internalDFN">names</a> that are not
+    <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">absolute URLs</a> to the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>. When generating property URIs, if the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>
+    does not end with a '/' or '#', a '#' is appended to the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>. (See <a href="#scheme-vocab">Step 4</a>
+    in
+    <a href="#generate-predicate-uri">Generate Predicate URI</a>.)</p>
+  <p>URI creation uses a base URL with query parameters to indicate the in-scope
+    type and <a href="#dfn-name" class="internalDFN">name</a> list. Consider the following example:</p>
+  <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example">&lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+  &lt;span itemprop="n" itemscope&gt;
+    &lt;span itemprop="given-name"&gt;
+      Princeton
+    &lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;</pre></div>
+  <p>Given the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> <code>http://microformats.org/profile/hcard</code>, this
+    would generate <code>http://microformats.org/profile/hcard#n</code> and
+    <code>http://microformats.org/profile/hcard#given-name</code>. Note that the '#' is automatically
+    added as a separator.</p>
+  <p>Looking at another example:</p>
+  <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
+&lt;/div&gt;</pre></div>
+  <p>Given the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> <code>http://schema.org/</code>,
+    this would generate <code>http://schema.org/name</code>. Note that if the <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>
+    were <code>http://schema.org/Person/Teacher</code>, this would generate the same property URI.</p>
+  <p>If the <a href="#dfn-registry" class="internalDFN">registry</a> contains no match for <a href="#dfn-current-type" class="internalDFN">current type</a> implementations <em class="rfc2119" title="MUST">MUST</em> act as if
+    there is a <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> made from the first <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> value by stripping either the
+    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or
+    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>,
+    if the value has no fragment (See [<cite><a class="bibref" href="#bib-RFC3986">RFC3986</a></cite>]).</p>
+  <p>The vocabulary <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> is made from the first <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> value by stripping either the <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, if the value has no fragment (See
+    [<cite><a class="bibref" href="#bib-RFC3986">RFC3986</a></cite>]).</p>
+  <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_3"><span>Note</span></div><p class="">Deconstructing the <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> URL to create or identify a vocabulary URI
+    is a violation of the microdata specification which is necessary to
+    support the use of existing vocabularies designed for use with RDF, and
+    shared or inherited properties within all vocabularies.</p></div>
+  <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example">&lt;div itemscope itemtype="http://example.org/Book"&gt;
+  &lt;h2 itemprop="title"&gt;Just a Geek&lt;/h2&gt;
+&lt;/div&gt;</pre></div>
+  <p>In this example, assuming no matching entry in the <a href="#dfn-registry" class="internalDFN">registry</a>,
+    the <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> is constructed by removing the
+    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, leaving the URI
+    <code>http://example.org/</code>. The resulting property URI would be
+    <code>http://example.org/title</code>.</p>
+
+    <div>
+      <p>If there is no in-scope <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>, property URIs are generated
+        using the base URI of the document and the <a href="#dfn-name" class="internalDFN">name</a> as a fragment
+        Consider the following example:</p>
+      <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example">&lt;div itemscope&gt;
+&lt;p itemscope itemprop='bar'&gt;
+  &lt;span itemprop='baz'&gt;Baz&lt;/span&gt;
+&lt;/p&gt;
+&lt;/div&gt;</pre></div>
+      <p>If the document is located at <code>http://example/author</code>,
+        the <a href="#dfn-name" class="internalDFN">name</a> <em>bar</em> generates the URI
+        <code>http://example/author#bar</code>.
+        However, the included <a href="#dfn-name" class="internalDFN">name</a> <em>baz</em> is included in untyped item.
+        The inherited property URI is used to create a new property URI:
+        <code>http://example/author#baz</code>.</p>
+      <p>This scheme is compatible with the needs of other RDF serialization formats such as
+        RDF/XML [<cite><a class="bibref" href="#bib-RDF-SYNTAX-GRAMMAR">RDF-SYNTAX-GRAMMAR</a></cite>],
+        which rely on <em>QNames</em> for expressing properties. For example, the generated property URIs
+        can be split as follows:</p>
+      <div class="example"><div class="example-title"><span>Example 6</span></div><pre class="example">&lt;rdf:Description xmlns:base="http://example/author#"
+               rdf:type="http://microformats.org/profile/hcard"&gt;
+&lt;base:bar&gt;
+  &lt;rdf:Description&gt;
+    &lt;base:baz&gt;Baz&lt;/base:baz&gt;
+  &lt;/rdf:Description&gt;
+&lt;/base:bar&gt;
+&lt;/rdf:Description&gt;</pre></div>
+    </div>
+
+</section>
+
+<section class="informative" id="value-typing">
+  <h3 role="heading" id="h3_value-typing"><span class="secno">3.2 </span>Value Typing</h3><p><em>This section is non-normative.</em></p>
+  <p>In microdata, all values are strings. In RDF, values may be resources
+   or may be typed with an appropriate datatype.</p>
+  <p> In some cases, the type of a microdata value can be determined from the
+   element on which it is specified. In particular:</p>
+  <ul>
+    <li>URL property elements provide URLs</li>
+    <li><code>time</code> element provides dates, times and durations</li>
+    <li><code>data</code> and <code>meter</code> elements provides doubles and integers</li>
+  </ul>
+</section>
+</section>
+
+<section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion">
+  <!--OddPage--><h2 id="vocab_expansion" role="heading"><span class="secno">4. </span>Vocabulary Expansion</h2>
+   <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_4"><span>Note</span></div><p class="">Support for the registry is
+      being amended
+      (see <a href="#issues">issue 10</a>).</p></div>
+  <p>Microdata requires that all values of <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> come from the same vocabulary. This
+    is required as <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> values are resolved relative to that vocabulary. However,
+    it is often useful to define an <a href="#dfn-item" class="internalDFN">item</a> to have types from multiple different vocabularies.</p>
+  <p>Vocabulary expansion uses simple rules to generate additional triples based on 
+    rules and property relationships described in the <a href="#dfn-registry" class="internalDFN">registry</a>.
+    Within the <a href="#dfn-registry" class="internalDFN">registry</a>, a property definition may have either <code>equivalentProperty</code>
+    or <code>subPropertyOf</code> keys having a IRI value (or array of IRI values)
+    of the associated property. Such an
+    entry causes the processor to generate triples associating the source
+    property IRI with the target property IRI using either
+    <code>rdf:subPropertyOf</code> or
+    <code>owl:equivalentProperty</code> predicates.</p>
+  <p>For example, the <a href="#dfn-registry" class="internalDFN">registry</a> definition for the <em>additionalType</em> property
+    within schema.org, defines <em>additionalType</em> to have an <code>rdfs:subPropertyOf</code>
+    relationship with <code>rdf:type</code>.</p>
+
+<div class="example"><div class="example-title"><span>Example 7</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;link itemprop="additionalType" href="http://xmlns.com/foaf/0.1/Person"/&gt;
+  &lt;a itemprop="email http://xmlns.com/foaf/0.1/mbox" href="mailto:mail@gmail.com"&gt;
+    mail@gmail.com
+  &lt;/a&gt;
+&lt;/div&gt;</pre></div>
+
+  <p>The previous example, indicates a <a href="#dfn-registry" class="internalDFN">registry</a> rule, which causes the processor to emit
+    an extra triple when first seeing the <code>additionalProperty</code> <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>:</p>
+
+<div class="example"><div class="example-title"><span>Example 8</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+[ a schema:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
+] .</pre></div>
+
+  <p>After performing vocabulary expansion, an additional <code>rdf:type</code> triple is generated:</p>
+
+<div class="example"><div class="example-title"><span>Example 9</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+&lt;&gt; rdfa:usesVocabulary schema: .
+[ a schema:Person, foaf:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
+] .  </pre></div>
+
+  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_5"><span>Note</span></div><p class="">The <code>owl:equivalentProperty</code> rule is more powerfull than <code>rdfs:subPropertyOf</code>,
+    in that if any equivalent property matches, then the source property would also cause a triple to be generated.
+    For example, if the registry stated that <code>name</code> was equivalent to <code>rdfs:label</code>,
+    than any use of <code>name</code> in a <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> would cause a triple using
+    <code>rdfs:label</code> to be emitted, as with <code>rdfs:subPropertyOf</code>. However, logically,
+    any use of <code>label</code> where the current voabulary were <code>rdfs:</code> could also cause
+    a triple using <code>schema:name</code> to be emitted. To simplify processing, this specification
+    requires that all values of a <code>owl:equivalentProperty</code> registry entry have their
+    own rules with those values as keys within the <code>property</code> section of their respective
+    vocabularies.</p></div>
+</section>
+
+<section id="control-of-microdata-processors">
+  <!--OddPage--><h2 role="heading" id="h2_control-of-microdata-processors"><span class="secno">5. </span>Control of Microdata Processors</h2>
+  <p>The external registry may be controlled by the
+    <code>registry</code> option passed to the microdata processor. If specified, the registry
+    must be loaded from the location indicated as the option value, Otherwise,
+    the processor <em class="rfc2119" title="MUST">MUST</em> load the default <a href="#dfn-registry" class="internalDFN">registry</a> from <code>http://www.w3.org/ns/md</code>.
+    <span class="note">see <a href="#issues">issue 10</a></span>.
+  </p><p>Setting <code>registry</code> is performed in a processor-specific way.</p>
+  <p>
+    When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors <em class="rfc2119" title="SHOULD">SHOULD</em> use <code>registry</code>
+    query parameter. Acceptable values for <code>registry</code> is a URI-encoded URL.
+    Web service processors <em class="rfc2119" title="SHOULD">SHOULD</em> return the resulting RDF graph using a requested format specified by
+    HTTP Content Negotiation for an acceptable content type. Web service processors <em class="rfc2119" title="MUST">MUST</em> support [<cite><a class="bibref" href="#bib-N-TRIPLES">N-TRIPLES</a></cite>].
+</p></section>
+
+
+<section id="algorithm">
+  <!--OddPage--><h2 role="heading" id="h2_algorithm"><span class="secno">6. </span>Algorithm</h2>
+  <p>
+    Transformation of Microdata to RDF makes use of general processing rules described in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]
+    for the treatment of <a title="item" href="#dfn-item" class="internalDFN">items</a>.
+  </p>
+  <section id="algorithm-terms">
+    <h3 role="heading" id="h3_algorithm-terms"><span class="secno">6.1 </span>Algorithm Terms</h3>
+    <dl>
+      <dt><dfn id="dfn-absolute-url">absolute URL</dfn></dt><dd>
+        The term <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#absolute-url">absolute URL</a></cite>
+        is defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+      </dd>
+      <dt><dfn id="dfn-blank-node">blank node</dfn></dt><dd>
+        A blank node is a node in a graph that is neither a <a href="#dfn-uri-reference" class="internalDFN">URI reference</a> nor a <a href="#dfn-literal" class="internalDFN">literal</a>.
+        <a href="#dfn-item" class="internalDFN">Item</a>s without a <a href="#dfn-global-identifier" class="internalDFN">global identifier</a> have a blank node allocated to them.
+        (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+      </dd>
+      <dt><dfn id="dfn-canonicalized-fragment">canonicalized fragment</dfn></dt><dd>
+        The term <cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">canonicalized fragment</a></cite>
+        is defined in [<cite><a class="bibref" href="#bib-URL">URL</a></cite>]. This involves transforming elements added to URLs to ensure that the result
+        remains a valid URL. Non-Unicode characters, and characters less than U+0020 SPACE character
+        (" ") are subject to percent escaping.
+      </dd>
+      <dt><dfn id="dfn-document-base">document base</dfn></dt><dd>
+        The base address of the document being processed, as defined in <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#resolving-urls">Resolving URLs</a></cite> in
+        [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+      </dd>
+      <dt><dfn id="dfn-evaluation-context">evaluation context</dfn></dt><dd>
+        A data structure including the following elements:
+        <dl>
+          <dt><dfn id="dfn-memory">memory</dfn></dt><dd>
+            a mapping of items to subjects, initially empty;
+          </dd>
+          <dt><dfn id="dfn-current-type">current type</dfn></dt><dd>
+            an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a> for the <em>current type</em>, used when an <a href="#dfn-item" class="internalDFN">item</a> does not
+            contain an <a href="#dfn-item-type" class="internalDFN">item type</a>;
+          </dd>
+          <dt><dfn id="dfn-current-vocabulary">current vocabulary</dfn></dt><dd>
+            an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a> for the <em>current vocabulary</em>, from the <a href="#dfn-registry" class="internalDFN">registry</a>.
+          </dd>
+        </dl>
+      </dd>
+      <dt><dfn id="dfn-item">item</dfn></dt><dd>
+         An <a href="#dfn-item" class="internalDFN">item</a> is described by an element containing an <a class="aref internalDFN" href="#dfn-itemscope">itemscope</a> attribute. The list
+         of top-level microdata items may be retrieved using the
+         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
+         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-document-getitems">document.getItems</a></cite></code>
+         method.
+      </dd>
+      <dt><dfn id="dfn-item-properties">item properties</dfn></dt><dd>
+        The mechanism for finding the <a title="item properties" href="#dfn-item-properties" class="internalDFN">properties of an item</a> The list
+         of item properties items may be retrieved using the
+         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
+         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-properties">element.properties</a></cite></code>
+         attribute.
+      </dd>
+      <dt><dfn id="dfn-global-identifier">global identifier</dfn></dt><dd>
+        The value of an <a href="#dfn-item" class="internalDFN">item</a>'s <a href="#dfn-itemid" class="internalDFN">itemid</a> attribute, if it has one,
+        <a href="http://www.w3.org/TR/html/infrastructure.html#resolving-urls">resolved</a> relative to the element on which the attribute is specified. (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite> in
+        [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+      </dd>
+      <dt><dfn id="dfn-literal">literal</dfn></dt><dd>
+        Literals are values such as strings and dates, including <dfn id="dfn-typed-literal">typed literal</dfn>s and
+        <dfn id="dfn-plain-literal">plain literal</dfn>s.
+        (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+      </dd>
+      <dt><dfn id="dfn-property">property</dfn></dt><dd>
+        Each <a href="#dfn-name" class="internalDFN">name</a> identifies a <a href="#dfn-property" class="internalDFN">property</a> of an <a href="#dfn-item" class="internalDFN">item</a>.
+        An <a href="#dfn-item" class="internalDFN">item</a> may have multiple elements sharing the same <a href="#dfn-name" class="internalDFN">name</a>, creating
+        a multi-valued <a href="#dfn-property" class="internalDFN">property</a>.
+       </dd>
+      <dt><dfn id="dfn-property-names">property names</dfn></dt><dd>
+        The tokens of an element's <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> attribute. Each token is a <a href="#dfn-name" class="internalDFN">name</a>.
+        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#property-names">property names</a></cite> in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+      </dd>
+      <dt><dfn id="dfn-property-value">property value</dfn></dt><dd>
+        The <a href="#dfn-property-value" class="internalDFN">property value</a> of a name-value pair added by an element with an <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>
+        attribute depends on the element.
+        <dl>
+          <dt>If the element has no <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> attribute</dt>
+          <dd>The value is null and no triple should be generated.</dd>
+          <dt>If the element creates an <a href="#dfn-item" class="internalDFN">item</a> (by having an <a class="aref internalDFN" href="#dfn-itemscope">itemscope</a> attribute)</dt>
+          <dd>
+            The value is the <a href="#dfn-uri-reference" class="internalDFN">URI reference</a> or <a href="#dfn-blank-node" class="internalDFN">blank node</a> returned from
+            <a href="#generate-the-triples">generate the triples</a> for that <a href="#dfn-item" class="internalDFN">item</a>.
+          </dd>
+          <dt>If the element is a URL property element (<code>a</code>, <code>area</code>, <code>audio</code>,
+            <code>embed</code>, <code>iframe</code>, <code>img</code>, <code>link</code>, <code>object</code>,
+            <code>source</code>, <code>track</code> or <code>video</code>)</dt>
+          <dd>
+            The value is a <a href="#dfn-uri-reference" class="internalDFN">URI reference</a> created from <code><cite>
+              <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+              (See relevant attribute descriptions in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>]).
+          </dd>
+          <dt>If the element is a <code>meter</code> or <code>data</code> element.</dt>
+          <dd>The value is a <a href="#dfn-literal" class="internalDFN">literal</a> made from <code><cite>
+            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+            <dl>
+              <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#numbers">valid integer</a></cite> having the lexical form of <cite><a href="http://www.w3.org/TR/xmlschema-2/#date">xsd:integer</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>]</dt>
+                <dd>The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#integer</code>.
+              </dd>
+
+             <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">valid float number</a></cite> having the lexical form of <cite><a href="http://www.w3.org/TR/xmlschema-2/#date">xsd:double</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>]</dt>
+                <dd>The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#double</code>.
+              </dd>
+
+              <dt>Otherwise</dt>
+                <dd>The value is a <a href="#dfn-plain-literal" class="internalDFN">plain literal</a>.
+              </dd>
+            </dl>
+          </dd>
+          <dt>
+            If the element is a <code>meta</code> element with a <code>@content</code> attribute.
+          </dt>
+          <dd>
+            The value is a <a href="#dfn-plain-literal" class="internalDFN">plain literal</a> created from the value of the <code>@content</code> attribute
+            with language information set from the
+            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
+            of the property element
+          </dd>
+          <dt>If the element is a <code>time</code> element.</dt>
+          <dd>The value is a <a href="#dfn-literal" class="internalDFN">literal</a> made from <code><cite>
+            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+            <dl>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#dates">
+                  valid date string
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#date">xsd:date</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#date</code>.
+              </dd>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#times">
+                  valid time string
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#time">xsd:time</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#time</code>.
+              </dd>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
+                  valid local date and time string
+                </a></cite>
+                or
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
+                  valid global date and time string
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#dateTime</code>.
+              </dd>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#months">
+                  valid month string
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth">xsd:gYearMonth</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#gYearMonth</code>.
+              </dd>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">
+                  valid non-negative integer
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYear">xsd:gYear</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+               <code>http://www.w3.org/2001/XMLSchema#gYear</code>.
+              </dd>
+              <dt>
+                If the value is a
+                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string">
+                  valid duration string
+                </a></cite>
+                having the lexical form of
+                <cite><a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a></cite>
+                [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>].
+              </dt>
+              <dd>
+                The value is a <a href="#dfn-typed-literal" class="internalDFN">typed literal</a> composed of the value and
+                <code>http://www.w3.org/2001/XMLSchema#duration</code>.
+              </dd>
+              <dt>Otherwise</dt>
+              <dd>
+                The value is a <a href="#dfn-plain-literal" class="internalDFN">plain literal</a> created from the value with language information set from the
+                <cite><a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
+                of the property element.
+                <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_6"><span>Note</span></div><p class="">The HTML
+                  <em>valid yearless date string</em>
+                  is similar to
+                  <cite><a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay">xsd:gMonthDay</a></cite>,
+                  but the lexical forms differ, so it is not included in this conversion.</p></div>
+              </dd>
+            </dl>
+            <p>See
+              <cite><a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-time-element">
+                The <code>time</code> element
+              </a></cite>
+              in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].</p>
+          </dd>
+          <dt>Otherwise</dt>
+          <dd>The value is a <a href="#dfn-plain-literal" class="internalDFN">plain literal</a> created from the value with language information set from the
+            <cite><a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">language</a></cite> of the property element.
+            <p>See
+              <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
+                The <code>lang</code> and <code>xml:lang</code> attributes
+              </a></cite>
+              in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>] for determining the language of a node.</p>
+          </dd>
+        </dl>
+      </dd>
+      <dt><dfn id="dfn-top-level-item">top-level item</dfn></dt><dd>
+        An <a href="#dfn-item" class="internalDFN">item</a> which does not contain an <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> attribute.
+        Available through the <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
+        <code>document.getItems</code>.
+        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#top-level-microdata-items">top-level microdata item</a></cite> in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
+      </dd>
+      <dt><dfn id="dfn-uri-reference">URI reference</dfn></dt><dd>
+        URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
+        within an RDF triple, as opposed to a <a href="#dfn-literal" class="internalDFN">literal</a> value that may contain a string representation of a
+        URI. (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+        <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_3"><span>Issue</span></div><div class="">
+          <p>The HTML5/microdata content model for <code>@href</code>, <code>@src</code>,
+            <code>@data</code>, <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> and <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> and <a class="aref internalDFN" href="#dfn-itemid">itemid</a> is that of
+            a URL, not a URI or IRI.</p>
+          <p>A proposed mechanism for specifying the range of <a title="property value" href="#dfn-property-value" class="internalDFN">property values</a> to be URI reference or IRI could
+            allow these to be specified as subject or object using a <code>@content</code> attribute.</p>
+        </div></div>
+      </dd>
+      <dt><dfn id="dfn-vocabulary">vocabulary</dfn></dt><dd>
+        A vocabulary is a collection of URIs, suitable for use as an <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> or <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>
+        value, that share a common <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>. That prefix is the vocabulary URI. A vocabulary URI is not
+        allowed to be a prefix of another vocabulary URI.
+        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_7"><span>Note</span></div><div class="">
+          This definition differs from the language in the HTML spec and is just for the purpose of this
+          document. In HTML, a vocabulary is a specification, and doesn't have a URI. In our view, if one
+          specification defines ten <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>s, then these could be treated as one vocabulary or as ten
+          distinct vocabularies; it is entirely up to the vocabulary creator.
+        </div></div>
+      </dd>
+    </dl>
+  </section>
+
+  <section id="rdf-conversion-algorithm">
+    <h3 role="heading" id="h3_rdf-conversion-algorithm"><span class="secno">6.2 </span>RDF Conversion Algorithm</h3>
+    <p>A HTML document containing microdata <em class="rfc2119" title="MAY">MAY</em> be converted to any other RDF-compatible document
+    format using the algorithm specified in this section.</p>
+    <p>A conforming microdata processor implementing RDF conversion <em class="rfc2119" title="MUST">MUST</em> implement a
+      processing algorithm that results in the equivalent triples to those that the following
+      algorithm generates:</p>
+
+    <ol class="algorithm">
+      <li>For each element that is also a <a href="#dfn-top-level-item" class="internalDFN">top-level item</a>,
+        <a href="#generate-the-triples">Generate the triples</a> for that item using the
+        <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a>.
+      </li>
+    </ol>
+  </section>
+
+  <section id="generate-the-triples">
+    <h3 role="heading" id="h3_generate-the-triples"><span class="secno">6.3 </span>Generate the triples</h3>
+    <p>
+      When the user agent is to Generate triples for an <a href="#dfn-item" class="internalDFN">item</a> <em>item</em>, given
+      <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a>, it must run the following steps:
+    </p>
+    <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_8"><span>Note</span></div><p class="">
+      This algorithm has undergone substantial change from the original microdata specification [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>].
+    </p></div>
+    <ol class="algorithm">
+      <li>
+        If there is an entry for <em>item</em> in <a href="#dfn-memory" class="internalDFN">memory</a>, then let <em>subject</em> be the subject of
+        that entry. Otherwise, if <em>item</em> has a <a href="#dfn-global-identifier" class="internalDFN">global identifier</a> and that
+        <a href="#dfn-global-identifier" class="internalDFN">global identifier</a> is an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a>, let <em>subject</em> be that
+        <a href="#dfn-global-identifier" class="internalDFN">global identifier</a>. Otherwise, let <em>subject</em> be a new <a href="#dfn-blank-node" class="internalDFN">blank node</a>.
+      </li>
+      <li>Add a mapping from <em>item</em> to <em>subject</em> in <a href="#dfn-memory" class="internalDFN">memory</a></li>
+      <li>
+        For each <em>type</em> returned from
+        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
+        of the element defining the <a href="#dfn-item" class="internalDFN">item</a>.
+        <ol class="algorithm">
+          <li>If <em>type</em> is an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a>, generate the following triple:
+            <dl class="triple">
+              <dt>subject</dt>
+              <dd><em>subject</em></dd>
+              <dt>predicate</dt>
+              <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code></dd>
+              <dt>object</dt>
+              <dd><em>type</em> (as a <a href="#dfn-uri-reference" class="internalDFN">URI reference</a>)</dd>
+            </dl>
+          </li>
+        </ol>
+      </li>
+      <li>
+        Set <em>type</em> to the first value returned from
+        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
+        of the element defining the <a href="#dfn-item" class="internalDFN">item</a>.
+      </li>
+      <li>Otherwise, set <em>type</em> to <a href="#dfn-current-type" class="internalDFN">current type</a> from <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a> if not empty.</li>
+      <li>If the <a href="#dfn-registry" class="internalDFN">registry</a> contains a <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> that is a
+        character for character match of <em>type</em> up to the length of the 
+        <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>,
+        set <em>vocab</em> as that <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>.
+      </li>
+      <li>Otherwise, if type is not empty, construct <em>vocab</em> by removing everything following the last
+        SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
+      <li>Update <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a> setting <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a> to <em>vocab</em>.</li> 
+      <li id="alg-prop-names">For each element <em>element</em> that has one or more <a href="#dfn-property-names" class="internalDFN">property names</a> and is one of the
+        <a title="item properties" href="#dfn-item-properties" class="internalDFN">properties of the item</a> <em>item</em>
+        run the following substep:
+        <ol class="algorithm">
+          <li>
+            For each <em>name</em> in the element's <a href="#dfn-property-names" class="internalDFN">property names</a>, run the following substeps:
+            <ol class="algorithm">
+              <li>
+                Let <em>context</em> be a copy of <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a> with <a href="#dfn-current-type" class="internalDFN">current type</a> set
+                to <em>type</em>.
+              </li>
+              <li>
+                Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
+                using <em>context</em> and <em>name</em>.
+              </li>
+              <li>
+                Let <em>value</em> be the <a href="#dfn-property-value" class="internalDFN">property value</a> of <em>element</em>.
+              </li>
+              <li>
+                If <em>value</em> is an <a href="#dfn-item" class="internalDFN">item</a>, then <a href="#generate-the-triples">generate the
+                triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
+                from those steps.
+              </li>
+              <li>Generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>subject</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>value</em></dd>
+                </dl>
+              </li>
+              <li>
+                If an entry exists in the <a href="#dfn-registry" class="internalDFN">registry</a> for <em>name</em> in the vocabulary
+                associated with <em>vocab</em> having the key <code>subPropertyOf</code> or
+                <code>equivalentProperty</code>, for each such value <em>equiv</em>, generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>subject</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>equiv</em></dd>
+                  <dt>object</dt>
+                  <dd><em>value</em></dd>
+                </dl>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>Return <em>subject</em></li>
+    </ol>
+  </section>
+  
+  <section id="generate-predicate-uri">
+    <h3 role="heading" id="h3_generate-predicate-uri"><span class="secno">6.4 </span>Generate Predicate URI</h3>
+    <p>Predicate URI generation makes use of <a href="#dfn-current-type" class="internalDFN">current type</a>
+      and <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a> from an <a href="#dfn-evaluation-context" class="internalDFN">evaluation
+      context</a> <em>context</em> along with <em>name</em>.</p>
+    <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_9"><span>Note</span></div><p class="">Support for the <code>contextual</code> <em>scheme</em> is
+      being considered for removal
+      (see <a href="#issues">issue 10</a>).</p></div>
+
+    <ol class="algorithm">
+      <li>If <em>name</em> is an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a>, return <em>name</em>
+        as a <a href="#dfn-uri-reference" class="internalDFN">URI reference</a>.</li>
+      <li>If <a href="#dfn-current-type" class="internalDFN">current type</a> from <em>context</em> is null,
+        there can be no <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a>. Return the <a href="#dfn-uri-reference" class="internalDFN">URI reference</a>
+        that is the <a href="#dfn-document-base" class="internalDFN">document base</a> with its <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
+        set to the <a href="#dfn-canonicalized-fragment" class="internalDFN">canonicalized fragment</a> value of <em>name</em>.
+        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_10"><span>Note</span></div><div class="">
+          This rule is intended to allow for a the case where no type is set, and
+          therefore there is no vocabulary from which to extract rules. For
+          example, if there is a <a href="#dfn-document-base" class="internalDFN">document base</a> of
+          <code>http://example.org/doc</code> and an <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>
+          of 'title', a URI will be constructed to be
+          <code>http://example.org/doc#title</code>.
+        </div></div>
+      </li>
+      <li id="scheme-vocab">Set <em>expandedURI</em> to the <a href="#dfn-uri-reference" class="internalDFN">URI reference</a> constructed by
+        appending the <a href="#dfn-canonicalized-fragment" class="internalDFN">canonicalized fragment</a> value of <em>name</em> to <a href="#dfn-current-vocabulary" class="internalDFN">current
+        vocabulary</a>, separated by a U+0023 NUMBER SIGN character ("#") unless the
+        <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
+        ("#") or SOLIDUS U+002F ("/").</li>
+      <li>Return <em>expandedURI</em>.</li>
+    </ol>
+  </section>
+  
+</section>
+
+<section class="appendix informative" id="reverse-itemprop">
+  <!--OddPage--><h2 role="heading" id="h2_reverse-itemprop"><span class="secno">A. </span>Reverse <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a></h2><p><em>This section is non-normative.</em></p>
+
+  <p>The <a href="https://www.w3.org/wiki/WebSchemas">WebSchemas community</a> has
+    <a href="https://www.w3.org/wiki/WebSchemas/InverseProperties">proposed</a> the use of a new Microdata attribute:
+    <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a>. Although not present in [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] at this
+    time, the attribute can be very useful in many markup examples where items
+    are related using the reverse of a common property; this saves creating new properties
+    which exist solely for the purpose of describing such reverse relationships. Evidence
+    for the utility of such a feature can be seen in the 
+    <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">RDFa <code>@rev</code> attribute</a> [<cite><a class="bibref" href="#bib-RDFA-CORE">RDFA-CORE</a></cite>]
+    and the <a href="http://www.w3.org/TR/json-ld/#reverse-properties">JSON-LD <code>@reverse</code> property</a> [<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>].
+
+  </p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_11"><span>Note</span></div><p class="">See <a href="#issues">issue 5</a> for further reference.</p></div>
+
+  <p>This feature adds the following attribute:</p>
+  <dl>
+    <dt><dfn class="adef" id="dfn-itemprop-reverse">itemprop-reverse</dfn></dt><dd>
+      An attribute used to identify one or more <a title="name" href="#dfn-name" class="internalDFN">names</a> of an <a title="item" href="#dfn-item" class="internalDFN">items</a> reversing the
+      sense of <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>. An <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a>
+      contains a space separated list of <a title="name" href="#dfn-name" class="internalDFN">names</a> which may either by <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">absolute URLs</a> or terms
+      associated with the type of the <a href="#dfn-item" class="internalDFN">item</a> as defined by the referencing <a href="#dfn-item" class="internalDFN">item</a>'s
+      <a href="#dfn-item-type" class="internalDFN">item type</a>.
+    </dd>
+  </dl>
+
+  <p>The <a href="#algorithm" class="sectionRef sec-ref">Algorithm</a> is extended accordingly:</p>
+  <section id="algorithm-terms-1">
+    <h3 role="heading" id="h3_algorithm-terms-1"><span class="secno">A.1 </span>Algorithm Terms</h3>
+    <dl>
+      <dt><dfn id="dfn-reverse-properties">reverse properties</dfn></dt><dd>
+        The mechanism for finding the <a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN">reverse properties of an item</a> The list
+         of reverse properties is the result of transforming each space-separated-value of an item's <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a>
+         to a URL as defined in <a href="#property-uri-generation">Property URI Generation</a>.
+      </dd>
+      <dt><dfn id="dfn-reverse-property-names">reverse property names</dfn></dt><dd>
+        The tokens of an element's <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a> attribute. Each token is a <a href="#dfn-name" class="internalDFN">name</a>.
+      </dd>
+    </dl>
+  </section>
+
+  <section id="generate-the-triples-1">
+    <h3 role="heading" id="h3_generate-the-triples-1"><span class="secno">A.2 </span>Generate the triples</h3>
+    <p>The Triples generation algorithm is extended with the following step to take place immediately
+      after <a href="#alg-prop-names">Step 9</a>:</p>
+    <ol class="algorithm" start="10">
+      <li>
+        For each element <em>element</em> that has one or more <a href="#dfn-reverse-property-names" class="internalDFN">reverse property names</a> and is one of the
+        <a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN">reverse properties of the item</a> <em>item</em>,
+        run the following substep:
+        <ol class="algorithm">
+          <li>
+            For each <em>name</em> in the element's <a href="#dfn-reverse-property-names" class="internalDFN">reverse property names</a>, run the following substeps:
+            <ol class="algorithm">
+              <li>
+                Let <em>context</em> be a copy of <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a> with <a href="#dfn-current-type" class="internalDFN">current type</a> set
+                to <em>type</em> and <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a> set to <em>vocab</em>.
+              </li>
+              <li>
+                Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
+                using <em>context</em> and <em>name</em>.
+              </li>
+              <li>
+                Let <em>value</em> be the <a href="#dfn-property-value" class="internalDFN">property value</a> of <em>element</em>.
+              </li>
+              <li>
+                If <em>value</em> is an <a href="#dfn-item" class="internalDFN">item</a>, then <a href="#generate-the-triples">generate the
+                triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
+                from those steps.
+              </li>
+              <li>
+                Otherwise, if <em>value</em> is a <a href="#dfn-literal" class="internalDFN">literal</a> ignore the <em>value</em>
+                and continue to the next <em>name</em>;
+                it is an error for the <em>value</em> of <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a> to be a <a href="#dfn-literal" class="internalDFN">literal</a>.
+              </li><li>Generate the following triple:
+                <dl class="triple">
+                  <dt>subject</dt>
+                  <dd><em>value</em></dd>
+                  <dt>predicate</dt>
+                  <dd><em>predicate</em></dd>
+                  <dt>object</dt>
+                  <dd><em>subject</em></dd>
+                </dl>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <p>Simple use of <a class="aref internalDFN" href="#dfn-itemprop-reverse">itemprop-reverse</a>:</p>
+  <div class="example"><div class="example-title"><span>Example 10</span></div><pre class="example">&lt;div  itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;span itemprop="name"&gt;William Shakespeare&lt;/span&gt;
+  &lt;link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd"&gt;
+&lt;/div&gt;</pre></div>
+
+  <p>Results in the following Turtle:</p>
+  <div class="example"><div class="example-title"><span>Example 11</span></div><pre class="example">@prefix schema: &lt;http://schema.org/&gt; .
+&lt;http://www.freebase.com/m/0yq9mqd&gt; schema:creator [
+  a schema:Person;
+  schema:name "William Shakespeare"
+] .</pre></div>
+
+</section>
+
+<section class="appendix informative" id="testing">
+  <!--OddPage--><h2 role="heading" id="h2_testing"><span class="secno">B. </span>Testing</h2><p><em>This section is non-normative.</em></p>
+  <p>A test suite [<cite><a class="bibref" href="#bib-MICRODATA-RDF-TESTS">MICRODATA-RDF-TESTS</a></cite>] under development to help processor developers verify
+    conformance to this specification.</p>
+</section>
+
+<section class="appendix informative" id="markup-examples">
+<!--OddPage--><h2 role="heading" id="h2_markup-examples"><span class="secno">C. </span>Markup Examples</h2><p><em>This section is non-normative.</em></p>
+
+<p>The microdata example below expresses book information as an FRBR Work item.</p>
+
+<div class="example"><div class="example-title"><span>Example 12</span></div><pre class="example">&lt;dl itemscope
+    itemtype="http://purl.org/vocab/frbr/core#Work"
+    itemid="http://books.example.com/works/45U8QJGZSQKDH8N"
+    lang="en"&gt;
+ &lt;dt&gt;Title&lt;/dt&gt;
+ &lt;dd&gt;&lt;cite itemprop="http://purl.org/dc/terms/title"&gt;Just a Geek&lt;/cite&gt;&lt;/dd&gt;
+ &lt;dt&gt;By&lt;/dt&gt;
+ &lt;dd&gt;&lt;span itemprop="http://purl.org/dc/terms/creator"&gt;Wil Wheaton&lt;/span&gt;&lt;/dd&gt;
+ &lt;dt&gt;Format&lt;/dt&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596007683.BOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/BOOK"&gt;
+  Print
+ &lt;/dd&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://books.example.com/products/9780596802189.EBOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://books.example.com/product-types/EBOOK"&gt;
+  Ebook
+ &lt;/dd&gt;
+&lt;/dl&gt;</pre></div>
+
+<p>Assuming that <a href="#dfn-registry" class="internalDFN">registry</a> contains a an entry for <code>http://purl.org/vocab/frbr/core#</code>
+  this is equivalent to the following Turtle:</p>
+<div class="example"><div class="example-title"><span>Example 13</span></div><pre class="example">@prefix dc: &lt;http://purl.org/dc/terms/&gt; .
+@prefix frbr: &lt;http://purl.org/vocab/frbr/core#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+
+&lt;&gt; rdfa:usesVocabulary frbr: .
+
+&lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt; a frbr:Work ;
+  dc:creator "Wil Wheaton"@en ;
+  dc:title "Just a Geek"@en ;
+  frbr:realization &lt;http://books.example.com/products/9780596007683.BOOK&gt;,
+    &lt;http://books.example.com/products/9780596802189.EBOOK&gt; .
+
+&lt;http://books.example.com/products/9780596007683.BOOK&gt; a frbr:Expression ;
+  dc:type &lt;http://books.example.com/product-types/BOOK&gt; .
+
+&lt;http://books.example.com/products/9780596802189.EBOOK&gt; a frbr:Expression ;
+  dc:type &lt;http://books.example.com/product-types/EBOOK&gt; .</pre></div>
+
+<p>The following snippet of HTML has microdata for two people with the same address. This illustrates two
+  <a title="item" href="#dfn-item" class="internalDFN">items</a> referencing a third item, and how only a single RDF resource definition is created
+  for that third item.</p>
+<div class="example"><div class="example-title"><span>Example 14</span></div><pre class="example">&lt;p&gt;
+ Both
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+       &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Princeton&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ and
+ &lt;span itemscope itemtype="http://microformats.org/profile/hcard" itemref="home"&gt;
+   &lt;span itemprop="fn"
+     &gt;&lt;span itemprop="n" itemscope
+       &gt;&lt;span itemprop="given-name"&gt;Trekkie&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+ live at
+ &lt;span id="home" itemprop="adr" itemscope&gt;
+   &lt;span itemprop="street-address"&gt;Avenue Q&lt;/span&gt;.
+ &lt;/span&gt;
+&lt;/p&gt;</pre></div>
+
+<p>Assuming that <a href="#dfn-registry" class="internalDFN">registry</a> contains a an entry for <code>http://microformats.org/profile/hcard</code>
+  it generates these triples expressed in Turtle:</p>
+
+<div class="example"><div class="example-title"><span>Example 15</span></div><pre class="example">@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Princeton";
+  hcard:n [ hcard:given-name "Princeton" ];
+  hcard:adr _:a
+] .
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Trekkie";
+  hcard:n [ hcard:given-name "Trekkie" ];
+  hcard:adr _:a
+] .
+
+_:a hcard:street-address "Avenue Q" .</pre></div>
+
+<p>The following snippet of HTML has microdata for a playlist
+  and illustrates the use of the <code>schema:additionalType</code>
+  property to relate recordings to the <cite><a href="http://musicontology.com/">Music Ontology</a></cite>:</p>
+<div class="example"><div class="example-title"><span>Example 16</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
+  &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
+  &lt;meta itemprop="numTracks" content="2"/&gt;
+  &lt;p&gt;Including works by
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt; and
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;&lt;/p&gt;.
+
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    1.&lt;span itemprop="name"&gt;Sweet Home Alabama&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt;
+    &lt;link href="sweet-home-alabama" itemprop="url" /&gt;
+   &lt;/div&gt;
+
+  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
+    &lt;link itemprop="additionalType" href="http://purl.org/ontology/mo/MusicalManifestation"/&gt;
+    2.&lt;span itemprop="name"&gt;Shook you all Night Long&lt;/span&gt; -
+    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;
+    &lt;link href="shook-you-all-night-long" itemprop="url" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+
+<p>Assuming that <a href="#dfn-registry" class="internalDFN">registry</a> contains a an entry for <code>http://schema.org/</code>
+  it generates these triples expressed in Turtle:</p>
+
+<div class="example"><div class="example-title"><span>Example 17</span></div><pre class="example">@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+
+[ a schema:MusicPlaylist;
+  schema:name "Classic Rock Playlist";
+  schema:byArtist "Lynard Skynard" "AC/DC";
+  schema:numTracks "2";
+  schema:tracks [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "Lynard Skynard";
+    schema:name "Sweet Home Alabama";
+    schema:url &lt;sweet-home-alabama&gt;
+  ], [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "AC/DC";;
+    schema:name "Shook you all Night Long";
+    schema:url &lt;shook-you-all-night-long&gt;
+  ]
+] .</pre></div>
+
+</section>
+
+<section class="appendix informative" id="default-registry">
+  <!--OddPage--><h2 role="heading" id="h2_default-registry"><span class="secno">D. </span>Default <a href="#dfn-registry" class="internalDFN">registry</a></h2><p><em>This section is non-normative.</em></p>
+  <p>The following is the default <a href="#dfn-registry" class="internalDFN">registry</a> in JSON format, as of the time of publication.</p>
+
+  <div class="example"><div class="example-title"><span>Example 18</span></div><pre class="example">{
+  "http://schema.org/": {
+    "properties": {
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
+    }
+  },
+  "http://microformats.org/profile/hcard": {}
+}</pre></div>
+</section>
+
+<section class="appendix informative" id="acknowledgements">
+  <!--OddPage--><h2 role="heading" id="h2_acknowledgements"><span class="secno">E. </span>Acknowledgements</h2><p><em>This section is non-normative.</em></p>
+  <p>Thanks to Richard Cyganiak for property URI and vocabulary terminology and the general excellent
+    consideration of practical problems in generating RDF from microdata.</p>
+</section>
+
+
+
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 role="heading" id="h2_references"><span class="secno">F. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_normative-references"><span class="secno">F.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 28 October 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+</dd><dt id="bib-MICRODATA">[MICRODATA]</dt><dd rel="dcterms:requires">Ian Hickson. <a href="http://www.w3.org/TR/microdata/"><cite>HTML Microdata</cite></a>. 29 October 2013. W3C Note. URL: <a href="http://www.w3.org/TR/microdata/">http://www.w3.org/TR/microdata/</a>
+</dd><dt id="bib-N-TRIPLES">[N-TRIPLES]</dt><dd rel="dcterms:requires">Gavin Carothers; Andy Seaborne. <a href="http://www.w3.org/TR/n-triples/"><cite>RDF 1.1 N-Triples</cite></a>. 25 February 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a>
+</dd><dt id="bib-RDF-CONCEPTS">[RDF-CONCEPTS]</dt><dd rel="dcterms:requires">Graham Klyne; Jeremy Carroll. <a href="http://www.w3.org/TR/rdf-concepts/"><cite>Resource Description Framework (RDF): Concepts and Abstract Syntax</cite></a>. 10 February 2004. W3C Recommendation. URL: <a href="http://www.w3.org/TR/rdf-concepts/">http://www.w3.org/TR/rdf-concepts/</a>
+</dd><dt id="bib-RFC3986">[RFC3986]</dt><dd rel="dcterms:requires">T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
+</dd><dt id="bib-URL">[URL]</dt><dd rel="dcterms:requires">Erik Arvidsson; Michael[tm] Smith. <a href="http://www.w3.org/TR/url/"><cite>URL</cite></a>. 24 May 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/url/">http://www.w3.org/TR/url/</a>
+</dd><dt id="bib-XMLSCHEMA11-2">[XMLSCHEMA11-2]</dt><dd rel="dcterms:requires">David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al. <a href="http://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. 5 April 2012. W3C Recommendation. URL: <a href="http://www.w3.org/TR/xmlschema11-2/">http://www.w3.org/TR/xmlschema11-2/</a>
+</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_informative-references"><span class="secno">F.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-JSON-LD">[JSON-LD]</dt><dd rel="dcterms:references">Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="http://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. 16 January 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/json-ld/">http://www.w3.org/TR/json-ld/</a>
+</dd><dt id="bib-MICRODATA-RDF-TESTS">[MICRODATA-RDF-TESTS]</dt><dd rel="dcterms:references">Gregg Kellogg; Ivan Herman. <a href="http://w3c.github.io/microdata-rdf/tests/"><cite>Microdata to RDF Tests</cite></a>. unofficial. URL: <a href="http://w3c.github.io/microdata-rdf/tests/">http://w3c.github.io/microdata-rdf/tests/</a>
+</dd><dt id="bib-RDF-SYNTAX-GRAMMAR">[RDF-SYNTAX-GRAMMAR]</dt><dd rel="dcterms:references">Fabien Gandon; Guus Schreiber. <a href="http://www.w3.org/TR/rdf-syntax-grammar/"><cite>RDF 1.1 XML Syntax</cite></a>. 25 February 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/rdf-syntax-grammar/">http://www.w3.org/TR/rdf-syntax-grammar/</a>
+</dd><dt id="bib-RDFA-CORE">[RDFA-CORE]</dt><dd rel="dcterms:references">Ben Adida; Mark Birbeck; Shane McCarron; Ivan Herman et al. <a href="http://www.w3.org/TR/rdfa-core/"><cite>RDFa Core 1.1 - Second Edition</cite></a>. 22 August 2013. W3C Recommendation. URL: <a href="http://www.w3.org/TR/rdfa-core/">http://www.w3.org/TR/rdfa-core/</a>
+</dd></dl></section></section></body></html>
