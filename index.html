@@ -386,13 +386,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">itemprop</a></cite>
       in [[!MICRODATA]]).
     </dd>
-    <dt><dfn class="adef">itemprop-reverse</dfn></dt><dd>
-      An attribute used to identify one or more <a title="name">names</a> of an <a title="item">items</a> reversing the
-      sense of <a class="aref">itemprop</a>. An <a class="aref">itemprop-reverse</a>
-      contains a space separated list of <a title="name">names</a> which may either by <a title="absolute URL">absolute URLs</a> or terms
-      associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
-      <a>item type</a>.
-    </dd>
     <dt><dfn class="adef">itemref</dfn></dt><dd>
       An additional attribute on an element that references additional elements containing property
       definitions to be applied to the referencing <a>item</a>.
@@ -949,14 +942,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           </dd>
         </dl>
       </dd>
-      <dt><dfn>reverse properties</dfn></dt><dd>
-        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a> The list
-         of reverse properties is the result of transforming each space-separated-value of an item's <a class='aref'>itemprop-reverse</a>
-         to a URL as defined in <a href="#property-uri-generation">Property URI Generation</a>.
-      </dd>
-      <dt><dfn>reverse property names</dfn></dt><dd>
-        The tokens of an element's <a class="aref">itemprop-reverse</a> attribute. Each token is a <a>name</a>.
-      </dd>
       <dt><dfn>top-level item</dfn></dt><dd>
         An <a>item</a> which does not contain an <a class="aref">itemprop</a> attribute.
         Available through the <cite><a
@@ -1054,7 +1039,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       <li>Otherwise, if type is not empty, construct <em>vocab</em> by removing everything following the last
         SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
       <li>Update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
-      <li>For each element <em>element</em> that has one or more <a>property names</a> and is one of the
+      <li id="alg-prop-names">For each element <em>element</em> that has one or more <a>property names</a> and is one of the
         <a title="item properties">properties of the item</a> <em>item</em>
         run the following substep:
         <ol class="algorithm">
@@ -1104,8 +1089,94 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           </li>
         </ol>
       </li>
+      <li>Return <em>subject</em></li>
+    </ol>
+  </section>
+  
+  <section>
+    <h3>Generate Predicate URI</h3>
+    <p>Predicate URI generation makes use of <a>current type</a>
+      and <a>current vocabulary</a> from an <a>evaluation
+      context</a> <em>context</em> along with <em>name</em>.</p>
+    <p class="note">Support for the <code>contextual</code> <em>scheme</em> is
+      being considered for removal
+      (see <a href="#issues">issue 10</a>).</p>
+
+    <ol class="algorithm">
+      <li>If <em>name</em> is an <a>absolute URL</a>, return <em>name</em>
+        as a <a>URI reference</a>.</li>
+      <li>If <a>current type</a> from <em>context</em> is null,
+        there can be no <a>current vocabulary</a>. Return the <a>URI reference</a>
+        that is the <a>document base</a> with its <cite><a
+        href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
+        set to the <a>canonicalized fragment</a> value of <em>name</em>.
+        <div class="note">
+          This rule is intended to allow for a the case where no type is set, and
+          therefore there is no vocabulary from which to extract rules. For
+          example, if there is a <a>document base</a> of
+          <code>http://example.org/doc</code> and an <a class="aref">itemprop</a>
+          of 'title', a URI will be constructed to be
+          <code>http://example.org/doc#title</code>.
+        </div>
+      </li>
+      <li id="scheme-vocab">Set <em>expandedURI</em> to the <a>URI reference</a> constructed by
+        appending the <a>canonicalized fragment</a> value of <em>name</em> to <a>current
+        vocabulary</a>, separated by a U+0023 NUMBER SIGN character ("#") unless the
+        <a>current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
+        ("#") or SOLIDUS U+002F ("/").</li>
+      <li>Return <em>expandedURI</em>.</li>
+    </ol>
+  </section>
+  
+</section>
+
+<section class="appendix informative">
+  <h2>Reverse <a class="aref">itemprop</a></h2>
+
+  <p>The <a href="https://www.w3.org/wiki/WebSchemas">WebSchemas community</a> has
+    <a href="https://www.w3.org/wiki/WebSchemas/InverseProperties">proposed</a> the use of a new Microdata attribute:
+    <a class="aref">itemprop-reverse</a>. Although not present in [[MICRODATA]] at this
+    time, the attribute can be very useful in many markup examples where items
+    are related using the reverse of a common property; this saves creating new properties
+    which exist solely for the purpose of describing such reverse relationships. Evidence
+    for the utility of such a feature can be seen in the 
+    <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">RDFa <code>@rev</code> attribute</a> [[RDFA-CORE]]
+    and the <a href="http://www.w3.org/TR/json-ld/#reverse-properties">JSON-LD <code>@reverse</code> property</a> [[JSON-LD]].
+
+  <p class="note">See <a href="#issues">issue 5</a> for further reference.</p>
+
+  <p>This feature adds the following attribute:</p>
+  <dl>
+    <dt><dfn class="adef">itemprop-reverse</dfn></dt><dd>
+      An attribute used to identify one or more <a title="name">names</a> of an <a title="item">items</a> reversing the
+      sense of <a class="aref">itemprop</a>. An <a class="aref">itemprop-reverse</a>
+      contains a space separated list of <a title="name">names</a> which may either by <a title="absolute URL">absolute URLs</a> or terms
+      associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
+      <a>item type</a>.
+    </dd>
+  </dl>
+
+  <p>The <a href="#algorithm" class="sectionRef sec-ref">Algorithm</a> is extended accordingly:</p>
+  <section>
+    <h3>Algorithm Terms</h3>
+    <dl>
+      <dt><dfn>reverse properties</dfn></dt><dd>
+        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a> The list
+         of reverse properties is the result of transforming each space-separated-value of an item's <a class='aref'>itemprop-reverse</a>
+         to a URL as defined in <a href="#property-uri-generation">Property URI Generation</a>.
+      </dd>
+      <dt><dfn>reverse property names</dfn></dt><dd>
+        The tokens of an element's <a class="aref">itemprop-reverse</a> attribute. Each token is a <a>name</a>.
+      </dd>
+    </dl>
+  </section>
+
+  <section>
+    <h3>Generate the triples</h3>
+    <p>The Triples generation algorithm is extended with the following step to take place immediately
+      after <a href="#alg-prop-names">Step 9</a>:</p>
+    <ol class="algorithm" start="10">
       <li>
-        <span class="note">See <a href="#issues">issue 5</a>.</span>
         For each element <em>element</em> that has one or more <a>reverse property names</a> and is one of the
         <a title="reverse properties">reverse properties of the item</a> <em>item</em>,
         run the following substep:
@@ -1147,45 +1218,30 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           </li>
         </ol>
       </li>
-      <li>Return <em>subject</em></li>
     </ol>
   </section>
-  
-  <section>
-    <h3>Generate Predicate URI</h3>
-    <p>Predicate URI generation makes use of <a>current type</a>
-      and <a>current vocabulary</a> from an <a>evaluation
-      context</a> <em>context</em> along with <em>name</em>.</p>
-    <p class="note">Support for the <code>contextual</code> <em>scheme</em> is
-      being considered for removal
-      (see <a href="#issues">issue 10</a>).</p>
 
-    <ol class="algorithm">
-      <li>If <em>name</em> is an <a>absolute URL</a>, return <em>name</em>
-        as a <a>URI reference</a>.</li>
-      <li>If <a>current type</a> from <em>context</em> is null,
-        there can be no <a>current vocabulary</a>. Return the <a>URI reference</a>
-        that is the <a>document base</a> with its <cite><a
-        href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
-        set to the <a>canonicalized fragment</a> value of <em>name</em>.
-        <div class="note">
-          This rule is intended to allow for a the case where no type is set, and
-          therefore there is no vocabulary from which to extract rules. For
-          example, if there is a <a>document base</a> of
-          <code>http://example.org/doc</code> and an <a class="aref">itemprop</a>
-          of 'title', a URI will be constructed to be
-          <code>http://example.org/doc#title</code>.
-        </div>
-      </li>
-      <li id="scheme-vocab">Set <em>expandedURI</em> to the <a>URI reference</a> constructed by
-        appending the <a>canonicalized fragment</a> value of <em>name</em> to <a>current
-        vocabulary</a>, separated by a U+0023 NUMBER SIGN character ("#") unless the
-        <a>current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
-        ("#") or SOLIDUS U+002F ("/").</li>
-      <li>Return <em>expandedURI</em>.</li>
-    </ol>
-  </section>
-  
+  <p>Simple use of <a class="aref">itemprop-reverse</a>:</p>
+  <pre class="example" data-transform="updateExample">
+<!--
+<div  itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name">William Shakespeare</span>
+  <link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd">
+</div>
+-->
+</pre>
+
+  <p>Results in the following Turtle:</p>
+  <pre class="example" data-transform="updateExample">
+<!--
+@prefix schema: <http://schema.org/> .
+<http://www.freebase.com/m/0yq9mqd> schema:creator [
+  a schema:Person;
+  schema:name "William Shakespeare"
+] .
+-->
+</pre>
+
 </section>
 
 <section class="appendix informative">
@@ -1358,28 +1414,6 @@ _:a hcard:street-address "Avenue Q" .
     schema:name "Shook you all Night Long";
     schema:url <shook-you-all-night-long>
   ]
-] .
--->
-</pre>
-
-<p>Simple use of <a class="aref">itemprop-reverse</a>
-  <span class="note">see <a href="#issues">issue 5</a></span>.</p>
-<pre class="example" data-transform="updateExample">
-<!--
-<div  itemscope itemtype="http://schema.org/Person">
-  <span itemprop="name">William Shakespeare</span>
-  <link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd">
-</div>
--->
-</pre>
-
-<p>Results in the following Turtle:</p>
-<pre class="example" data-transform="updateExample">
-<!--
-@prefix schema: <http://schema.org/> .
-<http://www.freebase.com/m/0yq9mqd> schema:creator [
-  a schema:Person;
-  schema:name "William Shakespeare"
 ] .
 -->
 </pre>
