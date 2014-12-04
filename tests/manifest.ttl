@@ -279,7 +279,7 @@ rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
       a mf:ManifestEntry,
         rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 20 (format md)";
-      mf:action <sdo_eg_md_10.html>;
+      mf:action <sdo_eg_md_20.html>;
       mf:name "Test 0035";
       mf:result <sdo_eg_md_20.ttl>;
       rdft:registry <http://www.w3.org/ns/md>
