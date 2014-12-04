@@ -3,11 +3,6 @@
 <head>
 <title>Microdata to RDF – Second Edition</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--
-  === NOTA BENE ===
-  For the three scripts below, if your spec resides on dev.w3 you can check them
-  out in the same tree and use relative links so that they'll work offline,
-  -->
 
 
 <style type="text/css">
@@ -270,7 +265,7 @@ HTML+Microdata
 to
 RDF
 </h2>
-<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-05T07:25:34.000Z" id="w3c-editor-s-draft-04-december-2014">
+<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-05T07:33:33.000Z" id="w3c-editor-s-draft-04-december-2014">
 <abbr title="World Wide Web Consortium">
 W3C
 </abbr>
@@ -1134,32 +1129,31 @@ below.
 </ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
 issue
 10
-</ins></a><ins class="diff-chg">
-)
-</ins></li><li><ins class="diff-chg">
+</ins>
+</a>
+<ins class="diff-new">)
+</ins></li><li><ins class="diff-new">
 Lastly,
 the
 previous
 update
 introduced
-</ins><a href="#vocab_expansion"><ins class="diff-chg">
+</ins><a href="#vocab_expansion"><ins class="diff-new">
 Vocabulary
 Expansion
-</ins></a><ins class="diff-chg">
+</ins></a><ins class="diff-new">
 using
-</ins><em><ins class="diff-chg">
+</ins><em><ins class="diff-new">
 entailment
-</ins></em><ins class="diff-chg">
+</ins></em><ins class="diff-new">
 rules
 adopted
 from
 [
-</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-chg">
+</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-new">
 RDFA-CORE
-</ins>
-</a>
-</cite>
-<ins class="diff-new">]
+</ins></a></cite><ins class="diff-new">
+]
 under
 control
 </ins>
@@ -2369,15 +2363,7 @@ and
 potentially
 vocabulary-specific
 processing
-<del class="diff-old">rules.
-</del>
-<ins class="diff-chg">rules
-</ins><span class="note"><ins class="diff-chg">
-see
-</ins><a href="#issues"><ins class="diff-chg">
-issue
-10
-</ins></a></span>.
+rules.
 </p>
 <p>
 This
@@ -2934,63 +2920,25 @@ RDF
 vocabularies.
 A
 registry
-</del>
-<ins class="diff-chg">attribute
-is
-not
-part
-of
-[
-</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
-MICRODATA
-</ins>
-</a>
-<del class="diff-old">allows
+allows
 for
 exceptions
 to
-</del>
-</cite>
-<ins class="diff-chg">]
-and
-is
-included
-as
-an
-experimental
-feature.
-Specific
-feedback
-from
-</ins>
 the
-<del class="diff-old">default
+default
 processing
 rules
-</del>
-<ins class="diff-chg">community
-is
-requested.
-Based
-on
-addoption,
-the
-attribute
-may
-be
-considered
-</ins>
 for
-<del class="diff-old">certain
+certain
 well-known
 vocabularies.
 Issue
 2
 </del>
-<ins class="diff-chg">inclusion
-in
-forthcoming
-versions
+<ins class="diff-chg">attribute
+is
+not
+part
 of
 [
 </ins><cite>
@@ -3011,79 +2959,42 @@ closed
 with
 no
 change
-as
 </del>
 </cite>
 <ins class="diff-chg">]
 and
+is
+included
 </ins>
-this
-<del class="diff-old">would
+as
+<del class="diff-old">this
+would
 violate
 microdata's
 data
 model.
-</del>
-<ins class="diff-chg">note.
-</ins>
-</p>
-</div>
-</div>
-<div class="issue">
-<div class="issue-title" aria-level="2" role="heading" id="h_issue_2">
-<a href="http://github.com/w3c/microdata-rdf/issues/10">
-<span>
 Issue
-<del class="diff-old">3
+3
+Should
 </del>
-<ins class="diff-chg">10
+<ins class="diff-chg">an
+experimental
+feature.
+Specific
+feedback
+from
 </ins>
-</span>
-</a>
-</div>
-<p class="">
-<del class="diff-old">Should
 the
-registry
+<del class="diff-old">registry
 allow
 property
 datatype
 specification.
-</del>
-<ins class="diff-chg">Remove
-support
-for
-</ins><code><ins class="diff-chg">
-contextual
-</ins></code><code><ins class="diff-chg">
-propertyURI
-</ins></code><ins class="diff-chg">
-and
-</ins><code><ins class="diff-chg">
-mulitpleValues
-</ins></code>.<ins class="diff-chg">
-This
-issue
-proposes
-to
-remove
-support
-for
-independently
-setting
-</ins><code><ins class="diff-chg">
-propertyURI
-</ins></code><ins class="diff-chg">
-and
-code&gt;multipleValues.
-</ins>
 The
-<del class="diff-old">consensus
+consensus
 </del>
-<ins class="diff-chg">former
-</ins><code><ins class="diff-chg">
-propertyURI
-</ins></code>
+<ins class="diff-chg">community
+</ins>
 is
 <del class="diff-old">that
 datatypes
@@ -3108,77 +3019,51 @@ Issue
 4
 Should
 </del>
-<ins class="diff-chg">treated
-like
+<ins class="diff-chg">requested.
+Based
+on
+addoption,
 </ins>
 the
 <del class="diff-old">registry
-</del>
-<ins class="diff-chg">former
-</ins><a href="#dfn-vocabulary" class="internalDFN"><ins class="diff-chg">
-vocabulary
-</ins>
-</a>
-<del class="diff-old">allow
-</del>
-<ins class="diff-chg">scheme
-if
-there
-is
-an
-</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-chg">
-itemtype
-</ins></a>,<ins class="diff-chg">
-otherwise,
-like
-</ins><code><ins class="diff-chg">
-contextual
-</ins></code><ins class="diff-chg">
-creating
-</ins>
+allow
 a
-<del class="diff-old">name
+name
 or
 URL
 to
-be
-used
 </del>
-<ins class="diff-chg">property
+<ins class="diff-chg">attribute
+may
 </ins>
+be
+<del class="diff-old">used
 as
-<ins class="diff-new">a
-fragment
-of
-the
-document
-base.
-The
-former
-</ins><code><ins class="diff-new">
-multipleValues
-</ins></code><ins class="diff-new">
-is
-treated
-like
-false,
-where
-values
-are
-never
-placed
-in
-</ins>
 an
-<del class="diff-old">alias
+alias
+</del>
+<ins class="diff-chg">considered
+</ins>
 for
-itemid
+<del class="diff-old">itemid
 .
 </del>
-<code>
-<ins class="diff-chg">rdf:List.
-</ins></code>
+<ins class="diff-chg">inclusion
+in
+forthcoming
+versions
+of
+[
+</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+MICRODATA
+</ins></a></cite><ins class="diff-chg">
+]
+and
+this
+note.
+</ins>
 </p>
+</div>
 </div>
 <p>
 The
@@ -3945,25 +3830,6 @@ is
 non-normative.
 </em>
 </p>
-<div class="note">
-<div class="note-title" aria-level="1" role="heading" id="h_note_2">
-<span>
-<ins class="diff-new">Note
-</ins></span></div><p class=""><ins class="diff-new">
-(The
-registry
-is
-being
-considered
-for
-revision
-(see
-</ins><a href="#issues"><ins class="diff-new">
-issue
-10
-</ins></a><ins class="diff-new">
-).
-</ins></p></div>
 <p>
 In
 a
@@ -4933,7 +4799,7 @@ RFC3986
 ]).
 </ins></p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_3">
+<div class="note-title" aria-level="2" role="heading" id="h_note_2">
 <span>
 Note
 </span>
@@ -5512,9 +5378,8 @@ properties.
 For
 example,
 <del class="diff-old">consider
-</del>
 the
-<del class="diff-old">following:
+following:
 &lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
   &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
   &lt;meta itemprop="numTracks" content="2"/&gt;
@@ -5582,8 +5447,9 @@ containing
 the
 ordered
 values,
+</del>
 the
-data
+<del class="diff-old">data
 may
 </del>
 <ins class="diff-chg">generated
@@ -5710,10 +5576,6 @@ and
 <ins class="diff-chg">dates,
 </ins>
 times
-<ins class="diff-new">and
-durations
-</ins>
-</li>
 <del class="diff-old">Issue
 Using
 information
@@ -5762,9 +5624,7 @@ DOM
 to
 interpret
 microdata.
-</del>
-<li>
-<del class="diff-old">Additionally,
+Additionally,
 one
 possible
 use
@@ -5783,14 +5643,8 @@ information,
 so
 that
 a
-</del>
-<code>
-<del class="diff-old">dc:time
-</del>
-<ins class="diff-chg">data
-</ins>
-</code>
-<del class="diff-old">value,
+dc:time
+value,
 for
 example,
 would
@@ -5841,16 +5695,8 @@ following:
  }
 }
 The
-</del>
-<ins class="diff-chg">and
-</ins>
-<code>
-<del class="diff-old">datatype
-</del>
-<ins class="diff-chg">meter
-</ins>
-</code>
-<del class="diff-old">identifies
+datatype
+identifies
 a
 URI
 to
@@ -5884,10 +5730,6 @@ value
 is
 for
 </del>
-<ins class="diff-chg">elements
-provides
-doubles
-</ins>
 and
 <del class="diff-old">the
 syntax
@@ -5973,21 +5815,10 @@ revision
 of
 this
 document.
-</del>
-<ins class="diff-chg">integers
-</ins></li></ul></section></section><section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion"><h2 id="vocab_expansion" role="heading"><span class="secno"><ins class="diff-chg">
-4.
-</ins></span><ins class="diff-chg">
-Vocabulary
-Expansion
-</ins></h2>
-<div class="note">
-<div class="note-title" aria-level="1" role="heading" id="h_note_4">
-<span>
 Note
-</span>
-</div>
-<p class="">
+</del>
+<ins class="diff-chg">durations
+</ins></li><li>
 <del class="diff-old">If
 property
 URI
@@ -6002,31 +5833,34 @@ values
 always
 generated
 both
-unordered
+</del>
+<code>
+<del class="diff-old">unordered
+</del>
+<ins class="diff-chg">data
+</ins>
+</code>
 and
-ordered
-representations,
+<code>
+<del class="diff-old">ordered
+</del>
+<ins class="diff-chg">meter
+</ins>
+</code>
+<del class="diff-old">representations,
+</del>
+<ins class="diff-chg">elements
+provides
+doubles
+</ins>
 and
-there
+<del class="diff-old">there
 were
 datatype
 support,
-</del>
-<ins class="diff-chg">Support
-for
-</ins>
 the
 registry
-<ins class="diff-new">is
-being
-amended
-(see
-</ins><a href="#issues"><ins class="diff-new">
-issue
-10
-</ins>
-</a>
-<del class="diff-old">could
+could
 be
 reduced
 to
@@ -6041,14 +5875,18 @@ further
 structure
 necessary.
 </del>
-<ins class="diff-chg">).
-</ins>
-</p>
-</div>
-<del class="diff-old">4.
+<ins class="diff-chg">integers
+</ins></li></ul>
+</section>
+</section>
+<section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion">
+<h2 id="vocab_expansion" role="heading">
+<span class="secno">
+4.
+</span>
 Vocabulary
 Expansion
-</del>
+</h2>
 <p>
 Microdata
 requires
@@ -6417,7 +6255,7 @@ classes
 themselves.)
 </del>
 <div class="note">
-<div class="note-title" aria-level="1" role="heading" id="h_note_5">
+<div class="note-title" aria-level="1" role="heading" id="h_note_3">
 <span>
 Note
 </span>
@@ -6872,12 +6710,7 @@ registry
 from
 </ins><code><ins class="diff-chg">
 http://www.w3.org/ns/md
-</ins></code>.<span class="note"><ins class="diff-chg">
-see
-</ins><a href="#issues"><ins class="diff-chg">
-issue
-10
-</ins></a></span>.
+</ins></code>.
 </p>
 <p>
 <del class="diff-old">If
@@ -8500,7 +8333,7 @@ the
 property
 element.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_6">
+<div class="note-title" aria-level="2" role="heading" id="h_note_4">
 <span>
 Note
 </span>
@@ -8738,7 +8571,7 @@ RDF-CONCEPTS
 </cite>
 ]).
 <div class="issue">
-<div class="issue-title" aria-level="2" role="heading" id="h_issue_3">
+<div class="issue-title" aria-level="2" role="heading" id="h_issue_2">
 <span>
 Issue
 </span>
@@ -8880,7 +8713,7 @@ another
 vocabulary
 URI.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_7">
+<div class="note-title" aria-level="2" role="heading" id="h_note_5">
 <span>
 Note
 </span>
@@ -9176,7 +9009,7 @@ following
 steps:
 </p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_8">
+<div class="note-title" aria-level="2" role="heading" id="h_note_6">
 <span>
 Note
 </span>
@@ -9945,31 +9778,6 @@ with
 name
 </em>.
 </p>
-<div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_9">
-<span>
-<ins class="diff-new">Note
-</ins></span></div><p class=""><ins class="diff-new">
-Support
-for
-the
-</ins><code><ins class="diff-new">
-contextual
-</ins></code><em><ins class="diff-new">
-scheme
-</ins></em><ins class="diff-new">
-is
-being
-considered
-for
-removal
-(see
-</ins><a href="#issues"><ins class="diff-new">
-issue
-10
-</ins></a><ins class="diff-new">
-).
-</ins></p></div>
 <ol class="algorithm">
 <li>
 If
@@ -10051,7 +9859,7 @@ of
 name
 </em>.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_10">
+<div class="note-title" aria-level="2" role="heading" id="h_note_7">
 <span>
 Note
 </span>
@@ -10477,7 +10285,7 @@ propertyURI
 </del>
 </cite>
 <ins class="diff-chg">].
-</ins></p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_11"><span><ins class="diff-chg">
+</ins></p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_8"><span><ins class="diff-chg">
 Note
 </ins></span></div><p class=""><ins class="diff-chg">
 See
@@ -10524,8 +10332,7 @@ key:
 </del>
 </dt>
 <del class="diff-old">http://www.w3.org/2002/07/owl#equivalentProperty
-</del>
-<del class="diff-old">object
+object
 </del>
 <dd>
 <del class="diff-old">value
@@ -10673,8 +10480,7 @@ properties
 </del>
 </dt>
 <del class="diff-old">value
-</del>
-<del class="diff-old">If
+If
 </del>
 <dd>
 <ins class="diff-chg">The

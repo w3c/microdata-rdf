@@ -3,11 +3,6 @@
 <head>
 <title>Microdata to RDF – Second Edition</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<!--
-  === NOTA BENE ===
-  For the three scripts below, if your spec resides on dev.w3 you can check them
-  out in the same tree and use relative links so that they'll work offline,
-  -->
 <script type="text/javascript"
   src="http://www.w3.org/Tools/respec/respec-w3c-common" async class="remove">
  </script>
@@ -271,8 +266,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
      <a>vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
      This is facilitated by a <a>registry</a> that associates URIs with specific rules based on matching
      <a class="aref">itemtype</a> values against registered URI prefixes do determine a vocabulary and potentially
-     vocabulary-specific processing rules
-     <span class="note">see <a href="#issues">issue 10</a></span>.
+     vocabulary-specific processing rules.
    </p>
 
    <p>This specification also assumes that consumers of RDF generated from
@@ -329,17 +323,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     Specific feedback from the community is requested. Based on addoption, the attribute
     may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.</p>
   </div>
-  <p class="issue" data-number="10">
-    Remove support for <code>contextual</code>
-    <code>propertyURI</code> and <code>mulitpleValues</code>. This issue proposes to
-    remove support for independently setting
-    <code>propertyURI</code> and code>multipleValues</code>.
-    The former <code>propertyURI</code>
-    is treated like the former <a>vocabulary</a> scheme if
-    there is an <a class="aref">itemtype</a>, otherwise, like <code>contextual</code> creating a property
-    as a fragment of the document base.
-    The former <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
-  </p>
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
     about the need for a <a>registry</a> and the details of processing. Among the options investigated by
@@ -452,7 +435,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section class="informative">
   <h1>Vocabulary Registry</h1>
-  <p class="note">(The registry is being considered for revision (see <a href="#issues">issue 10</a>).</p>
   <p>In a perfect world, all processors would be able to generate the same output for a given input
     without regards to the requirements of a particular <a>vocabulary</a>. However, microdata doesn't
     provide sufficient syntactic help in making these decisions. Different vocabularies have different
@@ -608,9 +590,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <section>
   <h2 id="vocab_expansion">Vocabulary Expansion</h2>
-   <p class="note">Support for the registry is
-      being amended
-      (see <a href="#issues">issue 10</a>).</p>
   <p>Microdata requires that all values of <a class="aref">itemtype</a> come from the same vocabulary. This
     is required as <a class="aref">itemprop</a> values are resolved relative to that vocabulary. However,
     it is often useful to define an <a>item</a> to have types from multiple different vocabularies.</p>
@@ -694,7 +673,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <code>registry</code> option passed to the microdata processor. If specified, the registry
     must be loaded from the location indicated as the option value, Otherwise,
     the processor MUST load the default <a>registry</a> from <code>http://www.w3.org/ns/md</code>.
-    <span class="note">see <a href="#issues">issue 10</a></span>.
   <p>Setting <code>registry</code> is performed in a processor-specific way.</p>
   <p>
     When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors SHOULD use <code>registry</code>
@@ -1098,9 +1076,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <p>Predicate URI generation makes use of <a>current type</a>
       and <a>current vocabulary</a> from an <a>evaluation
       context</a> <em>context</em> along with <em>name</em>.</p>
-    <p class="note">Support for the <code>contextual</code> <em>scheme</em> is
-      being considered for removal
-      (see <a href="#issues">issue 10</a>).</p>
 
     <ol class="algorithm">
       <li>If <em>name</em> is an <a>absolute URL</a>, return <em>name</em>

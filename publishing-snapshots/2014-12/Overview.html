@@ -3,11 +3,6 @@
 <head>
 <title>Microdata to RDF – Second Edition</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--
-  === NOTA BENE ===
-  For the three scripts below, if your spec resides on dev.w3 you can check them
-  out in the same tree and use relative links so that they'll work offline,
-  -->
 
 
 <style type="text/css">
@@ -239,7 +234,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
   
     <h2 property="bibo:subtitle" id="subtitle">Transformation from HTML+Microdata to RDF</h2>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-05T07:26:19.000Z" id="w3c-interest-group-note-04-december-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Interest Group Note <time class="dt-published" datetime="2014-12-04">04 December 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-05T07:34:06.000Z" id="w3c-interest-group-note-04-december-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Interest Group Note <time class="dt-published" datetime="2014-12-04">04 December 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -537,8 +532,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
      <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
      This is facilitated by a <a href="#dfn-registry" class="internalDFN">registry</a> that associates URIs with specific rules based on matching
      <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> values against registered URI prefixes do determine a vocabulary and potentially
-     vocabulary-specific processing rules
-     <span class="note">see <a href="#issues">issue 10</a></span>.
+     vocabulary-specific processing rules.
    </p>
 
    <p>This specification also assumes that consumers of RDF generated from
@@ -595,17 +589,6 @@ span.note, span.issue { padding: .1em .5em .15em; }
     Specific feedback from the community is requested. Based on addoption, the attribute
     may be considered for inclusion in forthcoming versions of [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] and this note.</p>
   </div></div>
-  <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_2"><a href="http://github.com/w3c/microdata-rdf/issues/10"><span>Issue 10</span></a></div><p class="">
-    Remove support for <code>contextual</code>
-    <code>propertyURI</code> and <code>mulitpleValues</code>. This issue proposes to
-    remove support for independently setting
-    <code>propertyURI</code> and code&gt;multipleValues.
-    The former <code>propertyURI</code>
-    is treated like the former <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a> scheme if
-    there is an <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>, otherwise, like <code>contextual</code> creating a property
-    as a fragment of the document base.
-    The former <code>multipleValues</code> is treated like false, where values are never placed in an <code>rdf:List.</code>
-  </p></div>
 
   <p>The purpose of this specification is to provide input to a future working group that can make decisions
     about the need for a <a href="#dfn-registry" class="internalDFN">registry</a> and the details of processing. Among the options investigated by
@@ -718,7 +701,6 @@ span.note, span.issue { padding: .1em .5em .15em; }
 
 <section class="informative" id="vocabulary-registry">
   <!--OddPage--><h2 role="heading" id="h2_vocabulary-registry"><span class="secno">3. </span>Vocabulary Registry</h2><p><em>This section is non-normative.</em></p>
-  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_2"><span>Note</span></div><p class="">(The registry is being considered for revision (see <a href="#issues">issue 10</a>).</p></div>
   <p>In a perfect world, all processors would be able to generate the same output for a given input
     without regards to the requirements of a particular <a href="#dfn-vocabulary" class="internalDFN">vocabulary</a>. However, microdata doesn't
     provide sufficient syntactic help in making these decisions. Different vocabularies have different
@@ -788,7 +770,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
     if the value has no fragment (See [<cite><a class="bibref" href="#bib-RFC3986">RFC3986</a></cite>]).</p>
   <p>The vocabulary <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a> is made from the first <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> value by stripping either the <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, if the value has no fragment (See
     [<cite><a class="bibref" href="#bib-RFC3986">RFC3986</a></cite>]).</p>
-  <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_3"><span>Note</span></div><p class="">Deconstructing the <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> URL to create or identify a vocabulary URI
+  <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_2"><span>Note</span></div><p class="">Deconstructing the <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> URL to create or identify a vocabulary URI
     is a violation of the microdata specification which is necessary to
     support the use of existing vocabularies designed for use with RDF, and
     shared or inherited properties within all vocabularies.</p></div>
@@ -848,9 +830,6 @@ span.note, span.issue { padding: .1em .5em .15em; }
 
 <section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion">
   <!--OddPage--><h2 id="vocab_expansion" role="heading"><span class="secno">4. </span>Vocabulary Expansion</h2>
-   <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_4"><span>Note</span></div><p class="">Support for the registry is
-      being amended
-      (see <a href="#issues">issue 10</a>).</p></div>
   <p>Microdata requires that all values of <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> come from the same vocabulary. This
     is required as <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> values are resolved relative to that vocabulary. However,
     it is often useful to define an <a href="#dfn-item" class="internalDFN">item</a> to have types from multiple different vocabularies.</p>
@@ -904,7 +883,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
   foaf:mbox &lt;mailto:mail@gmail.com&gt;
 ] .  </pre></div>
 
-  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_5"><span>Note</span></div><p class="">The <code>owl:equivalentProperty</code> rule is more powerfull than <code>rdfs:subPropertyOf</code>,
+  <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_3"><span>Note</span></div><p class="">The <code>owl:equivalentProperty</code> rule is more powerfull than <code>rdfs:subPropertyOf</code>,
     in that if any equivalent property matches, then the source property would also cause a triple to be generated.
     For example, if the registry stated that <code>name</code> was equivalent to <code>rdfs:label</code>,
     than any use of <code>name</code> in a <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> would cause a triple using
@@ -922,7 +901,6 @@ span.note, span.issue { padding: .1em .5em .15em; }
     <code>registry</code> option passed to the microdata processor. If specified, the registry
     must be loaded from the location indicated as the option value, Otherwise,
     the processor <em class="rfc2119" title="MUST">MUST</em> load the default <a href="#dfn-registry" class="internalDFN">registry</a> from <code>http://www.w3.org/ns/md</code>.
-    <span class="note">see <a href="#issues">issue 10</a></span>.
   </p><p>Setting <code>registry</code> is performed in a processor-specific way.</p>
   <p>
     When accessed as a <strong>web service</strong> using HTTP GET, POST or similar action, processors <em class="rfc2119" title="SHOULD">SHOULD</em> use <code>registry</code>
@@ -1141,7 +1119,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
                 The value is a <a href="#dfn-plain-literal" class="internalDFN">plain literal</a> created from the value with language information set from the
                 <cite><a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
                 of the property element.
-                <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_6"><span>Note</span></div><p class="">The HTML
+                <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_4"><span>Note</span></div><p class="">The HTML
                   <em>valid yearless date string</em>
                   is similar to
                   <cite><a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay">xsd:gMonthDay</a></cite>,
@@ -1175,7 +1153,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
         URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
         within an RDF triple, as opposed to a <a href="#dfn-literal" class="internalDFN">literal</a> value that may contain a string representation of a
         URI. (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
-        <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_3"><span>Issue</span></div><div class="">
+        <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_2"><span>Issue</span></div><div class="">
           <p>The HTML5/microdata content model for <code>@href</code>, <code>@src</code>,
             <code>@data</code>, <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> and <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> and <a class="aref internalDFN" href="#dfn-itemid">itemid</a> is that of
             a URL, not a URI or IRI.</p>
@@ -1187,7 +1165,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
         A vocabulary is a collection of URIs, suitable for use as an <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> or <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a>
         value, that share a common <a href="#dfn-uri-prefix" class="internalDFN">URI prefix</a>. That prefix is the vocabulary URI. A vocabulary URI is not
         allowed to be a prefix of another vocabulary URI.
-        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_7"><span>Note</span></div><div class="">
+        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_5"><span>Note</span></div><div class="">
           This definition differs from the language in the HTML spec and is just for the purpose of this
           document. In HTML, a vocabulary is a specification, and doesn't have a URI. In our view, if one
           specification defines ten <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a>s, then these could be treated as one vocabulary or as ten
@@ -1219,7 +1197,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
       When the user agent is to Generate triples for an <a href="#dfn-item" class="internalDFN">item</a> <em>item</em>, given
       <a href="#dfn-evaluation-context" class="internalDFN">evaluation context</a>, it must run the following steps:
     </p>
-    <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_8"><span>Note</span></div><p class="">
+    <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_6"><span>Note</span></div><p class="">
       This algorithm has undergone substantial change from the original microdata specification [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>].
     </p></div>
     <ol class="algorithm">
@@ -1320,9 +1298,6 @@ span.note, span.issue { padding: .1em .5em .15em; }
     <p>Predicate URI generation makes use of <a href="#dfn-current-type" class="internalDFN">current type</a>
       and <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a> from an <a href="#dfn-evaluation-context" class="internalDFN">evaluation
       context</a> <em>context</em> along with <em>name</em>.</p>
-    <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_9"><span>Note</span></div><p class="">Support for the <code>contextual</code> <em>scheme</em> is
-      being considered for removal
-      (see <a href="#issues">issue 10</a>).</p></div>
 
     <ol class="algorithm">
       <li>If <em>name</em> is an <a href="#dfn-absolute-url" class="internalDFN">absolute URL</a>, return <em>name</em>
@@ -1331,7 +1306,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
         there can be no <a href="#dfn-current-vocabulary" class="internalDFN">current vocabulary</a>. Return the <a href="#dfn-uri-reference" class="internalDFN">URI reference</a>
         that is the <a href="#dfn-document-base" class="internalDFN">document base</a> with its <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
         set to the <a href="#dfn-canonicalized-fragment" class="internalDFN">canonicalized fragment</a> value of <em>name</em>.
-        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_10"><span>Note</span></div><div class="">
+        <div class="note"><div class="note-title" aria-level="2" role="heading" id="h_note_7"><span>Note</span></div><div class="">
           This rule is intended to allow for a the case where no type is set, and
           therefore there is no vocabulary from which to extract rules. For
           example, if there is a <a href="#dfn-document-base" class="internalDFN">document base</a> of
@@ -1364,7 +1339,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
     <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">RDFa <code>@rev</code> attribute</a> [<cite><a class="bibref" href="#bib-RDFA-CORE">RDFA-CORE</a></cite>]
     and the <a href="http://www.w3.org/TR/json-ld/#reverse-properties">JSON-LD <code>@reverse</code> property</a> [<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>].
 
-  </p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_11"><span>Note</span></div><p class="">See <a href="#issues">issue 5</a> for further reference.</p></div>
+  </p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_8"><span>Note</span></div><p class="">See <a href="#issues">issue 5</a> for further reference.</p></div>
 
   <p>This feature adds the following attribute:</p>
   <dl>
