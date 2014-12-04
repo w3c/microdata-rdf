@@ -66,17 +66,13 @@ output += %(
      itemscope="true"
      itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry"
      class="test-entry">
+  <link itemprop="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" href="http://www.w3.org/ns/rdftest#TestMicrodataEval" />
   <span itemprop="name">Test #{num_str}</span>:
   <span itemprop="http://www.w3.org/2000/01/rdf-schema#comment"
     >#{comment}</span>
   (
-  <span itemprop="action"
-        itemscope="true"
-        itemtype="http://www.w3.org/2001/sw/DataAccess/tests/test-query#QueryTest">
-    <a itemprop="data" href="#{data}">input</a>
-  </span> |
+  <a itemprop="action" href="#{data}">input</a>
   <a itemprop="result" href="#{result}">result</a>
-  <meta itemprop="positiveTest" content="true"/>
   )
 </div>
 <!-- End Test Description -->

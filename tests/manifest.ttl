@@ -1,861 +1,628 @@
 @prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
-@prefix mq: <http://www.w3.org/2001/sw/DataAccess/tests/test-query#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdft: <http://www.w3.org/ns/rdftest#> .
+
+rdft:TestMicrodataEval a rdfs:Class;
+   rdfs:label "Microdata Positive Evaluation";
+   rdfs:comment "A positive Microdata evaluation test." .
+
+rdft:TestMicrodataNegativeEval a rdfs:Class;
+   rdfs:label "Microdata Negative Evaluation";
+   rdfs:comment "A negative Microdata evaluation test." .
+
+rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
+   rdfs:label "registry";
+   rdfs:comment "Test Registry";
+   rdfs:domain rdft:Test .
 
  [
     a mf:Manifest;
     rdfs:comment "Positive processor tests";
     mf:entries [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Item with no itemtype and literal itemprop";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0001.html>
-      ];
+      mf:action <0001.html>;
       mf:name "Test 0001";
-      mf:positiveTest "true";
       mf:result <0001.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Item with no itemtype and 2 elements with equivalent itemprop";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0002.html>
-      ];
+      mf:action <0002.html>;
       mf:name "Test 0002";
-      mf:positiveTest "true";
       mf:result <0002.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Item with itemprop having two properties";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0003.html>
-      ];
+      mf:action <0003.html>;
       mf:name "Test 0003";
-      mf:positiveTest "true";
       mf:result <0003.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of meta and @content";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0004.html>
-      ];
+      mf:action <0004.html>;
       mf:name "Test 0004";
-      mf:positiveTest "true";
       mf:result <0004.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of audio and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0005.html>
-      ];
+      mf:action <0005.html>;
       mf:name "Test 0005";
-      mf:positiveTest "true";
       mf:result <0005.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of embed and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0006.html>
-      ];
+      mf:action <0006.html>;
       mf:name "Test 0006";
-      mf:positiveTest "true";
       mf:result <0006.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of iframe and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0007.html>
-      ];
+      mf:action <0007.html>;
       mf:name "Test 0007";
-      mf:positiveTest "true";
       mf:result <0007.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of img and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0008.html>
-      ];
+      mf:action <0008.html>;
       mf:name "Test 0008";
-      mf:positiveTest "true";
       mf:result <0008.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of source and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0009.html>
-      ];
+      mf:action <0009.html>;
       mf:name "Test 0009";
-      mf:positiveTest "true";
       mf:result <0009.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of track and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0010.html>
-      ];
+      mf:action <0010.html>;
       mf:name "Test 0010";
-      mf:positiveTest "true";
       mf:result <0010.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of video and @src";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0011.html>
-      ];
+      mf:action <0011.html>;
       mf:name "Test 0011";
-      mf:positiveTest "true";
       mf:result <0011.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of a and @href";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0012.html>
-      ];
+      mf:action <0012.html>;
       mf:name "Test 0012";
-      mf:positiveTest "true";
       mf:result <0012.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of area and @href";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0013.html>
-      ];
+      mf:action <0013.html>;
       mf:name "Test 0013";
-      mf:positiveTest "true";
       mf:result <0013.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of link and @href";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0014.html>
-      ];
+      mf:action <0014.html>;
       mf:name "Test 0014";
-      mf:positiveTest "true";
       mf:result <0014.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of object and @data";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0015.html>
-      ];
+      mf:action <0015.html>;
       mf:name "Test 0015";
-      mf:positiveTest "true";
       mf:result <0015.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 1 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_1.html>
-      ];
+      mf:action <sdo_eg_md_1.html>;
       mf:name "Test 0016";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_1.ttl>
+      mf:result <sdo_eg_md_1.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 2 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_2.html>
-      ];
+      mf:action <sdo_eg_md_2.html>;
       mf:name "Test 0017";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_2.ttl>
+      mf:result <sdo_eg_md_2.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 3 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_3.html>
-      ];
+      mf:action <sdo_eg_md_3.html>;
       mf:name "Test 0018";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_3.ttl>
+      mf:result <sdo_eg_md_3.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 4 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_4.html>
-      ];
+      mf:action <sdo_eg_md_4.html>;
       mf:name "Test 0019";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_4.ttl>
+      mf:result <sdo_eg_md_4.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 5 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_5.html>
-      ];
+      mf:action <sdo_eg_md_5.html>;
       mf:name "Test 0020";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_5.ttl>
+      mf:result <sdo_eg_md_5.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 6 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_6.html>
-      ];
+      mf:action <sdo_eg_md_6.html>;
       mf:name "Test 0021";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_6.ttl>
+      mf:result <sdo_eg_md_6.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 7 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_7.html>
-      ];
+      mf:action <sdo_eg_md_7.html>;
       mf:name "Test 0022";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_7.ttl>
+      mf:result <sdo_eg_md_7.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 8 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_8.html>
-      ];
+      mf:action <sdo_eg_md_8.html>;
       mf:name "Test 0023";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_8.ttl>
+      mf:result <sdo_eg_md_8.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 9 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_9.html>
-      ];
+      mf:action <sdo_eg_md_9.html>;
       mf:name "Test 0024";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_9.ttl>
+      mf:result <sdo_eg_md_9.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 10 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_10.html>
-      ];
+      mf:action <sdo_eg_md_10.html>;
       mf:name "Test 0025";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_10.ttl>
+      mf:result <sdo_eg_md_10.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 11 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_11.html>
-      ];
+      mf:action <sdo_eg_md_11.html>;
       mf:name "Test 0026";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_11.ttl>
+      mf:result <sdo_eg_md_11.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 12 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_12.html>
-      ];
+      mf:action <sdo_eg_md_12.html>;
       mf:name "Test 0027";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_12.ttl>
+      mf:result <sdo_eg_md_12.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 13 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_13.html>
-      ];
+      mf:action <sdo_eg_md_13.html>;
       mf:name "Test 0028";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_13.ttl>
+      mf:result <sdo_eg_md_13.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 14 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_14.html>
-      ];
+      mf:action <sdo_eg_md_14.html>;
       mf:name "Test 0029";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_14.ttl>
+      mf:result <sdo_eg_md_14.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 15 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_15.html>
-      ];
+      mf:action <sdo_eg_md_15.html>;
       mf:name "Test 0030";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_15.ttl>
+      mf:result <sdo_eg_md_15.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 16 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_16.html>
-      ];
+      mf:action <sdo_eg_md_16.html>;
       mf:name "Test 0031";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_16.ttl>
+      mf:result <sdo_eg_md_16.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 17 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_17.html>
-      ];
+      mf:action <sdo_eg_md_17.html>;
       mf:name "Test 0032";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_17.ttl>
+      mf:result <sdo_eg_md_17.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 18 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_18.html>
-      ];
+      mf:action <sdo_eg_md_18.html>;
       mf:name "Test 0033";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_18.ttl>
+      mf:result <sdo_eg_md_18.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 19 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_19.html>
-      ];
+      mf:action <sdo_eg_md_19.html>;
       mf:name "Test 0034";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_19.ttl>
+      mf:result <sdo_eg_md_19.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 20 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_20.html>
-      ];
+      mf:action <sdo_eg_md_10.html>;
       mf:name "Test 0035";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_20.ttl>
+      mf:result <sdo_eg_md_20.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 21 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_21.html>
-      ];
+      mf:action <sdo_eg_md_21.html>;
       mf:name "Test 0036";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_21.ttl>
+      mf:result <sdo_eg_md_21.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 22 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_22.html>
-      ];
+      mf:action <sdo_eg_md_22.html>;
       mf:name "Test 0037";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_22.ttl>
+      mf:result <sdo_eg_md_22.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 23 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_23.html>
-      ];
+      mf:action <sdo_eg_md_23.html>;
       mf:name "Test 0038";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_23.ttl>
+      mf:result <sdo_eg_md_23.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 24 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_24.html>
-      ];
+      mf:action <sdo_eg_md_24.html>;
       mf:name "Test 0039";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_24.ttl>
+      mf:result <sdo_eg_md_24.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 25 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_25.html>
-      ];
+      mf:action <sdo_eg_md_25.html>;
       mf:name "Test 0040";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_25.ttl>
+      mf:result <sdo_eg_md_25.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 26 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_26.html>
-      ];
+      mf:action <sdo_eg_md_26.html>;
       mf:name "Test 0041";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_26.ttl>
+      mf:result <sdo_eg_md_26.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 27 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_27.html>
-      ];
+      mf:action <sdo_eg_md_27.html>;
       mf:name "Test 0042";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_27.ttl>
+      mf:result <sdo_eg_md_27.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 28 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_28.html>
-      ];
+      mf:action <sdo_eg_md_28.html>;
       mf:name "Test 0043";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_28.ttl>
+      mf:result <sdo_eg_md_28.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 29 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_29.html>
-      ];
+      mf:action <sdo_eg_md_29.html>;
       mf:name "Test 0044";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_29.ttl>
+      mf:result <sdo_eg_md_29.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Web Schemas TF: Schema.org tests: test 30 (format md)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <sdo_eg_md_30.html>
-      ];
+      mf:action <sdo_eg_md_30.html>;
       mf:name "Test 0045";
-      mf:positiveTest "true";
-      mf:registry <http://www.w3.org/ns/md>;
-      mf:result <sdo_eg_md_30.ttl>
+      mf:result <sdo_eg_md_30.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of time with @datetime xsd:time";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0046.html>
-      ];
+      mf:action <0046.html>;
       mf:name "Test 0046";
-      mf:positiveTest "true";
       mf:result <0046.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of time with @datetime xsd:dateTime";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0047.html>
-      ];
+      mf:action <0047.html>;
       mf:name "Test 0047";
-      mf:positiveTest "true";
       mf:result <0047.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of time with @datetime xsd:duration";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0048.html>
-      ];
+      mf:action <0048.html>;
       mf:name "Test 0048";
-      mf:positiveTest "true";
       mf:result <0048.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of time with @datetime invalid";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0049.html>
-      ];
+      mf:action <0049.html>;
       mf:name "Test 0049";
-      mf:positiveTest "true";
       mf:result <0049.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "relative URL as object";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0050.html>
-      ];
+      mf:action <0050.html>;
       mf:name "Test 0050";
-      mf:positiveTest "true";
       mf:result <0050.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "relative URL as itemid";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0051.html>
-      ];
+      mf:action <0051.html>;
       mf:name "Test 0051";
-      mf:positiveTest "true";
       mf:result <0051.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "token property no @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0052.html>
-      ];
+      mf:action <0052.html>;
       mf:name "Test 0052";
-      mf:positiveTest "true";
       mf:result <0052.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "token property empty @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0053.html>
-      ];
+      mf:action <0053.html>;
       mf:name "Test 0053";
-      mf:positiveTest "true";
       mf:result <0053.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "token property and relative @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0054.html>
-      ];
+      mf:action <0054.html>;
       mf:name "Test 0054";
-      mf:positiveTest "true";
       mf:result <0054.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "token property and single @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0055.html>
-      ];
+      mf:action <0055.html>;
       mf:name "Test 0055";
-      mf:positiveTest "true";
       mf:result <0055.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "token property and multiple @itemtypes from different vocabularies";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0056.html>
-      ];
+      mf:action <0056.html>;
       mf:name "Test 0056";
-      mf:positiveTest "true";
       mf:result <0056.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "URI property no @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0057.html>
-      ];
+      mf:action <0057.html>;
       mf:name "Test 0057";
-      mf:positiveTest "true";
       mf:result <0057.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "URI property empty @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0058.html>
-      ];
+      mf:action <0058.html>;
       mf:name "Test 0058";
-      mf:positiveTest "true";
       mf:result <0058.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "URI property relative @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0059.html>
-      ];
+      mf:action <0059.html>;
       mf:name "Test 0059";
-      mf:positiveTest "true";
       mf:result <0059.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "URI property single @itemtype";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0060.html>
-      ];
+      mf:action <0060.html>;
       mf:name "Test 0060";
-      mf:positiveTest "true";
       mf:result <0060.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "inherited type and token property";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0061.html>
-      ];
+      mf:action <0061.html>;
       mf:name "Test 0061";
-      mf:positiveTest "true";
       mf:result <0061.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemref to single id";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0062.html>
-      ];
+      mf:action <0062.html>;
       mf:name "Test 0062";
-      mf:positiveTest "true";
       mf:result <0062.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemref generates property values";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0063.html>
-      ];
+      mf:action <0063.html>;
       mf:name "Test 0063";
-      mf:positiveTest "true";
       mf:result <0063.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemref to single id with different types";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0064.html>
-      ];
+      mf:action <0064.html>;
       mf:name "Test 0064";
-      mf:positiveTest "true";
       mf:result <0064.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemref to multiple ids";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0065.html>
-      ];
+      mf:action <0065.html>;
       mf:name "Test 0065";
-      mf:positiveTest "true";
       mf:result <0065.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemref with chaining";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0066.html>
-      ];
+      mf:action <0066.html>;
       mf:name "Test 0066";
-      mf:positiveTest "true";
       mf:result <0066.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Shared @itemref";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0067.html>
-      ];
+      mf:action <0067.html>;
       mf:name "Test 0067";
-      mf:positiveTest "true";
       mf:result <0067.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Property URI generation (default) 1";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0068.html>
-      ];
+      mf:action <0068.html>;
       mf:name "Test 0068";
-      mf:positiveTest "true";
       mf:result <0068.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Property URI generation (default) 2";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0069.html>
-      ];
+      mf:action <0069.html>;
       mf:name "Test 0069";
-      mf:positiveTest "true";
       mf:result <0069.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Property URI generation (default) 3";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0070.html>
-      ];
+      mf:action <0070.html>;
       mf:name "Test 0070";
-      mf:positiveTest "true";
       mf:result <0070.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Vocabulary Expansion test with rdfs:subPropertyOf";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0073.html>
-      ];
+      mf:action <0073.html>;
       mf:name "Test 0073";
-      mf:positiveTest "true";
       mf:result <0073.ttl>;
       mf:vocab_expansion "true"
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Vocabulary Expansion test with owl:equivalentProperty";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0074.html>
-      ];
+      mf:action <0074.html>;
       mf:name "Test 0074";
-      mf:positiveTest "true";
       mf:result <0074.ttl>;
       mf:vocab_expansion "true"
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of data and xsd:float";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0075.html>
-      ];
+      mf:action <0075.html>;
       mf:name "Test 0075";
-      mf:positiveTest "true";
       mf:result <0075.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of data and xsd:integer";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0076.html>
-      ];
+      mf:action <0076.html>;
       mf:name "Test 0076";
-      mf:positiveTest "true";
       mf:result <0076.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of data and string";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0077.html>
-      ];
+      mf:action <0077.html>;
       mf:name "Test 0077";
-      mf:positiveTest "true";
       mf:result <0077.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of meter and xsd:double";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0078.html>
-      ];
+      mf:action <0078.html>;
       mf:name "Test 0078";
-      mf:positiveTest "true";
       mf:result <0078.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of meter and xsd:integer";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0079.html>
-      ];
+      mf:action <0079.html>;
       mf:name "Test 0079";
-      mf:positiveTest "true";
       mf:result <0079.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Use of meter and xsd:string";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0080.html>
-      ];
+      mf:action <0080.html>;
       mf:name "Test 0080";
-      mf:positiveTest "true";
       mf:result <0080.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Simple @itemprop-reverse (experimental)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0081.html>
-      ];
+      mf:action <0081.html>;
       mf:name "Test 0081";
-      mf:positiveTest "true";
       mf:result <0081.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemprop-reverse with @itemscope value (experimental)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0082.html>
-      ];
+      mf:action <0082.html>;
       mf:name "Test 0082";
-      mf:positiveTest "true";
       mf:result <0082.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemprop-reverse with literal value (experimental)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0083.html>
-      ];
+      mf:action <0083.html>;
       mf:name "Test 0083";
-      mf:positiveTest "true";
       mf:result <0083.ttl>
     ],  [
-      a mf:ManifestEntry;
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "@itemprop-reverse with @itemprop (experimental)";
-      mf:action [
-        a mq:QueryTest;
-        mq:data <0084.html>
-      ];
+      mf:action <0084.html>;
       mf:name "Test 0084";
-      mf:positiveTest "true";
       mf:result <0084.ttl>
     ]
  ] .

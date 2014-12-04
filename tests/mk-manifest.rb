@@ -10,11 +10,13 @@ graph = RDF::Graph.load("./index.html",
 
 # Turtle version
 ttl = graph.dump(:ttl,
-:base_uri => BASE,
-:prefixes => {
-  :rdfs => "http://www.w3.org/2000/01/rdf-schema#",
-  :mf => "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
-  :mq => "http://www.w3.org/2001/sw/DataAccess/tests/test-query#"}
+  :base_uri => BASE,
+  :prefixes => {
+    rdfs: "http://www.w3.org/2000/01/rdf-schema#",
+    rdft: "http://www.w3.org/ns/rdftest#",
+    mf:   "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
+    mq:   "http://www.w3.org/2001/sw/DataAccess/tests/test-query#"
+  }
 )
 File.open("./manifest.ttl", "w") do |f|
   f.write(ttl.lines.to_a[1..-1].join(""))

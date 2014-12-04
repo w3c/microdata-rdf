@@ -2,24 +2,19 @@
   "@context": {
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rdft": "http://www.w3.org/ns/rdftest#",
     "mf": "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
     "mq": "http://www.w3.org/2001/sw/DataAccess/tests/test-query#",
     
     "comment": "rdfs:comment",
     "entries": {"@id": "mf:entries"},
     "name": "mf:name",
-    "action": "mf:action",
-    "data": {"@id": "mq:data", "@type": "@id"},
+    "action": {"@id": "mf:action", "@type": "@id"},
     "result": {"@id": "mf:result", "@type": "@id"},
-    "vocab_expansion": {"@id": "mf:vocab_expansion"},
-    "registry": {"@id": "mf:registry", "@type": "@id"},
-    "positiveTest": "mf:positiveTest"
+    "registry": {"@id": "rdft:registry", "@type": "@id"}
   },
   "@type": "mf:Manifest",
   "entries": {
-    "@type": "mf:ManifestEntry",
-    "action": {
-      "@type": "mq:QueryTest"
-    }
+    "@type": "mf:ManifestEntry"
   }
 }
