@@ -736,13 +736,8 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         [[!MICRODATA]]).
       </dd>
       <dt><dfn>literal</dfn></dt><dd>
-        Literals are values such as strings and dates. These include <dfn>typed literal</dfn>s, as defined in [[RDF11-CONCEPTS]], and <a>simple literal</a>s.
+        Literals are values such as strings and dates. These include <dfn title="typed literal">typed literals</dfn>, <dfn title="language-tagged string">language-tagged strings</dfn> and <dfn title="simple literal">simple literals</dfn>, as defined in [[RDF11-CONCEPTS]].
       </dd>
-
-      <dt><dfn>simple literal</dfn></dt><dd>
-        Simple literals are either literals with the datatype <cite><a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></cite> [[!XMLSCHEMA11-2]], or <a href="http://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string">language tagged strings</a> as defined in [[RDF11-CONCEPTS]], depending on whether a language information is attached to the literal or not. Note that most RDF environments and serializations have shorthands for simple literals.
-      </dd>
-
       <dt><dfn>property</dfn></dt><dd>
         Each <a>name</a> identifies a <a>property</a> of an <a>item</a>.
         An <a>item</a> may have multiple elements sharing the same <a>name</a>, creating
@@ -796,10 +791,12 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
             If the element is a <code>meta</code> element with a <code>@content</code> attribute.
           </dt>
           <dd>
-            The value is a <a>simple literal</a> created from the value of the <code>@content</code> attribute
+            If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
+            the value is a <a>language-tagged string</a> created from the value of the <code>@content</code> attribute
             with language information set from the
             <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
-            of the property element
+            of the property element.
+            Otherwise, the value is a <a>simple literal</a> created from the value of the <code>@content</code> attribute.
           </dd>
           <dt>If the element is a <code>time</code> element.</dt>
           <dd>The value is a <a>literal</a> made from <code><cite>
@@ -885,9 +882,12 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>Otherwise</dt>
               <dd>
-                The value is a <a>simple literal</a> created from the value with language information set from the
-                <cite><a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
+                If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
+                the value is a <a>language-tagged string</a> created from the value
+                with language information set from the
+                <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
                 of the property element.
+                Otherwise, the value is a <a>simple literal</a> created from the value.
                 <p class="note">The HTML
                   <em>valid yearless date string</em>
                   is similar to
@@ -902,8 +902,13 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               in [[!HTML5]].</p>
           </dd>
           <dt>Otherwise</dt>
-          <dd>The value is a <a>simple literal</a> created from the value with language information set from the
-            <cite><a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">language</a></cite> of the property element.
+          <dd>
+            If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
+            the value is a <a>language-tagged string</a> created from the value
+            with language information set from the
+            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
+            of the property element.
+            Otherwise, the value is a <a>simple literal</a> created from the value.
             <p>See
               <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
                 The <code>lang</code> and <code>xml:lang</code> attributes
