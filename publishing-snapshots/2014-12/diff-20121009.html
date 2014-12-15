@@ -24,7 +24,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 }
 .aref:before {content: "@"; }
 </style>
-<style>/*****************************************************************
+<style>.pkt_added {text-decoration:none !important;}</style><style type="text/css"></style><style>/*****************************************************************
  * ReSpec 3 CSS
  * Robin Berjon - http://berjon.com/
  *****************************************************************/
@@ -539,8 +539,11 @@ extract
 RDF
 [
 <cite>
-<a class="bibref" href="#bib-RDF-CONCEPTS">
-RDF-CONCEPTS
+<del class="diff-old">RDF-CONCEPTS
+</del>
+<a class="bibref" href="#bib-RDF11-CONCEPTS">
+<ins class="diff-chg">RDF11-CONCEPTS
+</ins>
 </a>
 </cite>
 ]
@@ -1043,14 +1046,15 @@ Force
 <ins class="diff-chg">multipleValues
 </ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
 registry
-</ins></a><ins class="diff-chg">
-setting
+</ins>
+</a>
+<ins class="diff-new">setting
 were
 set
 to
-</ins><code><ins class="diff-chg">
+</ins><code><ins class="diff-new">
 list
-</ins></code>.<ins class="diff-chg">
+</ins></code>.<ins class="diff-new">
 Although
 the
 previous
@@ -1082,15 +1086,15 @@ consequently
 support
 for
 the
-</ins><code><ins class="diff-chg">
+</ins><code><ins class="diff-new">
 multipeValues
-</ins></code><ins class="diff-chg">
+</ins></code><ins class="diff-new">
 element
 with
 the
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-new">
 registry
-</ins></a>.<ins class="diff-chg">
+</ins></a>.<ins class="diff-new">
 This
 issue
 remains
@@ -1111,23 +1115,22 @@ as
 requested
 below.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-new">
 issue
 10
-</ins></a><ins class="diff-chg">
+</ins></a><ins class="diff-new">
 )
-</ins></li><li><ins class="diff-chg">
+</ins></li><li><ins class="diff-new">
 Lastly,
 the
 previous
 update
 introduced
-</ins><a href="#vocab_expansion"><ins class="diff-chg">
+</ins><a href="#vocab_expansion"><ins class="diff-new">
 Vocabulary
 Expansion
-</ins>
-</a>
-<ins class="diff-new">using
+</ins></a><ins class="diff-new">
+using
 </ins><em><ins class="diff-new">
 entailment
 </ins></em><ins class="diff-new">
@@ -1736,8 +1739,11 @@ to
 RDF
 [
 <cite>
-<a class="bibref" href="#bib-RDF-CONCEPTS">
-RDF-CONCEPTS
+<del class="diff-old">RDF-CONCEPTS
+</del>
+<a class="bibref" href="#bib-RDF11-CONCEPTS">
+<ins class="diff-chg">RDF11-CONCEPTS
+</ins>
 </a>
 </cite>
 ].
@@ -5325,8 +5331,9 @@ as
 object
 values
 of
+</del>
 the
-playlist
+<del class="diff-old">playlist
 along
 with
 an
@@ -5336,9 +5343,8 @@ containing
 the
 ordered
 values,
-</del>
 the
-<del class="diff-old">data
+data
 may
 </del>
 <ins class="diff-chg">generated
@@ -6862,8 +6868,11 @@ them.
 (See
 [
 <cite>
-<a class="bibref" href="#bib-RDF-CONCEPTS">
-RDF-CONCEPTS
+<del class="diff-old">RDF-CONCEPTS
+</del>
+<a class="bibref" href="#bib-RDF11-CONCEPTS">
+<ins class="diff-chg">RDF11-CONCEPTS
+</ins>
 </a>
 </cite>
 ]).
@@ -7351,27 +7360,108 @@ such
 as
 strings
 and
-dates,
+<del class="diff-old">dates,
 including
+</del>
+<ins class="diff-chg">dates.
+These
+include
+</ins>
 <dfn id="dfn-typed-literal">
 typed
 literal
 </dfn>
-s
+<del class="diff-old">s
+</del>
+<ins class="diff-chg">s,
+as
+defined
+in
+[
+</ins><cite><a class="bibref" href="#bib-RDF11-CONCEPTS"><ins class="diff-chg">
+RDF11-CONCEPTS
+</ins></a></cite><ins class="diff-chg">
+],
+</ins>
 and
+<a href="#dfn-plain-literal" class="internalDFN">
+<ins class="diff-new">plain
+literal
+</ins></a><ins class="diff-new">
+s.
+</ins></dd><dt>
 <dfn id="dfn-plain-literal">
 plain
 literal
 </dfn>
-s.
+<del class="diff-old">s.
 (See
+</del>
+</dt>
+<dd>
+<ins class="diff-chg">Plain
+literals
+are
+either
+literals
+with
+the
+datatype
+</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#string"><ins class="diff-chg">
+xsd:string
+</ins></a></cite>
 [
 <cite>
-<a class="bibref" href="#bib-RDF-CONCEPTS">
-RDF-CONCEPTS
+<del class="diff-old">RDF-CONCEPTS
+</del>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
+<ins class="diff-chg">XMLSCHEMA11-2
+</ins>
 </a>
 </cite>
-]).
+<del class="diff-old">]).
+</del>
+<ins class="diff-chg">],
+or
+</ins><a href="http://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string"><ins class="diff-chg">
+language
+tagged
+strings
+</ins></a><ins class="diff-chg">
+as
+defined
+in
+[
+</ins><cite><a class="bibref" href="#bib-RDF11-CONCEPTS"><ins class="diff-chg">
+RDF11-CONCEPTS
+</ins></a></cite><ins class="diff-chg">
+],
+depending
+on
+whether
+a
+language
+information
+is
+attached
+to
+the
+literal
+or
+not.
+Note
+that
+most
+RDF
+environments
+and
+serializations
+have
+shorthands
+for
+plain
+literals.
+</ins>
 </dd>
 <dt>
 <dfn id="dfn-property">
@@ -8454,8 +8544,11 @@ URI.
 (See
 [
 <cite>
-<a class="bibref" href="#bib-RDF-CONCEPTS">
-RDF-CONCEPTS
+<del class="diff-old">RDF-CONCEPTS
+</del>
+<a class="bibref" href="#bib-RDF11-CONCEPTS">
+<ins class="diff-chg">RDF11-CONCEPTS
+</ins>
 </a>
 </cite>
 ]).
@@ -12034,40 +12127,14 @@ W3C
 OWL
 Working
 Group.
-OWL
-2
-Web
-Ontology
-Language:
-Overview.
-27
-October
-2009.
-W3C
-Recommendation.
-URL:
-http://www.w3.org/TR/2009/REC-owl2-overview-20091027/
-[OWL2-PROFILES]
-Boris
-Motik;
-Bernardo
-Cuenca
-Grau;
-Ian
-Horrocks;
-Zhe
-Wu;
-Achille
-Fokoue;
-Carsten
-Lutz.
 </del>
 <cite>
 <del class="diff-old">OWL
 2
 Web
 Ontology
-Language:Profiles.
+Language:
+Overview.
 </del>
 <ins class="diff-chg">HTML
 Microdata
@@ -12089,21 +12156,32 @@ W3C
 <ins class="diff-chg">Note.
 </ins>
 URL:
-<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-profiles-20091027/
+<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-overview-20091027/
 </del>
 <a href="http://www.w3.org/TR/microdata/">
 <ins class="diff-chg">http://www.w3.org/TR/microdata/
 </ins>
 </a>
 </dd>
-<del class="diff-old">[OWL2-RDF-BASED-SEMANTICS]
+<del class="diff-old">[OWL2-PROFILES]
 </del>
 <dt id="bib-N-TRIPLES">
 <ins class="diff-chg">[N-TRIPLES]
 </ins>
 </dt>
-<del class="diff-old">Michael
-Schneider.
+<del class="diff-old">Boris
+Motik;
+Bernardo
+Cuenca
+Grau;
+Ian
+Horrocks;
+Zhe
+Wu;
+Achille
+Fokoue;
+Carsten
+Lutz.
 </del>
 <dd rel="dcterms:requires">
 <ins class="diff-chg">Gavin
@@ -12116,8 +12194,7 @@ Seaborne.
 2
 Web
 Ontology
-Language:RDF-Based
-Semantics.
+Language:Profiles.
 </del>
 <ins class="diff-chg">RDF
 1.1
@@ -12136,59 +12213,76 @@ February
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-rdf-based-semantics-20091027/
+<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-profiles-20091027/
 </del>
 <a href="http://www.w3.org/TR/n-triples/">
 <ins class="diff-chg">http://www.w3.org/TR/n-triples/
 </ins>
 </a>
 </dd>
-<dt id="bib-RDF-CONCEPTS">
-[RDF-CONCEPTS]
-</dt>
-<dd rel="dcterms:requires">
-Graham
-Klyne;
-Jeremy
-<del class="diff-old">J.
+<del class="diff-old">[OWL2-RDF-BASED-SEMANTICS]
 </del>
-Carroll.
-<a href="http://www.w3.org/TR/rdf-concepts/">
+<dt id="bib-RDF11-CONCEPTS">
+<ins class="diff-chg">[RDF11-CONCEPTS]
+</ins>
+</dt>
+<del class="diff-old">Michael
+Schneider.
+</del>
+<dd rel="dcterms:requires">
+<ins class="diff-chg">Richard
+Cyganiak;
+David
+Wood;
+Markus
+Lanthaler.
+</ins><a href="http://www.w3.org/TR/rdf11-concepts/">
 <cite>
-Resource
-Description
-Framework
-(RDF):
+<del class="diff-old">OWL
+2
+Web
+Ontology
+Language:RDF-Based
+Semantics.
+</del>
+<ins class="diff-chg">RDF
+1.1
 Concepts
 and
 Abstract
-<del class="diff-old">Syntax.
-</del>
-<ins class="diff-chg">Syntax
+Syntax
 </ins>
 </cite>
+<del class="diff-old">27
+October
+2009.
+</del>
 </a>.
-10
+<ins class="diff-chg">25
 February
-2004.
+2014.
+</ins>
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
+<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-rdf-based-semantics-20091027/
 </del>
-<a href="http://www.w3.org/TR/rdf-concepts/">
-<ins class="diff-chg">http://www.w3.org/TR/rdf-concepts/
+<a href="http://www.w3.org/TR/rdf11-concepts/">
+<ins class="diff-chg">http://www.w3.org/TR/rdf11-concepts/
 </ins>
 </a>
 </dd>
-<del class="diff-old">[RDF-MT]
+<del class="diff-old">[RDF-CONCEPTS]
 </del>
 <dt id="bib-RFC3986">
 <ins class="diff-chg">[RFC3986]
 </ins>
 </dt>
-<del class="diff-old">Patrick
-Hayes.
+<del class="diff-old">Graham
+Klyne;
+Jeremy
+J.
+Carroll.
 </del>
 <dd rel="dcterms:requires">
 <ins class="diff-chg">T.
@@ -12199,12 +12293,18 @@ L.
 Masinter.
 </ins><a href="https://tools.ietf.org/html/rfc3986">
 <cite>
-<del class="diff-old">RDF
-Semantics.
-</del>
-<ins class="diff-chg">Uniform
+<ins class="diff-new">Uniform
+</ins>
 Resource
-Identifier
+<del class="diff-old">Description
+Framework
+(RDF):
+Concepts
+and
+Abstract
+Syntax.
+</del>
+<ins class="diff-chg">Identifier
 (URI):
 Generic
 Syntax
@@ -12223,39 +12323,32 @@ Internet
 Standard.
 </ins>
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-mt-20040210
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
 </del>
 <a href="https://tools.ietf.org/html/rfc3986">
 <ins class="diff-chg">https://tools.ietf.org/html/rfc3986
 </ins>
 </a>
 </dd>
-<del class="diff-old">[RDF-SCHEMA]
+<del class="diff-old">[RDF-MT]
 </del>
 <dt id="bib-URL">
 <ins class="diff-chg">[URL]
 </ins>
 </dt>
-<del class="diff-old">Dan
-Brickley;
-Ramanathan
-V.
-Guha.
+<del class="diff-old">Patrick
+Hayes.
 </del>
 <dd rel="dcterms:requires">
-<ins class="diff-chg">Erik
-Arvidsson;
-Michael[tm]
-Smith.
-</ins><a href="http://www.w3.org/TR/url/">
+<ins class="diff-chg">Anne
+van
+Kesteren;
+Sam
+Ruby.
+</ins><a href="http://www.w3.org/TR/url-1/">
 <cite>
 <del class="diff-old">RDF
-Vocabulary
-Description
-Language
-1.0:
-RDF
-Schema.
+Semantics.
 </del>
 <ins class="diff-chg">URL
 </ins>
@@ -12265,9 +12358,9 @@ February
 2004.
 </del>
 </a>.
-<ins class="diff-chg">24
-May
-2012.
+<ins class="diff-chg">9
+December
+2014.
 </ins>
 W3C
 <del class="diff-old">Recommendation.
@@ -12276,25 +12369,22 @@ W3C
 Draft.
 </ins>
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-schema-20040210
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-mt-20040210
 </del>
-<a href="http://www.w3.org/TR/url/">
-<ins class="diff-chg">http://www.w3.org/TR/url/
+<a href="http://www.w3.org/TR/url-1/">
+<ins class="diff-chg">http://www.w3.org/TR/url-1/
 </ins>
 </a>
 </dd>
-<del class="diff-old">[RFC3986]
+<del class="diff-old">[RDF-SCHEMA]
 </del>
 <dt id="bib-XMLSCHEMA11-2">
 <ins class="diff-chg">[XMLSCHEMA11-2]
 </ins>
 </dt>
-<del class="diff-old">T.
-Berners-Lee;
-R.
-Fielding;
-L.
-Masinter.
+<del class="diff-old">Dan
+Brickley;
+Ramanathan
 </del>
 <dd rel="dcterms:requires">
 <ins class="diff-chg">David
@@ -12308,46 +12398,69 @@ Sperberg-McQueen;
 Henry
 Thompson;
 Paul
+</ins>
 V.
-Biron
+<del class="diff-old">Guha.
+</del>
+<ins class="diff-chg">Biron
 et
 al.
 </ins><a href="http://www.w3.org/TR/xmlschema11-2/">
 <cite>
-<del class="diff-old">Uniform
-Resource
-Identifier
-(URI):
-Generic
-Syntax.
+<del class="diff-old">RDF
+Vocabulary
+Description
 </del>
 <ins class="diff-chg">W3C
 XML
 Schema
 Definition
+</ins>
 Language
-(XSD)
+<del class="diff-old">1.0:
+RDF
+Schema.
+</del>
+<ins class="diff-chg">(XSD)
 1.1
 Part
 2:
 Datatypes
 </ins>
 </cite>
-<del class="diff-old">January
-2005.
-Internet
-RFC
-3986.
+<del class="diff-old">10
+February
+2004.
 </del>
 </a>.
 <ins class="diff-chg">5
 April
 2012.
+</ins>
 W3C
 Recommendation.
-</ins>
 URL:
-<del class="diff-old">http://www.ietf.org/rfc/rfc3986.txt
+<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-schema-20040210
+[RFC3986]
+T.
+Berners-Lee;
+R.
+Fielding;
+L.
+Masinter.
+Uniform
+Resource
+Identifier
+(URI):
+Generic
+Syntax.
+January
+2005.
+Internet
+RFC
+3986.
+URL:
+http://www.ietf.org/rfc/rfc3986.txt
 </del>
 <a href="http://www.w3.org/TR/xmlschema11-2/">
 <ins class="diff-chg">http://www.w3.org/TR/xmlschema11-2/

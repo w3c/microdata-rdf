@@ -24,7 +24,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 }
 .aref:before {content: "@"; }
 </style>
-<style>/*****************************************************************
+<style>.pkt_added {text-decoration:none !important;}</style><style type="text/css"></style><style>/*****************************************************************
  * ReSpec 3 CSS
  * Robin Berjon - http://berjon.com/
  *****************************************************************/
@@ -344,7 +344,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
 <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 role="heading" id="h2_abstract">Abstract</h2>
   <p>HTML microdata [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>] is an extension to HTML used to embed machine-readable data into HTML documents.
     Whereas the microdata specification describes a means of markup, the output format is JSON. This specification
-    describes processing rules that may be used to extract RDF [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>] from an HTML document containing
+    describes processing rules that may be used to extract RDF [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>] from an HTML document containing
     microdata.</p>
 </section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 role="heading" id="h2_sotd">Status of This Document</h2>
   
@@ -426,7 +426,10 @@ span.note, span.issue { padding: .1em .5em .15em; }
           
           
           
+          
+            
             All comments are welcome.
+            
           
         </p>
         
@@ -466,7 +469,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
   <!--OddPage--><h2 role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
   <p>This document describes a means of transforming HTML containing microdata into RDF. HTML Microdata [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]
     is an extension to HTML used to embed machine-readable data to HTML documents. This specification describes
-    transformation directly to RDF [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>].</p>
+    transformation directly to RDF [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>].</p>
   <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_1"><span>Note</span></div><div class="">
     <p>There are a variety of ways in which a mapping from microdata to
       RDF might be configured to give a result that is closer to the required result for a particular vocabulary.
@@ -916,7 +919,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
       <dt><dfn id="dfn-blank-node">blank node</dfn></dt><dd>
         A blank node is a node in a graph that is neither a <a href="#dfn-uri-reference" class="internalDFN">URI reference</a> nor a <a href="#dfn-literal" class="internalDFN">literal</a>.
         <a href="#dfn-item" class="internalDFN">Item</a>s without a <a href="#dfn-global-identifier" class="internalDFN">global identifier</a> have a blank node allocated to them.
-        (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+        (See [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>]).
       </dd>
       <dt><dfn id="dfn-canonicalized-fragment">canonicalized fragment</dfn></dt><dd>
         The term <cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">canonicalized fragment</a></cite>
@@ -963,10 +966,13 @@ span.note, span.issue { padding: .1em .5em .15em; }
         [<cite><a class="bibref" href="#bib-MICRODATA">MICRODATA</a></cite>]).
       </dd>
       <dt><dfn id="dfn-literal">literal</dfn></dt><dd>
-        Literals are values such as strings and dates, including <dfn id="dfn-typed-literal">typed literal</dfn>s and
-        <dfn id="dfn-plain-literal">plain literal</dfn>s.
-        (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+        Literals are values such as strings and dates. These include <dfn id="dfn-typed-literal">typed literal</dfn>s, as defined in [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>], and <a href="#dfn-plain-literal" class="internalDFN">plain literal</a>s.
       </dd>
+
+      <dt><dfn id="dfn-plain-literal">plain literal</dfn></dt><dd>
+        Plain literals are either literals with the datatype <cite><a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></cite> [<cite><a class="bibref" href="#bib-XMLSCHEMA11-2">XMLSCHEMA11-2</a></cite>], or <a href="http://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string">language tagged strings</a> as defined in [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>], depending on whether a language information is attached to the literal or not. Note that most RDF environments and serializations have shorthands for plain literals.
+      </dd>
+
       <dt><dfn id="dfn-property">property</dfn></dt><dd>
         Each <a href="#dfn-name" class="internalDFN">name</a> identifies a <a href="#dfn-property" class="internalDFN">property</a> of an <a href="#dfn-item" class="internalDFN">item</a>.
         An <a href="#dfn-item" class="internalDFN">item</a> may have multiple elements sharing the same <a href="#dfn-name" class="internalDFN">name</a>, creating
@@ -1142,7 +1148,7 @@ span.note, span.issue { padding: .1em .5em .15em; }
       <dt><dfn id="dfn-uri-reference">URI reference</dfn></dt><dd>
         URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
         within an RDF triple, as opposed to a <a href="#dfn-literal" class="internalDFN">literal</a> value that may contain a string representation of a
-        URI. (See [<cite><a class="bibref" href="#bib-RDF-CONCEPTS">RDF-CONCEPTS</a></cite>]).
+        URI. (See [<cite><a class="bibref" href="#bib-RDF11-CONCEPTS">RDF11-CONCEPTS</a></cite>]).
         <div class="issue"><div class="issue-title" aria-level="2" role="heading" id="h_issue_2"><span>Issue</span></div><div class="">
           <p>The HTML5/microdata content model for <code>@href</code>, <code>@src</code>,
             <code>@data</code>, <a class="aref internalDFN" href="#dfn-itemtype">itemtype</a> and <a class="aref internalDFN" href="#dfn-itemprop">itemprop</a> and <a class="aref internalDFN" href="#dfn-itemid">itemid</a> is that of
@@ -1599,9 +1605,9 @@ _:a hcard:street-address "Avenue Q" .</pre></div>
 <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 role="heading" id="h2_references"><span class="secno">F. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_normative-references"><span class="secno">F.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 28 October 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-MICRODATA">[MICRODATA]</dt><dd rel="dcterms:requires">Ian Hickson. <a href="http://www.w3.org/TR/microdata/"><cite>HTML Microdata</cite></a>. 29 October 2013. W3C Note. URL: <a href="http://www.w3.org/TR/microdata/">http://www.w3.org/TR/microdata/</a>
 </dd><dt id="bib-N-TRIPLES">[N-TRIPLES]</dt><dd rel="dcterms:requires">Gavin Carothers; Andy Seaborne. <a href="http://www.w3.org/TR/n-triples/"><cite>RDF 1.1 N-Triples</cite></a>. 25 February 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/n-triples/">http://www.w3.org/TR/n-triples/</a>
-</dd><dt id="bib-RDF-CONCEPTS">[RDF-CONCEPTS]</dt><dd rel="dcterms:requires">Graham Klyne; Jeremy Carroll. <a href="http://www.w3.org/TR/rdf-concepts/"><cite>Resource Description Framework (RDF): Concepts and Abstract Syntax</cite></a>. 10 February 2004. W3C Recommendation. URL: <a href="http://www.w3.org/TR/rdf-concepts/">http://www.w3.org/TR/rdf-concepts/</a>
+</dd><dt id="bib-RDF11-CONCEPTS">[RDF11-CONCEPTS]</dt><dd rel="dcterms:requires">Richard Cyganiak; David Wood; Markus Lanthaler. <a href="http://www.w3.org/TR/rdf11-concepts/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. 25 February 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/rdf11-concepts/">http://www.w3.org/TR/rdf11-concepts/</a>
 </dd><dt id="bib-RFC3986">[RFC3986]</dt><dd rel="dcterms:requires">T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://tools.ietf.org/html/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
-</dd><dt id="bib-URL">[URL]</dt><dd rel="dcterms:requires">Erik Arvidsson; Michael[tm] Smith. <a href="http://www.w3.org/TR/url/"><cite>URL</cite></a>. 24 May 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/url/">http://www.w3.org/TR/url/</a>
+</dd><dt id="bib-URL">[URL]</dt><dd rel="dcterms:requires">Anne van Kesteren; Sam Ruby. <a href="http://www.w3.org/TR/url-1/"><cite>URL</cite></a>. 9 December 2014. W3C Working Draft. URL: <a href="http://www.w3.org/TR/url-1/">http://www.w3.org/TR/url-1/</a>
 </dd><dt id="bib-XMLSCHEMA11-2">[XMLSCHEMA11-2]</dt><dd rel="dcterms:requires">David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al. <a href="http://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. 5 April 2012. W3C Recommendation. URL: <a href="http://www.w3.org/TR/xmlschema11-2/">http://www.w3.org/TR/xmlschema11-2/</a>
 </dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_informative-references"><span class="secno">F.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-JSON-LD">[JSON-LD]</dt><dd rel="dcterms:references">Manu Sporny; Gregg Kellogg; Markus Lanthaler. <a href="http://www.w3.org/TR/json-ld/"><cite>JSON-LD 1.0</cite></a>. 16 January 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/json-ld/">http://www.w3.org/TR/json-ld/</a>
 </dd><dt id="bib-MICRODATA-RDF-TESTS">[MICRODATA-RDF-TESTS]</dt><dd rel="dcterms:references">Gregg Kellogg; Ivan Herman. <a href="http://w3c.github.io/microdata-rdf/tests/"><cite>Microdata to RDF Tests</cite></a>. unofficial. URL: <a href="http://w3c.github.io/microdata-rdf/tests/">http://w3c.github.io/microdata-rdf/tests/</a>

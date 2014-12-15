@@ -20,10 +20,9 @@
             }
           },
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          //specStatus:           "IG-NOTE",
           specStatus:           "ED",
           charterDisclosureURI: "http://www.w3.org/2006/07/swig-charter#Ipr",
-          //publishDate:          "2012-10-09",
+          // publishDate:          "2014-12-16",
           copyrightStart:       "2011",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
@@ -32,9 +31,9 @@
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
-          previousPublishDate:  "2012-10-09",
+          previousPublishDate:  "2014-12-16",
           previousMaturity:     "IG-NOTE",
-          previousURI:          "http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/",
+          previousURI:          "http://www.w3.org/TR/2012/NOTE-microdata-rdf-20141216/",
 
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:           "http://w3c.github.io/microdata-rdf/",
@@ -135,7 +134,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 <section id="abstract">
   <p>HTML microdata [[!MICRODATA]] is an extension to HTML used to embed machine-readable data into HTML documents.
     Whereas the microdata specification describes a means of markup, the output format is JSON. This specification
-    describes processing rules that may be used to extract RDF [[!RDF-CONCEPTS]] from an HTML document containing
+    describes processing rules that may be used to extract RDF [[!RDF11-CONCEPTS]] from an HTML document containing
     microdata.</p>
 </section>
 
@@ -200,7 +199,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   <h1>Introduction</h1>
   <p>This document describes a means of transforming HTML containing microdata into RDF. HTML Microdata [[!MICRODATA]]
     is an extension to HTML used to embed machine-readable data to HTML documents. This specification describes
-    transformation directly to RDF [[RDF-CONCEPTS]].</p>
+    transformation directly to RDF [[RDF11-CONCEPTS]].</p>
   <div class="note">
     <p>There are a variety of ways in which a mapping from microdata to
       RDF might be configured to give a result that is closer to the required result for a particular vocabulary.
@@ -688,7 +687,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       <dt><dfn>blank node</dfn></dt><dd>
         A blank node is a node in a graph that is neither a <a>URI reference</a> nor a <a>literal</a>.
         <a>Item</a>s without a <a>global identifier</a> have a blank node allocated to them.
-        (See [[RDF-CONCEPTS]]).
+        (See [[RDF11-CONCEPTS]]).
       </dd>
       <dt><dfn>canonicalized fragment</dfn></dt><dd>
         The term <cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">canonicalized fragment</a></cite>
@@ -737,10 +736,13 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
         [[!MICRODATA]]).
       </dd>
       <dt><dfn>literal</dfn></dt><dd>
-        Literals are values such as strings and dates, including <dfn>typed literal</dfn>s and
-        <dfn>plain literal</dfn>s.
-        (See [[RDF-CONCEPTS]]).
+        Literals are values such as strings and dates. These include <dfn>typed literal</dfn>s, as defined in [[RDF11-CONCEPTS]], and <a>plain literal</a>s.
       </dd>
+
+      <dt><dfn>plain literal</dfn></dt><dd>
+        Plain literals are either literals with the datatype <cite><a href="http://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></cite> [[!XMLSCHEMA11-2]], or <a href="http://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string">language tagged strings</a> as defined in [[RDF11-CONCEPTS]], depending on whether a language information is attached to the literal or not. Note that most RDF environments and serializations have shorthands for plain literals.
+      </dd>
+
       <dt><dfn>property</dfn></dt><dd>
         Each <a>name</a> identifies a <a>property</a> of an <a>item</a>.
         An <a>item</a> may have multiple elements sharing the same <a>name</a>, creating
@@ -920,7 +922,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       <dt><dfn>URI reference</dfn></dt><dd>
         URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
         within an RDF triple, as opposed to a <a>literal</a> value that may contain a string representation of a
-        URI. (See [[RDF-CONCEPTS]]).
+        URI. (See [[RDF11-CONCEPTS]]).
         <div class="issue">
           <p>The HTML5/microdata content model for <code>@href</code>, <code>@src</code>,
             <code>@data</code>, <a class="aref">itemtype</a> and <a class="aref">itemprop</a> and <a class="aref">itemid</a> is that of
