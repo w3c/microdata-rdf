@@ -21,7 +21,7 @@ rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
     mf:entries [
       a mf:ManifestEntry,
         rdft:TestMicrodataEval;
-      rdfs:comment "Item with no itemtype and literal itemprop";
+      rdfs:comment "Item with itemtype and literal itemprop";
       mf:action <0001.html>;
       mf:name "Test 0001";
       mf:result <0001.ttl>
