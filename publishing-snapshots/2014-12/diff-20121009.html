@@ -1046,15 +1046,14 @@ Force
 <ins class="diff-chg">multipleValues
 </ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
 registry
-</ins>
-</a>
-<ins class="diff-new">setting
+</ins></a><ins class="diff-chg">
+setting
 were
 set
 to
-</ins><code><ins class="diff-new">
+</ins><code><ins class="diff-chg">
 list
-</ins></code>.<ins class="diff-new">
+</ins></code>.<ins class="diff-chg">
 Although
 the
 previous
@@ -1086,15 +1085,15 @@ consequently
 support
 for
 the
-</ins><code><ins class="diff-new">
+</ins><code><ins class="diff-chg">
 multipeValues
-</ins></code><ins class="diff-new">
+</ins></code><ins class="diff-chg">
 element
 with
 the
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-new">
+</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
 registry
-</ins></a>.<ins class="diff-new">
+</ins></a>.<ins class="diff-chg">
 This
 issue
 remains
@@ -1115,22 +1114,23 @@ as
 requested
 below.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-new">
+</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
 issue
 10
-</ins></a><ins class="diff-new">
+</ins></a><ins class="diff-chg">
 )
-</ins></li><li><ins class="diff-new">
+</ins></li><li><ins class="diff-chg">
 Lastly,
 the
 previous
 update
 introduced
-</ins><a href="#vocab_expansion"><ins class="diff-new">
+</ins><a href="#vocab_expansion"><ins class="diff-chg">
 Vocabulary
 Expansion
-</ins></a><ins class="diff-new">
-using
+</ins>
+</a>
+<ins class="diff-new">using
 </ins><em><ins class="diff-new">
 entailment
 </ins></em><ins class="diff-new">
@@ -4212,8 +4212,9 @@ are
 the
 following:
 contextual
+</del>
 The
-contextual
+<del class="diff-old">contextual
 URI
 generation
 scheme
@@ -4384,9 +4385,8 @@ generate
 http://www.w3.org/ns/md?type=http://schema.org/Person&amp;prop=name
 .
 vocabulary
-</del>
 The
-<del class="diff-old">vocabulary
+vocabulary
 </del>
 URI
 generation
@@ -5331,17 +5331,17 @@ as
 object
 values
 of
-</del>
 the
-<del class="diff-old">playlist
+playlist
 along
 with
 an
 RDF
 Collection
 containing
+</del>
 the
-ordered
+<del class="diff-old">ordered
 values,
 the
 data
@@ -5721,16 +5721,16 @@ generation
 was
 fixed
 to
-</del>
-<code>
-<del class="diff-old">vocabulary
+vocabulary
 ,
 multiple
 values
 always
 generated
 both
-unordered
+</del>
+<code>
+<del class="diff-old">unordered
 </del>
 <ins class="diff-chg">data
 </ins>
@@ -6449,26 +6449,26 @@ use
 of
 </ins><code><ins class="diff-chg">
 label
-</ins></code><ins class="diff-chg">
-where
+</ins>
+</code>
+<ins class="diff-new">where
 the
 current
 voabulary
 were
-</ins><code><ins class="diff-chg">
+</ins><code><ins class="diff-new">
 rdfs:
-</ins></code><ins class="diff-chg">
+</ins></code><ins class="diff-new">
 could
 also
 cause
 a
 triple
 using
-</ins><code><ins class="diff-chg">
+</ins><code><ins class="diff-new">
 schema:name
-</ins>
-</code>
-<ins class="diff-new">to
+</ins></code><ins class="diff-new">
+to
 be
 emitted.
 To
@@ -7366,101 +7366,44 @@ including
 <ins class="diff-chg">dates.
 These
 include
-</ins>
-<dfn id="dfn-typed-literal">
+</ins><dfn title="typed literal" id="dfn-typed-literal">
 typed
-literal
+<del class="diff-old">literal
+</del>
+<ins class="diff-chg">literals
+</ins></dfn>,<dfn title="language-tagged string" id="dfn-language-tagged-string"><ins class="diff-chg">
+language-tagged
+strings
+</ins>
 </dfn>
 <del class="diff-old">s
 </del>
-<ins class="diff-chg">s,
+and
+<del class="diff-old">plain
+literal
+s.
+(See
+</del>
+<dfn title="simple literal" id="dfn-simple-literal">
+<ins class="diff-chg">simple
+literals
+</ins></dfn>,<ins class="diff-chg">
 as
 defined
 in
-[
-</ins><cite><a class="bibref" href="#bib-RDF11-CONCEPTS"><ins class="diff-chg">
-RDF11-CONCEPTS
-</ins></a></cite><ins class="diff-chg">
-],
 </ins>
-and
-<a href="#dfn-plain-literal" class="internalDFN">
-<ins class="diff-new">plain
-literal
-</ins></a><ins class="diff-new">
-s.
-</ins></dd><dt>
-<dfn id="dfn-plain-literal">
-plain
-literal
-</dfn>
-<del class="diff-old">s.
-(See
-</del>
-</dt>
-<dd>
-<ins class="diff-chg">Plain
-literals
-are
-either
-literals
-with
-the
-datatype
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#string"><ins class="diff-chg">
-xsd:string
-</ins></a></cite>
 [
 <cite>
 <del class="diff-old">RDF-CONCEPTS
 </del>
-<a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
+<a class="bibref" href="#bib-RDF11-CONCEPTS">
+<ins class="diff-chg">RDF11-CONCEPTS
 </ins>
 </a>
 </cite>
 <del class="diff-old">]).
 </del>
-<ins class="diff-chg">],
-or
-</ins><a href="http://www.w3.org/TR/rdf11-concepts/#dfn-language-tagged-string"><ins class="diff-chg">
-language
-tagged
-strings
-</ins></a><ins class="diff-chg">
-as
-defined
-in
-[
-</ins><cite><a class="bibref" href="#bib-RDF11-CONCEPTS"><ins class="diff-chg">
-RDF11-CONCEPTS
-</ins></a></cite><ins class="diff-chg">
-],
-depending
-on
-whether
-a
-language
-information
-is
-attached
-to
-the
-literal
-or
-not.
-Note
-that
-most
-RDF
-environments
-and
-serializations
-have
-shorthands
-for
-plain
-literals.
+<ins class="diff-chg">].
 </ins>
 </dd>
 <dt>
@@ -7836,8 +7779,8 @@ The
 value
 is
 a
-</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
-plain
+</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+simple
 literal
 </ins></a>.</dd></dl></dd><dt><ins class="diff-new">
 If
@@ -7856,13 +7799,22 @@ a
 </ins></code><ins class="diff-new">
 attribute.
 </ins></dt><dd><ins class="diff-new">
-The
+If
+the
+element
+has
+a
+non-empty
+</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-new">
+language
+</ins></a></cite>,<ins class="diff-new">
+the
 value
 is
 a
-</ins><a href="#dfn-plain-literal" class="internalDFN"><ins class="diff-new">
-plain
-literal
+</ins><a href="#dfn-language-tagged-string" class="internalDFN"><ins class="diff-new">
+language-tagged
+string
 </ins></a><ins class="diff-new">
 created
 from
@@ -7886,7 +7838,26 @@ language
 of
 the
 property
-element
+element.
+Otherwise,
+the
+value
+is
+a
+</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+simple
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value
+of
+the
+</ins><code><ins class="diff-new">
+@content
+</ins></code><ins class="diff-new">
+attribute.
 </ins></dd><dt><ins class="diff-new">
 If
 the
@@ -8284,13 +8255,29 @@ Draft
 Otherwise
 </dt>
 <dd>
-The
+<del class="diff-old">The
+</del>
+<ins class="diff-chg">If
+the
+element
+has
+a
+non-empty
+</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-chg">
+language
+</ins></a></cite>,<ins class="diff-chg">
+the
+</ins>
 value
 is
 a
-<a href="#dfn-plain-literal" class="internalDFN">
-plain
+<del class="diff-old">plain
 literal
+</del>
+<a href="#dfn-language-tagged-string" class="internalDFN">
+<ins class="diff-chg">language-tagged
+string
+</ins>
 </a>
 created
 from
@@ -8303,7 +8290,7 @@ set
 from
 the
 <cite>
-<a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
 </a>
 </cite>
@@ -8311,6 +8298,20 @@ of
 the
 property
 element.
+<ins class="diff-new">Otherwise,
+the
+value
+is
+a
+</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+simple
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value.
+</ins>
 <div class="note">
 <div class="note-title" aria-level="2" role="heading" id="h_note_4">
 <span>
@@ -8376,13 +8377,29 @@ HTML5
 Otherwise
 </dt>
 <dd>
-The
+<del class="diff-old">The
+</del>
+<ins class="diff-chg">If
+the
+element
+has
+a
+non-empty
+</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-chg">
+language
+</ins></a></cite>,<ins class="diff-chg">
+the
+</ins>
 value
 is
 a
-<a href="#dfn-plain-literal" class="internalDFN">
-plain
+<del class="diff-old">plain
 literal
+</del>
+<a href="#dfn-language-tagged-string" class="internalDFN">
+<ins class="diff-chg">language-tagged
+string
+</ins>
 </a>
 created
 from
@@ -8395,7 +8412,7 @@ set
 from
 the
 <cite>
-<a href="http://www.w3.org/TR/html/dom.html#the-lang-and-xml:lang-attributes">
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
 </a>
 </cite>
@@ -8403,6 +8420,20 @@ of
 the
 property
 element.
+<ins class="diff-new">Otherwise,
+the
+value
+is
+a
+</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+simple
+literal
+</ins></a><ins class="diff-new">
+created
+from
+the
+value.
+</ins>
 <p>
 See
 <cite>
