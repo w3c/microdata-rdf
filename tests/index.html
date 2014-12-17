@@ -67,23 +67,32 @@
     and <a href="manifest.jsonld">JSON-LD</a>.</p>  
 </section>
 <section><h2>Running tests</h2>
-  <p>Tests are described with individual HTML files containing microdata, which when processed,
-    generates exactly the triples specified in the result file.
-    <a href="#positive-tests">Positive processor
-    tests</a> tests MUST generate the specified triples and <a href="#negative-tests">Negative processor tests</a>
-    MUST NOT generate the specified triples.
+  <p>Tests are described with individual HTML files containing microdata
+    (identified by the object of the <code>mf:action</code> property),
+    which when parsed into a graph or dataset, parses the expected result
+     (identified by the object of the <code>mf:result</code> property)
+     into another graph or dataset, and those two graphs/datasets are
+     <a href="http://www.w3.org/TR/rdf11-concepts/#graph-isomorphism">isomorphic</a> (see [[RDF11-CONCEPTS]]).
     <span itemscope itemid="http://www.w3.org/ns/rdftest#TestMicrodataEval" itemtype="http://www.w3.org/2000/01/rdf-schema#Class">
       A <em itemprop="label">Microdata Positive Evaluation</em> Test (<code>TestMicrodataEval</code>)
       represents a <span itemprop="comment">A positive Microdata evaluation test.</span>
     </span>
+  </p>
+   <p>A negative test is passed if an implementation parses the input
+     (identified by the object of the <code>mf:action</code> property) into a graph
+     or dataset, parses the expected result
+     (identified by the object of the <code>mf:result</code> property)
+     into another graph or dataset, and those two graphs/datasets are <strong>not</strong>
+     <a href="http://www.w3.org/TR/rdf11-concepts/#graph-isomorphism">isomorphic</a> (see [[RDF11-CONCEPTS]]).
     <span itemscope itemid="http://www.w3.org/ns/rdftest#TestMicrodataNegativeEval" itemtype="http://www.w3.org/2000/01/rdf-schema#Class">
       A <em itemprop="label">Microdata Negative Evaluation</em> Test (<code>TestMicrodataNegativeEval</code>)
       represents a <span itemprop="comment">A negative Microdata evaluation test.</span>
     </span>
-    These tests generally correspond to the descriptions of Evaluation Tests in [[RDF11-TESTCASES]]
   </p>
+  <p>These test descriptions generally correspond to the descriptions of Evaluation Tests in [[RDF11-TESTCASES]]</p>
   <p>All tests should be performed with an assumed base of <code>http://w3c.github.io/microdata-rdf/tests/</code>
-    along with the base-name of the specific test document (excluding any format extension).</p>
+    along with the base-name of the specific test document (excluding any format extension) for
+    both input and result files.</p>
   <p>This document serves as the test manifest for both positive and negative parser tests using the
     <a href="http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#">Data Access Test Manifest</a>
     and <a href="http://www.w3.org/2001/sw/DataAccess/tests/test-query#">Data Access Test Query</a> vocabularies.</p>
