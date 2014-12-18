@@ -544,16 +544,14 @@ rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
       rdfs:comment "Vocabulary Expansion test with rdfs:subPropertyOf";
       mf:action <0073.html>;
       mf:name "Test 0073";
-      mf:result <0073.ttl>;
-      mf:vocab_expansion "true"
+      mf:result <0073.ttl>
     ],  [
       a mf:ManifestEntry,
         rdft:TestMicrodataEval;
       rdfs:comment "Vocabulary Expansion test with owl:equivalentProperty";
       mf:action <0074.html>;
       mf:name "Test 0074";
-      mf:result <0074.ttl>;
-      mf:vocab_expansion "true"
+      mf:result <0074.ttl>
     ],  [
       a mf:ManifestEntry,
         rdft:TestMicrodataEval;
