@@ -541,6 +541,14 @@ rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
     ],  [
       a mf:ManifestEntry,
         rdft:TestMicrodataEval;
+      rdfs:comment "Vocabulary Expansion test with schema:additionalType";
+      mf:action <0071.html>;
+      mf:name "Test 0071";
+      mf:result <0071.ttl>;
+      rdft:registry <http://www.w3.org/ns/md>
+    ],  [
+      a mf:ManifestEntry,
+        rdft:TestMicrodataEval;
       rdfs:comment "Vocabulary Expansion test with rdfs:subPropertyOf";
       mf:action <0073.html>;
       mf:name "Test 0073";
