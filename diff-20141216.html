@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
-<head>
+<html lang="en" dir="ltr" typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head><meta lang="" property="dc:language" content="en">
 <title>Microdata to RDF – Second Edition</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
@@ -172,33 +172,34 @@ aside.example div.example div.example-title {
     color: #999;
 }
 </style><style>/* --- ISSUES/NOTES --- */
-div.issue-title, div.note-title {
+div.issue-title, div.note-title , div.warning-title {
     padding-right:  1em;
     min-width: 7.5em;
     color: #b9ab2d;
 }
 div.issue-title { color: #e05252; }
 div.note-title { color: #2b2; }
-div.issue-title span, div.note-title span {
+div.warning-title { color: #f22; }
+div.issue-title span, div.note-title span, div.warning-title span {
     text-transform: uppercase;
 }
-div.note, div.issue {
+div.note, div.issue, div.warning {
     margin-top: 1em;
     margin-bottom: 1em;
 }
-.note > p:first-child, .issue > p:first-child { margin-top: 0 }
-.issue, .note {
+.note > p:first-child, .issue > p:first-child, .warning > p:first-child { margin-top: 0 }
+.issue, .note, .warning {
     padding: .5em;
     border-left-width: .5em;
     border-left-style: solid;
 }
-div.issue, div.note {
+div.issue, div.note , div.warning {
     padding: 1em 1.2em 0.5em;
     margin: 1em 0;
     position: relative;
     clear: both;
 }
-span.note, span.issue { padding: .1em .5em .15em; }
+span.note, span.issue, span.warning { padding: .1em .5em .15em; }
 
 .issue {
     border-color: #e05252;
@@ -209,8 +210,25 @@ span.note, span.issue { padding: .1em .5em .15em; }
     background: #e9fbe9;
 }
 
+.warning {
+    border-color: #f11;
+    border-right-width: .2em;
+    border-top-width: .2em;
+    border-bottom-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
 
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-IG-NOTE"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><style type='text/css'>
+.warning-title:before{
+    content: "&#9888;"; /*U+26A0 WARNING SIGN*/
+    font-size: 3em;
+    float: left;
+    height: 100%;
+    padding-right: .3em;
+    vertical-align: top;
+    margin-top: -0.5em;
+}
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><style type='text/css'>
 .diff-old-a {
   font-size: smaller;
   color: red;
@@ -243,10 +261,12 @@ span.note, span.issue { padding: .1em .5em .15em; }
 Microdata
 to
 RDF
-<ins class="diff-new">–
+<del class="diff-old">â€“
+</del>
+<ins class="diff-chg">–
+</ins>
 Second
 Edition
-</ins>
 </h1>
 <h2 property="bibo:subtitle" id="subtitle">
 Transformation
@@ -255,22 +275,23 @@ HTML+Microdata
 to
 RDF
 </h2>
-<h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-12-16T08:00:00.000Z" id="w3c-interest-group-note-16-december-2014">
+<h2 id="w3c-editor-s-draft-29-december-2014">
 <abbr title="World Wide Web Consortium">
 W3C
 </abbr>
-Interest
+<del class="diff-old">Interest
 Group
 Note
-<del class="diff-old">09
-October
-2012
+16
 </del>
-<time class="dt-published" datetime="2014-12-16">
-<ins class="diff-chg">16
+<ins class="diff-chg">Editor's
+Draft
+</ins><time property="dcterms:issued" class="dt-published" datetime="2014-12-29"><ins class="diff-chg">
+29
+</ins>
 December
 2014
-</ins></time>
+</time>
 </h2>
 <dl>
 <dt>
@@ -278,10 +299,10 @@ This
 version:
 </dt>
 <dd>
-<del class="diff-old">http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/
+<del class="diff-old">http://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/
 </del>
-<a class="u-url" href="http://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/">
-<ins class="diff-chg">http://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/
+<a class="u-url" href="http://w3c.github.io/microdata-rdf/">
+<ins class="diff-chg">http://w3c.github.io/microdata-rdf/
 </ins>
 </a>
 </dd>
@@ -301,49 +322,46 @@ editor's
 draft:
 </dt>
 <dd>
-<del class="diff-old">http://dvcs.w3.org/hg/htmldata/raw-file/default/microdata-rdf/index.html
-</del>
 <a href="http://w3c.github.io/microdata-rdf/">
-<ins class="diff-chg">http://w3c.github.io/microdata-rdf/
-</ins></a></dd><dt><ins class="diff-chg">
+http://w3c.github.io/microdata-rdf/
+</a>
+</dd>
+<dt>
 Test
 suite:
-</ins></dt><dd><a href="http://w3c.github.io/microdata-rdf/tests/"><ins class="diff-chg">
-http://w3c.github.io/microdata-rdf/tests/
-</ins>
-</a>
-</dd>
-<dt>
-Previous
-version:
 </dt>
 <dd>
-<del class="diff-old">http://www.w3.org/TR/2012/NOTE-microdata-rdf-20120308/
-</del>
-<a rel="dcterms:replaces" href="http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/">
-<ins class="diff-chg">http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/
-</ins>
+<a href="http://w3c.github.io/microdata-rdf/tests/">
+http://w3c.github.io/microdata-rdf/tests/
 </a>
 </dd>
 <dt>
+<del class="diff-old">Previous
+version:
+http://www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/
+</del>
 Editor:
 </dt>
-<dd class="p-author h-card vcard" rel="bibo:editor" inlist="">
-<span typeof="foaf:Person">
-<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">
+<dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0">
+<span property="rdf:first" typeof="foaf:Person">
+<meta property="foaf:name" content="Gregg Kellogg">
+<a class="u-url url p-name fn" property="foaf:homepage" href="http://greggkellogg.net/">
 Gregg
 Kellogg
 </a>,
 Kellogg
 Associates
 </span>
+<span property="rdf:rest" resource="rdf:nil">
+</span>
 </dd>
 <dt>
 Authors:
 </dt>
-<dd class="p-author h-card vcard" rel="dcterms:contributor">
-<span typeof="foaf:Person">
-<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ian Hickson" href="mailto:ian@hixie.ch">
+<dd class="p-author h-card vcard">
+<span property="dc:contributor" typeof="foaf:Person">
+<meta property="foaf:name" content="Ian Hickson">
+<a class="u-url url p-name fn" property="foaf:homepage" href="mailto:ian@hixie.ch">
 Ian
 Hickson
 </a>,
@@ -351,9 +369,10 @@ Google,
 Inc.
 </span>
 </dd>
-<dd class="p-author h-card vcard" rel="dcterms:contributor">
-<span typeof="foaf:Person">
-<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Gregg Kellogg" href="http://greggkellogg.net/">
+<dd class="p-author h-card vcard">
+<span property="dc:contributor" typeof="foaf:Person">
+<meta property="foaf:name" content="Gregg Kellogg">
+<a class="u-url url p-name fn" property="foaf:homepage" href="http://greggkellogg.net/">
 Gregg
 Kellogg
 </a>,
@@ -361,61 +380,59 @@ Kellogg
 Associates
 </span>
 </dd>
-<dd class="p-author h-card vcard" rel="dcterms:contributor">
-<span typeof="foaf:Person">
-<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Jeni Tennison" href="http://www.jenitennison.com/">
+<dd class="p-author h-card vcard">
+<span property="dc:contributor" typeof="foaf:Person">
+<meta property="foaf:name" content="Jeni Tennison">
+<a class="u-url url p-name fn" property="foaf:homepage" href="http://www.jenitennison.com/">
 Jeni
 Tennison
 </a>,
-<del class="diff-old">Independent
-</del>
-<a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://theodi.org/">
-<ins class="diff-chg">Open
+<a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://theodi.org/">
+Open
 Data
 Institute
-</ins></a></span>
+</a>
+</span>
 </dd>
-<dd class="p-author h-card vcard" rel="dcterms:contributor">
-<span typeof="foaf:Person">
-<a class="u-url url p-name fn" rel="foaf:homepage" property="foaf:name" content="Ivan Herman" href="http://www.w3.org/People/Ivan/">
+<dd class="p-author h-card vcard">
+<span property="dc:contributor" typeof="foaf:Person">
+<meta property="foaf:name" content="Ivan Herman">
+<a class="u-url url p-name fn" property="foaf:homepage" href="http://www.w3.org/People/Ivan/">
 Ivan
 Herman
 </a>,
-<a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.w3.org">
+<a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.w3.org">
 <abbr title="World Wide Web Consortium">
 W3C
 </abbr>
 </a>
 </span>
 </dd>
-<del class="diff-old">This
-document
-is
-also
-available
-in
-this
-non-normative
-format:
-diff
-</del>
 <dt>
-<ins class="diff-chg">Repository:
-</ins></dt><dd><a href="https://github.com/w3c/microdata-rdf"><ins class="diff-chg">
+Repository:
+</dt>
+<dd>
+<a href="https://github.com/w3c/microdata-rdf">
 We
 are
 on
 Github
-</ins></a></dd><dd><a href="https://github.com/w3c/microdata-rdf/issues"><ins class="diff-chg">
+</a>
+</dd>
+<dd>
+<a href="https://github.com/w3c/microdata-rdf/issues">
 Open
 and
 closed
 issues
-</ins></a></dd><dt><ins class="diff-chg">
+</a>
+</dd>
+<dt>
 Changes:
-</ins></dt><dd><a href="diff-20121009.html"><ins class="diff-chg">
+</dt>
+<dd>
+<a href="diff-20141216.html">
 Diff
-</ins>
 to
 previous
 version
@@ -423,19 +440,20 @@ version
 </dd>
 <dd>
 <a href="https://github.com/w3c/microdata-rdf/commits/gh-pages">
-<ins class="diff-chg">Commit
+Commit
 history
-</ins></a></dd></dl>
+</a>
+</dd>
+</dl>
 <p class="copyright">
 <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">
 Copyright
 </a>
 <del class="diff-old">Â©
-2011-2012
 </del>
 <ins class="diff-chg">©
-2011-2014
 </ins>
+2011-2014
 <a href="http://www.w3.org/">
 <abbr title="World Wide Web Consortium">
 W3C
@@ -462,8 +480,7 @@ ERCIM
 Keio
 </a>,
 <a href="http://ev.buaa.edu.cn/">
-<ins class="diff-new">Beihang
-</ins>
+Beihang
 </a>
 ),
 All
@@ -488,9 +505,11 @@ apply.
 </p>
 <hr>
 </div>
-<section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter">
-<h2 role="heading" id="h2_abstract">
+<section id="abstract" class="introductory" property="dc:abstract">
+<h2 id="h-abstract" resource="#h-abstract">
+<span property="xhv:role" resource="xhv:heading">
 Abstract
+</span>
 </h2>
 <p>
 HTML
@@ -543,11 +562,8 @@ extract
 RDF
 [
 <cite>
-<del class="diff-old">RDF-CONCEPTS
-</del>
 <a class="bibref" href="#bib-RDF11-CONCEPTS">
-<ins class="diff-chg">RDF11-CONCEPTS
-</ins>
+RDF11-CONCEPTS
 </a>
 </cite>
 ]
@@ -559,12 +575,14 @@ containing
 microdata.
 </p>
 </section>
-<section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter">
-<h2 role="heading" id="h2_sotd">
+<section id="sotd" class="introductory">
+<h2 id="h-sotd" resource="#h-sotd">
+<span property="xhv:role" resource="xhv:heading">
 Status
 of
 This
 Document
+</span>
 </h2>
 <p>
 <em>
@@ -698,36 +716,26 @@ Note
 </a>,
 published
 in
-<del class="diff-old">March
-</del>
-<ins class="diff-chg">October
-</ins>
+October
 2012.
 This
 update
-<del class="diff-old">adds
-</del>
-<ins class="diff-chg">simplifies
+simplifies
 processing
 using
-</ins>
 the
-<del class="diff-old">Vocabulary
-Expansion
-</del>
-<ins class="diff-chg">following
+following
 mechanisms:
-</ins></p><ul><li><ins class="diff-chg">
+</p>
+<ul>
+<li>
 Experimental
 support
 for
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins>
 </a>
-<del class="diff-old">feature
-</del>
-<ins class="diff-chg">has
+has
 been
 added.
 This
@@ -737,9 +745,11 @@ not
 part
 of
 [
-</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
 MICRODATA
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 ]
 and
 is
@@ -770,58 +780,53 @@ forthcoming
 versions
 of
 [
-</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
 MICRODATA
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 ]
 and
 this
 note.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/5"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/5">
 issue
 5
-</ins></a><ins class="diff-chg">
+</a>
 )
-</ins></li><li><a title="top-level item" href="#dfn-top-level-item" class="internalDFN"><ins class="diff-chg">
+</li>
+<li>
+<a title="top-level item" href="#dfn-top-level-item" class="internalDFN">
 Top-level
 items
-</ins></a><ins class="diff-chg">
+</a>
 were
 prviously
 included
 in
 a
-</ins><code><ins class="diff-chg">
+<code>
 md:item
-</ins></code><ins class="diff-chg">
+</code>
 RDF
 Collection
-</ins>
 to
-<ins class="diff-new">reconstruct
-</ins>
+reconstruct
 the
-<del class="diff-old">conversion
-algorithm,
-</del>
-<ins class="diff-chg">order
+order
 that
 items
 appear
-</ins>
 in
-<del class="diff-old">response
-</del>
-<ins class="diff-chg">the
+the
 DOM.
 This
 has
 also
 proven
-</ins>
 to
-<ins class="diff-new">not
+not
 be
 useful
 and
@@ -829,12 +834,13 @@ has
 been
 dropped.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/6"><ins class="diff-new">
+<a href="https://github.com/w3c/microdata-rdf/issues/6">
 issue
 6
-</ins></a><ins class="diff-new">
+</a>
 )
-</ins></li><li><ins class="diff-new">
+</li>
+<li>
 A
 property
 value
@@ -842,31 +848,25 @@ may
 be
 extracted
 from
-</ins>
 the
-<del class="diff-old">evolution
-</del>
 <code>
-<ins class="diff-chg">@content
-</ins></code><ins class="diff-chg">
+@content
+</code>
 attribute
-</ins>
 of
-<del class="diff-old">vocabularies
-discussed
-</del>
-<ins class="diff-chg">the
-</ins><code><ins class="diff-chg">
+the
+<code>
 meta
-</ins></code><ins class="diff-chg">
+</code>
 element.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/7"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/7">
 issue
 7
-</ins></a><ins class="diff-chg">
+</a>
 )
-</ins></li><li><ins class="diff-chg">
+</li>
+<li>
 A
 property
 value
@@ -875,19 +875,19 @@ be
 extracted
 from
 the
-</ins><code><ins class="diff-chg">
+<code>
 @value
-</ins></code><ins class="diff-chg">
+</code>
 attribute
 of
 the
-</ins><code><ins class="diff-chg">
+<code>
 data
-</ins></code><ins class="diff-chg">
+</code>
 or
-</ins><code><ins class="diff-chg">
+<code>
 meter
-</ins></code><ins class="diff-chg">
+</code>
 elements.
 If
 this
@@ -907,22 +907,25 @@ appropriate
 datatype
 from
 [
-</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
 XMLSCHEMA11-2
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 ]
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/8"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/8">
 issue
 8
-</ins></a><ins class="diff-chg">
+</a>
 and
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/9"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/9">
 issue
 9
-</ins></a><ins class="diff-chg">
+</a>
 )
-</ins></li><li><ins class="diff-chg">
+</li>
+<li>
 Property
 URI
 generation
@@ -931,11 +934,12 @@ under
 control
 of
 the
-</ins><code><ins class="diff-chg">
+<code>
 propertyURI
-</ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+</code>
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins></a><ins class="diff-chg">
+</a>
 setting.
 This
 setting
@@ -945,18 +949,18 @@ have
 taken
 either
 the
-</ins><code><ins class="diff-chg">
+<code>
 vocabulary
-</ins></code><ins class="diff-chg">
+</code>
 or
-</ins><code><ins class="diff-chg">
+<code>
 contextual
-</ins></code><ins class="diff-chg">
+</code>
 settings.
 As
-</ins><code><ins class="diff-chg">
+<code>
 contextual
-</ins></code><ins class="diff-chg">
+</code>
 was
 never
 used,
@@ -967,15 +971,15 @@ the
 wild
 favors
 the
-</ins><code><ins class="diff-chg">
+<code>
 vocabulary
-</ins></code><ins class="diff-chg">
+</code>
 setting,
 support
 for
-</ins><code><ins class="diff-chg">
+<code>
 contextual
-</ins></code><ins class="diff-chg">
+</code>
 has
 been
 eliminated,
@@ -984,15 +988,15 @@ consequently
 support
 for
 the
-</ins><code><ins class="diff-chg">
+<code>
 propertyURI
-</ins></code><ins class="diff-chg">
+</code>
 element
 within
 the
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins></a>.<ins class="diff-chg">
+</a>.
 This
 issue
 remains
@@ -1003,9 +1007,8 @@ review;
 specifically,
 anyone
 depending
-</ins>
 on
-<ins class="diff-new">this
+this
 feature
 should
 provide
@@ -1014,12 +1017,13 @@ as
 requested
 below.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-new">
+<a href="https://github.com/w3c/microdata-rdf/issues/10">
 issue
 10
-</ins></a><ins class="diff-new">
+</a>
 )
-</ins></li><li><ins class="diff-new">
+</li>
+<li>
 An
 item
 having
@@ -1039,25 +1043,20 @@ an
 RDF
 Collection
 if
-</ins>
 the
-<del class="diff-old">Web
-Schemas
-Task
-Force
-</del>
 <code>
-<ins class="diff-chg">multipleValues
-</ins></code><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+multipleValues
+</code>
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins></a><ins class="diff-chg">
+</a>
 setting
 were
 set
 to
-</ins><code><ins class="diff-chg">
+<code>
 list
-</ins></code>.<ins class="diff-chg">
+</code>.
 Although
 the
 previous
@@ -1089,15 +1088,15 @@ consequently
 support
 for
 the
-</ins><code><ins class="diff-chg">
+<code>
 multipeValues
-</ins></code><ins class="diff-chg">
+</code>
 element
 with
 the
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins></a>.<ins class="diff-chg">
+</a>.
 This
 issue
 remains
@@ -1118,61 +1117,51 @@ as
 requested
 below.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/10">
 issue
 10
-</ins></a><ins class="diff-chg">
+</a>
 )
-</ins></li><li><ins class="diff-chg">
+</li>
+<li>
 Lastly,
 the
 previous
 update
 introduced
-</ins><a href="#vocab_expansion"><ins class="diff-chg">
+<a href="#vocab_expansion">
 Vocabulary
 Expansion
-</ins></a><ins class="diff-chg">
+</a>
 using
-</ins><em><ins class="diff-chg">
+<em>
 entailment
-</ins></em><ins class="diff-chg">
+</em>
 rules
 adopted
 from
 [
-</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-RDFA-CORE">
 RDFA-CORE
-</ins>
 </a>
 </cite>
-<ins class="diff-new">]
+]
 under
 control
-</ins>
 of
 the
-<del class="diff-old">Semantic
-Web
-Interest
-Group
-</del>
 <code>
-<ins class="diff-chg">vocab_expansion
-</ins></code><ins class="diff-chg">
+vocab_expansion
+</code>
 option.
 Support
 for
-</ins><a href="#vocab_expansion"><ins class="diff-chg">
+<a href="#vocab_expansion">
 Vocabulary
 Expansion
-</ins>
 </a>
-<del class="diff-old">at
-W3C
-.
-</del>
-<ins class="diff-chg">has
+has
 been
 substantially
 simplified,
@@ -1205,12 +1194,14 @@ as
 requested
 below.
 (see
-</ins><a href="https://github.com/w3c/microdata-rdf/issues/10"><ins class="diff-chg">
+<a href="https://github.com/w3c/microdata-rdf/issues/10">
 issue
 10
-</ins></a><ins class="diff-chg">
+</a>
 )
-</ins></li></ul><p>
+</li>
+</ul>
+<p>
 The
 intention
 is
@@ -1249,9 +1240,13 @@ Group
 </a>
 as
 an
-Interest
+<del class="diff-old">Interest
 Group
 Note.
+</del>
+<ins class="diff-chg">Editor's
+Draft.
+</ins>
 If
 you
 wish
@@ -1277,21 +1272,21 @@ archives
 </a>
 ).
 All
-<del class="diff-old">feedback
-is
-</del>
-<ins class="diff-chg">comments
+comments
 are
-</ins>
 welcome.
 </p>
 <p>
 Publication
 as
 an
-Interest
+<del class="diff-old">Interest
 Group
 Note
+</del>
+<ins class="diff-chg">Editor's
+Draft
+</ins>
 does
 not
 imply
@@ -1335,46 +1330,138 @@ in
 progress.
 </p>
 <p>
-The
+<del class="diff-old">The
 disclosure
 obligations
-of
+</del>
+<ins class="diff-chg">This
+document
+was
+produced
+by
+a
+group
+operating
+under
 the
-Participants
+</ins><a id="sotd_patent" property="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/"><ins class="diff-chg">
+5
+February
+2004
+</ins><abbr title="World Wide Web Consortium"><ins class="diff-chg">
+W3C
+</ins></abbr><ins class="diff-chg">
+Patent
+Policy
+</ins></a>.<abbr title="World Wide Web Consortium"><ins class="diff-chg">
+W3C
+</ins></abbr><ins class="diff-chg">
+maintains
+a
+</ins><a href="http://www.w3.org/2004/01/pp-impl/68238/status" rel="disclosure"><ins class="diff-chg">
+public
+list
+</ins>
 of
-this
+<ins class="diff-new">any
+patent
+disclosures
+</ins></a><ins class="diff-new">
+made
+in
+connection
+with
+</ins>
+the
+<del class="diff-old">Participants
+</del>
+<ins class="diff-chg">deliverables
+</ins>
+of
+<del class="diff-old">this
 group
 are
 described
-in
+</del>
+<ins class="diff-chg">the
+group;
+that
+page
+also
+includes
+instructions
+for
+disclosing
+a
+patent.
+An
+individual
+who
+has
+actual
+knowledge
+of
+a
+patent
+which
 the
-<a href="http://www.w3.org/2006/07/swig-charter#Ipr">
-charter
+individual
+believes
+contains
+</ins><a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential"><ins class="diff-chg">
+Essential
+Claim(s)
+</ins></a><ins class="diff-chg">
+must
+disclose
+the
+information
+</ins>
+in
+<ins class="diff-new">accordance
+with
+</ins><a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure"><ins class="diff-new">
+section
+6
+of
+</ins>
+the
+<del class="diff-old">charter
+</del>
+<abbr title="World Wide Web Consortium">
+<ins class="diff-chg">W3C
+</ins></abbr><ins class="diff-chg">
+Patent
+Policy
+</ins>
 </a>.
 </p>
 <p>
-<ins class="diff-new">This
+This
 document
 is
 governed
 by
 the
-</ins><a id="w3c_process_revision" href="http://www.w3.org/2014/Process-20140801/"><ins class="diff-new">
+<a id="w3c_process_revision" href="http://www.w3.org/2014/Process-20140801/">
 1
 August
 2014
-</ins><abbr title="World Wide Web Consortium"><ins class="diff-new">
+<abbr title="World Wide Web Consortium">
 W3C
-</ins></abbr><ins class="diff-new">
+</abbr>
 Process
 Document
-</ins></a>.</p>
+</a>.
+</p>
 </section>
 <section id="toc">
-<h2 class="introductory" role="heading" id="h2_toc">
+<h2 class="introductory" id="h-toc" resource="#h-toc">
+<span property="xhv:role" resource="xhv:heading">
 Table
 of
 Contents
+</span>
 </h2>
 <ul class="toc" role="directory" id="respecContents">
 <li class="tocline">
@@ -1442,16 +1529,9 @@ Generation
 </a>
 </li>
 <li class="tocline">
-<del class="diff-old">3.2
-Value
-Ordering
-</del>
 <a href="#value-typing" class="tocxref">
 <span class="secno">
-<del class="diff-old">3.3
-</del>
-<ins class="diff-chg">3.2
-</ins>
+3.2
 </span>
 Value
 Typing
@@ -1467,22 +1547,12 @@ Typing
 Vocabulary
 Expansion
 </a>
-<del class="diff-old">4.1
-Vocabulary
-Entailment
-</del>
 </li>
 <li class="tocline">
 <a href="#control-of-microdata-processors" class="tocxref">
 <span class="secno">
-<del class="diff-old">4.2
-</del>
-<ins class="diff-chg">5.
-</ins>
+5.
 </span>
-<del class="diff-old">Vocabulary
-Expansion
-</del>
 Control
 of
 Microdata
@@ -1492,10 +1562,7 @@ Processors
 <li class="tocline">
 <a href="#algorithm" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.
-</del>
-<ins class="diff-chg">6.
-</ins>
+6.
 </span>
 Algorithm
 </a>
@@ -1503,10 +1570,7 @@ Algorithm
 <li class="tocline">
 <a href="#algorithm-terms" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.1
-</del>
-<ins class="diff-chg">6.1
-</ins>
+6.1
 </span>
 Algorithm
 Terms
@@ -1515,10 +1579,7 @@ Terms
 <li class="tocline">
 <a href="#rdf-conversion-algorithm" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.2
-</del>
-<ins class="diff-chg">6.2
-</ins>
+6.2
 </span>
 RDF
 Conversion
@@ -1528,10 +1589,7 @@ Algorithm
 <li class="tocline">
 <a href="#generate-the-triples" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.3
-</del>
-<ins class="diff-chg">6.3
-</ins>
+6.3
 </span>
 Generate
 the
@@ -1541,10 +1599,7 @@ triples
 <li class="tocline">
 <a href="#generate-predicate-uri" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.4
-</del>
-<ins class="diff-chg">6.4
-</ins>
+6.4
 </span>
 Generate
 Predicate
@@ -1556,41 +1611,31 @@ URI
 <li class="tocline">
 <a href="#reverse-itemprop" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.5
-</del>
-<ins class="diff-chg">A.
-</ins>
+A.
 </span>
-<del class="diff-old">Generate
-Property
-Values
-</del>
-<ins class="diff-chg">Reverse
-</ins><span class="formerLink"><ins class="diff-chg">
+Reverse
+<span class="formerLink">
 itemprop
-</ins></span></a><ul class="toc"><li class="tocline"><a href="#algorithm-terms-1" class="tocxref"><span class="secno"><ins class="diff-chg">
+</span>
+</a>
+<ul class="toc">
+<li class="tocline">
+<a href="#algorithm-terms-1" class="tocxref">
+<span class="secno">
 A.1
-</ins></span><ins class="diff-chg">
+</span>
 Algorithm
 Terms
-</ins>
 </a>
 </li>
 <li class="tocline">
 <a href="#generate-the-triples-1" class="tocxref">
 <span class="secno">
-<del class="diff-old">5.6
-</del>
-<ins class="diff-chg">A.2
-</ins>
+A.2
 </span>
 Generate
-<del class="diff-old">RDF
-Collection
-</del>
-<ins class="diff-chg">the
+the
 triples
-</ins>
 </a>
 </li>
 </ul>
@@ -1598,10 +1643,7 @@ triples
 <li class="tocline">
 <a href="#testing" class="tocxref">
 <span class="secno">
-<del class="diff-old">A.
-</del>
-<ins class="diff-chg">B.
-</ins>
+B.
 </span>
 Testing
 </a>
@@ -1609,10 +1651,7 @@ Testing
 <li class="tocline">
 <a href="#markup-examples" class="tocxref">
 <span class="secno">
-<del class="diff-old">B.
-</del>
-<ins class="diff-chg">C.
-</ins>
+C.
 </span>
 Markup
 Examples
@@ -1621,15 +1660,9 @@ Examples
 <li class="tocline">
 <a href="#default-registry" class="tocxref">
 <span class="secno">
-<del class="diff-old">C.
-</del>
-<ins class="diff-chg">D.
-</ins>
+D.
 </span>
-<del class="diff-old">Example
-</del>
-<ins class="diff-chg">Default
-</ins>
+Default
 <span class="formerLink">
 registry
 </span>
@@ -1638,10 +1671,7 @@ registry
 <li class="tocline">
 <a href="#acknowledgements" class="tocxref">
 <span class="secno">
-<del class="diff-old">D.
-</del>
-<ins class="diff-chg">E.
-</ins>
+E.
 </span>
 Acknowledgements
 </a>
@@ -1649,10 +1679,7 @@ Acknowledgements
 <li class="tocline">
 <a href="#references" class="tocxref">
 <span class="secno">
-<del class="diff-old">E.
-</del>
-<ins class="diff-chg">F.
-</ins>
+F.
 </span>
 References
 </a>
@@ -1660,10 +1687,7 @@ References
 <li class="tocline">
 <a href="#normative-references" class="tocxref">
 <span class="secno">
-<del class="diff-old">E.1
-</del>
-<ins class="diff-chg">F.1
-</ins>
+F.1
 </span>
 Normative
 references
@@ -1672,10 +1696,7 @@ references
 <li class="tocline">
 <a href="#informative-references" class="tocxref">
 <span class="secno">
-<del class="diff-old">E.2
-</del>
-<ins class="diff-chg">F.2
-</ins>
+F.2
 </span>
 Informative
 references
@@ -1685,12 +1706,14 @@ references
 </li>
 </ul>
 </section>
-<section class="informative" id="introduction">
-<h2 role="heading" id="h2_introduction">
+<section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+<h2 id="h-introduction" resource="#h-introduction">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 1.
 </span>
 Introduction
+</span>
 </h2>
 <p>
 <em>
@@ -1744,17 +1767,14 @@ to
 RDF
 [
 <cite>
-<del class="diff-old">RDF-CONCEPTS
-</del>
 <a class="bibref" href="#bib-RDF11-CONCEPTS">
-<ins class="diff-chg">RDF11-CONCEPTS
-</ins>
+RDF11-CONCEPTS
 </a>
 </cite>
 ].
 </p>
 <div class="note">
-<div class="note-title" aria-level="1" role="heading" id="h_note_1">
+<div class="note-title" aria-level="3" role="heading" id="h-note1">
 <span>
 Note
 </span>
@@ -1820,41 +1840,7 @@ on
 an
 implementation-defined
 basis.
-<del class="diff-old">However,
-the
-HTML
-Data
-TF
-recommends
-the
-adoption
-of
-a
-single
-method
-of
-mapping
-in
-which
-every
-vocabulary
-is
-treated
-as
-if:
-</del>
 </p>
-<del class="diff-old">propertyURI
-is
-set
-to
-vocabulary
-multipleValues
-is
-set
-to
-unordered
-</del>
 <p>
 For
 background
@@ -1868,21 +1854,22 @@ see
 <a href="http://www.w3.org/wiki/Mapping_Microdata_to_RDF">
 http://www.w3.org/wiki/Mapping_Microdata_to_RDF
 </a>
-<ins class="diff-new">and
-</ins><a href="https://github.com/w3c/microdata-rdf/issues"><ins class="diff-new">
+and
+<a href="https://github.com/w3c/microdata-rdf/issues">
 GitHub
 Issues
-</ins>
 </a>.
 </p>
 </div>
 </div>
-<section class="informative" id="background">
-<h3 role="heading" id="h3_background">
+<section class="informative" id="background" typeof="bibo:Chapter" resource="#background" property="bibo:hasPart">
+<h3 id="h-background" resource="#h-background">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 1.1
 </span>
 Background
+</span>
 </h3>
 <p>
 <em>
@@ -2089,21 +2076,16 @@ an
 <em>
 RDF
 Collection
-<del class="diff-old">.
-</del>
 </em>.
 </li>
 <li>
-<del class="diff-old">A
-</del>
-<ins class="diff-chg">Except
+Except
 for
 some
 specific
 element
 values,
 a
-</ins>
 value
 in
 microdata
@@ -2294,20 +2276,19 @@ datatypes
 to
 <a title="property value" href="#dfn-property-value" class="internalDFN">
 property
-<del class="diff-old">value
-s.
-</del>
-<ins class="diff-chg">values
-</ins></a>.
+values
+</a>.
 </p>
 </section>
-<section class="informative" id="use-cases">
-<h3 role="heading" id="h3_use-cases">
+<section class="informative" id="use-cases" typeof="bibo:Chapter" resource="#use-cases" property="bibo:hasPart">
+<h3 id="h-use-cases" resource="#h-use-cases">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 1.2
 </span>
 Use
 Cases
+</span>
 </h3>
 <p>
 <em>
@@ -2735,12 +2716,14 @@ http://schema.org/musicGroupMember/leadVocalist
 </li>
 </ul>
 </section>
-<section class="informative" id="issues">
-<h3 role="heading" id="h3_issues">
+<section class="informative" id="issues" typeof="bibo:Chapter" resource="#issues" property="bibo:hasPart">
+<h3 id="h-issues" resource="#h-issues">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 1.3
 </span>
 Issues
+</span>
 </h3>
 <p>
 <em>
@@ -2762,12 +2745,8 @@ are
 tracked
 on
 the
-<del class="diff-old">Task
-Force
-</del>
 <a href="https://github.com/w3c/microdata-rdf/issues">
-<ins class="diff-chg">GitHub
-</ins>
+GitHub
 Issue
 Tracker
 </a>.
@@ -2777,191 +2756,76 @@ the
 following:
 </p>
 <div class="issue">
-<div class="issue-title" aria-level="2" role="heading" id="h_issue_1">
+<div class="issue-title" aria-level="4" role="heading" id="h-issue1">
 <a href="http://github.com/w3c/microdata-rdf/issues/5">
 <span>
 Issue
-<del class="diff-old">1
-</del>
-<ins class="diff-chg">5
-</ins>
+5
 </span>
 </a>
 </div>
-<del class="diff-old">Vocabulary
-specific
-parsing
-for
-Microdata.
-</del>
 <div class="">
 <h3 id="experimental-feature">
-<ins class="diff-chg">Experimental
+Experimental
 Feature
-</ins></h3><p><ins class="diff-chg">
+</h3>
+<p>
 Experimental
 support
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins></a>.
+</a>.
 This
-<del class="diff-old">specification
-attempts
-to
-create
-generic
-rules
-for
-processing
-microdata
-with
-typical
-RDF
-vocabularies.
-A
-registry
-allows
-for
-exceptions
-to
-the
-default
-processing
-rules
-for
-certain
-well-known
-vocabularies.
-Issue
-2
-</del>
-<ins class="diff-chg">attribute
+attribute
 is
 not
 part
 of
 [
-</ins><cite>
+<cite>
 <a class="bibref" href="#bib-MICRODATA">
-<ins class="diff-new">MICRODATA
-</ins>
+MICRODATA
 </a>
-<del class="diff-old">Should
-Microdata-RDF
-generate
-XMLLiteral
-values.
-This
-issue
-has
-been
-closed
-with
-no
-change
-</del>
 </cite>
-<ins class="diff-chg">]
+]
 and
 is
 included
-</ins>
 as
-<del class="diff-old">this
-would
-violate
-microdata's
-data
-model.
-Issue
-3
-Should
-</del>
-<ins class="diff-chg">an
+an
 experimental
 feature.
 Specific
 feedback
 from
-</ins>
 the
-<del class="diff-old">registry
-allow
-property
-datatype
-specification.
-The
-consensus
-</del>
-<ins class="diff-chg">community
-</ins>
+community
 is
-<del class="diff-old">that
-datatypes
-are
-only
-derived
-from
-HTML
-semantics,
-so
-that
-only
-&lt;time&gt;
-values
-have
-a
-datatype
-other
-than
-plain.
-Issue
-4
-Should
-</del>
-<ins class="diff-chg">requested.
+requested.
 Based
 on
 addoption,
-</ins>
 the
-<del class="diff-old">registry
-allow
-a
-name
-or
-URL
-to
-</del>
-<ins class="diff-chg">attribute
+attribute
 may
-</ins>
 be
-<del class="diff-old">used
-as
-an
-alias
-</del>
-<ins class="diff-chg">considered
-</ins>
+considered
 for
-<del class="diff-old">itemid
-.
-</del>
-<ins class="diff-chg">inclusion
+inclusion
 in
 forthcoming
 versions
 of
 [
-</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
 MICRODATA
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 ]
 and
 this
 note.
-</ins>
 </p>
 </div>
 </div>
@@ -3040,8 +2904,7 @@ type
 </a>
 and
 <a href="#dfn-item-properties" class="internalDFN">
-<ins class="diff-chg">item
-</ins>
+item
 properties
 </a>.
 </li>
@@ -3108,13 +2971,8 @@ are
 multiple
 <a title="top-level item" href="#dfn-top-level-item" class="internalDFN">
 top-level
-<del class="diff-old">item
-</del>
-<ins class="diff-chg">items
-</ins>
+items
 </a>
-<del class="diff-old">s
-</del>
 in
 a
 document,
@@ -3192,36 +3050,18 @@ of
 collection.
 </li>
 </ul>
-<del class="diff-old">More
-examples
-and
-explanatory
-information
-are
-available
-in
-[
-MICRODATA-RDF-SUPPLEMENT
-],
-which
-may
-be
-updated
-from
-time
-to
-time.
-</del>
 </section>
 </section>
-<section id="attributes-and-syntax">
-<h2 role="heading" id="h2_attributes-and-syntax">
+<section id="attributes-and-syntax" typeof="bibo:Chapter" resource="#attributes-and-syntax" property="bibo:hasPart">
+<h2 id="h-attributes-and-syntax" resource="#h-attributes-and-syntax">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 2.
 </span>
 Attributes
 and
 Syntax
+</span>
 </h2>
 <p>
 The
@@ -3312,11 +3152,8 @@ item
 </a>.
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemid">
-<ins class="diff-chg">itemid
-</ins>
+itemid
 </a>
 </cite>
 in
@@ -3342,22 +3179,14 @@ identify
 one
 or
 more
-<del class="diff-old">name
-</del>
 <a title="name" href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">names
-</ins>
+names
 </a>
-<del class="diff-old">s
-</del>
 of
 an
-<del class="diff-old">item
-s.
-</del>
 <a title="item" href="#dfn-item" class="internalDFN">
-<ins class="diff-chg">items
-</ins></a>.
+items
+</a>.
 An
 <a class="aref internalDFN" href="#dfn-itemprop">
 itemprop
@@ -3368,27 +3197,17 @@ space
 separated
 list
 of
-<del class="diff-old">name
-</del>
 <dfn title="name" id="dfn-name">
-<ins class="diff-chg">names
-</ins>
+names
 </dfn>
-<del class="diff-old">s
-</del>
 which
 may
 either
 by
 <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
 absolute
-<del class="diff-old">URL
-</del>
-<ins class="diff-chg">URLs
-</ins>
+URLs
 </a>
-<del class="diff-old">s
-</del>
 or
 terms
 associated
@@ -3415,11 +3234,8 @@ type
 </a>.
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">
-<ins class="diff-chg">itemprop
-</ins>
+itemprop
 </a>
 </cite>
 in
@@ -3461,11 +3277,8 @@ item
 </a>.
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemref">
-<ins class="diff-chg">itemref
-</ins>
+itemref
 </a>
 </cite>
 in
@@ -3496,11 +3309,8 @@ item
 </a>.
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">
-<ins class="diff-chg">itemscope
-</ins>
+itemscope
 </a>
 </cite>
 in
@@ -3573,22 +3383,14 @@ used
 to
 resolve
 non-URL
-<del class="diff-old">name
-</del>
 <a title="name" href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">names
-</ins>
+names
 </a>
-<del class="diff-old">s
-</del>
 to
 <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
 absolute
-<del class="diff-old">URL
-s.
-</del>
-<ins class="diff-chg">URLs
-</ins></a>.
+URLs
+</a>.
 Available
 through
 the
@@ -3609,11 +3411,8 @@ element.itemType
 </code>.
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemtype">
-<ins class="diff-chg">itemtype
-</ins>
+itemtype
 </a>
 </cite>
 in
@@ -3714,13 +3513,15 @@ http://www.w3.org/2001/XMLSchema#
 </tbody>
 </table>
 </section>
-<section class="informative" id="vocabulary-registry">
-<h2 role="heading" id="h2_vocabulary-registry">
+<section class="informative" id="vocabulary-registry" typeof="bibo:Chapter" resource="#vocabulary-registry" property="bibo:hasPart">
+<h2 id="h-vocabulary-registry" resource="#h-vocabulary-registry">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 3.
 </span>
 Vocabulary
 Registry
+</span>
 </h2>
 <p>
 <em>
@@ -3796,7 +3597,7 @@ a
 variety
 of
 formats.
-<ins class="diff-new">Under
+Under
 control
 of
 a
@@ -3813,7 +3614,6 @@ reference,
 to
 affect
 processing.
-</ins>
 </p>
 <p>
 The
@@ -3850,18 +3650,10 @@ following:
 </p>
 <del class="diff-old">{
   "http://schema.org/": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered",
     "properties": {
-      "tracks": {"multipleValues": "list"}
-    }
-  },
-  "http://microformats.org/profile/hcard": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "list",
-    "properties" {
-      "url": {"multipleValues": "unordered"}
-    }
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
+    },
+    "http://microformats.org/profile/hcard": {}
   }
 </del>
 <div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example">{
@@ -3882,10 +3674,7 @@ associates
 mappings
 for
 two
-<del class="diff-old">URIs,
-</del>
-<ins class="diff-chg">URIs:
-</ins>
+URIs:
 <code>
 http://schema.org/
 </code>
@@ -3928,38 +3717,23 @@ that
 item
 type
 </a>.
-<del class="diff-old">This
-</del>
-<ins class="diff-chg">For
-</ins><code><ins class="diff-chg">
+For
+<code>
 http://schema.org/
-</ins></code>,<ins class="diff-chg">
+</code>,
 this
-</ins>
 mapping
 currently
 defines
-<del class="diff-old">two
-rules:
-propertyURI
-and
-</del>
-<ins class="diff-chg">a
+a
 single
 property:
-</ins>
 <code>
-<del class="diff-old">multipleValues
-</del>
-<ins class="diff-chg">additionalType
-</ins>
+additionalType
 </code>
 with
-<del class="diff-old">values
-</del>
-<ins class="diff-chg">a
+a
 value
-</ins>
 to
 indicate
 specific
@@ -3975,8 +3749,7 @@ basis;
 the
 <a href="#dfn-item-properties" class="internalDFN">
 <code>
-<ins class="diff-new">item
-</ins>
+item
 properties
 </code>
 </a>
@@ -4031,11 +3804,8 @@ type
 a
 conforming
 processor
-<del class="diff-old">must
-</del>
 <em class="rfc2119" title="MUST">
-<ins class="diff-chg">MUST
-</ins>
+MUST
 </em>
 use
 the
@@ -4046,85 +3816,16 @@ for
 these
 rules.
 </p>
-<del class="diff-old">Note
-The
-concept
-of
-a
-registry
-,
-including
-a
-hypothetical
-format,
-location
-and
-updating
-rules
-is
-presented
-as
-an
-abstract
-concept
-useful
-for
-describing
-the
-function
-of
-a
-microdata
-processor.
-There
-are
-issues
-surrounding
-update
-frequency,
-URL
-naming,
-and
-how
-updates
-are
-authorized.
-This
-spec
-just
-considers
-the
-semantic
-content
-of
-such
-a
-registry
-and
-how
-it
-can
-be
-used
-to
-affect
-processing
-without
-defining
-its
-representation
-or
-update
-policies.
-</del>
-<section class="informative" id="property-uri-generation">
-<h3 role="heading" id="h3_property-uri-generation">
+<section class="informative" id="property-uri-generation" typeof="bibo:Chapter" resource="#property-uri-generation" property="bibo:hasPart">
+<h3 id="h-property-uri-generation" resource="#h-property-uri-generation">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 3.1
 </span>
 Property
 URI
 Generation
+</span>
 </h3>
 <p>
 <em>
@@ -4136,30 +3837,18 @@ non-normative.
 </p>
 <p>
 For
-<del class="diff-old">name
-</del>
 <a title="name" href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">names
-</ins>
+names
 </a>
-<del class="diff-old">s
-</del>
 which
 are
 not
 <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
 absolute
-<del class="diff-old">URL
-s,
-the
-propertyURI
-rule
-</del>
-<ins class="diff-chg">URLs
-</ins></a>,<ins class="diff-chg">
+URLs
+</a>,
 this
 section
-</ins>
 defines
 the
 algorithm
@@ -4181,10 +3870,6 @@ a
 <a href="#dfn-current-type" class="internalDFN">
 current
 type
-<del class="diff-old">,
-current
-name
-</del>
 </a>
 and
 <a href="#dfn-current-vocabulary" class="internalDFN">
@@ -4209,214 +3894,21 @@ URI
 </a>.
 </p>
 <p>
-<del class="diff-old">Possible
-values
-for
-propertyURI
-are
-the
-following:
-contextual
-</del>
 The
-<del class="diff-old">contextual
-URI
-generation
-scheme
-guarantees
-that
-generated
-property
-URIs
-are
-unique
-based
-on
-the
-value
-of
-current
-name
-.
-This
-is
-required
-as
-the
-microdata
-data
-model
-requires
-that
-name
-s
-are
-associated
-with
-specific
-items
-and
-do
-not
-have
-a
-global
-scope.
-(See
-Step
-5
-in
-Generate
-Predicate
-URI
-).
-URI
-creation
-uses
-a
-base
-URI
-with
-query
-parameters
-to
-indicate
-the
-in-scope
-type
-and
-name
-list.
-Consider
-the
-following
-example:
-        &lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
-  &lt;span itemprop="n" itemscope&gt;
-    &lt;span itemprop="given-name"&gt;
-      Princeton
-    &lt;/span&gt;
-  &lt;/span&gt;
-&lt;/span&gt;
-The
-first
-name
-n
-generates
-the
-URI
-http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop=n
-.
-However,
-the
-included
-name
-given-name
-is
-included
-in
-untyped
-item.
-The
-inherited
-property
-URI
-is
-used
-to
-create
-a
-new
-property
-URI:
-http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop=n.given-name
-.
-This
-scheme
-is
-compatible
-with
-the
-needs
-of
-other
-RDF
-serialization
-formats
-such
-as
-RDF/XML
-[
-RDF-SYNTAX-GRAMMAR
-],
-which
-rely
-on
-QNames
-for
-expressing
-properties.
-For
-example,
-the
-generated
-property
-URIs
-can
-be
-split
-as
-follows:
-        &lt;rdf:Description xmlns:hcard="http://www.w3.org/ns/md?type=http://microformats.org/profile/hcard?prop="
-                 rdf:type="http://microformats.org/profile/hcard"&gt;
-  &lt;hcard:n&gt;
-    &lt;rdf:Description&gt;
-      &lt;hcard:n.given-name&gt;
-        Princeton
-      &lt;/hcard:n.given-name&gt;
-    &lt;/rdf:Description&gt;
-  &lt;/hcard:n&gt;
-&lt;/rdf:Description&gt;
-Looking
-at
-another
-example:
-        &lt;div itemscope itemtype="http://schema.org/Person"&gt;
-  &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
-&lt;/div&gt;
-This
-would
-generate
-http://www.w3.org/ns/md?type=http://schema.org/Person&amp;prop=name
-.
-vocabulary
-The
-vocabulary
-</del>
 URI
 generation
 scheme
 appends
-<del class="diff-old">name
-</del>
 <a title="name" href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">names
-</ins>
+names
 </a>
-<del class="diff-old">s
-</del>
 that
 are
 not
 <a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
 absolute
-<del class="diff-old">URL
-</del>
-<ins class="diff-chg">URLs
-</ins>
+URLs
 </a>
-<del class="diff-old">s
-</del>
 to
 the
 <a href="#dfn-uri-prefix" class="internalDFN">
@@ -4488,7 +3980,7 @@ the
 following
 example:
 </p>
-<del class="diff-old">        &lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+<del class="diff-old">  &lt;span itemscope itemtype="http://microformats.org/profile/hcard"&gt;
   &lt;span itemprop="n" itemscope&gt;
     &lt;span itemprop="given-name"&gt;
       Princeton
@@ -4542,7 +4034,7 @@ at
 another
 example:
 </p>
-<del class="diff-old">        &lt;div itemscope itemtype="http://schema.org/Person"&gt;
+<del class="diff-old">  &lt;div itemscope itemtype="http://schema.org/Person"&gt;
   &lt;h2 itemprop="name"&gt;Jeni&lt;/h2&gt;
 </del>
   <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
@@ -4602,8 +4094,8 @@ type
 </a>
 implementations
 <em class="rfc2119" title="MUST">
-<ins class="diff-new">MUST
-</ins></em>
+MUST
+</em>
 act
 as
 if
@@ -4656,35 +4148,39 @@ RFC3986
 ]).
 </p>
 <p>
-<ins class="diff-new">The
+The
 vocabulary
-</ins><a href="#dfn-uri-prefix" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-uri-prefix" class="internalDFN">
 URI
 prefix
-</ins></a><ins class="diff-new">
+</a>
 is
 made
 from
 the
 first
-</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-new">
+<a class="aref internalDFN" href="#dfn-itemtype">
 itemtype
-</ins></a><ins class="diff-new">
+</a>
 value
 by
 stripping
 either
 the
-</ins><cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5"><ins class="diff-new">
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.5">
 fragment
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 content
 or
-</ins><cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3"><ins class="diff-new">
+<cite>
+<a href="http://tools.ietf.org/html/rfc3986#section-3.3">
 last
 path
 segment
-</ins></a></cite>,<ins class="diff-new">
+</a>
+</cite>,
 if
 the
 value
@@ -4693,13 +4189,15 @@ no
 fragment
 (See
 [
-</ins><cite><a class="bibref" href="#bib-RFC3986"><ins class="diff-new">
+<cite>
+<a class="bibref" href="#bib-RFC3986">
 RFC3986
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 ]).
-</ins></p>
+</p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_2">
+<div class="note-title" aria-level="4" role="heading" id="h-note2">
 <span>
 Note
 </span>
@@ -4750,15 +4248,7 @@ all
 vocabularies.
 </p>
 </div>
-<del class="diff-old">The
-default
-value
-of
-propertyURI
-is
-vocabulary
-.
-  &lt;div itemscope itemtype="http://schema.org/Book"&gt;
+<del class="diff-old">  &lt;div itemscope itemtype="http://example.org/Book"&gt;
   &lt;h2 itemprop="title"&gt;Just a Geek&lt;/h2&gt;
 </del>
   <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example">&lt;div itemscope itemtype="http://example.org/Book"&gt;
@@ -4801,424 +4291,120 @@ leaving
 the
 URI
 <code>
-<del class="diff-old">http://schema.org/
-</del>
-<ins class="diff-chg">http://example.org/
-</ins>
+http://example.org/
 </code>.
-<del class="diff-old">As
-there
-is
-no
-explicit
-propertyURI
-,
-the
-default
-vocabulary
-is
-used,
-and
-the
-</del>
-<ins class="diff-chg">The
-</ins>
+The
 resulting
 property
 URI
 would
 be
 <code>
-<del class="diff-old">http://schema.org/title
-</del>
-<ins class="diff-chg">http://example.org/title
-</ins>
+http://example.org/title
 </code>.
 </p>
-<del class="diff-old">3.2
-Value
-Ordering
-</del>
 <div>
 <p>
-<del class="diff-old">This
-section
-</del>
-<ins class="diff-chg">If
+If
 there
-</ins>
 is
-<del class="diff-old">non-normative.
-For
-items
-having
-multiple
-values
-for
-a
-given
-property
-</del>
-<ins class="diff-chg">no
+no
 in-scope
-</ins><a class="aref internalDFN" href="#dfn-itemtype"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemtype">
 itemtype
-</ins>
 </a>,
-<ins class="diff-new">property
+property
 URIs
 are
 generated
 using
-</ins>
 the
-<del class="diff-old">multipleValues
-rule
-defines
-</del>
-<ins class="diff-chg">base
+base
 URI
 of
-</ins>
 the
-<del class="diff-old">algorithm
-for
-serializing
-these
-values.
-Microdata
-uses
-</del>
 document
-<del class="diff-old">order
-when
-generating
-property
-value
-s,
-as
-defined
-in
-Microdata
-DOM
-API
-as
-element.itemValue
-.
-However,
-many
-RDF
-vocabularies
-expect
-multiple
-values
-to
-be
-generated
-as
-triples
-sharing
-a
-common
-subject
-</del>
 and
-<del class="diff-old">predicate.
-In
-some
-cases,
-it
-may
-be
-useful
-to
-retain
-value
-ordering.
-The
-procedure
-for
-generating
-property
-value
-s
-is
-defined
-in
-Generate
-Property
-Values
-.
-Possible
-values
-for
-multipleValues
-are
-</del>
 the
-<del class="diff-old">following:
-unordered
-Values
-are
-serialized
-without
-ordering
-using
-a
-common
-subject
-and
-predicate.
-(See
-Step
-7
-in
-Generate
-Property
-Values
-).
-list
-Multi-valued
-itemprop
-s
-are
-serialized
-using
-an
-RDF
-Collection
-.
-(See
-Step
-8
-in
-Generate
-Property
-Values
-</del>
 <a href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">name
-</ins>
+name
 </a>
-<del class="diff-old">).
-An
-example
-of
-how
-this
-might
-be
-specified
-in
-</del>
-<ins class="diff-chg">as
-</ins>
+as
 a
-<del class="diff-old">registry
-is
-</del>
-<ins class="diff-chg">fragment
+fragment
 Consider
-</ins>
 the
-<del class="diff-old">following:
-</del>
-<ins class="diff-chg">following
+following
 example:
-</ins>
 </p>
-<del class="diff-old">  {
-  "http://schema.org/": {
-    "propertyURI":    "vocabulary",
-    
-  },
-  "http://microformats.org/profile/hcard": {
-    "propertyURI":    "vocabulary",
-    
-  }
-}
+<del class="diff-old">      &lt;div itemscope&gt;
+&lt;p itemscope itemprop='bar'&gt;
+  &lt;span itemprop='baz'&gt;Baz&lt;/span&gt;
+&lt;/p&gt;
 </del>
       <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example">&lt;div itemscope&gt;
 <ins class="diff-chg">&lt;p itemscope itemprop='bar'&gt;
   &lt;span itemprop='baz'&gt;Baz&lt;/span&gt;
 &lt;/p&gt;
-&lt;/div&gt;
 </ins>
+&lt;/div&gt;
 </pre>
 </div>
 <p>
-<del class="diff-old">Additionally,
-some
-vocabularies
-may
-wish
-to
-specify
-this
-on
-a
-per-property
-basis.
-For
-example,
-within
-http://schema.org/MusicPlaylist
-</del>
-<ins class="diff-chg">If
-</ins>
+If
 the
-<ins class="diff-new">document
+document
 is
 located
 at
-</ins>
 <code>
-<del class="diff-old">tracks
-property
-might
-depend
-on
-</del>
-<ins class="diff-chg">http://example/author
-</ins></code>,
+http://example/author
+</code>,
 the
-<del class="diff-old">order
-of
-values
-to
-to
-reproduce
-associated
-MusicRecording
-values.
-  {
- "http://schema.org/": {
-   "propertyURI": "vocabulary",
-   "multipleValues": "unordered",
-   "properties": {
-     "tracks": {"multipleValues": "list"}
-   }
- }
-}
-The
-properties
-key
-takes
-a
-JSON
-Object
-as
-a
-value,
-which
-in
-turn
-has
-keys
-for
-each
-property
-that
-is
-to
-be
-given
-alternate
-semantics.
-Each
-</del>
 <a href="#dfn-name" class="internalDFN">
 name
 </a>
-<del class="diff-old">is
-implicitly
-expanded
-to
-it's
-URI
-representation
-as
-defined
-in
-Generate
-Predicate
-URI
-,
-so
-that
-the
-behavior
-is
-</del>
 <em>
-<ins class="diff-chg">bar
-</ins></em><ins class="diff-chg">
+bar
+</em>
 generates
-</ins>
 the
-<del class="diff-old">same
-whether
-or
-not
-</del>
-<ins class="diff-chg">URI
-</ins><code><ins class="diff-chg">
+URI
+<code>
 http://example/author#bar
-</ins></code>.<ins class="diff-chg">
+</code>.
 However,
-</ins>
 the
-<ins class="diff-new">included
-</ins>
+included
 <a href="#dfn-name" class="internalDFN">
 name
 </a>
 <em>
-<ins class="diff-new">baz
-</ins></em>
+baz
+</em>
 is
-<del class="diff-old">listed
-as
-an
-absolute
-URL
-.
-</del>
-<ins class="diff-chg">included
+included
 in
 untyped
 item.
-</ins>
 The
-<del class="diff-old">default
-value
-of
-multipleValues
-</del>
-<ins class="diff-chg">inherited
+inherited
 property
 URI
-</ins>
 is
-<ins class="diff-new">used
+used
 to
 create
 a
 new
 property
 URI:
-</ins>
 <code>
-<del class="diff-old">unordered
-</del>
-<ins class="diff-chg">http://example/author#baz
-</ins>
+http://example/author#baz
 </code>.
 </p>
-<del class="diff-old">Note
-</del>
 <p>
-<ins class="diff-chg">This
+This
 scheme
 is
 compatible
@@ -5234,151 +4420,41 @@ such
 as
 RDF/XML
 [
-</ins><cite>
+<cite>
 <a class="bibref" href="#bib-RDF-SYNTAX-GRAMMAR">
-<ins class="diff-chg">RDF-SYNTAX-GRAMMAR
-</ins></a>
-<del class="diff-old">An
-alternative
-mechanism
-would
-output
-</del>
+RDF-SYNTAX-GRAMMAR
+</a>
 </cite>
-<ins class="diff-chg">],
+],
 which
 rely
 on
-</ins>
 <em>
-<del class="diff-old">both
-</del>
-<ins class="diff-chg">QNames
-</ins>
+QNames
 </em>
-<del class="diff-old">unordered
-and
-ordered
-values,
-to
-allow
-an
-application
-to
-choose
-the
-most
-useful
-representation.
-</del>
-<ins class="diff-chg">for
+for
 expressing
 properties.
-</ins>
 For
 example,
-<del class="diff-old">consider
 the
-following:
-&lt;div itemscope itemtype="http://schema.org/MusicPlaylist"&gt;
-  &lt;span itemprop="name"&gt;Classic Rock Playlist&lt;/span&gt;
-  &lt;meta itemprop="numTracks" content="2"/&gt;
-  &lt;p&gt;Including works by
-    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt; and
-    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;&lt;/p&gt;.
-  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
-    1.&lt;span itemprop="name"&gt;Sweet Home Alabama&lt;/span&gt; -
-    &lt;span itemprop="byArtist"&gt;Lynard Skynard&lt;/span&gt;
-    &lt;link href="sweet-home-alabama" itemprop="url" /&gt;
-   &lt;/div&gt;
-  &lt;div itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"&gt;
-    2.&lt;span itemprop="name"&gt;Shook you all Night Long&lt;/span&gt; -
-    &lt;span itemprop="byArtist"&gt;AC/DC&lt;/span&gt;
-    &lt;link href="shook-you-all-night-long" itemprop="url" /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-This
-might
-generate
-the
-following
-Turtle:
-@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
-@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
-@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
-@prefix schema: &lt;http://schema.org/&gt; .
-&lt;&gt; md:item [
-  a schema:MusicPlaylist;
-    schema:name "Classic Rock Playlist";
-    schema:byArtist ("Lynard Skynard" "AC/DC");
-    schema:numTracks "2";
-    schema:tracks _:track1, _:track2, (_:track1 _:track2)
-  ];
-  rdfa:usesVocabulary schema:
- .
-_:track1 a schema:MusicRecording;
-  schema:byArtist ("Lynard Skynard");
-  schema:name "Sweet Home Alabama";
-  schema:url &lt;sweet-home-alabama&gt; .
-_:track2 a schema:MusicRecording;
-  schema:byArtist ("AC/DC");
-  schema:name "Shook you all Night Long";
-schema:url
-&lt;shook-you-all-night-long&gt;
-.
-By
-providing
-both
-_:track1
-and
-_:track2
-as
-object
-values
-of
-the
-playlist
-along
-with
-an
-RDF
-Collection
-containing
-the
-ordered
-values,
-</del>
-the
-<del class="diff-old">data
-may
-</del>
-<ins class="diff-chg">generated
+generated
 property
 URIs
 can
-</ins>
 be
-<del class="diff-old">queried
-via
-a
-simple
-query
-using
-the
-playlist
-subject,
-or
-</del>
-<ins class="diff-chg">split
-</ins>
+split
 as
-<del class="diff-old">an
-ordered
-collection.
-</del>
-<ins class="diff-chg">follows:
-</ins>
+follows:
 </p>
+<del class="diff-old">      &lt;rdf:Description xmlns:base="http://example/author#"
+               rdf:type="http://microformats.org/profile/hcard"&gt;
+&lt;base:bar&gt;
+  &lt;rdf:Description&gt;
+    &lt;base:baz&gt;Baz&lt;/base:baz&gt;
+  &lt;/rdf:Description&gt;
+&lt;/base:bar&gt;
+</del>
       <div class="example"><div class="example-title"><span>Example 6</span></div><pre class="example">&lt;rdf:Description xmlns:base="http://example/author#"
 <ins class="diff-chg">               rdf:type="http://microformats.org/profile/hcard"&gt;
 &lt;base:bar&gt;
@@ -5386,21 +4462,21 @@ collection.
     &lt;base:baz&gt;Baz&lt;/base:baz&gt;
   &lt;/rdf:Description&gt;
 &lt;/base:bar&gt;
+</ins>
 &lt;/rdf:Description&gt;
-</ins></pre>
+</pre>
 </div>
 </div>
 </section>
-<section class="informative" id="value-typing">
-<h3 role="heading" id="h3_value-typing">
+<section class="informative" id="value-typing" typeof="bibo:Chapter" resource="#value-typing" property="bibo:hasPart">
+<h3 id="h-value-typing" resource="#h-value-typing">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">3.3
-</del>
-<ins class="diff-chg">3.2
-</ins>
+3.2
 </span>
 Value
 Typing
+</span>
 </h3>
 <p>
 <em>
@@ -5470,322 +4546,37 @@ time
 </code>
 element
 provides
-<del class="diff-old">dates
-and
-</del>
-<ins class="diff-chg">dates,
-</ins>
+dates,
 times
-<del class="diff-old">Issue
-Using
-information
-about
-the
-content
-of
-the
-document
-where
-the
-microdata
-is
-marked
-up
-might
-be
-a
-violation
-of
-the
-spirit
-of
-the
-microdata
-specification,
-though
-it
-does
-not
-explicitly
-say
-in
-normative
-text
-that
-consumers
-cannot
-use
-other
-information
-from
-the
-HTML
-DOM
-to
-interpret
-microdata.
-Additionally,
-one
-possible
-use
-of
-a
-registry
-would
-allow
-vocabularies
-to
-be
-marked
-with
-datatype
-information,
-so
-that
-a
-dc:time
-value,
-for
-example,
-would
-be
-understood
-to
-represent
-a
-literal
-with
-datatype
-xsd:date
-.
-This
-could
-be
-done
-by
-adding
-information
-for
-each
-property
-in
-the
-vocabulary
-requiring
-special
-treatment.
-This
-might
-be
-represented
-using
-a
-syntax
-such
-as
-the
-following:
-  {
- "http://schema.org/": {
-   "propertyURI": "vocabulary",
-   "multipleValues": "unordered",
-   "properties": {
-     "dateCreated": {"datatype": "http://www.w3.org/2001/XMLSchema#date"}
-   }
- }
-}
-The
-datatype
-identifies
-a
-URI
-to
-be
-used
-in
-constructing
-a
-typed
-literal
-.
-In
-most
-cases,
-the
-relevant
-datatype
-for
-a
-value
-can
-be
-derived
-from
-knowledge
-of
-what
-property
-the
-value
-is
-for
-</del>
 and
-<del class="diff-old">the
-syntax
-of
-the
-value
-itself.
-Thus,
-values
-can
-be
-given
-datatypes
-in
-a
-post-processing
-step
-after
-the
-mapping
-of
-microdata
-to
-RDF
-described
-by
-this
-specification.
-However,
-where
-there
-is
-information
-in
-the
-HTML
-markup,
-such
-as
-knowledge
-of
-what
-element
-was
-used
-to
-mark
-up
-the
-value,
-which
-can
-help
-with
-determining
-its
-datatype,
-that
-information
-is
-used
-by
-this
-specification.
-This
-concept
-is
-not
-explored
-further
-at
-this
-time,
-but
-could
-be
-developed
-further
-in
-a
-future
-revision
-of
-this
-document.
-Note
-</del>
-<ins class="diff-chg">durations
-</ins></li><li>
-<del class="diff-old">If
-property
-URI
-generation
-was
-fixed
-to
-vocabulary
-,
-multiple
-values
-always
-generated
-both
-</del>
+durations
+</li>
+<li>
 <code>
-<del class="diff-old">unordered
-</del>
-<ins class="diff-chg">data
-</ins>
+data
 </code>
 and
 <code>
-<del class="diff-old">ordered
-</del>
-<ins class="diff-chg">meter
-</ins>
+meter
 </code>
-<del class="diff-old">representations,
-</del>
-<ins class="diff-chg">elements
+elements
 provides
 doubles
-</ins>
 and
-<del class="diff-old">there
-were
-datatype
-support,
-the
-registry
-could
-be
-reduced
-to
-a
-simple
-list
-of
-URLs
-without
-any
-further
-structure
-necessary.
-</del>
-<ins class="diff-chg">integers
-</ins></li></ul>
+integers
+</li>
+</ul>
 </section>
 </section>
-<section typeof="bibo:Chapter" resource="#vocab_expansion" rel="bibo:Chapter" id="vocabulary-expansion">
-<h2 id="vocab_expansion" role="heading">
+<section id="vocabulary-expansion" typeof="bibo:Chapter" resource="#vocabulary-expansion" property="bibo:hasPart">
+<h2 id="vocab_expansion" resource="#vocab_expansion">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
 4.
 </span>
 Vocabulary
 Expansion
+</span>
 </h2>
 <p>
 Microdata
@@ -5911,17 +4702,11 @@ IRI
 using
 either
 <code>
-<del class="diff-old">http://www.w3.org/2000/01/rdf-schema#subPropertyOf
-</del>
-<ins class="diff-chg">rdf:subPropertyOf
-</ins>
+rdf:subPropertyOf
 </code>
 or
 <code>
-<del class="diff-old">http://www.w3.org/2002/07/owl#equivalentProperty
-</del>
-<ins class="diff-chg">owl:equivalentProperty
-</ins>
+owl:equivalentProperty
 </code>
 predicates.
 </p>
@@ -5954,19 +4739,10 @@ rdfs:subPropertyOf
 relationship
 with
 <code>
-<del class="diff-old">http://www.w3.org/1999/02/22-rdf-syntax-ns#type
-</del>
-<ins class="diff-chg">rdf:type
-</ins>
+rdf:type
 </code>.
 </p>
-<del class="diff-old">{
-  "http://schema.org/": {
-    "properties": {
-      
-    }
-}
-&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+<del class="diff-old">&lt;div itemscope itemtype="http://schema.org/Person"&gt;
   &lt;link itemprop="additionalType" href="http://xmlns.com/foaf/0.1/Person"/&gt;
   &lt;a itemprop="email http://xmlns.com/foaf/0.1/mbox" href="mailto:mail@gmail.com"&gt;
     mail@gmail.com
@@ -6012,20 +4788,14 @@ itemprop
 </a>:
 </p>
 <del class="diff-old">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
-@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 @prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 @prefix schema: &lt;http://schema.org/&gt; .
-&lt;&gt; md:item (
-  [ a schema:Person;
-    schema:additionalType foaf:Person;
-    schema:email &lt;mailto:mail@gmail.com&gt;;
-    foaf:mbox &lt;mailto:mail@gmail.com&gt;]);
-  rdfa:usesVocabulary schema: .
-schema:additionalType
-rdfs:subPropertyOf
-rdf:type
+[ a schema:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
 </del>
 <div class="example"><div class="example-title"><span>Example 8</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
 <ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
@@ -6037,8 +4807,8 @@ rdf:type
   schema:additionalType foaf:Person;
   schema:email &lt;mailto:mail@gmail.com&gt;;
   foaf:mbox &lt;mailto:mail@gmail.com&gt;
-]
 </ins>
+]
 .
 </pre>
 </div>
@@ -6057,20 +4827,15 @@ is
 generated:
 </p>
 <del class="diff-old">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
-@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 @prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 @prefix schema: &lt;http://schema.org/&gt; .
-&lt;&gt; md:item (
-  [ a schema:Person, foaf:Person;
-    schema:additionalType foaf:Person;
-    schema:email &lt;mailto:mail@gmail.com&gt;;
-    foaf:mbox &lt;mailto:mail@gmail.com&gt;]);
-  rdfa:usesVocabulary schema: .
-schema:additionalType
-rdfs:subPropertyOf
-rdf:type
+&lt;&gt; rdfa:usesVocabulary schema: .
+[ a schema:Person, foaf:Person;
+  schema:additionalType foaf:Person;
+  schema:email &lt;mailto:mail@gmail.com&gt;;
+  foaf:mbox &lt;mailto:mail@gmail.com&gt;
 </del>
 <div class="example"><div class="example-title"><span>Example 9</span></div><pre class="example">@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
 <ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
@@ -6083,175 +4848,31 @@ rdf:type
   schema:additionalType foaf:Person;
   schema:email &lt;mailto:mail@gmail.com&gt;;
   foaf:mbox &lt;mailto:mail@gmail.com&gt;
-]
 </ins>
+]
 .
 </pre>
 </div>
-<del class="diff-old">4.1
-Vocabulary
-Entailment
-Formally,
-and
-for
-the
-purpose
-of
-vocabulary
-processing,
-microdata
-uses
-a
-very
-restricted
-subset
-of
-the
-OWL2
-vocabulary
-and
-is
-based
-on
-the
-RDF-Based
-Semantics
-of
-OWL2
-[
-OWL2-RDF-BASED-SEMANTICS
-].
-Vocabulary
-Entailment
-uses
-the
-following
-terms:
-rdfs:subPropertyOf
-owl:equivalentProperty
-Vocabulary
-Entailment
-considers
-only
-the
-entailment
-on
-individuals
-(i.e.,
-not
-on
-the
-relationships
-that
-can
-be
-deduced
-on
-the
-properties
-or
-the
-classes
-themselves.)
-</del>
 <div class="note">
-<div class="note-title" aria-level="1" role="heading" id="h_note_3">
+<div class="note-title" aria-level="3" role="heading" id="h-note3">
 <span>
 Note
 </span>
 </div>
 <p class="">
-<del class="diff-old">While
-the
-formal
-definition
-of
-the
-Entailment
-refers
-to
-the
-general
-OWL
-2
-Semantics,
-practical
-implementations
-may
-rely
-on
-a
-subset
-of
-the
-OWL
-2
-RL
-Profileâ€™s
-entailment
-expressed
-in
-rules
-(
-section
-4.3
-of
-[
-OWL2-PROFILES
-]).
-</del>
 The
-<del class="diff-old">relevant
-rules
-are,
-using
-the
-rule
-identifications
-in
-section
-4.3
-of
-[
-OWL2-PROFILES
-]):
-</del>
 <code>
-<del class="diff-old">prp-spo1
-,
-</del>
-<ins class="diff-chg">owl:equivalentProperty
-</ins></code><ins class="diff-chg">
+owl:equivalentProperty
+</code>
 rule
 is
 more
 powerfull
 than
-</ins>
 <code>
-<del class="diff-old">prp-eqp1
-</del>
-<ins class="diff-chg">rdfs:subPropertyOf
-</ins>
+rdfs:subPropertyOf
 </code>,
-<del class="diff-old">and
-prp-eqp2
-.
-[
-RDFA-CORE
-]
-implements
-a
-more
-complete
-form
-of
-vocabulary
-entailement,
-including
-retrieving
-</del>
-<ins class="diff-chg">in
+in
 that
 if
 any
@@ -6259,220 +4880,86 @@ equivalent
 property
 matches,
 then
-</ins>
 the
-<del class="diff-old">vocabulary
-URI
-to
-find
-additional
-class
-and
-</del>
-<ins class="diff-chg">source
-</ins>
+source
 property
-<del class="diff-old">expansion
-definitions,
-as
-described
-in
-RDFa
-Vocabulary
-Entailment
-.
-Microdata
-implementations
-may
-use
-RDFa
-Vocabulary
-Entailment
-as
-an
-alternative
-to
-implementing
-</del>
-<ins class="diff-chg">would
+would
 also
 cause
-</ins>
 a
-<del class="diff-old">separate
-entailment
-algorithm.
-To
-allow
-[
-RDFA-CORE
-]
-processors
-</del>
-<ins class="diff-chg">triple
-</ins>
+triple
 to
 be
-<del class="diff-old">used
-for
-microdata
-vocabulary
-expansion,
-microdata
-acts
-as
-</del>
-<ins class="diff-chg">generated.
+generated.
 For
 example,
-</ins>
 if
-<del class="diff-old">there
-is
-an
-implicit
-</del>
-<ins class="diff-chg">the
+the
 registry
 stated
 that
-</ins>
 <code>
-<del class="diff-old">@vocab
-</del>
-<ins class="diff-chg">name
-</ins>
+name
 </code>
-<del class="diff-old">RDFa
-attribute
-set
-</del>
-<ins class="diff-chg">was
+was
 equivalent
-</ins>
 to
 <code>
-<ins class="diff-new">rdfs:label
-</ins></code>,<ins class="diff-new">
+rdfs:label
+</code>,
 than
 any
 use
 of
-</ins><code><ins class="diff-new">
+<code>
 name
-</ins></code><ins class="diff-new">
+</code>
 in
-</ins>
 a
-<del class="diff-old">detected
-vocabulary
-by
-emitting
-</del>
 <a class="aref internalDFN" href="#dfn-itemprop">
-<ins class="diff-chg">itemprop
-</ins></a><ins class="diff-chg">
+itemprop
+</a>
 would
 cause
-</ins>
 a
 triple
 using
-<del class="diff-old">the
-</del>
 <code>
-<del class="diff-old">rdfa:usesVocabulary
-</del>
-<ins class="diff-chg">rdfs:label
-</ins>
+rdfs:label
 </code>
-<del class="diff-old">predicate.
-Note
-The
-entailment
-described
-in
-this
-section
-is
-the
-minimum
-useful
-level
-for
-microdata.
-Processors
-may,
-of
-course,
-choose
-</del>
 to
-<del class="diff-old">follow
-more
-powerful
-entailment
-regimes,
-e.g.,
-include
-full
-RDFS
-[
-RDF-MT
-]
-or
-OWL2
-[
-OWL2-OVERVIEW
-]
-entailments.
-Using
-those
-entailments
-applications
-may
-perform
-datatype
-validation
-by
-checking
-</del>
-<ins class="diff-chg">be
+be
 emitted,
 as
 with
-</ins>
 <code>
-<del class="diff-old">rdfs:range
-</del>
-<ins class="diff-chg">rdfs:subPropertyOf
-</ins></code>.<ins class="diff-chg">
+rdfs:subPropertyOf
+</code>.
 However,
 logically,
 any
 use
 of
-</ins><code><ins class="diff-chg">
+<code>
 label
-</ins>
 </code>
-<ins class="diff-new">where
+where
 the
 current
 voabulary
 were
-</ins><code><ins class="diff-new">
+<code>
 rdfs:
-</ins></code><ins class="diff-new">
+</code>
 could
 also
 cause
 a
 triple
 using
-</ins><code><ins class="diff-new">
+<code>
 schema:name
-</ins></code><ins class="diff-new">
+</code>
 to
 be
 emitted.
@@ -6485,16 +4972,11 @@ requires
 that
 all
 values
-</ins>
 of
 a
-<del class="diff-old">property,
-or
-use
-</del>
 <code>
-<ins class="diff-chg">owl:equivalentProperty
-</ins></code><ins class="diff-chg">
+owl:equivalentProperty
+</code>
 registry
 entry
 have
@@ -6507,54 +4989,32 @@ values
 as
 keys
 within
-</ins>
 the
-<del class="diff-old">advanced
-facilities
-offered
-by,
-e.g.,
-OWL2â€™s
-</del>
 <code>
 property
-<del class="diff-old">chains
-to
-interlink
-vocabularies
-further.
-</del>
 </code>
-<ins class="diff-chg">section
+section
 of
 their
 respective
 vocabularies.
-</ins>
 </p>
 </div>
 </section>
-<section id="control-of-microdata-processors">
-<h2 role="heading" id="h2_control-of-microdata-processors">
+<section id="control-of-microdata-processors" typeof="bibo:Chapter" resource="#control-of-microdata-processors" property="bibo:hasPart">
+<h2 id="h-control-of-microdata-processors" resource="#h-control-of-microdata-processors">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">4.2
-</del>
-<ins class="diff-chg">5.
-</ins>
+5.
 </span>
-<del class="diff-old">Vocabulary
-Expansion
-</del>
 Control
 of
 Microdata
 Processors
+</span>
 </h2>
 <p>
-<del class="diff-old">Conforming
-processors
-</del>
-<ins class="diff-chg">The
+The
 external
 registry
 may
@@ -6562,9 +5022,9 @@ be
 controlled
 by
 the
-</ins><code><ins class="diff-chg">
+<code>
 registry
-</ins></code><ins class="diff-chg">
+</code>
 option
 passed
 to
@@ -6575,9 +5035,8 @@ If
 specified,
 the
 registry
-</ins>
 must
-<ins class="diff-new">be
+be
 loaded
 from
 the
@@ -6590,116 +5049,77 @@ value,
 Otherwise,
 the
 processor
-</ins><em class="rfc2119" title="MUST"><ins class="diff-new">
+<em class="rfc2119" title="MUST">
 MUST
-</ins>
 </em>
-<del class="diff-old">perform
-</del>
-<ins class="diff-chg">load
-</ins>
+load
 the
-<del class="diff-old">basic
-vocabulary
-expansion.
-</del>
-<ins class="diff-chg">default
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+default
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins></a><ins class="diff-chg">
+</a>
 from
-</ins><code><ins class="diff-chg">
+<code>
 http://www.w3.org/ns/md
-</ins></code>.
+</code>.
 </p>
 <p>
-<del class="diff-old">If
-vocabulary
-expansion
-</del>
-<ins class="diff-chg">Setting
-</ins><code><ins class="diff-chg">
+Setting
+<code>
 registry
-</ins></code>
+</code>
 is
 performed
-<del class="diff-old">by
-the
-microdata
-processor
-</del>
-<ins class="diff-chg">in
+in
 a
 processor-specific
 way.
-</ins></p><p><ins class="diff-chg">
+</p>
+<p>
 When
 accessed
 as
 a
-</ins><strong><ins class="diff-chg">
+<strong>
 web
 service
-</ins></strong>
+</strong>
 using
-<del class="diff-old">[
-RDFA-CORE
-]
-vocabulary
-expansion,
-and
-the
-</del>
-<ins class="diff-chg">HTTP
+HTTP
 GET,
 POST
 or
 similar
 action,
 processors
-</ins><em class="rfc2119" title="SHOULD"><ins class="diff-chg">
+<em class="rfc2119" title="SHOULD">
 SHOULD
-</ins></em><ins class="diff-chg">
+</em>
 use
-</ins>
 <code>
-<del class="diff-old">vocab_expansion
-</del>
-<ins class="diff-chg">registry
-</ins></code><ins class="diff-chg">
+registry
+</code>
 query
 parameter.
 Acceptable
 values
 for
-</ins><code><ins class="diff-chg">
+<code>
 registry
-</ins>
 </code>
-<del class="diff-old">option
-</del>
 is
-<del class="diff-old">passed
-to
-the
-microdata
-processor,
-</del>
-<ins class="diff-chg">a
+a
 URI-encoded
 URL.
 Web
 service
 processors
-</ins><em class="rfc2119" title="SHOULD"><ins class="diff-chg">
+<em class="rfc2119" title="SHOULD">
 SHOULD
-</ins></em><ins class="diff-chg">
+</em>
 return
-</ins>
 the
-<del class="diff-old">full
-</del>
-<ins class="diff-chg">resulting
+resulting
 RDF
 graph
 using
@@ -6719,40 +5139,27 @@ type.
 Web
 service
 processors
-</ins><em class="rfc2119" title="MUST"><ins class="diff-chg">
+<em class="rfc2119" title="MUST">
 MUST
-</ins></em><ins class="diff-chg">
+</em>
 support
-</ins>
 [
 <cite>
-<del class="diff-old">RDFA-CORE
-</del>
 <a class="bibref" href="#bib-N-TRIPLES">
-<ins class="diff-chg">N-TRIPLES
-</ins>
+N-TRIPLES
 </a>
 </cite>
-<del class="diff-old">]
-expansion
-must
-also
-be
-performed.
-</del>
-<ins class="diff-chg">].
-</ins>
+].
 </p>
 </section>
-<section id="algorithm">
-<h2 role="heading" id="h2_algorithm">
+<section id="algorithm" typeof="bibo:Chapter" resource="#algorithm" property="bibo:hasPart">
+<h2 id="h-algorithm" resource="#h-algorithm">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.
-</del>
-<ins class="diff-chg">6.
-</ins>
+6.
 </span>
 Algorithm
+</span>
 </h2>
 <p>
 Transformation
@@ -6779,23 +5186,19 @@ for
 the
 treatment
 of
-<del class="diff-old">item
-s.
-</del>
 <a title="item" href="#dfn-item" class="internalDFN">
-<ins class="diff-chg">items
-</ins></a>.
+items
+</a>.
 </p>
-<section id="algorithm-terms">
-<h3 role="heading" id="h3_algorithm-terms">
+<section id="algorithm-terms" typeof="bibo:Chapter" resource="#algorithm-terms" property="bibo:hasPart">
+<h3 id="h-algorithm-terms" resource="#h-algorithm-terms">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.1
-</del>
-<ins class="diff-chg">6.1
-</ins>
+6.1
 </span>
 Algorithm
 Terms
+</span>
 </h3>
 <dl>
 <dt>
@@ -6873,33 +5276,36 @@ them.
 (See
 [
 <cite>
-<del class="diff-old">RDF-CONCEPTS
-</del>
 <a class="bibref" href="#bib-RDF11-CONCEPTS">
-<ins class="diff-chg">RDF11-CONCEPTS
-</ins>
+RDF11-CONCEPTS
 </a>
 </cite>
 ]).
 </dd>
 <dt>
 <dfn id="dfn-canonicalized-fragment">
-<ins class="diff-new">canonicalized
-fragment
-</ins></dfn></dt><dd><ins class="diff-new">
-The
-term
-</ins><cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0"><ins class="diff-new">
 canonicalized
 fragment
-</ins></a></cite><ins class="diff-new">
+</dfn>
+</dt>
+<dd>
+The
+term
+<cite>
+<a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">
+canonicalized
+fragment
+</a>
+</cite>
 is
 defined
 in
 [
-</ins><cite><a class="bibref" href="#bib-URL"><ins class="diff-new">
+<cite>
+<a class="bibref" href="#bib-URL">
 URL
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 ].
 This
 involves
@@ -6933,7 +5339,8 @@ subject
 to
 percent
 escaping.
-</ins></dd><dt>
+</dd>
+<dt>
 <dfn id="dfn-document-base">
 document
 base
@@ -6997,53 +5404,6 @@ initially
 empty;
 </dd>
 <dt>
-<del class="diff-old">current
-name
-an
-absolute
-URL
-for
-the
-in-scope
-name
-,
-used
-for
-generating
-URIs
-for
-properties
-of
-items
-without
-an
-item
-type
-;
-Note
-current
-name
-is
-required
-for
-the
-contextual
-property
-URI
-generation
-scheme.
-Without
-this
-scheme,
-this
-evaluation
-context
-component
-would
-not
-be
-required.
-</del>
 <dfn id="dfn-current-type">
 current
 type
@@ -7197,105 +5557,6 @@ element.properties
 attribute.
 </dd>
 <dt>
-<del class="diff-old">fragment-escape
-The
-term
-fragment-escape
-is
-defined
-in
-[
-HTML5
-].
-This
-involves
-transforming
-elements
-added
-to
-URLs
-to
-ensure
-that
-the
-result
-remains
-a
-valid
-URL.
-The
-following
-characters
-are
-subject
-to
-percent
-escaping:
-U+0022
-QUOTATION
-MARK
-character
-(")
-U+0023
-NUMBER
-SIGN
-character
-(#)
-U+0025
-PERCENT
-SIGN
-character
-(%)
-U+003C
-LESS-THAN
-SIGN
-character
-(&lt;)
-U+003E
-GREATER-THAN
-SIGN
-character
-(&gt;)
-U+005B
-LEFT
-SQUARE
-BRACKET
-character
-([)
-U+005C
-REVERSE
-SOLIDUS
-character
-(\)
-U+005D
-RIGHT
-SQUARE
-BRACKET
-character
-(])
-U+005E
-CIRCUMFLEX
-ACCENT
-character
-(^)
-U+007B
-LEFT
-CURLY
-BRACKET
-character
-({)
-U+007C
-VERTICAL
-LINE
-character
-(|)
-U+007D
-RIGHT
-CURLY
-BRACKET
-character
-(})
-</del>
 <dfn id="dfn-global-identifier">
 global
 identifier
@@ -7317,12 +5578,10 @@ attribute,
 if
 it
 has
-<del class="diff-old">one.
-</del>
-<ins class="diff-chg">one,
-</ins><a href="http://www.w3.org/TR/html/infrastructure.html#resolving-urls"><ins class="diff-chg">
+one,
+<a href="http://www.w3.org/TR/html/infrastructure.html#resolving-urls">
 resolved
-</ins></a><ins class="diff-chg">
+</a>
 relative
 to
 the
@@ -7333,14 +5592,10 @@ the
 attribute
 is
 specified.
-</ins>
 (See
 <cite>
-<del class="diff-old">Items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">
-<ins class="diff-chg">itemscope
-</ins>
+itemscope
 </a>
 </cite>
 in
@@ -7365,51 +5620,32 @@ such
 as
 strings
 and
-<del class="diff-old">dates,
-including
-</del>
-<ins class="diff-chg">dates.
+dates.
 These
 include
-</ins><dfn title="typed literal" id="dfn-typed-literal">
+<dfn title="typed literal" id="dfn-typed-literal">
 typed
-<del class="diff-old">literal
-</del>
-<ins class="diff-chg">literals
-</ins></dfn>,<dfn title="language-tagged string" id="dfn-language-tagged-string"><ins class="diff-chg">
+literals
+</dfn>,
+<dfn title="language-tagged string" id="dfn-language-tagged-string">
 language-tagged
 strings
-</ins>
 </dfn>
-<del class="diff-old">s
-</del>
 and
-<del class="diff-old">plain
-literal
-s.
-(See
-</del>
 <dfn title="simple literal" id="dfn-simple-literal">
-<ins class="diff-chg">simple
+simple
 literals
-</ins></dfn>,<ins class="diff-chg">
+</dfn>,
 as
 defined
 in
-</ins>
 [
 <cite>
-<del class="diff-old">RDF-CONCEPTS
-</del>
 <a class="bibref" href="#bib-RDF11-CONCEPTS">
-<ins class="diff-chg">RDF11-CONCEPTS
-</ins>
+RDF11-CONCEPTS
 </a>
 </cite>
-<del class="diff-old">]).
-</del>
-<ins class="diff-chg">].
-</ins>
+].
 </dd>
 <dt>
 <dfn id="dfn-property">
@@ -7477,15 +5713,9 @@ name
 </a>.
 (See
 <cite>
-<del class="diff-old">Names:
-the
-itemprop
-attribute
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#property-names">
-<ins class="diff-chg">property
+property
 names
-</ins>
 </a>
 </cite>
 in
@@ -7679,157 +5909,190 @@ element
 is
 a
 <code>
-<ins class="diff-new">meter
-</ins></code><ins class="diff-new">
+meter
+</code>
 or
-</ins><code><ins class="diff-new">
+<code>
 data
-</ins></code><ins class="diff-new">
+</code>
 element.
-</ins></dt><dd><ins class="diff-new">
+</dt>
+<dd>
 The
 value
 is
 a
-</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-literal" class="internalDFN">
 literal
-</ins></a><ins class="diff-new">
+</a>
 made
 from
-</ins><code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue"><ins class="diff-new">
+<code>
+<cite>
+<a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">
 element.itemValue
-</ins></a></cite></code>.<dl><dt><ins class="diff-new">
+</a>
+</cite>
+</code>.
+<dl>
+<dt>
 If
 the
 value
 is
 a
-</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#numbers"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/html5/infrastructure.html#numbers">
 valid
 integer
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 having
 the
 lexical
 form
 of
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#date"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#date">
 xsd:integer
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 [
-</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+<cite>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
 XMLSCHEMA11-2
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 ]
-</ins></dt><dd><ins class="diff-new">
+</dt>
+<dd>
 The
 value
 is
 a
-</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-typed-literal" class="internalDFN">
 typed
 literal
-</ins></a><ins class="diff-new">
+</a>
 composed
 of
 the
 value
 and
-</ins><code><ins class="diff-new">
+<code>
 http://www.w3.org/2001/XMLSchema#integer
-</ins></code>.</dd><dt><ins class="diff-new">
+</code>.
+</dd>
+<dt>
 If
 the
 value
 is
 a
-</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">
 valid
 float
 number
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 having
 the
 lexical
 form
 of
-</ins><cite><a href="http://www.w3.org/TR/xmlschema-2/#date"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/xmlschema-2/#date">
 xsd:double
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 [
-</ins><cite><a class="bibref" href="#bib-XMLSCHEMA11-2"><ins class="diff-new">
+<cite>
+<a class="bibref" href="#bib-XMLSCHEMA11-2">
 XMLSCHEMA11-2
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 ]
-</ins></dt><dd><ins class="diff-new">
+</dt>
+<dd>
 The
 value
 is
 a
-</ins><a href="#dfn-typed-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-typed-literal" class="internalDFN">
 typed
 literal
-</ins></a><ins class="diff-new">
+</a>
 composed
 of
 the
 value
 and
-</ins><code><ins class="diff-new">
+<code>
 http://www.w3.org/2001/XMLSchema#double
-</ins></code>.</dd><dt><ins class="diff-new">
+</code>.
+</dd>
+<dt>
 Otherwise
-</ins></dt><dd><ins class="diff-new">
+</dt>
+<dd>
 The
 value
 is
 a
-</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-simple-literal" class="internalDFN">
 simple
 literal
-</ins></a>.</dd></dl></dd><dt><ins class="diff-new">
+</a>.
+</dd>
+</dl>
+</dd>
+<dt>
 If
 the
 element
 is
 a
-</ins><code><ins class="diff-new">
+<code>
 meta
-</ins></code><ins class="diff-new">
+</code>
 element
 with
 a
-</ins><code><ins class="diff-new">
+<code>
 @content
-</ins></code><ins class="diff-new">
+</code>
 attribute.
-</ins></dt><dd><ins class="diff-new">
+</dt>
+<dd>
 If
 the
 element
 has
 a
 non-empty
-</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
-</ins></a></cite>,<ins class="diff-new">
+</a>
+</cite>,
 the
 value
 is
 a
-</ins><a href="#dfn-language-tagged-string" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-language-tagged-string" class="internalDFN">
 language-tagged
 string
-</ins></a><ins class="diff-new">
+</a>
 created
 from
 the
 value
 of
 the
-</ins><code><ins class="diff-new">
+<code>
 @content
-</ins></code><ins class="diff-new">
+</code>
 attribute
 with
 language
@@ -7837,9 +6100,11 @@ information
 set
 from
 the
-</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-new">
+<cite>
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
-</ins></a></cite><ins class="diff-new">
+</a>
+</cite>
 of
 the
 property
@@ -7849,27 +6114,28 @@ the
 value
 is
 a
-</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-simple-literal" class="internalDFN">
 simple
 literal
-</ins></a><ins class="diff-new">
+</a>
 created
 from
 the
 value
 of
 the
-</ins><code><ins class="diff-new">
+<code>
 @content
-</ins></code><ins class="diff-new">
+</code>
 attribute.
-</ins></dd><dt><ins class="diff-new">
+</dd>
+<dt>
 If
 the
 element
 is
 a
-</ins><code>
+<code>
 time
 </code>
 element.
@@ -7917,11 +6183,8 @@ xsd:date
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -7969,11 +6232,8 @@ xsd:time
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -8035,11 +6295,8 @@ xsd:dateTime
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -8087,11 +6344,8 @@ xsd:gYearMonth
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -8139,11 +6393,8 @@ xsd:gYear
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -8170,17 +6421,16 @@ http://www.w3.org/2001/XMLSchema#gYear
 If
 the
 value
-<del class="diff-old">has
-</del>
-<ins class="diff-chg">is
+is
 a
-</ins><cite><a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string"><ins class="diff-chg">
+<cite>
+<a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string">
 valid
 duration
 string
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 having
-</ins>
 the
 lexical
 form
@@ -8192,11 +6442,8 @@ xsd:duration
 </cite>
 [
 <cite>
-<del class="diff-old">RDF-SCHEMA
-</del>
 <a class="bibref" href="#bib-XMLSCHEMA11-2">
-<ins class="diff-chg">XMLSCHEMA11-2
-</ins>
+XMLSCHEMA11-2
 </a>
 </cite>
 ].
@@ -8218,71 +6465,29 @@ and
 <code>
 http://www.w3.org/2001/XMLSchema#duration
 </code>.
-<del class="diff-old">Note
-The
-referenced
-version
-of
-[
-HTML5
-]
-does
-not
-include
-a
-duration
-data
-type,
-but
-it
-is
-in
-the
-Editor's
-Draft
-and
-is
-expected
-to
-be
-included
-in
-a
-forthcoming
-update
-to
-the
-Working
-Draft
-</del>
 </dd>
 <dt>
 Otherwise
 </dt>
 <dd>
-<del class="diff-old">The
-</del>
-<ins class="diff-chg">If
+If
 the
 element
 has
 a
 non-empty
-</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-chg">
+<cite>
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
-</ins></a></cite>,<ins class="diff-chg">
+</a>
+</cite>,
 the
-</ins>
 value
 is
 a
-<del class="diff-old">plain
-literal
-</del>
 <a href="#dfn-language-tagged-string" class="internalDFN">
-<ins class="diff-chg">language-tagged
+language-tagged
 string
-</ins>
 </a>
 created
 from
@@ -8303,22 +6508,21 @@ of
 the
 property
 element.
-<ins class="diff-new">Otherwise,
+Otherwise,
 the
 value
 is
 a
-</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-simple-literal" class="internalDFN">
 simple
 literal
-</ins></a><ins class="diff-new">
+</a>
 created
 from
 the
 value.
-</ins>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_4">
+<div class="note-title" aria-level="4" role="heading" id="h-note4">
 <span>
 Note
 </span>
@@ -8382,29 +6586,24 @@ HTML5
 Otherwise
 </dt>
 <dd>
-<del class="diff-old">The
-</del>
-<ins class="diff-chg">If
+If
 the
 element
 has
 a
 non-empty
-</ins><cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes"><ins class="diff-chg">
+<cite>
+<a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
 language
-</ins></a></cite>,<ins class="diff-chg">
+</a>
+</cite>,
 the
-</ins>
 value
 is
 a
-<del class="diff-old">plain
-literal
-</del>
 <a href="#dfn-language-tagged-string" class="internalDFN">
-<ins class="diff-chg">language-tagged
+language-tagged
 string
-</ins>
 </a>
 created
 from
@@ -8425,20 +6624,19 @@ of
 the
 property
 element.
-<ins class="diff-new">Otherwise,
+Otherwise,
 the
 value
 is
 a
-</ins><a href="#dfn-simple-literal" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-simple-literal" class="internalDFN">
 simple
 literal
-</ins></a><ins class="diff-new">
+</a>
 created
 from
 the
 value.
-</ins>
 <p>
 See
 <cite>
@@ -8509,16 +6707,10 @@ document.getItems
 </code>.
 (See
 <cite>
-<del class="diff-old">Associating
-names
-with
-items
-</del>
 <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#top-level-microdata-items">
-<ins class="diff-chg">top-level
+top-level
 microdata
 item
-</ins>
 </a>
 </cite>
 in
@@ -8580,16 +6772,13 @@ URI.
 (See
 [
 <cite>
-<del class="diff-old">RDF-CONCEPTS
-</del>
 <a class="bibref" href="#bib-RDF11-CONCEPTS">
-<ins class="diff-chg">RDF11-CONCEPTS
-</ins>
+RDF11-CONCEPTS
 </a>
 </cite>
 ]).
 <div class="issue">
-<div class="issue-title" aria-level="2" role="heading" id="h_issue_2">
+<div class="issue-title" aria-level="4" role="heading" id="h-issue2">
 <span>
 Issue
 </span>
@@ -8643,13 +6832,8 @@ range
 of
 <a title="property value" href="#dfn-property-value" class="internalDFN">
 property
-<del class="diff-old">value
-</del>
-<ins class="diff-chg">values
-</ins>
+values
 </a>
-<del class="diff-old">s
-</del>
 to
 be
 URI
@@ -8731,7 +6915,7 @@ another
 vocabulary
 URI.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_5">
+<div class="note-title" aria-level="4" role="heading" id="h-note5">
 <span>
 Note
 </span>
@@ -8806,17 +6990,16 @@ creator.
 </dd>
 </dl>
 </section>
-<section id="rdf-conversion-algorithm">
-<h3 role="heading" id="h3_rdf-conversion-algorithm">
+<section id="rdf-conversion-algorithm" typeof="bibo:Chapter" resource="#rdf-conversion-algorithm" property="bibo:hasPart">
+<h3 id="h-rdf-conversion-algorithm" resource="#h-rdf-conversion-algorithm">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.2
-</del>
-<ins class="diff-chg">6.2
-</ins>
+6.2
 </span>
 RDF
 Conversion
 Algorithm
+</span>
 </h3>
 <p>
 A
@@ -8824,11 +7007,8 @@ HTML
 document
 containing
 microdata
-<del class="diff-old">may
-</del>
 <em class="rfc2119" title="MAY">
-<ins class="diff-chg">MAY
-</ins>
+MAY
 </em>
 be
 converted
@@ -8854,11 +7034,8 @@ processor
 implementing
 RDF
 conversion
-<del class="diff-old">must
-</del>
 <em class="rfc2119" title="MUST">
-<ins class="diff-chg">MUST
-</ins>
+MUST
 </em>
 implement
 a
@@ -8878,14 +7055,6 @@ following
 algorithm
 generates:
 </p>
-<del class="diff-old">Set
-item
-list
-to
-an
-empty
-list.
-</del>
 <ol class="algorithm">
 <li>
 For
@@ -8898,11 +7067,6 @@ a
 <a href="#dfn-top-level-item" class="internalDFN">
 top-level
 item
-<del class="diff-old">run
-the
-following
-algorithm:
-</del>
 </a>,
 <a href="#generate-the-triples">
 Generate
@@ -8910,92 +7074,27 @@ the
 triples
 </a>
 for
-<del class="diff-old">an
+that
 item
-</del>
-<ins class="diff-chg">that
-</ins>
-item
-<del class="diff-old">,
-</del>
 using
 the
 <a href="#dfn-evaluation-context" class="internalDFN">
 evaluation
 context
 </a>.
-<del class="diff-old">Let
-result
-be
-the
-(
-URI
-reference
-or
-blank
-node
-)
-subject
-returned.
-Append
-result
-to
-item
-list
-.
-Generate
-an
-RDF
-Collection
-list
-from
-the
-ordered
-list
-of
-values.
-Set
-value
-to
-the
-value
-returned
-from
-generate
-an
-RDF
-Collection
-.
-Generate
-the
-following
-triple:
-subject
-document
-base
-predicate
-http://www.w3.org/ns/md#item
-object
-value
-Perform
-Vocabulary
-Entailment
-.
-</del>
 </li>
 </ol>
 </section>
-<section id="generate-the-triples">
-<h3 role="heading" id="h3_generate-the-triples">
+<section id="generate-the-triples" typeof="bibo:Chapter" resource="#generate-the-triples" property="bibo:hasPart">
+<h3 id="h-generate-the-triples" resource="#h-generate-the-triples">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.3
-</del>
-<ins class="diff-chg">6.3
-</ins>
+6.3
 </span>
 Generate
 the
 triples
+</span>
 </h3>
 <p>
 When
@@ -9027,7 +7126,7 @@ following
 steps:
 </p>
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_6">
+<div class="note-title" aria-level="4" role="heading" id="h-note6">
 <span>
 Note
 </span>
@@ -9242,25 +7341,21 @@ defining
 the
 <a href="#dfn-item" class="internalDFN">
 item
-</a>.
-</li>
-<li>
-<del class="diff-old">If
-type
+<del class="diff-old">.
+</del>
+</a>
+<ins class="diff-chg">which
 is
 an
+</ins><a href="#dfn-absolute-url" class="internalDFN"><ins class="diff-chg">
 absolute
 URL
-,
-set
-current
-name
-in
-evaluation
-context
-to
-null.
-</del>
+</ins></a>,<ins class="diff-chg">
+if
+any.
+</ins>
+</li>
+<li>
 Otherwise,
 set
 <em>
@@ -9322,24 +7417,6 @@ that
 <a href="#dfn-uri-prefix" class="internalDFN">
 URI
 prefix
-<del class="diff-old">and
-generate
-the
-following
-triple:
-subject
-document
-base
-predicate
-http://www.w3.org/ns/rdfa#usesVocabulary
-object
-vocab
-(as
-a
-URI
-reference
-)
-</del>
 </a>.
 </li>
 <li>
@@ -9394,25 +7471,6 @@ to
 vocab
 </em>.
 </li>
-<del class="diff-old">Set
-property
-list
-to
-an
-empty
-array
-mapping
-properties
-to
-one
-or
-more
-value
-s
-as
-established
-below.
-</del>
 <li id="alg-prop-names">
 For
 each
@@ -9442,26 +7500,6 @@ item
 </a>
 <em>
 item
-<del class="diff-old">,
-in
-the
-order
-those
-elements
-are
-given
-by
-the
-algorithm
-that
-returns
-the
-properties
-of
-the
-item
-,
-</del>
 </em>
 run
 the
@@ -9532,16 +7570,6 @@ and
 <em>
 name
 </em>.
-<del class="diff-old">Update
-context
-by
-setting
-current
-name
-to
-predicate
-.
-</del>
 </li>
 <li>
 Let
@@ -9596,147 +7624,108 @@ those
 steps.
 </li>
 <li>
-<del class="diff-old">Add
-value
-to
-</del>
-<ins class="diff-chg">Generate
+Generate
 the
 following
 triple:
-</ins><dl class="triple"><dt><ins class="diff-chg">
+<dl class="triple">
+<dt>
 subject
-</ins></dt><dd>
+</dt>
+<dd>
 <em>
-<del class="diff-old">property
-list
-</del>
-<ins class="diff-chg">subject
-</ins>
+subject
 </em>
-<del class="diff-old">for
-</del>
 </dd>
 <dt>
 predicate
-<del class="diff-old">.
-For
-each
-</del>
 </dt>
 <dd>
 <em>
 predicate
 </em>
-<del class="diff-old">in
-</del>
 </dd>
 <dt>
-<ins class="diff-chg">object
-</ins></dt><dd>
+object
+</dt>
+<dd>
 <em>
-<del class="diff-old">property
-list
-:
-</del>
-<ins class="diff-chg">value
-</ins></em>
-<del class="diff-old">Generate
-property
-values
-</del>
+value
+</em>
 </dd>
 </dl>
 </li>
 <li>
-<ins class="diff-chg">If
+If
 an
 entry
 exists
 in
 the
-</ins><a href="#dfn-registry" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-registry" class="internalDFN">
 registry
-</ins>
 </a>
-<ins class="diff-new">for
-</ins>
+for
 <em>
-<del class="diff-old">subject
-,
-predicate
-</del>
-<ins class="diff-chg">name
-</ins>
+name
 </em>
-<del class="diff-old">and
-</del>
-<ins class="diff-chg">in
-</ins>
+in
 the
-<del class="diff-old">list
-of
-values
-</del>
-<ins class="diff-chg">vocabulary
-</ins>
+vocabulary
 associated
 with
 <em>
-<del class="diff-old">predicate
-</del>
-<ins class="diff-chg">vocab
-</ins>
+vocab
 </em>
-<del class="diff-old">from
-</del>
-<ins class="diff-chg">having
+having
 the
 key
-</ins><code><ins class="diff-chg">
+<code>
 subPropertyOf
-</ins></code><ins class="diff-chg">
+</code>
 or
-</ins><code><ins class="diff-chg">
+<code>
 equivalentProperty
-</ins></code>,<ins class="diff-chg">
+</code>,
 for
 each
 such
 value
-</ins>
 <em>
-<del class="diff-old">property
-list
-</del>
-<ins class="diff-chg">equiv
-</ins></em>,<ins class="diff-chg">
+equiv
+</em>,
 generate
 the
 following
 triple:
-</ins><dl class="triple"><dt><ins class="diff-chg">
+<dl class="triple">
+<dt>
 subject
-</ins></dt><dd><em><ins class="diff-chg">
+</dt>
+<dd>
+<em>
 subject
-</ins>
 </em>
-<del class="diff-old">as
-</del>
 </dd>
 <dt>
-<ins class="diff-chg">predicate
-</ins></dt><dd>
+predicate
+</dt>
+<dd>
 <em>
-<del class="diff-old">values
-.
-</del>
-<ins class="diff-chg">equiv
-</ins></em></dd><dt><ins class="diff-chg">
+equiv
+</em>
+</dd>
+<dt>
 object
-</ins></dt><dd><em><ins class="diff-chg">
+</dt>
+<dd>
+<em>
 value
-</ins></em></dd></dl></li></ol>
+</em>
+</dd>
+</dl>
+</li>
+</ol>
 </li>
 </ol>
 </li>
@@ -9748,17 +7737,16 @@ subject
 </li>
 </ol>
 </section>
-<section id="generate-predicate-uri">
-<h3 role="heading" id="h3_generate-predicate-uri">
+<section id="generate-predicate-uri" typeof="bibo:Chapter" resource="#generate-predicate-uri" property="bibo:hasPart">
+<h3 id="h-generate-predicate-uri" resource="#h-generate-predicate-uri">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.4
-</del>
-<ins class="diff-chg">6.4
-</ins>
+6.4
 </span>
 Generate
 Predicate
 URI
+</span>
 </h3>
 <p>
 Predicate
@@ -9770,11 +7758,6 @@ of
 <a href="#dfn-current-type" class="internalDFN">
 current
 type
-<del class="diff-old">,
-current
-name
-,
-</del>
 </a>
 and
 <a href="#dfn-current-vocabulary" class="internalDFN">
@@ -9862,22 +7845,17 @@ fragment
 set
 to
 the
-<del class="diff-old">fragment-escape
-</del>
 <a href="#dfn-canonicalized-fragment" class="internalDFN">
-<ins class="diff-chg">canonicalized
+canonicalized
 fragment
-</ins>
 </a>
-<del class="diff-old">d
-</del>
 value
 of
 <em>
 name
 </em>.
 <div class="note">
-<div class="note-title" aria-level="2" role="heading" id="h_note_7">
+<div class="note-title" aria-level="4" role="heading" id="h-note7">
 <span>
 Note
 </span>
@@ -9943,52 +7921,8 @@ http://example.org/doc#title
 </div>
 </div>
 </li>
-<del class="diff-old">Otherwise,
-if
-current
-vocabulary
-from
-context
-is
-not
-null
-and
-registry
-has
-an
-entry
-for
-current
-vocabulary
-having
-a
-propertyURI
-entry
-that
-is
-not
-null,
-set
-that
-as
-scheme
-.
-Otherwise,
-set
-scheme
-to
-vocabulary
-.
-</del>
 <li id="scheme-vocab">
-<del class="diff-old">If
-scheme
-is
-vocabulary
-set
-</del>
-<ins class="diff-chg">Set
-</ins>
+Set
 <em>
 expandedURI
 </em>
@@ -10002,15 +7936,10 @@ constructed
 by
 appending
 the
-<del class="diff-old">fragment-escape
-</del>
 <a href="#dfn-canonicalized-fragment" class="internalDFN">
-<ins class="diff-chg">canonicalized
+canonicalized
 fragment
-</ins>
 </a>
-<del class="diff-old">d
-</del>
 value
 of
 <em>
@@ -10028,10 +7957,7 @@ U+0023
 NUMBER
 SIGN
 character
-<del class="diff-old">(#)
-</del>
-<ins class="diff-chg">("#")
-</ins>
+("#")
 unless
 the
 <a href="#dfn-current-vocabulary" class="internalDFN">
@@ -10046,135 +7972,72 @@ U+0023
 NUMBER
 SIGN
 character
-<del class="diff-old">(#)
-</del>
-<ins class="diff-chg">("#")
-</ins>
+("#")
 or
 SOLIDUS
 U+002F
-<del class="diff-old">(/).
-</del>
-<ins class="diff-chg">("/").
-</ins>
+("/").
 </li>
-<del class="diff-old">Otherwise,
-if
-scheme
-is
-contextual
-,
-set
-</del>
 <li>
-<ins class="diff-chg">Return
-</ins>
+Return
 <em>
 expandedURI
-<del class="diff-old">to
-the
-URI
-reference
-</del>
 </em>.
 </li>
 </ol>
 </section>
 </section>
-<section class="appendix informative" id="reverse-itemprop">
-<h2 role="heading" id="h2_reverse-itemprop">
+<section class="appendix informative" id="reverse-itemprop" typeof="bibo:Chapter" resource="#reverse-itemprop" property="bibo:hasPart">
+<h2 id="h-reverse-itemprop" resource="#h-reverse-itemprop">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<ins class="diff-chg">A.
-</ins></span><ins class="diff-chg">
+A.
+</span>
 Reverse
-</ins><a class="aref internalDFN" href="#dfn-itemprop"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop">
 itemprop
-</ins>
 </a>
-<del class="diff-old">constructed
-as
-follows:
-Let
-</del>
+</span>
 </h2>
 <p>
 <em>
-<del class="diff-old">s
-</del>
-<ins class="diff-chg">This
+This
 section
 is
 non-normative.
-</ins>
 </em>
-<del class="diff-old">be
-current
-name
-</del>
 </p>
 <p>
-<ins class="diff-chg">The
-</ins><a href="https://www.w3.org/wiki/WebSchemas"><ins class="diff-chg">
+The
+<a href="https://www.w3.org/wiki/WebSchemas">
 WebSchemas
 community
-</ins></a><ins class="diff-chg">
-has
-</ins><a href="https://www.w3.org/wiki/WebSchemas/InverseProperties"><ins class="diff-chg">
-proposed
-</ins>
 </a>
-<del class="diff-old">from
-context
-.
-If
-http://www.w3.org/ns/md?type=
-is
-a
-prefix
-of
-s
-,
-return
-</del>
+has
+<a href="https://www.w3.org/wiki/WebSchemas/InverseProperties">
+proposed
+</a>
 the
-<del class="diff-old">concatenation
-</del>
-<ins class="diff-chg">use
-</ins>
+use
 of
-<del class="diff-old">s
-,
-</del>
 a
-<del class="diff-old">U+002E
-FULL
-STOP
-character
-(.)
-and
-the
-fragment-escape
-</del>
-<ins class="diff-chg">new
+new
 Microdata
 attribute:
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins></a>.<ins class="diff-chg">
+</a>.
 Although
 not
 present
 in
 [
-</ins><cite><a class="bibref" href="#bib-MICRODATA"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-MICRODATA">
 MICRODATA
-</ins>
 </a>
-<del class="diff-old">d
-value
-</del>
 </cite>
-<ins class="diff-chg">]
+]
 at
 this
 time,
@@ -10195,14 +8058,8 @@ related
 using
 the
 reverse
-</ins>
 of
-<del class="diff-old">name
-.
-Otherwise,
-return
-</del>
-<ins class="diff-chg">a
+a
 common
 property;
 this
@@ -10214,152 +8071,90 @@ which
 exist
 solely
 for
-</ins>
 the
-<del class="diff-old">concatenation
-</del>
-<ins class="diff-chg">purpose
-</ins>
+purpose
 of
-<del class="diff-old">http://www.w3.org/ns/md?type=
-,
-</del>
-<ins class="diff-chg">describing
+describing
 such
 reverse
 relationships.
 Evidence
 for
-</ins>
 the
-<del class="diff-old">fragment-escape
-d
-value
-</del>
-<ins class="diff-chg">utility
-</ins>
+utility
 of
-<del class="diff-old">current
-type
-,
-</del>
-<ins class="diff-chg">such
+such
 a
 feature
 can
 be
 seen
 in
-</ins>
 the
-<del class="diff-old">string
-</del>
 <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">
-<ins class="diff-chg">RDFa
-</ins>
+RDFa
 <code>
-<del class="diff-old">&amp;prop=
-,
-</del>
-<ins class="diff-chg">@rev
-</ins></code><ins class="diff-chg">
+@rev
+</code>
 attribute
-</ins></a><ins class="diff-chg">
+</a>
 [
-</ins><cite><a class="bibref" href="#bib-RDFA-CORE"><ins class="diff-chg">
+<cite>
+<a class="bibref" href="#bib-RDFA-CORE">
 RDFA-CORE
-</ins></a></cite><ins class="diff-chg">
+</a>
+</cite>
 ]
-</ins>
 and
 the
-<del class="diff-old">fragment-escape
-</del>
 <a href="http://www.w3.org/TR/json-ld/#reverse-properties">
-<ins class="diff-chg">JSON-LD
-</ins><code><ins class="diff-chg">
-@reverse
-</ins></code><ins class="diff-chg">
-property
-</ins>
-</a>
-<del class="diff-old">d
-value
-of
-name
-.
-If
-the
-registry
-</del>
-<ins class="diff-chg">[
-</ins><cite><a class="bibref" href="#bib-JSON-LD"><ins class="diff-chg">
 JSON-LD
-</ins>
+<code>
+@reverse
+</code>
+property
 </a>
-<del class="diff-old">entry
-for
-propertyURI
-</del>
+[
+<cite>
+<a class="bibref" href="#bib-JSON-LD">
+JSON-LD
+</a>
 </cite>
-<ins class="diff-chg">].
-</ins></p><div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_8"><span><ins class="diff-chg">
+].
+</p>
+<div class="note">
+<div class="note-title" aria-level="3" role="heading" id="h-note8">
+<span>
 Note
-</ins></span></div><p class=""><ins class="diff-chg">
+</span>
+</div>
+<p class="">
 See
-</ins><a href="#issues"><ins class="diff-chg">
+<a href="#issues">
 issue
 5
-</ins>
 </a>
-<del class="diff-old">has
-an
-equivalentProperty
-key,
-generate
-</del>
-<ins class="diff-chg">for
+for
 further
 reference.
-</ins></p></div><p><ins class="diff-chg">
+</p>
+</div>
+<p>
 This
 feature
 adds
-</ins>
 the
 following
-<del class="diff-old">triple
-using
-the
-value
-of
-that
-key:
-</del>
-<ins class="diff-chg">attribute:
-</ins></p><dl>
+attribute:
+</p>
+<dl>
 <dt>
-<del class="diff-old">subject
-</del>
-<del class="diff-old">expandedURI
-</del>
 <dfn class="adef" id="dfn-itemprop-reverse">
-<ins class="diff-chg">itemprop-reverse
-</ins></dfn>
-<del class="diff-old">predicate
-</del>
+itemprop-reverse
+</dfn>
 </dt>
-<del class="diff-old">http://www.w3.org/2002/07/owl#equivalentProperty
-object
-</del>
 <dd>
-<del class="diff-old">value
-If
-the
-value
-is
-</del>
-<ins class="diff-chg">An
+An
 attribute
 used
 to
@@ -10367,255 +8162,216 @@ identify
 one
 or
 more
-</ins><a title="name" href="#dfn-name" class="internalDFN"><ins class="diff-chg">
+<a title="name" href="#dfn-name" class="internalDFN">
 names
-</ins></a><ins class="diff-chg">
+</a>
 of
-</ins>
 an
-<del class="diff-old">array,
-generate
-</del>
 <a title="item" href="#dfn-item" class="internalDFN">
-<ins class="diff-chg">items
-</ins></a><ins class="diff-chg">
+items
+</a>
 reversing
 the
 sense
 of
-</ins><a class="aref internalDFN" href="#dfn-itemprop"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop">
 itemprop
-</ins></a>.<ins class="diff-chg">
+</a>.
 An
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins></a><ins class="diff-chg">
+</a>
 contains
-</ins>
 a
-<del class="diff-old">triple
-for
-each
-value
-</del>
-<ins class="diff-chg">space
+space
 separated
 list
-</ins>
 of
-<del class="diff-old">that
-array.
-If
-the
-registry
-</del>
 <a title="name" href="#dfn-name" class="internalDFN">
-<ins class="diff-chg">names
-</ins>
+names
 </a>
-<del class="diff-old">entry
-for
-propertyURI
-</del>
-<ins class="diff-chg">which
+which
 may
 either
 by
-</ins><a title="absolute URL" href="#dfn-absolute-url" class="internalDFN"><ins class="diff-chg">
+<a title="absolute URL" href="#dfn-absolute-url" class="internalDFN">
 absolute
 URLs
-</ins>
 </a>
-<del class="diff-old">has
-an
-subPropertyOf
-key,
-generate
-the
-following
-triple
-using
-</del>
-<ins class="diff-chg">or
+or
 terms
 associated
 with
-</ins>
 the
-<del class="diff-old">value
-</del>
-<ins class="diff-chg">type
-</ins>
+type
 of
-<del class="diff-old">that
-key:
-subject
-expandedURI
-</del>
-<ins class="diff-chg">the
-</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-chg">
+the
+<a href="#dfn-item" class="internalDFN">
 item
-</ins></a><ins class="diff-chg">
+</a>
 as
 defined
 by
 the
 referencing
-</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-item" class="internalDFN">
 item
-</ins></a><ins class="diff-chg">
+</a>
 's
-</ins><a href="#dfn-item-type" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-item-type" class="internalDFN">
 item
 type
-</ins></a>.
+</a>.
 </dd>
 </dl>
 <p>
-<ins class="diff-new">The
-</ins><a href="#algorithm" class="sectionRef sec-ref"><ins class="diff-new">
-Algorithm
+The
+<ins class="diff-new">definition
+of
+</ins><a href="#dfn-top-level-item" class="internalDFN"><ins class="diff-new">
+top-level
+item
 </ins></a><ins class="diff-new">
+is
+updated
+to
+also
+exclude
+items
+having
+</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-new">
+itemprop-reverse
+</ins></a>.</p><p><ins class="diff-new">
+The
+</ins>
+<a href="#algorithm" class="sectionRef sec-ref">
+Algorithm
+</a>
 is
 extended
 accordingly:
-</ins></p><section id="algorithm-terms-1"><h3 role="heading" id="h3_algorithm-terms-1"><span class="secno"><ins class="diff-new">
+</p>
+<section id="algorithm-terms-1" typeof="bibo:Chapter" resource="#algorithm-terms-1" property="bibo:hasPart">
+<h3 id="h-algorithm-terms-1" resource="#h-algorithm-terms-1">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
 A.1
-</ins></span><ins class="diff-new">
+</span>
 Algorithm
 Terms
-</ins></h3><dl>
+</span>
+</h3>
+<dl>
 <dt>
-<del class="diff-old">predicate
-</del>
-<del class="diff-old">http://www.w3.org/2000/01/rdf-schema#subPropertyOf
-</del>
 <dfn id="dfn-reverse-properties">
-<ins class="diff-chg">reverse
+reverse
 properties
-</ins></dfn>
-<del class="diff-old">object
-</del>
+</dfn>
 </dt>
-<del class="diff-old">value
-</del>
-<del class="diff-old">If
-</del>
 <dd>
-<ins class="diff-chg">The
+The
 mechanism
 for
 finding
-</ins>
 the
-<del class="diff-old">value
-</del>
 <a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN">
-<ins class="diff-chg">reverse
+reverse
 properties
 of
 an
 item
-</ins></a><ins class="diff-chg">
+</a>.
 The
 list
 of
 reverse
 properties
-</ins>
 is
-<ins class="diff-new">the
+<del class="diff-old">the
 result
+</del>
+<ins class="diff-chg">obtained
+using
+a
+variation
+</ins>
 of
-transforming
+<del class="diff-old">transforming
 each
 space-separated-value
+</del>
+<ins class="diff-chg">the
+Microdata
+</ins><code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#the-properties-of-an-item"><ins class="diff-chg">
+properties
+</ins>
 of
-</ins>
 an
-<del class="diff-old">array,
-generate
+<del class="diff-old">item's
 </del>
-<ins class="diff-chg">item's
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
-itemprop-reverse
+<ins class="diff-chg">item
+</ins></a></cite></code><ins class="diff-chg">
+method,
+replacing
+</ins><a class="aref internalDFN" href="#dfn-itemprop"><ins class="diff-chg">
+itemprop
 </ins></a><ins class="diff-chg">
-to
+with
 </ins>
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
+itemprop-reverse
+<del class="diff-old">to
 a
-<del class="diff-old">triple
-for
-each
-value
-</del>
-<ins class="diff-chg">URL
+URL
 as
 defined
 in
-</ins><a href="#property-uri-generation"><ins class="diff-chg">
 Property
 URI
 Generation
-</ins></a>.</dd><dt><dfn id="dfn-reverse-property-names"><ins class="diff-chg">
+</del>
+</a>.
+</dd>
+<dt>
+<dfn id="dfn-reverse-property-names">
 reverse
 property
 names
-</ins></dfn></dt><dd><ins class="diff-chg">
+</dfn>
+</dt>
+<dd>
 The
 tokens
-</ins>
 of
-<del class="diff-old">that
-array.
-Return
-expandedURI
-.
-</del>
-<ins class="diff-chg">an
+an
 element's
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins></a><ins class="diff-chg">
+</a>
 attribute.
 Each
 token
 is
 a
-</ins><a href="#dfn-name" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-name" class="internalDFN">
 name
-</ins></a>.</dd></dl>
+</a>.
+</dd>
+</dl>
 </section>
-<section id="generate-the-triples-1">
-<h3 role="heading" id="h3_generate-the-triples-1">
+<section id="generate-the-triples-1" typeof="bibo:Chapter" resource="#generate-the-triples-1" property="bibo:hasPart">
+<h3 id="h-generate-the-triples-1" resource="#h-generate-the-triples-1">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">5.5
-</del>
-<ins class="diff-chg">A.2
-</ins>
+A.2
 </span>
 Generate
-<del class="diff-old">Property
-Values
-</del>
-<ins class="diff-chg">the
+the
 triples
-</ins>
+</span>
 </h3>
 <p>
-<del class="diff-old">Property
-value
-serialization
-makes
-use
-of
-subject
-,
-predicate
-and
-values
-.
-</del>
-<ins class="diff-chg">The
+The
 Triples
 generation
 algorithm
@@ -10630,466 +8386,220 @@ take
 place
 immediately
 after
-</ins><a href="#alg-prop-names"><ins class="diff-chg">
+<a href="#alg-prop-names">
 Step
 9
-</ins></a>:
+</a>:
 </p>
 <ol class="algorithm" start="10">
 <li>
-<del class="diff-old">If
-the
-registry
-contains
-a
-URI
-prefix
-</del>
-<ins class="diff-chg">For
+For
 each
 element
-</ins><em><ins class="diff-chg">
+<em>
 element
-</ins></em>
+</em>
 that
-<ins class="diff-new">has
+has
 one
 or
 more
-</ins><a href="#dfn-reverse-property-names" class="internalDFN"><ins class="diff-new">
+<a href="#dfn-reverse-property-names" class="internalDFN">
 reverse
 property
 names
-</ins></a><ins class="diff-new">
+</a>
 and
-</ins>
 is
-<del class="diff-old">a
-character
-for
-character
-match
-</del>
-<ins class="diff-chg">one
-</ins>
+one
 of
-<del class="diff-old">predicate
-up
-to
-</del>
 the
-<del class="diff-old">length
-</del>
 <a title="reverse properties" href="#dfn-reverse-properties" class="internalDFN">
-<ins class="diff-chg">reverse
+reverse
 properties
-</ins>
 of
 the
-<del class="diff-old">URI
-prefix,
-set
-vocab
-as
-that
-URI
-prefix.
-Otherwise
-set
-</del>
-<ins class="diff-chg">item
-</ins></a>
+item
+</a>
 <em>
-<del class="diff-old">vocab
-to
-null.
-</del>
-<ins class="diff-chg">item
-</ins></em>,<ins class="diff-chg">
+item
+</em>,
 run
 the
 following
 substep:
-</ins><ol class="algorithm">
+<ol class="algorithm">
 <li>
-<del class="diff-old">If
-vocab
-is
-not
-null
-and
-registry
-has
-an
-entry
-for
-</del>
-<ins class="diff-chg">For
+For
 each
-</ins>
 <em>
-<del class="diff-old">vocab
-</del>
-<ins class="diff-chg">name
-</ins>
+name
 </em>
-<del class="diff-old">that
-is
-a
-JSON
-Object,
-let
-</del>
-<ins class="diff-chg">in
+in
 the
 element's
-</ins><a href="#dfn-reverse-property-names" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-reverse-property-names" class="internalDFN">
 reverse
 property
 names
-</ins></a>,<ins class="diff-chg">
+</a>,
 run
 the
 following
 substeps:
-</ins><ol class="algorithm"><li><ins class="diff-chg">
+<ol class="algorithm">
+<li>
 Let
-</ins>
 <em>
-<del class="diff-old">registry
-object
-</del>
-<ins class="diff-chg">context
-</ins>
+context
 </em>
 be
-<del class="diff-old">that
-value.
-Otherwise
-</del>
-<ins class="diff-chg">a
+a
 copy
 of
-</ins><a href="#dfn-evaluation-context" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-evaluation-context" class="internalDFN">
 evaluation
 context
-</ins></a><ins class="diff-chg">
+</a>
 with
-</ins><a href="#dfn-current-type" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-current-type" class="internalDFN">
 current
 type
-</ins></a>
-set
-<del class="diff-old">registry
-object
-</del>
-to
-<del class="diff-old">null.
-If
-</del>
-<em>
-<del class="diff-old">registry
-object
-</del>
-<ins class="diff-chg">type
-</ins>
-</em>
-<del class="diff-old">is
-not
-null
-</del>
-and
-<del class="diff-old">registry
-object
-contains
-key
-properties
-</del>
-<a href="#dfn-current-vocabulary" class="internalDFN">
-<ins class="diff-chg">current
-vocabulary
-</ins>
 </a>
-<del class="diff-old">which
-has
-a
-JSON
-Object
-value,
-let
-properties
-be
-that
-value.
-Otherwise,
-</del>
 set
-<del class="diff-old">properties
-</del>
 to
-<del class="diff-old">null.
-</del>
 <em>
-<ins class="diff-chg">vocab
-</ins></em>.
+type
+</em>
+and
+<a href="#dfn-current-vocabulary" class="internalDFN">
+current
+vocabulary
+</a>
+set
+to
+<em>
+vocab
+</em>.
 </li>
 <li>
-<del class="diff-old">If
-properties
-is
-not
-null,
-and
-</del>
-<ins class="diff-chg">Let
-</ins>
+Let
 <em>
-<del class="diff-old">properties
-</del>
-<ins class="diff-chg">predicate
-</ins>
+predicate
 </em>
-<del class="diff-old">contains
-a
-key,
-which
-after
-</del>
-<ins class="diff-chg">be
+be
 the
 result
 of
-</ins>
 <a href="#generate-predicate-uri">
-<del class="diff-old">Generate
-Predicate
-</del>
-<ins class="diff-chg">generate
+generate
 predicate
-</ins>
 URI
 </a>
-<del class="diff-old">expansion
-has
-a
+using
+<em>
+context
+</em>
+and
+<em>
+name
+</em>.
+</li>
+<li>
+Let
+<em>
 value
-which
-is
-a
-JSON
-Object,
-let
-property
-override
+</em>
 be
-that
-value.
-Otherwise,
-set
-property
-override
-to
-null.
-If
-</del>
-<ins class="diff-chg">using
-</ins>
-<em>
-<del class="diff-old">property
-override
-</del>
-<ins class="diff-chg">context
-</ins>
-</em>
-<del class="diff-old">contains
 the
-key
-multipleValues
-,
-set
-that
-as
-</del>
-<ins class="diff-chg">and
-</ins>
-<em>
-<del class="diff-old">method
-</del>
-<ins class="diff-chg">name
-</ins>
-</em>.
-</li>
-<li>
-<del class="diff-old">Otherwise,
-if
-</del>
-<ins class="diff-chg">Let
-</ins>
-<em>
-<del class="diff-old">registry
-object
-</del>
-<ins class="diff-chg">value
-</ins>
-</em>
-<del class="diff-old">con
-contains
-</del>
-<ins class="diff-chg">be
-</ins>
-the
-<del class="diff-old">key
-multipleValues
-,
-set
-that
-as
-</del>
 <a href="#dfn-property-value" class="internalDFN">
-<ins class="diff-chg">property
+property
 value
-</ins></a><ins class="diff-chg">
+</a>
 of
-</ins>
 <em>
-<del class="diff-old">method
-</del>
-<ins class="diff-chg">element
-</ins>
+element
 </em>.
 </li>
 <li>
-<del class="diff-old">Otherwise,
-set
-method
-to
-unordered
-.
-</del>
 If
 <em>
-<del class="diff-old">method
-is
-unordered
-,
-for
-each
-</del>
 value
 </em>
-<del class="diff-old">in
-values
-,
-</del>
-<ins class="diff-chg">is
+is
 an
-</ins><a href="#dfn-item" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-item" class="internalDFN">
 item
-</ins></a>,<ins class="diff-chg">
+</a>,
 then
-</ins><a href="#generate-the-triples">
+<a href="#generate-the-triples">
 generate
 the
-<del class="diff-old">following
-triple:
-subject
-</del>
-<ins class="diff-chg">triples
-</ins></a><ins class="diff-chg">
+triples
+</a>
 for
-</ins>
-<em>
-<del class="diff-old">subject
-</del>
-<ins class="diff-chg">value
-</ins>
-</em>
-<del class="diff-old">predicate
-</del>
-<ins class="diff-chg">using
-</ins>
-<em>
-<del class="diff-old">predicate
-object
-</del>
-<ins class="diff-chg">context
-</ins></em>.<ins class="diff-chg">
-Replace
-</ins>
 <em>
 value
 </em>
-<ins class="diff-chg">by
+using
+<em>
+context
+</em>.
+Replace
+<em>
+value
+</em>
+by
 the
 subject
 returned
 from
 those
 steps.
-</ins>
 </li>
 <li>
 Otherwise,
 if
 <em>
-<del class="diff-old">method
-</del>
-<ins class="diff-chg">value
-</ins>
+value
 </em>
 is
-<del class="diff-old">list
-:
-Set
-</del>
-<ins class="diff-chg">a
-</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-chg">
+a
+<a href="#dfn-literal" class="internalDFN">
 literal
-</ins></a><ins class="diff-chg">
+</a>
 ignore
 the
-</ins>
 <em>
 value
 </em>
-<ins class="diff-new">and
+and
 continue
-</ins>
 to
 the
-<del class="diff-old">value
-returned
-from
-generate
-</del>
-<ins class="diff-chg">next
-</ins><em><ins class="diff-chg">
+next
+<em>
 name
-</ins></em><ins class="diff-chg">
+</em>
 ;
 it
 is
-</ins>
 an
-<del class="diff-old">RDF
-Collection
-</del>
-<ins class="diff-chg">error
+error
 for
 the
-</ins><em><ins class="diff-chg">
+<em>
 value
-</ins></em><ins class="diff-chg">
+</em>
 of
-</ins><a class="aref internalDFN" href="#dfn-itemprop-reverse"><ins class="diff-chg">
+<a class="aref internalDFN" href="#dfn-itemprop-reverse">
 itemprop-reverse
-</ins></a><ins class="diff-chg">
+</a>
 to
 be
 a
-</ins><a href="#dfn-literal" class="internalDFN"><ins class="diff-chg">
+<a href="#dfn-literal" class="internalDFN">
 literal
-</ins>
 </a>.
 </li>
 <li>
@@ -11103,10 +8613,7 @@ subject
 </dt>
 <dd>
 <em>
-<del class="diff-old">subject
-</del>
-<ins class="diff-chg">value
-</ins>
+value
 </em>
 </dd>
 <dt>
@@ -11122,10 +8629,7 @@ object
 </dt>
 <dd>
 <em>
-<del class="diff-old">value
-</del>
-<ins class="diff-chg">subject
-</ins>
+subject
 </em>
 </dd>
 </dl>
@@ -11136,229 +8640,55 @@ object
 </li>
 </ol>
 </section>
-<del class="diff-old">5.6
-Generate
-RDF
-Collection
-</del>
 <p>
-<del class="diff-old">An
-RDF
-Collection
-is
-a
-mechanism
-for
-defining
-ordered
-sequences
-of
-objects
-in
-RDF
-(See
-RDF
-Collections
-in
-[
-RDF-SCHEMA
-]).
-As
-the
-RDF
-data-model
-is
-that
-</del>
-<ins class="diff-chg">Simple
+Simple
 use
-</ins>
 of
-<del class="diff-old">an
-unordered
-graph,
-a
-linking
-method
-using
-properties
-rdf:first
-and
-rdf:next
-is
-required
-to
-be
-able
-to
-specify
-a
-particular
-order.
-In
-the
-microdata
-to
-RDF
-mapping,
-RDF
-Collection
-s
-are
-used
-when
-an
-item
-has
-more
-than
-one
-value
-associated
-with
-a
-given
-property
-to
-ensure
-that
-the
-original
-document
-order
-is
-maintained.
-The
-following
-procedure
-should
-be
-used
-to
-generate
-triples
-when
-an
-item
-property
-has
-more
-than
-one
-value
-(contained
-in
-list
-):
-</del>
 <a class="aref internalDFN" href="#dfn-itemprop-reverse">
-<ins class="diff-chg">itemprop-reverse
-</ins></a>:
+itemprop-reverse
+</a>:
 </p>
-<del class="diff-old">Create
-a
-new
-array
-array
-containing
-a
-blank
-node
-for
-every
-value
-in
-list
-.
-For
-each
-pair
-of
-bnode
-from
-array
-and
-value
-from
-list
-the
-following
-triple
-is
-generated:
-subject
-bnode
-predicate
-http://www.w3.org/1999/02/22-rdf-syntax-ns#first
-object
-value
+<del class="diff-old">  &lt;div  itemscope itemtype="http://schema.org/Person"&gt;
+  &lt;span itemprop="name"&gt;William Shakespeare&lt;/span&gt;
+  &lt;link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd"&gt;
 </del>
   <div class="example"><div class="example-title"><span>Example 10</span></div><pre class="example">&lt;div  itemscope itemtype="http://schema.org/Person"&gt;
 <ins class="diff-chg">  &lt;span itemprop="name"&gt;William Shakespeare&lt;/span&gt;
   &lt;link itemprop-reverse="creator" href="http://www.freebase.com/m/0yq9mqd"&gt;
+</ins>
 &lt;/div&gt;
-</ins></pre>
-<del class="diff-old">For
-each
-bnode
-</del>
+</pre>
 </div>
 <p>
-<ins class="diff-chg">Results
-</ins>
+Results
 in
-<del class="diff-old">array
-</del>
 the
 following
-<del class="diff-old">triple
-is
-generated:
-subject
-bnode
-predicate
-http://www.w3.org/1999/02/22-rdf-syntax-ns#rest
-</del>
-<ins class="diff-chg">Turtle:
-</ins></p>  <div class="example"><div class="example-title"><span>Example 11</span></div><pre class="example">@prefix schema: &lt;http://schema.org/&gt; .<ins class="diff-chg">
+Turtle:
+</p>
+<del class="diff-old">  @prefix schema: &lt;http://schema.org/&gt; .
 &lt;http://www.freebase.com/m/0yq9mqd&gt; schema:creator [
   a schema:Person;
   schema:name "William Shakespeare"
+</del>
+  <div class="example"><div class="example-title"><span>Example 11</span></div><pre class="example">@prefix schema: &lt;http://schema.org/&gt; .
+<ins class="diff-chg">&lt;http://www.freebase.com/m/0yq9mqd&gt; schema:creator [
+  a schema:Person;
+  schema:name "William Shakespeare"
+</ins>
 ]
 .
-</ins></pre>
-<del class="diff-old">object
-next
-bnode
-in
-array
-or,
-if
-that
-does
-not
-exist,
-http://www.w3.org/1999/02/22-rdf-syntax-ns#nil
-Return
-the
-first
-blank
-node
-from
-array
-.
-</del>
+</pre>
 </div>
 </section>
-<section class="appendix informative" id="testing">
-<h2 role="heading" id="h2_testing">
+<section class="appendix informative" id="testing" typeof="bibo:Chapter" resource="#testing" property="bibo:hasPart">
+<h2 id="h-testing" resource="#h-testing">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">A.
-</del>
-<ins class="diff-chg">B.
-</ins>
+B.
 </span>
 Testing
+</span>
 </h2>
 <p>
 <em>
@@ -11392,16 +8722,15 @@ this
 specification.
 </p>
 </section>
-<section class="appendix informative" id="markup-examples">
-<h2 role="heading" id="h2_markup-examples">
+<section class="appendix informative" id="markup-examples" typeof="bibo:Chapter" resource="#markup-examples" property="bibo:hasPart">
+<h2 id="h-markup-examples" resource="#h-markup-examples">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">B.
-</del>
-<ins class="diff-chg">C.
-</ins>
+C.
 </span>
 Markup
 Examples
+</span>
 </h2>
 <p>
 <em>
@@ -11490,13 +8819,6 @@ for
 <code>
 http://purl.org/vocab/frbr/core#
 </code>
-<del class="diff-old">with
-propertyURI
-set
-to
-vocabulary
-,
-</del>
 this
 is
 equivalent
@@ -11506,11 +8828,9 @@ following
 Turtle:
 </p>
 <del class="diff-old">@prefix dc: &lt;http://purl.org/dc/terms/&gt; .
-@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
 @prefix frbr: &lt;http://purl.org/vocab/frbr/core#&gt; .
 @prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
-&lt;&gt; md:item (&lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt;) ;
-  rdfa:usesVocabulary frbr: .
+&lt;&gt; rdfa:usesVocabulary frbr: .
 &lt;http://books.example.com/works/45U8QJGZSQKDH8N&gt; a frbr:Work ;
   dc:creator "Wil Wheaton"@en ;
   dc:title "Just a Geek"@en ;
@@ -11560,14 +8880,9 @@ address.
 This
 illustrates
 two
-<del class="diff-old">item
-</del>
 <a title="item" href="#dfn-item" class="internalDFN">
-<ins class="diff-chg">items
-</ins>
+items
 </a>
-<del class="diff-old">s
-</del>
 referencing
 a
 third
@@ -11640,13 +8955,6 @@ for
 <code>
 http://microformats.org/profile/hcard
 </code>
-<del class="diff-old">with
-propertyURI
-set
-to
-vocabulary
-,
-</del>
 it
 generates
 these
@@ -11655,21 +8963,18 @@ expressed
 in
 Turtle:
 </p>
-<del class="diff-old">@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
-@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
+<del class="diff-old">@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
 @prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
-&lt;&gt; md:item (
-  [ a &lt;http://microformats.org/profile/hcard&gt;;
-    hcard:fn "Princeton";
-    hcard:n [ hcard:given-name "Princeton" ];
-    hcard:adr _:a
-  ]
-  [ a &lt;http://microformats.org/profile/hcard&gt;;
-    hcard:fn "Trekkie";
-    hcard:n [ hcard:given-name "Trekkie" ];
-    hcard:adr _:a
-  ]) ;
-  rdfa:usesVocabulary &lt;http://microformats.org/profile/hcard&gt; .
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Princeton";
+  hcard:n [ hcard:given-name "Princeton" ];
+  hcard:adr _:a
+] .
+[ a &lt;http://microformats.org/profile/hcard&gt;;
+  hcard:fn "Trekkie";
+  hcard:n [ hcard:given-name "Trekkie" ];
+  hcard:adr _:a
+] .
 </del>
 <div class="example"><div class="example-title"><span>Example 15</span></div><pre class="example">@prefix hcard: &lt;http://microformats.org/profile/hcard#&gt; .
 <ins class="diff-chg">@prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
@@ -11703,26 +9008,9 @@ has
 microdata
 for
 a
-<del class="diff-old">playlist,
-</del>
-<ins class="diff-chg">playlist
-</ins>
+playlist
 and
 illustrates
-<del class="diff-old">overriding
-a
-property
-to
-place
-elements
-in
-an
-RDF
-Collection.
-This
-also
-illustrates
-</del>
 the
 use
 of
@@ -11800,29 +9088,6 @@ for
 <code>
 http://schema.org/
 </code>
-<del class="diff-old">with
-propertyURI
-set
-to
-vocabulary
-,
-multipleValues
-set
-to
-unordered
-with
-the
-properties
-track
-and
-byArtist
-having
-multipleValues
-set
-to
-list
-,
-</del>
 it
 generates
 these
@@ -11831,33 +9096,28 @@ expressed
 in
 Turtle:
 </p>
-<del class="diff-old">@prefix md: &lt;http://www.w3.org/ns/md#&gt; .
-@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
+<del class="diff-old">@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 @prefix rdfa: &lt;http://www.w3.org/ns/rdfa#&gt; .
 @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 @prefix schema: &lt;http://schema.org/&gt; .
-&lt;&gt; md:item ([ a schema:MusicPlaylist;
+[ a schema:MusicPlaylist;
   schema:name "Classic Rock Playlist";
-  schema:byArtist ("Lynard Skynard" "AC/DC");
+  schema:byArtist "Lynard Skynard" "AC/DC";
   schema:numTracks "2";
-  schema:tracks (
-    [ a schema:MusicRecording, mo:MusicalManifestation;
-      schema:additionalType mo:MusicalManifestation;
-      schema:byArtist ("Lynard Skynard");
-      schema:name "Sweet Home Alabama";
-      schema:url &lt;sweet-home-alabama&gt;]
-    [ a schema:MusicRecording, mo:MusicalManifestation;
-      schema:additionalType mo:MusicalManifestation;
-      schema:byArtist ("AC/DC");;
-      schema:name "Shook you all Night Long";
-      schema:url &lt;shook-you-all-night-long&gt;]
-  )]);
-  rdfa:usesVocabulary schema: .
-  
-schema:additionalType
-rdfs:subPropertyOf
-rdf:type
+  schema:tracks [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "Lynard Skynard";
+    schema:name "Sweet Home Alabama";
+    schema:url &lt;sweet-home-alabama&gt;
+  ], [
+    a schema:MusicRecording, mo:MusicalManifestation;
+    schema:additionalType mo:MusicalManifestation;
+    schema:byArtist "AC/DC";;
+    schema:name "Shook you all Night Long";
+    schema:url &lt;shook-you-all-night-long&gt;
+  ]
 </del>
 <div class="example"><div class="example-title"><span>Example 17</span></div><pre class="example">@prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
 <ins class="diff-chg">@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
@@ -11882,27 +9142,23 @@ rdf:type
     schema:name "Shook you all Night Long";
     schema:url &lt;shook-you-all-night-long&gt;
   ]
-]
 </ins>
+]
 .
 </pre>
 </div>
 </section>
-<section class="appendix informative" id="default-registry">
-<h2 role="heading" id="h2_default-registry">
+<section class="appendix informative" id="default-registry" typeof="bibo:Chapter" resource="#default-registry" property="bibo:hasPart">
+<h2 id="h-default-registry" resource="#h-default-registry">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">C.
-</del>
-<ins class="diff-chg">D.
-</ins>
+D.
 </span>
-<del class="diff-old">Example
-</del>
-<ins class="diff-chg">Default
-</ins>
+Default
 <a href="#dfn-registry" class="internalDFN">
 registry
 </a>
+</span>
 </h2>
 <p>
 <em>
@@ -11916,73 +9172,28 @@ non-normative.
 The
 following
 is
-<del class="diff-old">an
-example
-</del>
-<ins class="diff-chg">the
+the
 default
-</ins>
 <a href="#dfn-registry" class="internalDFN">
 registry
 </a>
 in
 JSON
-<del class="diff-old">format.
-</del>
-<ins class="diff-chg">format,
+format,
 as
 of
 the
 time
 of
 publication.
-</ins>
 </p>
 <del class="diff-old">  {
   "http://schema.org/": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered",
     "properties": {
-      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"},
-      "blogPosts": {"multipleValues": "list"},
-      "blogPosts": {"multipleValues": "list"},
-      "breadcrumb": {"multipleValues": "list"},
-      "byArtist": {"multipleValues": "list"},
-      "creator": {"multipleValues": "list"},
-      "episode": {"multipleValues": "list"},
-      "episodes": {"multipleValues": "list"},
-      "event": {"multipleValues": "list"},
-      "events": {"multipleValues": "list"},
-      "founder": {"multipleValues": "list"},
-      "founders": {"multipleValues": "list"},
-      "itemListElement": {"multipleValues": "list"},
-      "musicGroupMember": {"multipleValues": "list"},
-      "performerIn": {"multipleValues": "list"},
-      "actor": {"multipleValues": "list"},
-      "actors": {"multipleValues": "list"},
-      "performer": {"multipleValues": "list"},
-      "performers": {"multipleValues": "list"},
-      "producer": {"multipleValues": "list"},
-      "recipeInstructions": {"multipleValues": "list"},
-      "season": {"multipleValues": "list"},
-      "seasons": {"multipleValues": "list"},
-      "subEvent": {"multipleValues": "list"},
-      "subEvents": {"multipleValues": "list"},
-      "track": {"multipleValues": "list"},
-      "tracks": {"multipleValues": "list"}
+      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
     }
   },
-  "http://microformats.org/profile/hcard": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered"
-  },
-  "http://microformats.org/profile/hcalendar#": {
-    "propertyURI":    "vocabulary",
-    "multipleValues": "unordered",
-    "properties": {
-      "categories": {"multipleValues": "list"}
-    }
-  }
+  "http://microformats.org/profile/hcard": {}
 </del>
   <div class="example"><div class="example-title"><span>Example 18</span></div><pre class="example">{
 <ins class="diff-chg">  "http://schema.org/": {
@@ -11996,15 +9207,14 @@ publication.
 </pre>
 </div>
 </section>
-<section class="appendix informative" id="acknowledgements">
-<h2 role="heading" id="h2_acknowledgements">
+<section class="appendix informative" id="acknowledgements" typeof="bibo:Chapter" resource="#acknowledgements" property="bibo:hasPart">
+<h2 id="h-acknowledgements" resource="#h-acknowledgements">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">D.
-</del>
-<ins class="diff-chg">E.
-</ins>
+E.
 </span>
 Acknowledgements
+</span>
 </h2>
 <p>
 <em>
@@ -12040,38 +9250,33 @@ from
 microdata.
 </p>
 </section>
-<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter">
-<h2 role="heading" id="h2_references">
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart">
+<h2 id="h-references" resource="#h-references">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">E.
-</del>
-<ins class="diff-chg">F.
-</ins>
+F.
 </span>
 References
+</span>
 </h2>
-<section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter">
-<h3 role="heading" id="h3_normative-references">
+<section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart">
+<h3 id="h-normative-references" resource="#h-normative-references">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">E.1
-</del>
-<ins class="diff-chg">F.1
-</ins>
+F.1
 </span>
 Normative
 references
+</span>
 </h3>
-<dl class="bibliography" about="">
+<dl class="bibliography" resource="">
 <dt id="bib-HTML5">
 [HTML5]
 </dt>
-<dd rel="dcterms:requires">
+<dd>
 Ian
 Hickson;
-<del class="diff-old">David
-Hyatt.
-</del>
-<ins class="diff-chg">Robin
+Robin
 Berjon;
 Steve
 Faulkner;
@@ -12084,347 +9289,157 @@ Edward
 O'Connor;
 Silvia
 Pfeiffer.
-</ins><a href="http://www.w3.org/TR/html5/">
+<a href="http://www.w3.org/TR/html5/" property="dc:requires">
 <cite>
-<del class="diff-old">HTML5.
-</del>
-<ins class="diff-chg">HTML5
-</ins>
+HTML5
 </cite>
-<del class="diff-old">29
-March
-2012.
-</del>
 </a>.
-<ins class="diff-chg">28
+28
 October
 2014.
-</ins>
 W3C
-<del class="diff-old">Working
-Draft.
-(Work
-in
-progress.)
-</del>
-<ins class="diff-chg">Recommendation.
-</ins>
+Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/html5
-</del>
-<a href="http://www.w3.org/TR/html5/">
-<ins class="diff-chg">http://www.w3.org/TR/html5/
-</ins>
+<a href="http://www.w3.org/TR/html5/" property="dc:requires">
+http://www.w3.org/TR/html5/
 </a>
 </dd>
 <dt id="bib-MICRODATA">
 [MICRODATA]
 </dt>
-<del class="diff-old">HTML
-Microdata
-</del>
-<dd rel="dcterms:requires">
+<dd>
 Ian
-<del class="diff-old">Hickson
-Editor.
-W3C
-Working
-Draft.
-(Work
-in
-progress).
-29
-March
-2012.
-This
-edition
-of
-the
-HTML
-Microdata
-specification
-is
-http://www.w3.org/TR/2012/WD-microdata-20120329/.
-The
-</del>
-<ins class="diff-chg">Hickson.
-</ins>
-<a href="http://www.w3.org/TR/microdata/">
-<del class="diff-old">latest
-edition
-of
-HTML
-Microdata
-is
-available
-at
-http://www.w3.org/TR/microdata/
-[OWL2-OVERVIEW]
-W3C
-OWL
-Working
-Group.
-</del>
+Hickson.
+<a href="http://www.w3.org/TR/microdata/" property="dc:requires">
 <cite>
-<del class="diff-old">OWL
-2
-Web
-Ontology
-Language:
-Overview.
-</del>
-<ins class="diff-chg">HTML
+HTML
 Microdata
-</ins>
 </cite>
-<del class="diff-old">27
-</del>
 </a>.
-<ins class="diff-chg">29
-</ins>
+29
 October
-<del class="diff-old">2009.
-</del>
-<ins class="diff-chg">2013.
-</ins>
+2013.
 W3C
-<del class="diff-old">Recommendation.
-</del>
-<ins class="diff-chg">Note.
-</ins>
+Note.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-overview-20091027/
-</del>
-<a href="http://www.w3.org/TR/microdata/">
-<ins class="diff-chg">http://www.w3.org/TR/microdata/
-</ins>
+<a href="http://www.w3.org/TR/microdata/" property="dc:requires">
+http://www.w3.org/TR/microdata/
 </a>
 </dd>
-<del class="diff-old">[OWL2-PROFILES]
-</del>
 <dt id="bib-N-TRIPLES">
-<ins class="diff-chg">[N-TRIPLES]
-</ins>
+[N-TRIPLES]
 </dt>
-<del class="diff-old">Boris
-Motik;
-Bernardo
-Cuenca
-Grau;
-Ian
-Horrocks;
-Zhe
-Wu;
-Achille
-Fokoue;
-Carsten
-Lutz.
-</del>
-<dd rel="dcterms:requires">
-<ins class="diff-chg">Gavin
+<dd>
+Gavin
 Carothers;
 Andy
 Seaborne.
-</ins><a href="http://www.w3.org/TR/n-triples/">
+<a href="http://www.w3.org/TR/n-triples/" property="dc:requires">
 <cite>
-<del class="diff-old">OWL
-2
-Web
-Ontology
-Language:Profiles.
-</del>
-<ins class="diff-chg">RDF
+RDF
 1.1
 N-Triples
-</ins>
 </cite>
-<del class="diff-old">27
-October
-2009.
-</del>
 </a>.
-<ins class="diff-chg">25
+25
 February
 2014.
-</ins>
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-profiles-20091027/
-</del>
-<a href="http://www.w3.org/TR/n-triples/">
-<ins class="diff-chg">http://www.w3.org/TR/n-triples/
-</ins>
+<a href="http://www.w3.org/TR/n-triples/" property="dc:requires">
+http://www.w3.org/TR/n-triples/
 </a>
 </dd>
-<del class="diff-old">[OWL2-RDF-BASED-SEMANTICS]
-</del>
 <dt id="bib-RDF11-CONCEPTS">
-<ins class="diff-chg">[RDF11-CONCEPTS]
-</ins>
+[RDF11-CONCEPTS]
 </dt>
-<del class="diff-old">Michael
-Schneider.
-</del>
-<dd rel="dcterms:requires">
-<ins class="diff-chg">Richard
+<dd>
+Richard
 Cyganiak;
 David
 Wood;
 Markus
 Lanthaler.
-</ins><a href="http://www.w3.org/TR/rdf11-concepts/">
+<a href="http://www.w3.org/TR/rdf11-concepts/" property="dc:requires">
 <cite>
-<del class="diff-old">OWL
-2
-Web
-Ontology
-Language:RDF-Based
-Semantics.
-</del>
-<ins class="diff-chg">RDF
+RDF
 1.1
 Concepts
 and
 Abstract
 Syntax
-</ins>
 </cite>
-<del class="diff-old">27
-October
-2009.
-</del>
 </a>.
-<ins class="diff-chg">25
+25
 February
 2014.
-</ins>
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2009/REC-owl2-rdf-based-semantics-20091027/
-</del>
-<a href="http://www.w3.org/TR/rdf11-concepts/">
-<ins class="diff-chg">http://www.w3.org/TR/rdf11-concepts/
-</ins>
+<a href="http://www.w3.org/TR/rdf11-concepts/" property="dc:requires">
+http://www.w3.org/TR/rdf11-concepts/
 </a>
 </dd>
-<del class="diff-old">[RDF-CONCEPTS]
-</del>
 <dt id="bib-RFC3986">
-<ins class="diff-chg">[RFC3986]
-</ins>
+[RFC3986]
 </dt>
-<del class="diff-old">Graham
-Klyne;
-Jeremy
-J.
-Carroll.
-</del>
-<dd rel="dcterms:requires">
-<ins class="diff-chg">T.
+<dd>
+T.
 Berners-Lee;
 R.
 Fielding;
 L.
 Masinter.
-</ins><a href="https://tools.ietf.org/html/rfc3986">
+<a href="https://tools.ietf.org/html/rfc3986" property="dc:requires">
 <cite>
-<ins class="diff-new">Uniform
-</ins>
+Uniform
 Resource
-<del class="diff-old">Description
-Framework
-(RDF):
-Concepts
-and
-Abstract
-Syntax.
-</del>
-<ins class="diff-chg">Identifier
+Identifier
 (URI):
 Generic
 Syntax
-</ins>
 </cite>
-<del class="diff-old">10
-February
-2004.
-W3C
-Recommendation.
-</del>
 </a>.
-<ins class="diff-chg">January
+January
 2005.
 Internet
 Standard.
-</ins>
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-concepts-20040210
-</del>
-<a href="https://tools.ietf.org/html/rfc3986">
-<ins class="diff-chg">https://tools.ietf.org/html/rfc3986
-</ins>
+<a href="https://tools.ietf.org/html/rfc3986" property="dc:requires">
+https://tools.ietf.org/html/rfc3986
 </a>
 </dd>
-<del class="diff-old">[RDF-MT]
-</del>
 <dt id="bib-URL">
-<ins class="diff-chg">[URL]
-</ins>
+[URL]
 </dt>
-<del class="diff-old">Patrick
-Hayes.
-</del>
-<dd rel="dcterms:requires">
-<ins class="diff-chg">Anne
+<dd>
+Anne
 van
 Kesteren;
 Sam
 Ruby.
-</ins><a href="http://www.w3.org/TR/url-1/">
+<a href="http://www.w3.org/TR/url-1/" property="dc:requires">
 <cite>
-<del class="diff-old">RDF
-Semantics.
-</del>
-<ins class="diff-chg">URL
-</ins>
+URL
 </cite>
-<del class="diff-old">10
-February
-2004.
-</del>
 </a>.
-<ins class="diff-chg">9
+9
 December
 2014.
-</ins>
 W3C
-<del class="diff-old">Recommendation.
-</del>
-<ins class="diff-chg">Working
+Working
 Draft.
-</ins>
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-mt-20040210
-</del>
-<a href="http://www.w3.org/TR/url-1/">
-<ins class="diff-chg">http://www.w3.org/TR/url-1/
-</ins>
+<a href="http://www.w3.org/TR/url-1/" property="dc:requires">
+http://www.w3.org/TR/url-1/
 </a>
 </dd>
-<del class="diff-old">[RDF-SCHEMA]
-</del>
 <dt id="bib-XMLSCHEMA11-2">
-<ins class="diff-chg">[XMLSCHEMA11-2]
-</ins>
+[XMLSCHEMA11-2]
 </dt>
-<del class="diff-old">Dan
-Brickley;
-Ramanathan
-</del>
-<dd rel="dcterms:requires">
-<ins class="diff-chg">David
+<dd>
+David
 Peterson;
 Sandy
 Gao;
@@ -12435,275 +9450,164 @@ Sperberg-McQueen;
 Henry
 Thompson;
 Paul
-</ins>
 V.
-<del class="diff-old">Guha.
-</del>
-<ins class="diff-chg">Biron
+Biron
 et
 al.
-</ins><a href="http://www.w3.org/TR/xmlschema11-2/">
+<a href="http://www.w3.org/TR/xmlschema11-2/" property="dc:requires">
 <cite>
-<del class="diff-old">RDF
-Vocabulary
-Description
-</del>
-<ins class="diff-chg">W3C
+W3C
 XML
 Schema
 Definition
-</ins>
 Language
-<del class="diff-old">1.0:
-RDF
-Schema.
-</del>
-<ins class="diff-chg">(XSD)
+(XSD)
 1.1
 Part
 2:
 Datatypes
-</ins>
 </cite>
-<del class="diff-old">10
-February
-2004.
-</del>
 </a>.
-<ins class="diff-chg">5
+5
 April
 2012.
-</ins>
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-schema-20040210
-[RFC3986]
-T.
-Berners-Lee;
-R.
-Fielding;
-L.
-Masinter.
-Uniform
-Resource
-Identifier
-(URI):
-Generic
-Syntax.
-January
-2005.
-Internet
-RFC
-3986.
-URL:
-http://www.ietf.org/rfc/rfc3986.txt
-</del>
-<a href="http://www.w3.org/TR/xmlschema11-2/">
-<ins class="diff-chg">http://www.w3.org/TR/xmlschema11-2/
-</ins>
+<a href="http://www.w3.org/TR/xmlschema11-2/" property="dc:requires">
+http://www.w3.org/TR/xmlschema11-2/
 </a>
 </dd>
 </dl>
 </section>
-<section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter">
-<h3 role="heading" id="h3_informative-references">
+<section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart">
+<h3 id="h-informative-references" resource="#h-informative-references">
+<span property="xhv:role" resource="xhv:heading">
 <span class="secno">
-<del class="diff-old">E.2
-</del>
-<ins class="diff-chg">F.2
-</ins>
+F.2
 </span>
 Informative
 references
+</span>
 </h3>
-<dl class="bibliography" about="">
-<del class="diff-old">[MICRODATA-RDF-SUPPLEMENT]
-</del>
+<dl class="bibliography" resource="">
 <dt id="bib-JSON-LD">
-<ins class="diff-chg">[JSON-LD]
-</ins>
+[JSON-LD]
 </dt>
-<dd rel="dcterms:references">
-<ins class="diff-chg">Manu
+<dd>
+Manu
 Sporny;
 Gregg
 Kellogg;
 Markus
 Lanthaler.
-</ins><a href="http://www.w3.org/TR/json-ld/">
+<a href="http://www.w3.org/TR/json-ld/" property="dc:references">
 <cite>
-<del class="diff-old">Microdata
-to
-RDF
-Supplement
-</del>
-<ins class="diff-chg">JSON-LD
+JSON-LD
 1.0
-</ins>
 </cite>
-<del class="diff-old">Gregg
-Kellogg
-Editor.
-World
-Wide
-Web
-Consortium
-(work
-in
-progress).
-22
-</del>
 </a>.
-<ins class="diff-chg">16
-</ins>
+16
 January
-<del class="diff-old">2012.
-</del>
-<ins class="diff-chg">2014.
+2014.
 W3C
 Recommendation.
 URL:
-</ins><a href="http://www.w3.org/TR/json-ld/"><ins class="diff-chg">
+<a href="http://www.w3.org/TR/json-ld/" property="dc:references">
 http://www.w3.org/TR/json-ld/
-</ins></a>
+</a>
 </dd>
 <dt id="bib-MICRODATA-RDF-TESTS">
 [MICRODATA-RDF-TESTS]
 </dt>
-<dd rel="dcterms:references">
-<ins class="diff-chg">Gregg
+<dd>
+Gregg
 Kellogg;
 Ivan
 Herman.
-</ins><a href="http://w3c.github.io/microdata-rdf/tests/">
+<a href="http://w3c.github.io/microdata-rdf/tests/" property="dc:references">
 <cite>
 Microdata
 to
 RDF
 Tests
 </cite>
-<del class="diff-old">Gregg
-Kellogg,
-Ivan
-Herman
-Editors.
-World
-Wide
-Web
-Consortium
-(work
-in
-progress).
-22
-March
-2012.
-</del>
 </a>.
-<ins class="diff-chg">unofficial.
+unofficial.
 URL:
-</ins><a href="http://w3c.github.io/microdata-rdf/tests/"><ins class="diff-chg">
+<a href="http://w3c.github.io/microdata-rdf/tests/" property="dc:references">
 http://w3c.github.io/microdata-rdf/tests/
-</ins></a>
+</a>
 </dd>
 <dt id="bib-RDF-SYNTAX-GRAMMAR">
 [RDF-SYNTAX-GRAMMAR]
 </dt>
-<del class="diff-old">Dave
-Beckett.
-</del>
-<dd rel="dcterms:references">
-<ins class="diff-chg">Fabien
+<dd>
+Fabien
 Gandon;
 Guus
 Schreiber.
-</ins><a href="http://www.w3.org/TR/rdf-syntax-grammar/">
+<a href="http://www.w3.org/TR/rdf-syntax-grammar/" property="dc:references">
 <cite>
-<del class="diff-old">RDF/XML
-</del>
-<ins class="diff-chg">RDF
+RDF
 1.1
 XML
-</ins>
 Syntax
-<del class="diff-old">Specification
-(Revised).
-</del>
 </cite>
-<del class="diff-old">10
-</del>
 </a>.
-<ins class="diff-chg">25
-</ins>
+25
 February
-<del class="diff-old">2004.
-</del>
-<ins class="diff-chg">2014.
-</ins>
+2014.
 W3C
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210
-</del>
-<a href="http://www.w3.org/TR/rdf-syntax-grammar/">
-<ins class="diff-chg">http://www.w3.org/TR/rdf-syntax-grammar/
-</ins>
+<a href="http://www.w3.org/TR/rdf-syntax-grammar/" property="dc:references">
+http://www.w3.org/TR/rdf-syntax-grammar/
 </a>
 </dd>
 <dt id="bib-RDFA-CORE">
 [RDFA-CORE]
 </dt>
-<dd rel="dcterms:references">
-<ins class="diff-chg">Ben
+<dd>
+Ben
 Adida;
 Mark
 Birbeck;
-</ins>
 Shane
 McCarron;
-<ins class="diff-new">Ivan
+Ivan
 Herman
-</ins>
 et
 al.
-<a href="http://www.w3.org/TR/rdfa-core/">
+<a href="http://www.w3.org/TR/rdfa-core/" property="dc:references">
 <cite>
 RDFa
 Core
-<del class="diff-old">1.1:
-Syntax
-and
-processing
-rules
-for
-embedding
-RDF
-through
-attributes.
-</del>
-<ins class="diff-chg">1.1
+1.1
 -
-Second
-Edition
-</ins>
-</cite>
-<del class="diff-old">7
-June
-2012.
+<del class="diff-old">Second
 </del>
+<ins class="diff-chg">Third
+</ins>
+Edition
+</cite>
 </a>.
-<ins class="diff-chg">22
+<del class="diff-old">22
 August
 2013.
+</del>
+<ins class="diff-chg">16
+December
+2014.
 </ins>
 W3C
+<ins class="diff-new">Proposed
+Edited
+</ins>
 Recommendation.
 URL:
-<del class="diff-old">http://www.w3.org/TR/2012/REC-rdfa-core-20120607/
-</del>
-<a href="http://www.w3.org/TR/rdfa-core/">
-<ins class="diff-chg">http://www.w3.org/TR/rdfa-core/
-</ins>
+<a href="http://www.w3.org/TR/rdfa-core/" property="dc:references">
+http://www.w3.org/TR/rdfa-core/
 </a>
 </dd>
 </dl>
