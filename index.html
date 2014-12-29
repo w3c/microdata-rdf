@@ -1133,9 +1133,10 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <h3>Algorithm Terms</h3>
     <dl>
       <dt><dfn>reverse properties</dfn></dt><dd>
-        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a> The list
-         of reverse properties is the result of transforming each space-separated-value of an item's <a class='aref'>itemprop-reverse</a>
-         to a URL as defined in <a href="#property-uri-generation">Property URI Generation</a>.
+        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a>. The list
+         of reverse properties is obtained using a variation of the Microdata
+         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#the-properties-of-an-item">properties of an item</a></cite></code>
+         method, replacing <a class='aref'>itemprop</a> with <a class='aref'>itemprop-reverse</a>.
       </dd>
       <dt><dfn>reverse property names</dfn></dt><dd>
         The tokens of an element's <a class="aref">itemprop-reverse</a> attribute. Each token is a <a>name</a>.
