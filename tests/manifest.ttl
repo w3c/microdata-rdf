@@ -2,6 +2,93 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdft: <http://www.w3.org/ns/rdftest#> .
 
+<> a mf:Manifest;
+   rdfs:label "Processor tests";
+   mf:entries <#test0001>,
+     <#test0002>,
+     <#test0003>,
+     <#test0004>,
+     <#test0005>,
+     <#test0006>,
+     <#test0007>,
+     <#test0008>,
+     <#test0009>,
+     <#test0010>,
+     <#test0011>,
+     <#test0012>,
+     <#test0013>,
+     <#test0014>,
+     <#test0015>,
+     <#sdo_eg_md_1>,
+     <#sdo_eg_md_2>,
+     <#sdo_eg_md_3>,
+     <#sdo_eg_md_4>,
+     <#sdo_eg_md_5>,
+     <#sdo_eg_md_6>,
+     <#sdo_eg_md_7>,
+     <#sdo_eg_md_8>,
+     <#sdo_eg_md_9>,
+     <#sdo_eg_md_10>,
+     <#sdo_eg_md_11>,
+     <#sdo_eg_md_12>,
+     <#sdo_eg_md_13>,
+     <#sdo_eg_md_14>,
+     <#sdo_eg_md_15>,
+     <#sdo_eg_md_16>,
+     <#sdo_eg_md_17>,
+     <#sdo_eg_md_18>,
+     <#sdo_eg_md_19>,
+     <#sdo_eg_md_20>,
+     <#sdo_eg_md_21>,
+     <#sdo_eg_md_22>,
+     <#sdo_eg_md_23>,
+     <#sdo_eg_md_24>,
+     <#sdo_eg_md_25>,
+     <#sdo_eg_md_26>,
+     <#sdo_eg_md_27>,
+     <#sdo_eg_md_28>,
+     <#sdo_eg_md_29>,
+     <#sdo_eg_md_30>,
+     <#test0046>,
+     <#test0047>,
+     <#test0048>,
+     <#test0049>,
+     <#test0050>,
+     <#test0051>,
+     <#test0052>,
+     <#test0053>,
+     <#test0054>,
+     <#test0055>,
+     <#test0056>,
+     <#test0057>,
+     <#test0058>,
+     <#test0059>,
+     <#test0060>,
+     <#test0061>,
+     <#test0062>,
+     <#test0063>,
+     <#test0064>,
+     <#test0065>,
+     <#test0066>,
+     <#test0067>,
+     <#test0068>,
+     <#test0069>,
+     <#test0070>,
+     <#test0071>,
+     <#test0073>,
+     <#test0074>,
+     <#test0075>,
+     <#test0076>,
+     <#test0077>,
+     <#test0078>,
+     <#test0079>,
+     <#test0080>,
+     <#test0081>,
+     <#test0082>,
+     <#test0083>,
+     <#test0084>,
+     <#test0085> .
+
 rdft:TestMicrodataEval a rdfs:Class;
    rdfs:label "Microdata Positive Evaluation";
    rdfs:comment "A positive Microdata evaluation test." .
@@ -15,620 +102,620 @@ rdft:registry a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>;
    rdfs:comment "Test Registry";
    rdfs:domain rdft:Test .
 
- [
-    a mf:Manifest;
-    rdfs:comment "Positive processor tests";
-    mf:entries [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Item with itemtype and literal itemprop";
-      mf:action <0001.html>;
-      mf:name "Test 0001";
-      mf:result <0001.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Item with no itemtype and 2 elements with equivalent itemprop";
-      mf:action <0002.html>;
-      mf:name "Test 0002";
-      mf:result <0002.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Item with itemprop having two properties";
-      mf:action <0003.html>;
-      mf:name "Test 0003";
-      mf:result <0003.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of meta and @content";
-      mf:action <0004.html>;
-      mf:name "Test 0004";
-      mf:result <0004.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of audio and @src";
-      mf:action <0005.html>;
-      mf:name "Test 0005";
-      mf:result <0005.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of embed and @src";
-      mf:action <0006.html>;
-      mf:name "Test 0006";
-      mf:result <0006.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of iframe and @src";
-      mf:action <0007.html>;
-      mf:name "Test 0007";
-      mf:result <0007.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of img and @src";
-      mf:action <0008.html>;
-      mf:name "Test 0008";
-      mf:result <0008.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of source and @src";
-      mf:action <0009.html>;
-      mf:name "Test 0009";
-      mf:result <0009.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of track and @src";
-      mf:action <0010.html>;
-      mf:name "Test 0010";
-      mf:result <0010.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of video and @src";
-      mf:action <0011.html>;
-      mf:name "Test 0011";
-      mf:result <0011.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of a and @href";
-      mf:action <0012.html>;
-      mf:name "Test 0012";
-      mf:result <0012.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of area and @href";
-      mf:action <0013.html>;
-      mf:name "Test 0013";
-      mf:result <0013.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of link and @href";
-      mf:action <0014.html>;
-      mf:name "Test 0014";
-      mf:result <0014.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of object and @data";
-      mf:action <0015.html>;
-      mf:name "Test 0015";
-      mf:result <0015.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 1 (format md)";
-      mf:action <sdo_eg_md_1.html>;
-      mf:name "Test 0016";
-      mf:result <sdo_eg_md_1.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 2 (format md)";
-      mf:action <sdo_eg_md_2.html>;
-      mf:name "Test 0017";
-      mf:result <sdo_eg_md_2.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 3 (format md)";
-      mf:action <sdo_eg_md_3.html>;
-      mf:name "Test 0018";
-      mf:result <sdo_eg_md_3.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 4 (format md)";
-      mf:action <sdo_eg_md_4.html>;
-      mf:name "Test 0019";
-      mf:result <sdo_eg_md_4.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 5 (format md)";
-      mf:action <sdo_eg_md_5.html>;
-      mf:name "Test 0020";
-      mf:result <sdo_eg_md_5.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 6 (format md)";
-      mf:action <sdo_eg_md_6.html>;
-      mf:name "Test 0021";
-      mf:result <sdo_eg_md_6.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 7 (format md)";
-      mf:action <sdo_eg_md_7.html>;
-      mf:name "Test 0022";
-      mf:result <sdo_eg_md_7.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 8 (format md)";
-      mf:action <sdo_eg_md_8.html>;
-      mf:name "Test 0023";
-      mf:result <sdo_eg_md_8.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 9 (format md)";
-      mf:action <sdo_eg_md_9.html>;
-      mf:name "Test 0024";
-      mf:result <sdo_eg_md_9.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 10 (format md)";
-      mf:action <sdo_eg_md_10.html>;
-      mf:name "Test 0025";
-      mf:result <sdo_eg_md_10.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 11 (format md)";
-      mf:action <sdo_eg_md_11.html>;
-      mf:name "Test 0026";
-      mf:result <sdo_eg_md_11.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 12 (format md)";
-      mf:action <sdo_eg_md_12.html>;
-      mf:name "Test 0027";
-      mf:result <sdo_eg_md_12.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 13 (format md)";
-      mf:action <sdo_eg_md_13.html>;
-      mf:name "Test 0028";
-      mf:result <sdo_eg_md_13.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 14 (format md)";
-      mf:action <sdo_eg_md_14.html>;
-      mf:name "Test 0029";
-      mf:result <sdo_eg_md_14.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 15 (format md)";
-      mf:action <sdo_eg_md_15.html>;
-      mf:name "Test 0030";
-      mf:result <sdo_eg_md_15.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 16 (format md)";
-      mf:action <sdo_eg_md_16.html>;
-      mf:name "Test 0031";
-      mf:result <sdo_eg_md_16.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 17 (format md)";
-      mf:action <sdo_eg_md_17.html>;
-      mf:name "Test 0032";
-      mf:result <sdo_eg_md_17.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 18 (format md)";
-      mf:action <sdo_eg_md_18.html>;
-      mf:name "Test 0033";
-      mf:result <sdo_eg_md_18.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 19 (format md)";
-      mf:action <sdo_eg_md_19.html>;
-      mf:name "Test 0034";
-      mf:result <sdo_eg_md_19.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 20 (format md)";
-      mf:action <sdo_eg_md_20.html>;
-      mf:name "Test 0035";
-      mf:result <sdo_eg_md_20.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 21 (format md)";
-      mf:action <sdo_eg_md_21.html>;
-      mf:name "Test 0036";
-      mf:result <sdo_eg_md_21.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 22 (format md)";
-      mf:action <sdo_eg_md_22.html>;
-      mf:name "Test 0037";
-      mf:result <sdo_eg_md_22.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 23 (format md)";
-      mf:action <sdo_eg_md_23.html>;
-      mf:name "Test 0038";
-      mf:result <sdo_eg_md_23.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 24 (format md)";
-      mf:action <sdo_eg_md_24.html>;
-      mf:name "Test 0039";
-      mf:result <sdo_eg_md_24.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 25 (format md)";
-      mf:action <sdo_eg_md_25.html>;
-      mf:name "Test 0040";
-      mf:result <sdo_eg_md_25.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 26 (format md)";
-      mf:action <sdo_eg_md_26.html>;
-      mf:name "Test 0041";
-      mf:result <sdo_eg_md_26.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 27 (format md)";
-      mf:action <sdo_eg_md_27.html>;
-      mf:name "Test 0042";
-      mf:result <sdo_eg_md_27.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 28 (format md)";
-      mf:action <sdo_eg_md_28.html>;
-      mf:name "Test 0043";
-      mf:result <sdo_eg_md_28.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 29 (format md)";
-      mf:action <sdo_eg_md_29.html>;
-      mf:name "Test 0044";
-      mf:result <sdo_eg_md_29.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Web Schemas TF: Schema.org tests: test 30 (format md)";
-      mf:action <sdo_eg_md_30.html>;
-      mf:name "Test 0045";
-      mf:result <sdo_eg_md_30.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of time with @datetime xsd:time";
-      mf:action <0046.html>;
-      mf:name "Test 0046";
-      mf:result <0046.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of time with @datetime xsd:dateTime";
-      mf:action <0047.html>;
-      mf:name "Test 0047";
-      mf:result <0047.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of time with @datetime xsd:duration";
-      mf:action <0048.html>;
-      mf:name "Test 0048";
-      mf:result <0048.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of time with @datetime invalid";
-      mf:action <0049.html>;
-      mf:name "Test 0049";
-      mf:result <0049.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "relative URL as object";
-      mf:action <0050.html>;
-      mf:name "Test 0050";
-      mf:result <0050.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "relative URL as itemid";
-      mf:action <0051.html>;
-      mf:name "Test 0051";
-      mf:result <0051.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "token property no @itemtype";
-      mf:action <0052.html>;
-      mf:name "Test 0052";
-      mf:result <0052.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "token property empty @itemtype";
-      mf:action <0053.html>;
-      mf:name "Test 0053";
-      mf:result <0053.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "token property and relative @itemtype";
-      mf:action <0054.html>;
-      mf:name "Test 0054";
-      mf:result <0054.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "token property and single @itemtype";
-      mf:action <0055.html>;
-      mf:name "Test 0055";
-      mf:result <0055.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "token property and multiple @itemtypes from different vocabularies";
-      mf:action <0056.html>;
-      mf:name "Test 0056";
-      mf:result <0056.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "URI property no @itemtype";
-      mf:action <0057.html>;
-      mf:name "Test 0057";
-      mf:result <0057.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "URI property empty @itemtype";
-      mf:action <0058.html>;
-      mf:name "Test 0058";
-      mf:result <0058.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "URI property relative @itemtype";
-      mf:action <0059.html>;
-      mf:name "Test 0059";
-      mf:result <0059.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "URI property single @itemtype";
-      mf:action <0060.html>;
-      mf:name "Test 0060";
-      mf:result <0060.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "inherited type and token property";
-      mf:action <0061.html>;
-      mf:name "Test 0061";
-      mf:result <0061.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemref to single id";
-      mf:action <0062.html>;
-      mf:name "Test 0062";
-      mf:result <0062.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemref generates property values";
-      mf:action <0063.html>;
-      mf:name "Test 0063";
-      mf:result <0063.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemref to single id with different types";
-      mf:action <0064.html>;
-      mf:name "Test 0064";
-      mf:result <0064.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemref to multiple ids";
-      mf:action <0065.html>;
-      mf:name "Test 0065";
-      mf:result <0065.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemref with chaining";
-      mf:action <0066.html>;
-      mf:name "Test 0066";
-      mf:result <0066.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Shared @itemref";
-      mf:action <0067.html>;
-      mf:name "Test 0067";
-      mf:result <0067.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Property URI generation (default) 1";
-      mf:action <0068.html>;
-      mf:name "Test 0068";
-      mf:result <0068.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Property URI generation (default) 2";
-      mf:action <0069.html>;
-      mf:name "Test 0069";
-      mf:result <0069.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Property URI generation (default) 3";
-      mf:action <0070.html>;
-      mf:name "Test 0070";
-      mf:result <0070.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Vocabulary Expansion test with schema:additionalType";
-      mf:action <0071.html>;
-      mf:name "Test 0071";
-      mf:result <0071.ttl>;
-      rdft:registry <http://www.w3.org/ns/md>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Vocabulary Expansion test with rdfs:subPropertyOf";
-      mf:action <0073.html>;
-      mf:name "Test 0073";
-      mf:result <0073.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Vocabulary Expansion test with owl:equivalentProperty";
-      mf:action <0074.html>;
-      mf:name "Test 0074";
-      mf:result <0074.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of data and xsd:float";
-      mf:action <0075.html>;
-      mf:name "Test 0075";
-      mf:result <0075.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of data and xsd:integer";
-      mf:action <0076.html>;
-      mf:name "Test 0076";
-      mf:result <0076.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of data and string";
-      mf:action <0077.html>;
-      mf:name "Test 0077";
-      mf:result <0077.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of meter and xsd:double";
-      mf:action <0078.html>;
-      mf:name "Test 0078";
-      mf:result <0078.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of meter and xsd:integer";
-      mf:action <0079.html>;
-      mf:name "Test 0079";
-      mf:result <0079.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Use of meter and xsd:string";
-      mf:action <0080.html>;
-      mf:name "Test 0080";
-      mf:result <0080.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "Simple @itemprop-reverse (experimental)";
-      mf:action <0081.html>;
-      mf:name "Test 0081";
-      mf:result <0081.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemprop-reverse with @itemscope value (experimental)";
-      mf:action <0082.html>;
-      mf:name "Test 0082";
-      mf:result <0082.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemprop-reverse with literal value (experimental)";
-      mf:action <0083.html>;
-      mf:name "Test 0083";
-      mf:result <0083.ttl>
-    ],  [
-      a mf:ManifestEntry,
-        rdft:TestMicrodataEval;
-      rdfs:comment "@itemprop-reverse with @itemprop (experimental)";
-      mf:action <0084.html>;
-      mf:name "Test 0084";
-      mf:result <0084.ttl>
-    ]
- ] .
+<#sdo_eg_md_1> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 1 (format md)";
+   mf:action <sdo_eg_md_1.html>;
+   mf:name "Test 0016";
+   mf:result <sdo_eg_md_1.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_10> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 10 (format md)";
+   mf:action <sdo_eg_md_10.html>;
+   mf:name "Test 0025";
+   mf:result <sdo_eg_md_10.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_11> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 11 (format md)";
+   mf:action <sdo_eg_md_11.html>;
+   mf:name "Test 0026";
+   mf:result <sdo_eg_md_11.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_12> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 12 (format md)";
+   mf:action <sdo_eg_md_12.html>;
+   mf:name "Test 0027";
+   mf:result <sdo_eg_md_12.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_13> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 13 (format md)";
+   mf:action <sdo_eg_md_13.html>;
+   mf:name "Test 0028";
+   mf:result <sdo_eg_md_13.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_14> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 14 (format md)";
+   mf:action <sdo_eg_md_14.html>;
+   mf:name "Test 0029";
+   mf:result <sdo_eg_md_14.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_15> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 15 (format md)";
+   mf:action <sdo_eg_md_15.html>;
+   mf:name "Test 0030";
+   mf:result <sdo_eg_md_15.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_16> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 16 (format md)";
+   mf:action <sdo_eg_md_16.html>;
+   mf:name "Test 0031";
+   mf:result <sdo_eg_md_16.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_17> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 17 (format md)";
+   mf:action <sdo_eg_md_17.html>;
+   mf:name "Test 0032";
+   mf:result <sdo_eg_md_17.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_18> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 18 (format md)";
+   mf:action <sdo_eg_md_18.html>;
+   mf:name "Test 0033";
+   mf:result <sdo_eg_md_18.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_19> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 19 (format md)";
+   mf:action <sdo_eg_md_19.html>;
+   mf:name "Test 0034";
+   mf:result <sdo_eg_md_19.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_2> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 2 (format md)";
+   mf:action <sdo_eg_md_2.html>;
+   mf:name "Test 0017";
+   mf:result <sdo_eg_md_2.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_20> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 20 (format md)";
+   mf:action <sdo_eg_md_20.html>;
+   mf:name "Test 0035";
+   mf:result <sdo_eg_md_20.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_21> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 21 (format md)";
+   mf:action <sdo_eg_md_21.html>;
+   mf:name "Test 0036";
+   mf:result <sdo_eg_md_21.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_22> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 22 (format md)";
+   mf:action <sdo_eg_md_22.html>;
+   mf:name "Test 0037";
+   mf:result <sdo_eg_md_22.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_23> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 23 (format md)";
+   mf:action <sdo_eg_md_23.html>;
+   mf:name "Test 0038";
+   mf:result <sdo_eg_md_23.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_24> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 24 (format md)";
+   mf:action <sdo_eg_md_24.html>;
+   mf:name "Test 0039";
+   mf:result <sdo_eg_md_24.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_25> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 25 (format md)";
+   mf:action <sdo_eg_md_25.html>;
+   mf:name "Test 0040";
+   mf:result <sdo_eg_md_25.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_26> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 26 (format md)";
+   mf:action <sdo_eg_md_26.html>;
+   mf:name "Test 0041";
+   mf:result <sdo_eg_md_26.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_27> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 27 (format md)";
+   mf:action <sdo_eg_md_27.html>;
+   mf:name "Test 0042";
+   mf:result <sdo_eg_md_27.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_28> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 28 (format md)";
+   mf:action <sdo_eg_md_28.html>;
+   mf:name "Test 0043";
+   mf:result <sdo_eg_md_28.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_29> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 29 (format md)";
+   mf:action <sdo_eg_md_29.html>;
+   mf:name "Test 0044";
+   mf:result <sdo_eg_md_29.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_3> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 3 (format md)";
+   mf:action <sdo_eg_md_3.html>;
+   mf:name "Test 0018";
+   mf:result <sdo_eg_md_3.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_30> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 30 (format md)";
+   mf:action <sdo_eg_md_30.html>;
+   mf:name "Test 0045";
+   mf:result <sdo_eg_md_30.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_4> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 4 (format md)";
+   mf:action <sdo_eg_md_4.html>;
+   mf:name "Test 0019";
+   mf:result <sdo_eg_md_4.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_5> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 5 (format md)";
+   mf:action <sdo_eg_md_5.html>;
+   mf:name "Test 0020";
+   mf:result <sdo_eg_md_5.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_6> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 6 (format md)";
+   mf:action <sdo_eg_md_6.html>;
+   mf:name "Test 0021";
+   mf:result <sdo_eg_md_6.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_7> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 7 (format md)";
+   mf:action <sdo_eg_md_7.html>;
+   mf:name "Test 0022";
+   mf:result <sdo_eg_md_7.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_8> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 8 (format md)";
+   mf:action <sdo_eg_md_8.html>;
+   mf:name "Test 0023";
+   mf:result <sdo_eg_md_8.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#sdo_eg_md_9> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Web Schemas TF: Schema.org tests: test 9 (format md)";
+   mf:action <sdo_eg_md_9.html>;
+   mf:name "Test 0024";
+   mf:result <sdo_eg_md_9.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#test0001> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Item with itemtype and literal itemprop";
+   mf:action <0001.html>;
+   mf:name "Test 0001";
+   mf:result <0001.ttl> .
+
+<#test0002> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Item with no itemtype and 2 elements with equivalent itemprop";
+   mf:action <0002.html>;
+   mf:name "Test 0002";
+   mf:result <0002.ttl> .
+
+<#test0003> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Item with itemprop having two properties";
+   mf:action <0003.html>;
+   mf:name "Test 0003";
+   mf:result <0003.ttl> .
+
+<#test0004> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of meta and @content";
+   mf:action <0004.html>;
+   mf:name "Test 0004";
+   mf:result <0004.ttl> .
+
+<#test0005> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of audio and @src";
+   mf:action <0005.html>;
+   mf:name "Test 0005";
+   mf:result <0005.ttl> .
+
+<#test0006> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of embed and @src";
+   mf:action <0006.html>;
+   mf:name "Test 0006";
+   mf:result <0006.ttl> .
+
+<#test0007> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of iframe and @src";
+   mf:action <0007.html>;
+   mf:name "Test 0007";
+   mf:result <0007.ttl> .
+
+<#test0008> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of img and @src";
+   mf:action <0008.html>;
+   mf:name "Test 0008";
+   mf:result <0008.ttl> .
+
+<#test0009> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of source and @src";
+   mf:action <0009.html>;
+   mf:name "Test 0009";
+   mf:result <0009.ttl> .
+
+<#test0010> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of track and @src";
+   mf:action <0010.html>;
+   mf:name "Test 0010";
+   mf:result <0010.ttl> .
+
+<#test0011> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of video and @src";
+   mf:action <0011.html>;
+   mf:name "Test 0011";
+   mf:result <0011.ttl> .
+
+<#test0012> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of a and @href";
+   mf:action <0012.html>;
+   mf:name "Test 0012";
+   mf:result <0012.ttl> .
+
+<#test0013> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of area and @href";
+   mf:action <0013.html>;
+   mf:name "Test 0013";
+   mf:result <0013.ttl> .
+
+<#test0014> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of link and @href";
+   mf:action <0014.html>;
+   mf:name "Test 0014";
+   mf:result <0014.ttl> .
+
+<#test0015> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of object and @data";
+   mf:action <0015.html>;
+   mf:name "Test 0015";
+   mf:result <0015.ttl> .
+
+<#test0046> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of time with @datetime xsd:time";
+   mf:action <0046.html>;
+   mf:name "Test 0046";
+   mf:result <0046.ttl> .
+
+<#test0047> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of time with @datetime xsd:dateTime";
+   mf:action <0047.html>;
+   mf:name "Test 0047";
+   mf:result <0047.ttl> .
+
+<#test0048> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of time with @datetime xsd:duration";
+   mf:action <0048.html>;
+   mf:name "Test 0048";
+   mf:result <0048.ttl> .
+
+<#test0049> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of time with @datetime invalid";
+   mf:action <0049.html>;
+   mf:name "Test 0049";
+   mf:result <0049.ttl> .
+
+<#test0050> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "relative URL as object";
+   mf:action <0050.html>;
+   mf:name "Test 0050";
+   mf:result <0050.ttl> .
+
+<#test0051> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "relative URL as itemid";
+   mf:action <0051.html>;
+   mf:name "Test 0051";
+   mf:result <0051.ttl> .
+
+<#test0052> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "token property no @itemtype";
+   mf:action <0052.html>;
+   mf:name "Test 0052";
+   mf:result <0052.ttl> .
+
+<#test0053> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "token property empty @itemtype";
+   mf:action <0053.html>;
+   mf:name "Test 0053";
+   mf:result <0053.ttl> .
+
+<#test0054> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "token property and relative @itemtype";
+   mf:action <0054.html>;
+   mf:name "Test 0054";
+   mf:result <0054.ttl> .
+
+<#test0055> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "token property and single @itemtype";
+   mf:action <0055.html>;
+   mf:name "Test 0055";
+   mf:result <0055.ttl> .
+
+<#test0056> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "token property and multiple @itemtypes from different vocabularies";
+   mf:action <0056.html>;
+   mf:name "Test 0056";
+   mf:result <0056.ttl> .
+
+<#test0057> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "URI property no @itemtype";
+   mf:action <0057.html>;
+   mf:name "Test 0057";
+   mf:result <0057.ttl> .
+
+<#test0058> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "URI property empty @itemtype";
+   mf:action <0058.html>;
+   mf:name "Test 0058";
+   mf:result <0058.ttl> .
+
+<#test0059> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "URI property relative @itemtype";
+   mf:action <0059.html>;
+   mf:name "Test 0059";
+   mf:result <0059.ttl> .
+
+<#test0060> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "URI property single @itemtype";
+   mf:action <0060.html>;
+   mf:name "Test 0060";
+   mf:result <0060.ttl> .
+
+<#test0061> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "inherited type and token property";
+   mf:action <0061.html>;
+   mf:name "Test 0061";
+   mf:result <0061.ttl> .
+
+<#test0062> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemref to single id";
+   mf:action <0062.html>;
+   mf:name "Test 0062";
+   mf:result <0062.ttl> .
+
+<#test0063> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemref generates property values";
+   mf:action <0063.html>;
+   mf:name "Test 0063";
+   mf:result <0063.ttl> .
+
+<#test0064> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemref to single id with different types";
+   mf:action <0064.html>;
+   mf:name "Test 0064";
+   mf:result <0064.ttl> .
+
+<#test0065> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemref to multiple ids";
+   mf:action <0065.html>;
+   mf:name "Test 0065";
+   mf:result <0065.ttl> .
+
+<#test0066> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemref with chaining";
+   mf:action <0066.html>;
+   mf:name "Test 0066";
+   mf:result <0066.ttl> .
+
+<#test0067> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Shared @itemref";
+   mf:action <0067.html>;
+   mf:name "Test 0067";
+   mf:result <0067.ttl> .
+
+<#test0068> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Property URI generation (default) 1";
+   mf:action <0068.html>;
+   mf:name "Test 0068";
+   mf:result <0068.ttl> .
+
+<#test0069> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Property URI generation (default) 2";
+   mf:action <0069.html>;
+   mf:name "Test 0069";
+   mf:result <0069.ttl> .
+
+<#test0070> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Property URI generation (default) 3";
+   mf:action <0070.html>;
+   mf:name "Test 0070";
+   mf:result <0070.ttl> .
+
+<#test0071> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Vocabulary Expansion test with schema:additionalType";
+   mf:action <0071.html>;
+   mf:name "Test 0071";
+   mf:result <0071.ttl>;
+   rdft:registry <http://www.w3.org/ns/md> .
+
+<#test0073> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Vocabulary Expansion test with rdfs:subPropertyOf";
+   mf:action <0073.html>;
+   mf:name "Test 0073";
+   mf:result <0073.ttl> .
+
+<#test0074> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Vocabulary Expansion test with owl:equivalentProperty";
+   mf:action <0074.html>;
+   mf:name "Test 0074";
+   mf:result <0074.ttl> .
+
+<#test0075> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of data and xsd:float";
+   mf:action <0075.html>;
+   mf:name "Test 0075";
+   mf:result <0075.ttl> .
+
+<#test0076> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of data and xsd:integer";
+   mf:action <0076.html>;
+   mf:name "Test 0076";
+   mf:result <0076.ttl> .
+
+<#test0077> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of data and string";
+   mf:action <0077.html>;
+   mf:name "Test 0077";
+   mf:result <0077.ttl> .
+
+<#test0078> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of meter and xsd:double";
+   mf:action <0078.html>;
+   mf:name "Test 0078";
+   mf:result <0078.ttl> .
+
+<#test0079> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of meter and xsd:integer";
+   mf:action <0079.html>;
+   mf:name "Test 0079";
+   mf:result <0079.ttl> .
+
+<#test0080> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Use of meter and xsd:string";
+   mf:action <0080.html>;
+   mf:name "Test 0080";
+   mf:result <0080.ttl> .
+
+<#test0081> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "Simple @itemprop-reverse (experimental)";
+   mf:action <0081.html>;
+   mf:name "Test 0081";
+   mf:result <0081.ttl> .
+
+<#test0082> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemprop-reverse with @itemscope value (experimental)";
+   mf:action <0082.html>;
+   mf:name "Test 0082";
+   mf:result <0082.ttl> .
+
+<#test0083> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemprop-reverse with literal value (experimental)";
+   mf:action <0083.html>;
+   mf:name "Test 0083";
+   mf:result <0083.ttl> .
+
+<#test0084> a mf:ManifestEntry,
+     rdft:TestMicrodataEval;
+   rdfs:comment "@itemprop-reverse with @itemprop (experimental)";
+   mf:action <0084.html>;
+   mf:name "Test 0084";
+   mf:result <0084.ttl> .
+
+<#test0085> a mf:ManifestEntry,
+     rdft:TestMicrodataNegativeSyntax;
+   rdfs:comment "detects recursion on @itemref";
+   mf:action <0085.html>;
+   mf:name "Test 0085" .

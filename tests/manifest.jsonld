@@ -5,6 +5,7 @@
     "rdft": "http://www.w3.org/ns/rdftest#",
     "mf": "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
     "mq": "http://www.w3.org/2001/sw/DataAccess/tests/test-query#",
+    "label": "rdfs:label",
     "comment": "rdfs:comment",
     "entries": {
       "@id": "mf:entries"
@@ -25,12 +26,11 @@
   },
   "@graph": [
     {
-      "@id": "_:b81",
+      "@id": "",
       "@type": "mf:Manifest",
-      "comment": "Positive processor tests",
       "entries": [
         {
-          "@id": "_:b72",
+          "@id": "#test0001",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -41,7 +41,7 @@
           "result": "0001.ttl"
         },
         {
-          "@id": "_:b69",
+          "@id": "#test0002",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -52,7 +52,7 @@
           "result": "0002.ttl"
         },
         {
-          "@id": "_:b66",
+          "@id": "#test0003",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -63,7 +63,7 @@
           "result": "0003.ttl"
         },
         {
-          "@id": "_:b64",
+          "@id": "#test0004",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -74,7 +74,7 @@
           "result": "0004.ttl"
         },
         {
-          "@id": "_:b4",
+          "@id": "#test0005",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -85,7 +85,7 @@
           "result": "0005.ttl"
         },
         {
-          "@id": "_:b62",
+          "@id": "#test0006",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -96,7 +96,7 @@
           "result": "0006.ttl"
         },
         {
-          "@id": "_:b52",
+          "@id": "#test0007",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -107,7 +107,7 @@
           "result": "0007.ttl"
         },
         {
-          "@id": "_:b0",
+          "@id": "#test0008",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -118,7 +118,7 @@
           "result": "0008.ttl"
         },
         {
-          "@id": "_:b12",
+          "@id": "#test0009",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -129,7 +129,7 @@
           "result": "0009.ttl"
         },
         {
-          "@id": "_:b43",
+          "@id": "#test0010",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -140,7 +140,7 @@
           "result": "0010.ttl"
         },
         {
-          "@id": "_:b30",
+          "@id": "#test0011",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -151,7 +151,7 @@
           "result": "0011.ttl"
         },
         {
-          "@id": "_:b57",
+          "@id": "#test0012",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -162,7 +162,7 @@
           "result": "0012.ttl"
         },
         {
-          "@id": "_:b47",
+          "@id": "#test0013",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -173,7 +173,7 @@
           "result": "0013.ttl"
         },
         {
-          "@id": "_:b44",
+          "@id": "#test0014",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -184,7 +184,7 @@
           "result": "0014.ttl"
         },
         {
-          "@id": "_:b40",
+          "@id": "#test0015",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -195,7 +195,7 @@
           "result": "0015.ttl"
         },
         {
-          "@id": "_:b37",
+          "@id": "#sdo_eg_md_1",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -207,7 +207,7 @@
           "result": "sdo_eg_md_1.ttl"
         },
         {
-          "@id": "_:b33",
+          "@id": "#sdo_eg_md_2",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -219,7 +219,7 @@
           "result": "sdo_eg_md_2.ttl"
         },
         {
-          "@id": "_:b31",
+          "@id": "#sdo_eg_md_3",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -231,7 +231,7 @@
           "result": "sdo_eg_md_3.ttl"
         },
         {
-          "@id": "_:b28",
+          "@id": "#sdo_eg_md_4",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -243,7 +243,7 @@
           "result": "sdo_eg_md_4.ttl"
         },
         {
-          "@id": "_:b25",
+          "@id": "#sdo_eg_md_5",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -255,7 +255,7 @@
           "result": "sdo_eg_md_5.ttl"
         },
         {
-          "@id": "_:b23",
+          "@id": "#sdo_eg_md_6",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -267,7 +267,7 @@
           "result": "sdo_eg_md_6.ttl"
         },
         {
-          "@id": "_:b21",
+          "@id": "#sdo_eg_md_7",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -279,7 +279,7 @@
           "result": "sdo_eg_md_7.ttl"
         },
         {
-          "@id": "_:b19",
+          "@id": "#sdo_eg_md_8",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -291,7 +291,7 @@
           "result": "sdo_eg_md_8.ttl"
         },
         {
-          "@id": "_:b13",
+          "@id": "#sdo_eg_md_9",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -303,7 +303,7 @@
           "result": "sdo_eg_md_9.ttl"
         },
         {
-          "@id": "_:b10",
+          "@id": "#sdo_eg_md_10",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -315,7 +315,7 @@
           "result": "sdo_eg_md_10.ttl"
         },
         {
-          "@id": "_:b8",
+          "@id": "#sdo_eg_md_11",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -327,7 +327,7 @@
           "result": "sdo_eg_md_11.ttl"
         },
         {
-          "@id": "_:b6",
+          "@id": "#sdo_eg_md_12",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -339,7 +339,7 @@
           "result": "sdo_eg_md_12.ttl"
         },
         {
-          "@id": "_:b59",
+          "@id": "#sdo_eg_md_13",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -351,7 +351,7 @@
           "result": "sdo_eg_md_13.ttl"
         },
         {
-          "@id": "_:b55",
+          "@id": "#sdo_eg_md_14",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -363,7 +363,7 @@
           "result": "sdo_eg_md_14.ttl"
         },
         {
-          "@id": "_:b56",
+          "@id": "#sdo_eg_md_15",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -375,7 +375,7 @@
           "result": "sdo_eg_md_15.ttl"
         },
         {
-          "@id": "_:b82",
+          "@id": "#sdo_eg_md_16",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -387,7 +387,7 @@
           "result": "sdo_eg_md_16.ttl"
         },
         {
-          "@id": "_:b79",
+          "@id": "#sdo_eg_md_17",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -399,7 +399,7 @@
           "result": "sdo_eg_md_17.ttl"
         },
         {
-          "@id": "_:b77",
+          "@id": "#sdo_eg_md_18",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -411,7 +411,7 @@
           "result": "sdo_eg_md_18.ttl"
         },
         {
-          "@id": "_:b74",
+          "@id": "#sdo_eg_md_19",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -423,7 +423,7 @@
           "result": "sdo_eg_md_19.ttl"
         },
         {
-          "@id": "_:b71",
+          "@id": "#sdo_eg_md_20",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -435,7 +435,7 @@
           "result": "sdo_eg_md_20.ttl"
         },
         {
-          "@id": "_:b68",
+          "@id": "#sdo_eg_md_21",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -447,7 +447,7 @@
           "result": "sdo_eg_md_21.ttl"
         },
         {
-          "@id": "_:b65",
+          "@id": "#sdo_eg_md_22",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -459,7 +459,7 @@
           "result": "sdo_eg_md_22.ttl"
         },
         {
-          "@id": "_:b3",
+          "@id": "#sdo_eg_md_23",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -471,7 +471,7 @@
           "result": "sdo_eg_md_23.ttl"
         },
         {
-          "@id": "_:b60",
+          "@id": "#sdo_eg_md_24",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -483,7 +483,7 @@
           "result": "sdo_eg_md_24.ttl"
         },
         {
-          "@id": "_:b1",
+          "@id": "#sdo_eg_md_25",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -495,7 +495,7 @@
           "result": "sdo_eg_md_25.ttl"
         },
         {
-          "@id": "_:b16",
+          "@id": "#sdo_eg_md_26",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -507,7 +507,7 @@
           "result": "sdo_eg_md_26.ttl"
         },
         {
-          "@id": "_:b42",
+          "@id": "#sdo_eg_md_27",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -519,7 +519,7 @@
           "result": "sdo_eg_md_27.ttl"
         },
         {
-          "@id": "_:b17",
+          "@id": "#sdo_eg_md_28",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -531,7 +531,7 @@
           "result": "sdo_eg_md_28.ttl"
         },
         {
-          "@id": "_:b49",
+          "@id": "#sdo_eg_md_29",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -543,7 +543,7 @@
           "result": "sdo_eg_md_29.ttl"
         },
         {
-          "@id": "_:b45",
+          "@id": "#sdo_eg_md_30",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -555,7 +555,7 @@
           "result": "sdo_eg_md_30.ttl"
         },
         {
-          "@id": "_:b39",
+          "@id": "#test0046",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -566,7 +566,7 @@
           "result": "0046.ttl"
         },
         {
-          "@id": "_:b36",
+          "@id": "#test0047",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -577,7 +577,7 @@
           "result": "0047.ttl"
         },
         {
-          "@id": "_:b34",
+          "@id": "#test0048",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -588,7 +588,7 @@
           "result": "0048.ttl"
         },
         {
-          "@id": "_:b32",
+          "@id": "#test0049",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -599,7 +599,7 @@
           "result": "0049.ttl"
         },
         {
-          "@id": "_:b29",
+          "@id": "#test0050",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -610,7 +610,7 @@
           "result": "0050.ttl"
         },
         {
-          "@id": "_:b26",
+          "@id": "#test0051",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -621,7 +621,7 @@
           "result": "0051.ttl"
         },
         {
-          "@id": "_:b24",
+          "@id": "#test0052",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -632,7 +632,7 @@
           "result": "0052.ttl"
         },
         {
-          "@id": "_:b22",
+          "@id": "#test0053",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -643,7 +643,7 @@
           "result": "0053.ttl"
         },
         {
-          "@id": "_:b20",
+          "@id": "#test0054",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -654,7 +654,7 @@
           "result": "0054.ttl"
         },
         {
-          "@id": "_:b18",
+          "@id": "#test0055",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -665,7 +665,7 @@
           "result": "0055.ttl"
         },
         {
-          "@id": "_:b14",
+          "@id": "#test0056",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -676,7 +676,7 @@
           "result": "0056.ttl"
         },
         {
-          "@id": "_:b11",
+          "@id": "#test0057",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -687,7 +687,7 @@
           "result": "0057.ttl"
         },
         {
-          "@id": "_:b9",
+          "@id": "#test0058",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -698,7 +698,7 @@
           "result": "0058.ttl"
         },
         {
-          "@id": "_:b7",
+          "@id": "#test0059",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -709,7 +709,7 @@
           "result": "0059.ttl"
         },
         {
-          "@id": "_:b5",
+          "@id": "#test0060",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -720,7 +720,7 @@
           "result": "0060.ttl"
         },
         {
-          "@id": "_:b58",
+          "@id": "#test0061",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -731,7 +731,7 @@
           "result": "0061.ttl"
         },
         {
-          "@id": "_:b54",
+          "@id": "#test0062",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -742,7 +742,7 @@
           "result": "0062.ttl"
         },
         {
-          "@id": "_:b53",
+          "@id": "#test0063",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -753,7 +753,7 @@
           "result": "0063.ttl"
         },
         {
-          "@id": "_:b83",
+          "@id": "#test0064",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -764,7 +764,7 @@
           "result": "0064.ttl"
         },
         {
-          "@id": "_:b80",
+          "@id": "#test0065",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -775,7 +775,7 @@
           "result": "0065.ttl"
         },
         {
-          "@id": "_:b78",
+          "@id": "#test0066",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -786,7 +786,7 @@
           "result": "0066.ttl"
         },
         {
-          "@id": "_:b76",
+          "@id": "#test0067",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -797,7 +797,7 @@
           "result": "0067.ttl"
         },
         {
-          "@id": "_:b75",
+          "@id": "#test0068",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -808,7 +808,7 @@
           "result": "0068.ttl"
         },
         {
-          "@id": "_:b73",
+          "@id": "#test0069",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -819,7 +819,7 @@
           "result": "0069.ttl"
         },
         {
-          "@id": "_:b70",
+          "@id": "#test0070",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -830,7 +830,7 @@
           "result": "0070.ttl"
         },
         {
-          "@id": "_:b67",
+          "@id": "#test0071",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -842,7 +842,7 @@
           "result": "0071.ttl"
         },
         {
-          "@id": "_:b63",
+          "@id": "#test0073",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -853,7 +853,7 @@
           "result": "0073.ttl"
         },
         {
-          "@id": "_:b2",
+          "@id": "#test0074",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -864,7 +864,7 @@
           "result": "0074.ttl"
         },
         {
-          "@id": "_:b61",
+          "@id": "#test0075",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -875,7 +875,7 @@
           "result": "0075.ttl"
         },
         {
-          "@id": "_:b51",
+          "@id": "#test0076",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -886,7 +886,7 @@
           "result": "0076.ttl"
         },
         {
-          "@id": "_:b27",
+          "@id": "#test0077",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -897,7 +897,7 @@
           "result": "0077.ttl"
         },
         {
-          "@id": "_:b50",
+          "@id": "#test0078",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -908,7 +908,7 @@
           "result": "0078.ttl"
         },
         {
-          "@id": "_:b35",
+          "@id": "#test0079",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -919,7 +919,7 @@
           "result": "0079.ttl"
         },
         {
-          "@id": "_:b15",
+          "@id": "#test0080",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -930,7 +930,7 @@
           "result": "0080.ttl"
         },
         {
-          "@id": "_:b48",
+          "@id": "#test0081",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -941,7 +941,7 @@
           "result": "0081.ttl"
         },
         {
-          "@id": "_:b46",
+          "@id": "#test0082",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -952,7 +952,7 @@
           "result": "0082.ttl"
         },
         {
-          "@id": "_:b41",
+          "@id": "#test0083",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -963,7 +963,7 @@
           "result": "0083.ttl"
         },
         {
-          "@id": "_:b38",
+          "@id": "#test0084",
           "@type": [
             "mf:ManifestEntry",
             "rdft:TestMicrodataEval"
@@ -972,8 +972,19 @@
           "comment": "@itemprop-reverse with @itemprop (experimental)",
           "name": "Test 0084",
           "result": "0084.ttl"
+        },
+        {
+          "@id": "#test0085",
+          "@type": [
+            "mf:ManifestEntry",
+            "rdft:TestMicrodataNegativeSyntax"
+          ],
+          "action": "0085.html",
+          "comment": "detects recursion on @itemref",
+          "name": "Test 0085"
         }
-      ]
+      ],
+      "label": "Processor tests"
     }
   ]
 }

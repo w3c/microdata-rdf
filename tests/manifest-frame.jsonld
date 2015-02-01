@@ -6,6 +6,7 @@
     "mf": "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#",
     "mq": "http://www.w3.org/2001/sw/DataAccess/tests/test-query#",
     
+    "label": "rdfs:label",
     "comment": "rdfs:comment",
     "entries": {"@id": "mf:entries"},
     "name": "mf:name",
@@ -14,7 +15,5 @@
     "registry": {"@id": "rdft:registry", "@type": "@id"}
   },
   "@type": "mf:Manifest",
-  "entries": {
-    "@type": "mf:ManifestEntry"
-  }
+  "entries": {}
 }
