@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Microdata to RDF – Second Edition</title>
+<title>Microdata to RDF – Third Edition</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <script type="text/javascript"
   src="http://www.w3.org/Tools/respec/respec-w3c-common" async class="remove">
@@ -33,7 +33,7 @@
           // and its maturity status
           previousPublishDate:  "2014-12-16",
           previousMaturity:     "IG-NOTE",
-          previousURI:          "http://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/",
+          previousURI:          "https://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/",
 
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:           "http://w3c.github.io/microdata-rdf/",
@@ -42,20 +42,28 @@
           issueBase: "http://github.com/w3c/microdata-rdf/issues/",
 
           editors:  [
-              { name: "Gregg Kellogg", url: "http://greggkellogg.net/",
-                company: "Kellogg Associates" }
+              { name: "Gregg Kellogg",
+                url: "http://greggkellogg.net/",
+                company: "Spec-Ops",
+                companyURL: "https://spec-ops.io/",
+                w3cid:      "44770" }
           ],
 
           authors:  [
               { name: "Ian Hickson", url: "mailto:ian@hixie.ch",
                 company: "Google, Inc." },
-              { name: "Gregg Kellogg", url: "http://greggkellogg.net/",
-                company: "Kellogg Associates" },
+              { name: "Gregg Kellogg",
+                url: "http://greggkellogg.net/",
+                company: "Spec-Ops",
+                companyURL: "https://spec-ops.io/",
+                w3cid:      "44770" },
               { name: "Jeni Tennison", url: "http://www.jenitennison.com/",
                 company: "Open Data Institute", companyURL: "http://theodi.org/" },
               { name: "Ivan Herman", url: "http://www.w3.org/People/Ivan/",
                 company: "W3C", companyURL: "http://www.w3.org" }
           ],
+
+          github:    "https://github.com/json-ld/json-ld.org",
 
           // name of the WG
           wg:           "Semantic Web Interest Group",
@@ -67,25 +75,6 @@
           wgPublicList: "semantic-web",
 
           wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/68238/status",
-          otherLinks: [{
-            key: "Repository",
-            data: [{
-                value: "We are on Github",
-                href: "https://github.com/w3c/microdata-rdf"
-            }, {
-                value: "Open and closed issues",
-                href: "https://github.com/w3c/microdata-rdf/issues"
-            }]
-            }, {
-            key: "Changes",
-              data: [{
-                value: "Diff to previous version",
-                href: "diff-20141216.html"
-              }, {
-                value: "Commit history",
-                href: "https://github.com/w3c/microdata-rdf/commits/gh-pages"
-            }]
-          }],
           inlineCSS: true,
           maxTocLevel: 4
           //, alternateFormats: [ {uri: "diff-20120308.html", label: "diff to previous version"} ]
@@ -132,67 +121,26 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
 <body lang="en">
 <section id="abstract">
-  <p>HTML microdata [[!MICRODATA]] is an extension to HTML used to embed machine-readable data into HTML documents.
+  <p>HTML Microdata [[!MICRODATA]] is an extension to HTML used to embed machine-readable data into HTML documents.
     Whereas the microdata specification describes a means of markup, the output format is JSON. This specification
     describes processing rules that may be used to extract RDF [[!RDF11-CONCEPTS]] from an HTML document containing
     microdata.</p>
 </section>
 
 <section id='sotd'>
-<p>This document is an experimental work in progress. The concepts described herein are intended to 
+<p>The concepts described herein are intended to 
   provide guidance for a possible future Working Group chartered to provide a Recommendation
   for this transformation. As a consequence, implementers of this specification, either producers
   or consumers, should note that it may change prior to any possible publication as a Recommendation.</p>
 
-<p>This Working Draft is an update of the <a href="//www.w3.org/TR/2012/NOTE-microdata-rdf-20121009/">W3C
-  Interest Group Note</a>, published in October 2012. This update simplifies
-  processing using the following mechanisms:</p>
+<p>This document is an update of the <a href="https://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/">W3C
+  Interest Group Note</a>, published in December 2014. This aligns with the
+  2017 update to [[!MICRODATA]].</p>
+<p class="ednote">As the Semantic Web Interest Group has expired, a new home will need to be found for this Note.</p>
 <ul>
-  <li>Experimental support for <a class="aref">itemprop-reverse</a> has been added.
-    This attribute is not part of [[MICRODATA]] and is included as an experimental feature.
-    Specific feedback from the community is requested. Based on addoption, the attribute
-    may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/5">issue 5</a>)</li>
-  <li><a title="top-level item">Top-level items</a> were previously included in a <code>md:item</code>
-    RDF Collection to reconstruct the order that items appear in the DOM. This has also proven to
-    not be useful and has been dropped.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/6">issue 6</a>)</li>
-  <li>A property value may be extracted from the <code>@content</code> attribute
-    of the <code>meta</code> element.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/7">issue 7</a>)</li>
-  <li>A property value may be extracted from the <code>@value</code> attribute
-    of the <code>data</code> or <code>meter</code> elements. If this value has
-    numeric form, it will produce a datatyped literal using the appropriate datatype
-    from [[XMLSCHEMA11-2]]
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/8">issue 8</a>
-    and <a href="https://github.com/w3c/microdata-rdf/issues/9">issue 9</a>)</li>
-  <li>Property URI generation was under control of the <code>propertyURI</code> <a>registry</a>
-    setting. This setting could previously have taken either the <code>vocabulary</code> or
-    <code>contextual</code> settings. As <code>contextual</code> was never used, and usage
-    in the wild favors the <code>vocabulary</code> setting, support for <code>contextual</code>
-    has been eliminated, and consequently support for the <code>propertyURI</code> element
-    within the <a>registry</a>.
-    This issue remains open pending community review; specifically, anyone depending on this
-    feature should provide feedback as requested below.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
-  <li>An item having multiple values for a given property could previously having been placed
-    in an RDF Collection if the <code>multipleValues</code> <a>registry</a> setting were set
-    to <code>list</code>. Although the previous registry did have such a setting for some
-    schema.org values, this is not honored by most search engines, and so has been dropped,
-    and consequently support for the <code>multipeValues</code> element with the <a>registry</a>.
-    This issue remains open pending community review; specifically, anyone depending on this
-    feature should provide feedback as requested below.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
-  <li>Lastly, the previous update introduced <a href="#vocab_expansion">Vocabulary Expansion</a>
-    using <em>entailment</em> rules adopted from [[RDFA-CORE]] under control of the <code>vocab_expansion</code>
-    option. Support for <a href="#vocab_expansion">Vocabulary Expansion</a> has been substantially
-    simplified, and is no longer under control of an option.
-    This issue remains open pending community review; specifically, anyone depending on this
-    feature should provide feedback as requested below.
-    (see <a href="https://github.com/w3c/microdata-rdf/issues/10">issue 10</a>)</li>
+  <li>The <a data-cite="MICRODATA#dfn-content" class="adef">content</a> attribute may now be used on all elements.</li>
+  <li>The processing algorithm no longer relies on the former Microdata DOM API, which has been removed.</li>
 </ul>
-<p>The intention is to publish 
-  this draft as a new version of the Interest Group Note after gathering and incorporating community input.</p> 
 </section>
 
 <section class="informative">
@@ -213,11 +161,13 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       </a> and <a href="https://github.com/w3c/microdata-rdf/issues">GitHub Issues</a>.
     </p>
   </div>
+  <p class="issue atrisk">The current version of [[!MICRODATA]] does not generate URIs for properties
+    of un-typed <a>items</a>, and consequently, the mechanism for generating property URIs
+    for <a class="aref">itemprop</a> tokens using the document URI has been removed.</p>
 <section class="informative">
   <h2>Background</h2>
   <p>Microdata [[!MICRODATA]] is a way of embedding data in HTML documents
-    using attributes. The HTML DOM is extended to provide an API for
-    accessing microdata information, and the microdata specification
+    using attributes. The Microdata specification
     defines how to generate a JSON representation from microdata markup.</p>
 
   <p>Mapping microdata to RDF enables consumers to merge data expressed
@@ -226,13 +176,8 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     with the full RDF toolchain. Some use cases for this mapping are
     described in <a href="#use-cases">Section 1.2</a> below.</p>
 
-  <p>Microdata's data model does not align neatly with RDF.</p>
+  <p>Microdata's data model does not always align neatly with RDF.</p>
   <ul>
-   <li>Non-URL microdata properties are disambiguated based on microdata
-     <a>item type</a>; an <a>item</a> with the type <code>http://example.org/Cat</code> can have
-     both the property <code>color</code> and the property <code>http://example.org/color</code>,
-     and these properties are semantically distinct under microdata. In
-     RDF, all properties have IRIs.</li>
 
    <li>When an item has multiple properties with the same name, the values are
      always ordered; in RDF, property values are unordered unless they
@@ -242,14 +187,10 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
      by the consuming application. In RDF, values can be tagged with a
      datatype or a language. According to the microdata specification, the
      HTML context of microdata markup should not change how microdata is
-     interpreted, so although element names and HTML <code>@lang</code> attributes could
+     interpreted, so although element names and HTML <code>lang</code> attributes could
      be used to provide datatype and language information for RDF data, this
      would be contrary to the microdata specification.</li>
   </ul>
-
-   <p>Thus, in some places the needs of RDF consumers violate requirements of
-     the microdata specification. This specification highlights where such
-     violations occur and the reasons for them.</p>
 
    <p>This specification allows for 
      <a>vocabulary</a>-specific rules that affect the generation of property URIs and value serializations.
@@ -260,44 +201,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 
    <p>This specification also assumes that consumers of RDF generated from
      microdata may have to process the results in order to, for example,
-     assign appropriate datatypes to <a title="property value">property values</a>.</p>
-</section>
-
-<section class="informative">
-  <h2>Use Cases</h2>
-  <p>During the period of the task force, a number of use cases were put forth for the use of microdata
-    in generating RDF:</p>
-  <ul>
-    <li>Semantic search engines such as <a href="http://sindice.com/">Sindice</a> use RDF as their backend data model.
-      They want to gather information expressed using microdata alongside information expressed in RDF-based formats
-      and make it available to others to use, as a service. In these cases, the ultimate consumer, who will need to
-      understand the vocabularies used within the microdata, is the program or person who pulls out data from Sindice.
-      Sindice needs to retain the distinctions in the original microdata (e.g. ordering of items) and might not have
-      built-in knowledge about the <a>vocabulary</a> of interest to the ultimate consumer. In this case, the ultimate consumer
-      is likely to have to map/validate/handle errors in the data they get from Sindice.</li>
-    <li>A consumer such as <a href="http://openelectiondata.org">openelectiondata.org</a> wants to support
-      microdata-based markup of their <a>vocabulary</a> as well as RDFa-based markup, both going into an RDF-based data store.
-      They want to use an off-the-shelf tool to extract the microdata. They want to configure the tool to give them the
-      RDF that is appropriate for their known <a>vocabulary</a>.</li>
-    <li>A browser plugin that captures data for the user uses an RDF model as its backend store.
-      Any time it encounters microdata on a page, it wants to pull that microdata into the store on the fly.</li>
-    <li><a href="http://purl.org/goodrelations/">GoodRelations</a> properties do not take
-      <code>rdf:List</code> values; when they take
-      multiple values they are unordered. The <code>rdfs:range</code> of a GoodRelations
-      property indicates the datatype of the expected value, and GoodRelations
-      processors will expect values to be cast to that type. Language
-      information from the HTML needs to be captured as it is common that
-      multiple values will be used to specify the same information in different
-      languages.</li>
-    <li><a href="http://schema.org/">Schema.org</a> has an 
-      <a href="http://schema.org/docs/extension.html">extension mechanism</a> to allow authors to express information
-      that is more detail than the pre-defined types, properties and enumerations. Property URIs are all in the same
-      flat-namespace as types, but authors can add more detail by using a '/' after the type or property to provide
-      more detail. For example, schema.org defines a <em>musicGroupMember</em> property having a URI of
-      <code>http://schema.org/musicGroupMember</code>, and an author might express more detail through an ad-hoc
-      sub-property <em>musicGroupMember/leadVocalist</em>, having the URI
-      <code>http://schema.org/musicGroupMember/leadVocalist</code>.</li>
-  </ul>
+     assign appropriate datatypes to <a>property values</a>.</p>
 </section>
 
 <section class="informative">
@@ -312,113 +216,52 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     Specific feedback from the community is requested. Based on addoption, the attribute
     may be considered for inclusion in forthcoming versions of [[MICRODATA]] and this note.</p>
   </div>
-
-  <p>The purpose of this specification is to provide input to a future working group that can make decisions
-    about the need for a <a>registry</a> and the details of processing. Among the options investigated by
-    the Task Force are the following:</p>
-  <ul>
-    <li>Property URI generation using the original microdata specification with a base URI and
-      <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> made up of the in-scope <a>item
-      type</a> and <a>item properties</a>.</li>
-    <li>Vocabulary-based URI generation, where the <a>vocabulary</a> is determined from the
-      in-scope <a>item type</a>, either through an algorithmic modification of the type URL or by matching the
-      URL against a <a>registry</a>. The vocabulary URI is then used to generate property URIs in a namespace
-      parallel to the type URI.</li>
-    <li>When there are multiple <a title="top-level item">top-level items</a> in a document, place items in an RDF Collection.
-      Alternatively, simply list the items as multiple values, or do not generate an
-      <code>http://www.w3.org/ns/md#item</code> mapping at all.
-    </li>
-    <li>When an item has multiple values for a given <a>property</a>, place the values in an RDF Collection.
-      Alternatively, do not use collections, use an alternative such as <code>rdf:Seq</code>, or place all values,
-      whether or not multiple, into some form of collection.
-    </li>
-  </ul>
 </section>
 </section>
 
 <section>
   <h1>Attributes and Syntax</h1>
   <p>
-    The microdata specification [[!MICRODATA]] defines a number of attributes and the way in which those
-    attributes are to be interpreted. The
-    <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">microdata DOM API</a></cite>
-    provides methods and attributes for retrieving microdata from the HTML DOM.</p>
+    The Microdata specification [[!MICRODATA]] defines a number of attributes and the way in which those
+    attributes are to be interpreted.</p>
   <p>For reference, attributes used for specifying and retrieving HTML microdata are referenced here:</p>
   <dl>
     <dt><dfn class="adef">itemid</dfn></dt><dd>
-      An attribute containing a URL used to identify the subject of triples associated with this <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemid">itemid</a></cite>
-      in [[!MICRODATA]]).
+      An attribute containing a URL used to identify the <a data-cite="RDF11-CONCEPTS#dfn-subject">subject</a> of <a data-cite="RDF11-CONCEPTS#dfn-triple">triples</a> associated with this <a>item</a>.
+      (See <a data-cite="MICRODATA#dfn-itemid">itemid</a> in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemprop</dfn></dt><dd>
-      An attribute used to identify one or more <a title="name">names</a> of an <a title="item">items</a>. An <a class="aref">itemprop</a>
-      contains a space separated list of <dfn title="name">names</dfn> which may either by <a title="absolute URL">absolute URLs</a> or terms
-      associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
-      <a>item type</a>.
-      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#names:-the-itemprop-attribute">itemprop</a></cite>
-      in [[!MICRODATA]]).
+      An attribute used to identify one or more <a>names</a> of an <a>items</a>. An <a class="aref">itemprop</a>
+      contains a space separated list of <dfn data-lt="name">names</dfn> which may either by <a>absolute URLs</a> or terms
+      associated with the type of the <a>item</a> as defined by the referencing <a>item's</a> <a>item type</a>.
+      (See <a data-cite="MICRODATA#dfn-itemprop">itemprop</a> in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemref</dfn></dt><dd>
       An additional attribute on an element that references additional elements containing property
       definitions to be applied to the referencing <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemref">itemref</a></cite>
-      in [[!MICRODATA]]).
+      (See <a data-cite="MICRODATA#dfn-itemref">itemref</a> in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemscope</dfn></dt><dd>
       An boolean attribute identifying an element as an <a>item</a>.
-      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite>
-      in [[!MICRODATA]]).
+      (See <a data-cite="MICRODATA#dfn-itemscope">itemscope</a> in [[!MICRODATA]]).
     </dd>
     <dt><dfn class="adef">itemtype</dfn></dt><dd>
       An additional attribute on an element used to specify one or more types of an <a>item</a>.
-      The <dfn>item type</dfn> of an <a>item</a> is the first value returned from
-      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
-      on the element.
-      The <a>item type</a> is also used to resolve non-URL <a title="name">names</a> to <a title="absolute URL">absolute URLs</a>.
-      Available through the
-      <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
-      <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>.
-      (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemtype">itemtype</a></cite>
-      in [[!MICRODATA]]).
+      The <dfn data-lt="item types">item type</dfn> of an <a>item</a> is the first value
+      defined if <code>itemtype</code> contains multiple values, as defined in <a data-cite="MICRODATA#items">items</a>.
+      (See <a data-cite="MICRODATA#dfn-itemtype">itemtype</a> and <a data-cite="MICRODATA#dfn-item-type">itemtype</a>in [[!MICRODATA]]).
     </dd>
   </dl>
   <p>In RDF, it is common for people to shorten vocabulary terms via abbreviated URIs that use a 'prefix'
     and a 'reference'. throughout this document assume that the following vocabulary
     prefixes have been defined:</p>
   <table><tbody>
-    <tr>
-      <td>dc:</td>
-      <td>http://purl.org/dc/terms/</td>
-    </tr>
-
-    <tr>
-      <td>md:</td>
-      <td>
-        http://www.w3.org/ns/md#</td>
-    </tr>
-
-    <tr>
-      <td>rdf:</td>
-      <td>
-        http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
-    </tr>
-
-    <tr>
-      <td>rdf:</td>
-      <td>
-        http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
-    </tr>
-
-    <tr>
-      <td>rdfa:</td>
-      <td>
-        http://www.w3.org/ns/rdfa#</td>
-    </tr>
-
-    <tr>
-      <td>xsd:</td>
-      <td>http://www.w3.org/2001/XMLSchema#</td>
-    </tr>
+    <tr><td>dc:</td> <td>http://purl.org/dc/terms/</td></tr>
+    <tr><td>md:</td> <td>http://www.w3.org/ns/md#</td></tr>
+    <tr><td>rdf:</td> <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+    <tr><td>rdf:</td> <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td></tr>
+    <tr><td>rdfa:</td> <td>http://www.w3.org/ns/rdfa#</td></tr>
+    <tr><td>xsd:</td> <td>http://www.w3.org/2001/XMLSchema#</td></tr>
   </tbody></table>
 </section>
 
@@ -438,40 +281,36 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 {
   "http://schema.org/": {
     "properties": {
-      "additionalType": {"subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"}
-    },
-    "http://microformats.org/profile/hcard": {}
+      "additionalType": {
+        "subPropertyOf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      }
+    }
   }
 }
 -->
 </pre>
-  <p>This structure associates mappings for two URIs: <code>http://schema.org/</code> and
-    <code>http://microformats.org/profile/hcard</code>. Items having an <a>item type</a> with a <a>URI prefix</a> from this <a>registry</a>
+  <p>This structure associates mappings for a single URI: <code>http://schema.org/</code>.
+    Items having an <a>item type</a> with a <a>URI prefix</a> from this <a>registry</a>
     use the the rules described for that prefix within the scope of that
     <a>item type</a>. For <code>http://schema.org/</code>, this mapping currently defines a single property: <code>additionalType</code>
     with a value to indicate specific behavior. It also allows overrides
     on a per-property basis; the <a><code>item properties</code></a> key associates an individual <a>name</a>
     with overrides for default behavior.
     The interpretation of these
-    rules is defined in the following sections. If an item has no <a>current type</a> or the
-    <a>registry</a> contains no <a>URI prefix</a> matching <a>current type</a>, a conforming
+    rules is defined in the following sections. If an <a>item</a> has no <a>vocabulary identifier</a> or the
+    <a>registry</a> contains no <a>URI prefix</a> matching <a>vocabulary identifier</a>, a conforming
     processor MUST use the default values defined for these rules.</p>
 
 <section class="informative">
   <h2>Property URI Generation</h2>
-  <p>For <a title="name">names</a> which are not <a title="absolute URL">absolute URLs</a>,
-    this section defines the algorithm for generating an <a>absolute URL</a>
-    given an <a>evaluation context</a> including a <a>current type</a> and
-    <a>current vocabulary</a>.</p>
-  <p>The procedure for generating property URIs is defined in
-    <a href="#generate-predicate-uri">Generate Predicate URI</a>.</p>
-  <p>The URI generation scheme appends <a title="name">names</a> that are not
-    <a title="absolute URL">absolute URLs</a> to the <a>URI prefix</a>. When generating property URIs, if the <a>URI prefix</a>
-    does not end with a '/' or '#', a '#' is appended to the <a>URI prefix</a>. (See <a href="#scheme-vocab">Step 4</a>
-    in
-    <a href="#generate-predicate-uri">Generate Predicate URI</a>.)</p>
-  <p>URI creation uses a base URL with query parameters to indicate the in-scope
-    type and <a>name</a> list. Consider the following example:</p>
+  <p>Property URI generation is described in <a data-cite="MICRODATA#names:-the-itemprop-attribute">§ 5.3 Properites</a> of [[!MICRODATA]] with
+    the following modification:</p>
+  <ul>
+    <li>If the element is a <a>typed item</a>, a URI is formed using the
+      <a>current vocabulary</a>.</li>
+    <li>Resulting properties which are not <a>absolute URLs</a> are discarded.</li>
+  </ul>
+  <p>Consider the following example:</p>
   <pre class="example" data-transform="updateExample">
 <!--
 <span itemscope itemtype="http://microformats.org/profile/hcard">
@@ -498,19 +337,15 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   <p>Given the <a>URI prefix</a> <code>http://schema.org/</code>,
     this would generate <code>http://schema.org/name</code>. Note that if the <a class="aref">itemtype</a>
     were <code>http://schema.org/Person/Teacher</code>, this would generate the same property URI.</p>
-  <p>If the <a>registry</a> contains no match for <a>current type</a> implementations MUST act as if
+  <p>If the <a>registry</a> contains no match for <a>current vocabulary</a> implementations MUST act as if
     there is a <a>URI prefix</a> made from the first <a class="aref">itemtype</a> value by stripping either the
-    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or
-    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>,
+    <a data-cite="RFC3986#section-3.5">fragment</a> content or
+    <a data-cite="RFC3986#section-3.3">last path segment</a>,
     if the value has no fragment (See [[!RFC3986]]).</p>
-  <p>The vocabulary <a>URI prefix</a> is made from the first <a class="aref">itemtype</a> value by stripping either the <cite><a
-    href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite> content or <cite><a
-    href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, if the value has no fragment (See
-    [[!RFC3986]]).</p>
-  <p class="note">Deconstructing the <a class="aref">itemtype</a> URL to create or identify a vocabulary URI
-    is a violation of the microdata specification which is necessary to
-    support the use of existing vocabularies designed for use with RDF, and
-    shared or inherited properties within all vocabularies.</p>
+  <p>The vocabulary <a>URI prefix</a> is made from the first <a class="aref">itemtype</a> value by stripping either the
+    <a data-cite="RFC3986#section-3.5">fragment</a> content or
+    <a data-cite="RFC3986#section-3.3">last path segment</a>, if the value has no fragment
+    (See [[!RFC3986]]).</p>
   <pre class="example" data-transform="updateExample">
 <!--
 <div itemscope itemtype="http://example.org/Book">
@@ -520,46 +355,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
   </pre>
   <p>In this example, assuming no matching entry in the <a>registry</a>,
     the <a>URI prefix</a> is constructed by removing the
-    <cite><a href="http://tools.ietf.org/html/rfc3986#section-3.3">last path segment</a></cite>, leaving the URI
+    <a data-cite="RFC3986#section-3.3">last path segment</a>, leaving the URI
     <code>http://example.org/</code>. The resulting property URI would be
     <code>http://example.org/title</code>.</p>
-
-    <div>
-      <p>If there is no in-scope <a class="aref">itemtype</a>, property URIs are generated
-        using the base URI of the document and the <a>name</a> as a fragment
-        Consider the following example:</p>
-      <pre class="example" data-transform="updateExample">
-<!--
-<div itemscope>
-<p itemscope itemprop='bar'>
-  <span itemprop='baz'>Baz</span>
-</p>
-</div>
--->
-      </pre>
-      <p>If the document is located at <code>http://example/author</code>,
-        the <a>name</a> <em>bar</em> generates the URI
-        <code>http://example/author#bar</code>.
-        However, the included <a>name</a> <em>baz</em> is included in untyped item.
-        The inherited property URI is used to create a new property URI:
-        <code>http://example/author#baz</code>.</p>
-      <p>This scheme is compatible with the needs of other RDF serialization formats such as
-        RDF/XML [[RDF-SYNTAX-GRAMMAR]],
-        which rely on <em>QNames</em> for expressing properties. For example, the generated property URIs
-        can be split as follows:</p>
-      <pre class="example" data-transform="updateExample">
-<!--
-<rdf:Description xmlns:base="http://example/author#"
-               rdf:type="http://microformats.org/profile/hcard">
-<base:bar>
-  <rdf:Description>
-    <base:baz>Baz</base:baz>
-  </rdf:Description>
-</base:bar>
-</rdf:Description>
--->
-      </pre>
-    </div>
 
 </section>
 
@@ -590,7 +388,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     entry causes the processor to generate triples associating the source
     property IRI with the target property IRI using either
     <code>rdf:subPropertyOf</code> or
-    <code>owl:equivalentProperty</code> predicates.</p>
+    <code>owl:equivalentProperty</code> <a>predicates</a>.</p>
   <p>For example, the <a>registry</a> definition for the <em>additionalType</em> property
     within schema.org, defines <em>additionalType</em> to have an <code>rdfs:subPropertyOf</code>
     relationship with <code>rdf:type</code>.</p>
@@ -669,115 +467,111 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     Web service processors SHOULD return the resulting RDF graph using a requested format specified by
     HTTP Content Negotiation for an acceptable content type. Web service processors MUST support [[!N-TRIPLES]].
 </section>
-</section>
 
 <section>
   <h1>Algorithm</h1>
   <p>
     Transformation of Microdata to RDF makes use of general processing rules described in [[!MICRODATA]]
-    for the treatment of <a title="item">items</a>.
+    for the treatment of <a>items</a>.
   </p>
   <section>
     <h2>Algorithm Terms</h2>
     <dl>
-      <dt><dfn>absolute URL</dfn></dt><dd>
-        The term <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#absolute-url">absolute URL</a></cite>
-        is defined in [[!HTML5]].
+      <dt><dfn data-lt="absolute urls">absolute URL</dfn></dt><dd>
+        The term <a data-cite="MICRODATA#absolute-url">absolute URL</a>
+        as defined in [[!MICRODATA]].
       </dd>
       <dt><dfn>blank node</dfn></dt><dd>
-        A blank node is a node in a graph that is neither a <a>URI reference</a> nor a <a>literal</a>.
+        A blank node is a node in a graph that is neither a <a>URI</a> nor a <a>literal</a>.
         <a>Item</a>s without a <a>global identifier</a> have a blank node allocated to them.
-        (See [[RDF11-CONCEPTS]]).
+        (See <a data-cite="RDF11-CONCEPTS#blank-node">blank node</a> in [[RDF11-CONCEPTS]]).
       </dd>
-      <dt><dfn>canonicalized fragment</dfn></dt><dd>
-        The term <cite><a href="http://www.w3.org/TR/url/#canonicalize-a-fragment-0">canonicalized fragment</a></cite>
-        is defined in [[!URL]]. This involves transforming elements added to URLs to ensure that the result
-        remains a valid URL. Non-Unicode characters, and characters less than U+0020 SPACE character
-        (" ") are subject to percent escaping.
+      <dt><dfn>current vocabulary</dfn></dt><dd>
+        an <a>absolute URL</a> for the <em>current vocabulary</em>, from the <a>registry</a>.
       </dd>
       <dt><dfn>document base</dfn></dt><dd>
-        The base address of the document being processed, as defined in <cite><a
-        href="http://www.w3.org/TR/html5/infrastructure.html#resolving-urls">Resolving URLs</a></cite> in
-        [[!HTML5]].
+        The base address of the document being processed, as defined in <a
+        href="RFC3986#section-5.1">Establishing a Base URI</a> in [[!RFC3986]].
       </dd>
-      <dt><dfn>evaluation context</dfn></dt><dd>
-        A data structure including the following elements:
-        <dl>
-          <dt><dfn>memory</dfn></dt><dd>
-            a mapping of items to subjects, initially empty;
-          </dd>
-          <dt><dfn>current type</dfn></dt><dd>
-            an <a>absolute URL</a> for the <em>current type</em>, used when an <a>item</a> does not
-            contain an <a>item type</a>;
-          </dd>
-          <dt><dfn>current vocabulary</dfn></dt><dd>
-            an <a>absolute URL</a> for the <em>current vocabulary</em>, from the <a>registry</a>.
-          </dd>
-        </dl>
+      <dt><dfn data-lt="items|item's">item</dfn></dt><dd>
+         An <a>item</a> is described by an element containing an <a class="aref">itemscope</a> attribute.
+         A <dfn>top-level microdata item</dfn> is
+         an <a>item</a> that does not have an <a class="aref">itemprop</a> attribute.
+        (See <a data-cite="MICRODATA#dfn-item">item</a>  and <a data-cite="MICRODATA#top-level-microdata-item">top-level microdata item</a> in [[!MICRODATA]]).
       </dd>
-      <dt><dfn>item</dfn></dt><dd>
-         An <a>item</a> is described by an element containing an <a class="aref">itemscope</a> attribute. The list
-         of top-level microdata items may be retrieved using the
-         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
-         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-document-getitems">document.getItems</a></cite></code>
-         method.
-      </dd>
-      <dt><dfn>item properties</dfn></dt><dd>
-        The mechanism for finding the <a title="item properties">properties of an item</a> The list
-         of item properties items may be retrieved using the
-         <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite>
-         <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-properties">element.properties</a></cite></code>
-         attribute.
+      <dt><dfn data-lt="item property">item properties</dfn></dt><dd>
+        The mechanism for finding the <a data-lt="item property">properties of an item</a>
+        as described in <a data-cite="MICRODATA#associating-names-with-items">§ 5.5 Associating names with items</a> of [[!MICRODATA]].
+        (See <a data-cite="MICRODATA#dfn-item-property">item properties</a> in [[!MICRODATA]]).
       </dd>
       <dt><dfn>global identifier</dfn></dt><dd>
-        The value of an <a>item</a>'s <a>itemid</a> attribute, if it has one,
-        <a href="http://www.w3.org/TR/html/infrastructure.html#resolving-urls">resolved</a> relative to the element on which the attribute is specified. (See <cite><a
-        href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#attr-itemscope">itemscope</a></cite> in
-        [[!MICRODATA]]).
+        The value of an <a>item's</a> <a class="adef">itemid</a> attribute, if it has one,
+        <a data-cite="RFC3986#section-5">resolved</a> relative to the element on which the attribute is specified.
+        (See <a data-cite="MICRODATA#dfn-global-identifier">global identifier</a> in [[!MICRODATA]]).
       </dd>
       <dt><dfn>literal</dfn></dt><dd>
-        Literals are values such as strings and dates. These include <dfn title="typed literal">typed literals</dfn>, <dfn title="language-tagged string">language-tagged strings</dfn> and <dfn title="simple literal">simple literals</dfn>, as defined in [[RDF11-CONCEPTS]].
+        Literals are values such as strings and dates.
+        These include <dfn data-cite="RDF11-CONCEPTS#dfn-typed-literal">typed literal</dfn>,
+        <dfn data-cite="RDF11-CONCEPTS#dfn-language-tagged-string" data-lt="language-tagged string">language-tagged strings</dfn> and
+        <dfn data-cite="RDF11-CONCEPTS#dfn-simple-literal" data-lt="simple literal">simple literals</dfn>, as defined in [[RDF11-CONCEPTS]].
       </dd>
-      <dt><dfn>property</dfn></dt><dd>
+      <dt><dfn>memory</dfn></dt><dd>
+        a mapping of items to <a>subjects</a>, initially empty;
+      </dd>
+      <dt><dfn data-lt="objects">object</dfn></dt><dd>
+        An <a>object</a> is
+        a <a>URI</a>, <a>blank node</a> or <a>literal</a>.
+        See <a data-cite="RDF11-CONCEPTS#dfn-object">object</a>in [[RDF11-CONCEPTS]].</dd>
+      <dt><dfn data-lt="predicates">predicate</dfn></dt><dd>
+        A <a>subject</a> is a <a>URI</a>.
+        See <a data-cite="RDF11-CONCEPTS#dfn-predicate">subject</a> in [[RDF11-CONCEPTS]].</dd>
+      <dt><dfn data-lt="properties|property's">property</dfn></dt><dd>
         Each <a>name</a> identifies a <a>property</a> of an <a>item</a>.
         An <a>item</a> may have multiple elements sharing the same <a>name</a>, creating
         a multi-valued <a>property</a>.
+        (See <a data-cite="MICRODATA#dfn-property">property</a> in [[!MICRODATA]]).
        </dd>
       <dt><dfn>property names</dfn></dt><dd>
-        The tokens of an element's <a class="aref">itemprop</a> attribute. Each token is a <a>name</a>.
-        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#property-names">property names</a></cite> in [[!MICRODATA]]).
+        The tokens of an element's <a class="aref">itemprop</a> attribute. 
+        The <a data-cite="MICRODATA#dfn-property-names">property names</a> algorithm in [[!MICRODATA]] is modified with
+        the following modifications:
+        <ul>
+          <li>If the element is a <a>typed item</a>, a URI is formed using the
+            <a>current vocabulary</a>.</li>
+          <li>Resulting properties which are not <a>absolute URLs</a> are discarded.</li>
+        </ul>
+        Each property is a <a>URI</a>.
+        (See <a data-cite="MICRODATA#dfn-property-names">property names</a> in [[!MICRODATA]]).
       </dd>
-      <dt><dfn>property value</dfn></dt><dd>
-        The <a>property value</a> of a name-value pair added by an element with an <a class="aref">itemprop</a>
-        attribute depends on the element.
+      <dt><dfn data-lt="property values|value">property value</dfn></dt><dd>
+        The <a>value</a> of a <a>property</a> of an <a>item</a> is determined as described in
+        <a data-cite="MICRODATA#values">§ 5.4 Values: the <code class="aref">content</code> attribute</a> of [[!MICRODATA]].
+        This specification extends the algorithm to account for <a>URI</a>, datatypes, and language,
+        starting with the original <a>value</a> returned from that algorithm and the context of the <em>element</em>
+        containing the property in the DOM.
         <dl>
-          <dt>If the element has no <a class="aref">itemprop</a> attribute</dt>
-          <dd>The value is null and no triple should be generated.</dd>
-          <dt>If the element creates an <a>item</a> (by having an <a class="aref">itemscope</a> attribute)</dt>
+          <dt>If the value is an <a>item</a> (by having an <a class="aref">itemscope</a> attribute)</dt>
           <dd>
-            The value is the <a>URI reference</a> or <a>blank node</a> returned from
+            The value is the <a>URI</a> or <a>blank node</a> returned from
             <a href="#generate-the-triples">generate the triples</a> for that <a>item</a>.
           </dd>
-          <dt>If the element is a URL property element (<code>a</code>, <code>area</code>, <code>audio</code>,
-            <code>embed</code>, <code>iframe</code>, <code>img</code>, <code>link</code>, <code>object</code>,
-            <code>source</code>, <code>track</code> or <code>video</code>)</dt>
+          <dt>If <em>element</em> is a <a data-cite="MICRODATA#dfn-url-property-elements">URL property element</a></dt>
           <dd>
-            The value is a <a>URI reference</a> created from <code><cite>
-              <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
-              (See relevant attribute descriptions in [[!HTML5]]).
+            The value is a <a>URI</a> created from the value specified by the Microdata algorithm.
           </dd>
-          <dt>If the element is a <code>meter</code> or <code>data</code> element.</dt>
-          <dd>The value is a <a>literal</a> made from <code><cite>
-            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+          <dt>If <em>element</em> is a <code>data</code> or <code>meter</code> element.</dt>
+          <dd>The value is a <a>literal</a>.
             <dl>
-              <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#numbers">valid integer</a></cite> having the lexical form of <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:integer</a></cite> [[!XMLSCHEMA11-2]]</dt>
+              <dt>If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#date">xsd:integer</a> [[!XMLSCHEMA11-2]].
+              </dt>
                 <dd>The value is a <a>typed literal</a> composed of the value and
                 <code>http://www.w3.org/2001/XMLSchema#integer</code>.
               </dd>
 
-             <dt>If the value is a <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">valid float number</a></cite> having the lexical form of <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:double</a></cite> [[!XMLSCHEMA11-2]]</dt>
+             <dt>If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#double">xsd:double</a> [[!XMLSCHEMA11-2]].
+             </dt>
                 <dd>The value is a <a>typed literal</a> composed of the value and
                 <code>http://www.w3.org/2001/XMLSchema#double</code>.
               </dd>
@@ -787,94 +581,54 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
             </dl>
           </dd>
-          <dt>
-            If the element is a <code>meta</code> element with a <code>@content</code> attribute.
-          </dt>
-          <dd>
-            If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
-            the value is a <a>language-tagged string</a> created from the value of the <code>@content</code> attribute
-            with language information set from the
-            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
-            of the property element.
-            Otherwise, the value is a <a>simple literal</a> created from the value of the <code>@content</code> attribute.
-          </dd>
-          <dt>If the element is a <code>time</code> element.</dt>
-          <dd>The value is a <a>literal</a> made from <code><cite>
-            <a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemvalue">element.itemValue</a></cite></code>.
+        </dl>
+        <dl>
+          <dt>If <em>element</em> is a <code>time</code> element.</dt>
+          <dd>The value is a <a>literal</a>.
             <dl>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#dates">
-                  valid date string
-                </a></cite>
-                having the lexical form of
-                <cite><a
-                href="http://www.w3.org/TR/xmlschema-2/#date">xsd:date</a></cite> [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#date">xsd:date</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                 <code>http://www.w3.org/2001/XMLSchema#date</code>.
               </dd>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#times">
-                  valid time string
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#time">xsd:time</a></cite> [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#time">xsd:time</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                 <code>http://www.w3.org/2001/XMLSchema#time</code>.
               </dd>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
-                  valid local date and time string
-                </a></cite>
-                or
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#global-dates-and-times">
-                  valid global date and time string
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></cite> [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#dateTime">xsd:dateTime</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                <code>http://www.w3.org/2001/XMLSchema#dateTime</code>.
               </dd>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#months">
-                  valid month string
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYearMonth">xsd:gYearMonth</a></cite> [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#gYearMonth">xsd:gYearMonth</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                <code>http://www.w3.org/2001/XMLSchema#gYearMonth</code>.
               </dd>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">
-                  valid non-negative integer
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#gYear">xsd:gYear</a></cite> [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#gYear">xsd:gYear</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
                <code>http://www.w3.org/2001/XMLSchema#gYear</code>.
               </dd>
               <dt>
-                If the value is a
-                <cite><a href="http://www.w3.org/TR/html5/infrastructure.html#valid-duration-string">
-                  valid duration string
-                </a></cite>
-                having the lexical form of
-                <cite><a href="http://www.w3.org/TR/xmlschema-2/#duration">xsd:duration</a></cite>
-                [[!XMLSCHEMA11-2]].
+                If the value has the lexical form of
+                <a data-cite="XMLSCHEMA11-2#duration">xsd:duration</a> [[!XMLSCHEMA11-2]].
               </dt>
               <dd>
                 The value is a <a>typed literal</a> composed of the value and
@@ -882,59 +636,52 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
               </dd>
               <dt>Otherwise</dt>
               <dd>
-                If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
-                the value is a <a>language-tagged string</a> created from the value
-                with language information set from the
-                <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
-                of the property element.
-                Otherwise, the value is a <a>simple literal</a> created from the value.
-                <p class="note">The HTML
-                  <em>valid yearless date string</em>
-                  is similar to
-                  <cite><a href="http://www.w3.org/TR/xmlschema-2/#gMonthDay">xsd:gMonthDay</a></cite>,
-                  but the lexical forms differ, so it is not included in this conversion.</p>
+                If <em>element</em> has a <cite><a href="https://www.w3.org/TR/html52/dom.html#language">language</a></cite>
+                (as described in <cite><a href="https://www.w3.org/TR/html52/dom.html#the-lang-and-xmllang-attributes">§ 3.2.5.2 The <code>lang</code> and <code>xml:lang</code> attributes</a></cite> of [[!HTML52]])
+                the value is a <a>language-tagged string</a> created using the value
+                with the language of <em>element</em>.
+                Otherwise, the value is a <a>simple literal</a>.
               </dd>
+              <dd class="note">The HTML
+                <cite><a href="https://www.w3.org/TR/html52/infrastructure.html#valid-yearless-date-string">valid yearless date string</a></cite>
+                is similar to
+                <a data-cite="XMLSCHEMA11-2#gMonthDay">xsd:gMonthDay</a>,
+                but the lexical forms differ, so it is not included in this conversion.</dd>
             </dl>
-            <p>See
-              <cite><a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-time-element">
-                The <code>time</code> element
-              </a></cite>
-              in [[!HTML5]].</p>
+            <p>See <cite><a href="https://www.w3.org/TR/html52/infrastructure.html#dates-and-times">§ 2.4.5. Dates and times</a></cite> in [[!HTML52]].</p>
           </dd>
           <dt>Otherwise</dt>
           <dd>
-            If the element has a non-empty <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>,
-            the value is a <a>language-tagged string</a> created from the value
-            with language information set from the
-            <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">language</a></cite>
-            of the property element.
-            Otherwise, the value is a <a>simple literal</a> created from the value.
+            If <em>element</em> has a <cite><a href="https://www.w3.org/TR/html52/dom.html#language">language</a></cite>
+            (as described in <cite><a href="https://www.w3.org/TR/html52/dom.html#the-lang-and-xmllang-attributes">§ 3.2.5.2 The <code>lang</code> and <code>xml:lang</code> attributes</a></cite> of [[!HTML52]])
+            the value is a <a>language-tagged string</a> created using the value
+            with the language of <em>element</em>.
+            Otherwise, the value is a <a>simple literal</a>.
             <p>See
-              <cite><a href="http://www.w3.org/TR/html5/dom.html#the-lang-and-xml:lang-attributes">
-                The <code>lang</code> and <code>xml:lang</code> attributes
-              </a></cite>
-              in [[!HTML5]] for determining the language of a node.</p>
+              <cite><a href="https://www.w3.org/TR/html52/dom.html#the-lang-and-xmllang-attributes">§ 3.2.5.2 The <code>lang</code> and <code>xml:lang</code> attributes</a></cite>
+              in [[!HTML52]] for determining the language of a node.</p>
           </dd>
         </dl>
       </dd>
+      <dt><dfn data-lt="subjects">subject</dfn></dt><dd>
+        A <a>subject</a> is a <a>URI</a> or <a>blank node</a>.
+        See <a data-cite="RDF11-CONCEPTS#dfn-subject">subject</a> in [[RDF11-CONCEPTS]].</dd>
       <dt><dfn>top-level item</dfn></dt><dd>
         An <a>item</a> which does not contain an <a class="aref">itemprop</a> attribute.
-        Available through the <cite><a
-        href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#microdata-dom-api">Microdata DOM API</a></cite> as
-        <code>document.getItems</code>.
-        (See <cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#top-level-microdata-items">top-level microdata item</a></cite> in [[!MICRODATA]]).
+        (See <a data-cite="MICRODATA#top-level-microdata-item">top-level microdata item</a> in [[!MICRODATA]]).
       </dd>
-      <dt><dfn>URI reference</dfn></dt><dd>
-        URI references are suitable to be used in <em>subject</em>, <em>predicate</em> or <em>object</em> positions
+      <dt><dfn data-lt="typed items">typed item</dfn></dt><dd>
+         An <a>item</a> is said to be a <a>typed item</a> when either it has an <a>item type</a>, or
+         it is the <a>value</a> of a <a>property</a> of a <a>typed item</a>.
+         The <dfn data-cite="MICRODATA#dfn-relevant-types">relevant types</dfn> for
+         a typed item is the <a>item's</a> <a>item types</a>, if it has any, or else is the
+         relevant types of the <a>item</a> for which it is a <a>property's</a> <a>value</a>.
+         (See <a data-cite="MICRODATA#dfn-typed-item">typed item</a> in [[!MICRODATA]]).
+      </dd>
+      <dt><dfn data-lt="uri references|uri reference|uris">URI</dfn></dt><dd>
+        URIs are suitable to be used in <a>subject</a>, <a>predicate</a> or <a>object</a> positions
         within an RDF triple, as opposed to a <a>literal</a> value that may contain a string representation of a
         URI. (See [[RDF11-CONCEPTS]]).
-        <div class="issue">
-          <p>The HTML5/microdata content model for <code>@href</code>, <code>@src</code>,
-            <code>@data</code>, <a class="aref">itemtype</a> and <a class="aref">itemprop</a> and <a class="aref">itemid</a> is that of
-            a URL, not a URI or IRI.</p>
-          <p>A proposed mechanism for specifying the range of <a title="property value">property values</a> to be URI reference or IRI could
-            allow these to be specified as subject or object using a <code>@content</code> attribute.</p>
-        </div>
       </dd>
       <dt><dfn>vocabulary</dfn></dt><dd>
         A vocabulary is a collection of URIs, suitable for use as an <a class="aref">itemtype</a> or <a class="aref">itemprop</a>
@@ -947,6 +694,9 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
           distinct vocabularies; it is entirely up to the vocabulary creator.
         </div>
       </dd>
+      <dt><dfn>vocabulary identifier</dfn></dt>
+      <dd>The first URI from <a>item types</a>.
+        (See <a data-cite="MICRODATA#dfn-vocabulary-identifier">vocabulary identifier</a> in [[!MICRODATA]]).</dd>
     </dl>
   </section>
 
@@ -959,9 +709,10 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
       algorithm generates:</p>
 
     <ol class="algorithm">
+      <li>Create <a>memory</a> as an empty map.</li>
       <li>For each element that is also a <a>top-level item</a>,
         <a href="#generate-the-triples">Generate the triples</a> for that item using the
-        <a>evaluation context</a>.
+        <code>null</code> for <a>current vocabulary</a>.
       </li>
     </ol>
   </section>
@@ -970,72 +721,51 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <h2>Generate the triples</h2>
     <p>
       When the user agent is to Generate triples for an <a>item</a> <em>item</em>, given
-      <a>evaluation context</a>, it must run the following steps:
-    </p>
-    <p class="note">
-      This algorithm has undergone substantial change from the original microdata specification [[!MICRODATA]].
+      <a>current vocabulary</a>, it must run the following steps:
     </p>
     <ol class="algorithm">
       <li>
-        If there is an entry for <em>item</em> in <a>memory</a>, then let <em>subject</em> be the subject of
+        If there is an entry for <em>item</em> in <a>memory</a>, then let <em>subject</em> be the <a>subject</a> of
         that entry. Otherwise, if <em>item</em> has a <a>global identifier</a> and that
         <a>global identifier</a> is an <a>absolute URL</a>, let <em>subject</em> be that
         <a>global identifier</a>. Otherwise, let <em>subject</em> be a new <a>blank node</a>.
       </li>
       <li>Add a mapping from <em>item</em> to <em>subject</em> in <a>memory</a></li>
       <li>
-        For each <em>type</em> returned from
-        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
-        of the element defining the <a>item</a>.
+        For each <em>type</em> which is an <a>item type</a> of the <a>item</a>:
         <ol class="algorithm">
-          <li>If <em>type</em> is an <a>absolute URL</a>, generate the following triple:
+          <li>Generate the following triple:
             <dl class="triple">
               <dt>subject</dt>
               <dd><em>subject</em></dd>
               <dt>predicate</dt>
               <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code></dd>
               <dt>object</dt>
-              <dd><em>type</em> (as a <a>URI reference</a>)</dd>
+              <dd><em>type</em> (as a <a>URI</a>)</dd>
             </dl>
           </li>
         </ol>
       </li>
       <li>
-        Set <em>type</em> to the first value returned from
-        <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#dom-itemtype">element.itemType</a></cite></code>
-        of the element defining the <a>item</a> which is an <a>absolute URL</a>, if any.
+        Set <em>vocab</em> to the <a>vocabulary identifier</a> for the <a>item</a>, if any.
       </li>
-      <li>Otherwise, set <em>type</em> to <a>current type</a> from <a>evaluation context</a> if not empty.</li>
       <li>If the <a>registry</a> contains a <a>URI prefix</a> that is a
-        character for character match of <em>type</em> up to the length of the 
-        <a>URI prefix</a>,
-        set <em>vocab</em> as that <a>URI prefix</a>.
+        character for character match of <em>vocab</em> up to the length of the 
+        <a>URI prefix</a>, set <em>vocab</em> as that <a>URI prefix</a>.
       </li>
-      <li>Otherwise, if type is not empty, construct <em>vocab</em> by removing everything following the last
-        SOLIDUS U+002F ("/") or NUMBER SIGN U+0023 ("#") from the <em>path</em> component of <em>type</em>.</li>
-      <li>Update <a>evaluation context</a> setting <a>current vocabulary</a> to <em>vocab</em>.</li> 
-      <li id="alg-prop-names">For each element <em>element</em> that has one or more <a>property names</a> and is one of the
-        <a title="item properties">properties of the item</a> <em>item</em>
+      <li id="alg-prop-names">For each <em>element</em> which has an <a>item property</a> of <em>item</em>
         run the following substep:
         <ol class="algorithm">
           <li>
-            For each <em>name</em> in the element's <a>property names</a>, run the following substeps:
+            For each <em>predicate</em> in the element's <a>item properties</a>, run the following substeps:
             <ol class="algorithm">
-              <li>
-                Let <em>context</em> be a copy of <a>evaluation context</a> with <a>current type</a> set
-                to <em>type</em>.
-              </li>
-              <li>
-                Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
-                using <em>context</em> and <em>name</em>.
-              </li>
               <li>
                 Let <em>value</em> be the <a>property value</a> of <em>element</em>.
               </li>
               <li>
                 If <em>value</em> is an <a>item</a>, then <a href="#generate-the-triples">generate the
-                triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
-                from those steps.
+                triples</a> for <em>value</em> using <em>vocab</em> for the <a>current vocabulary</a>.
+                Replace <em>value</em> by the subject returned from those steps.
               </li>
               <li>Generate the following triple:
                 <dl class="triple">
@@ -1048,7 +778,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
                 </dl>
               </li>
               <li>
-                If an entry exists in the <a>registry</a> for <em>name</em> in the vocabulary
+                If an entry exists in the <a>registry</a> for <em>predicate</em> in the vocabulary
                 associated with <em>vocab</em> having the key <code>subPropertyOf</code> or
                 <code>equivalentProperty</code>, for each such value <em>equiv</em>, generate the following triple:
                 <dl class="triple">
@@ -1068,38 +798,6 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     </ol>
   </section>
   
-  <section>
-    <h3>Generate Predicate URI</h3>
-    <p>Predicate URI generation makes use of <a>current type</a>
-      and <a>current vocabulary</a> from an <a>evaluation
-      context</a> <em>context</em> along with <em>name</em>.</p>
-
-    <ol class="algorithm">
-      <li>If <em>name</em> is an <a>absolute URL</a>, return <em>name</em>
-        as a <a>URI reference</a>.</li>
-      <li>If <a>current type</a> from <em>context</em> is null,
-        there can be no <a>current vocabulary</a>. Return the <a>URI reference</a>
-        that is the <a>document base</a> with its <cite><a
-        href="http://tools.ietf.org/html/rfc3986#section-3.5">fragment</a></cite>
-        set to the <a>canonicalized fragment</a> value of <em>name</em>.
-        <div class="note">
-          This rule is intended to allow for a the case where no type is set, and
-          therefore there is no vocabulary from which to extract rules. For
-          example, if there is a <a>document base</a> of
-          <code>http://example.org/doc</code> and an <a class="aref">itemprop</a>
-          of 'title', a URI will be constructed to be
-          <code>http://example.org/doc#title</code>.
-        </div>
-      </li>
-      <li id="scheme-vocab">Set <em>expandedURI</em> to the <a>URI reference</a> constructed by
-        appending the <a>canonicalized fragment</a> value of <em>name</em> to <a>current
-        vocabulary</a>, separated by a U+0023 NUMBER SIGN character ("#") unless the
-        <a>current vocabulary</a> ends with either a U+0023 NUMBER SIGN character
-        ("#") or SOLIDUS U+002F ("/").</li>
-      <li>Return <em>expandedURI</em>.</li>
-    </ol>
-  </section>
-  
 </section>
 
 <section class="appendix informative">
@@ -1112,17 +810,17 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     are related using the reverse of a common property; this saves creating new properties
     which exist solely for the purpose of describing such reverse relationships. Evidence
     for the utility of such a feature can be seen in the 
-    <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">RDFa <code>@rev</code> attribute</a> [[RDFA-CORE]]
-    and the <a href="http://www.w3.org/TR/json-ld/#reverse-properties">JSON-LD <code>@reverse</code> property</a> [[JSON-LD]].
+    <a href="http://www.w3.org/TR/rdfa-syntax/#A-rev">RDFa <code>rev</code> attribute</a> [[RDFA-CORE]]
+    and the <a href="http://www.w3.org/TR/json-ld/#reverse-properties">JSON-LD <code>reverse</code> property</a> [[JSON-LD]].
 
   <p class="note">See <a href="#issues">issue 5</a> for further reference.</p>
 
   <p>This feature adds the following attribute:</p>
   <dl>
     <dt><dfn class="adef">itemprop-reverse</dfn></dt><dd>
-      An attribute used to identify one or more <a title="name">names</a> of an <a title="item">items</a> reversing the
+      An attribute used to identify one or more <a>names</a> of an <a>items</a> reversing the
       sense of <a class="aref">itemprop</a>. An <a class="aref">itemprop-reverse</a>
-      contains a space separated list of <a title="name">names</a> which may either by <a title="absolute URL">absolute URLs</a> or terms
+      contains a space separated list of <a>names</a> which may either by <a>absolute URLs</a> or terms
       associated with the type of the <a>item</a> as defined by the referencing <a>item</a>'s
       <a>item type</a>.
     </dd>
@@ -1136,7 +834,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <h3>Algorithm Terms</h3>
     <dl>
       <dt><dfn>reverse properties</dfn></dt><dd>
-        The mechanism for finding the <a title="reverse properties">reverse properties of an item</a>. The list
+        The mechanism for finding the <a data-lt="reverse properties">reverse properties of an item</a>. The list
          of reverse properties is obtained using a variation of the Microdata
          <code><cite><a href="http://www.w3.org/TR/2013/NOTE-microdata-20131029/#the-properties-of-an-item">properties of an item</a></cite></code>
          method, replacing <a class='aref'>itemprop</a> with <a class='aref'>itemprop-reverse</a>.
@@ -1152,29 +850,20 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
     <p>The Triples generation algorithm is extended with the following step to take place immediately
       after <a href="#alg-prop-names">Step 9</a>:</p>
     <ol class="algorithm" start="10">
-      <li>
-        For each element <em>element</em> that has one or more <a>reverse property names</a> and is one of the
-        <a title="reverse properties">reverse properties of the item</a> <em>item</em>,
+      <li>For each <em>element</em> which has <a>reverse property names</a> and is one of the
+        <a data-lt="reverse properties">reverse properties of the item</a> <em>item</em>,
         run the following substep:
         <ol class="algorithm">
           <li>
-            For each <em>name</em> in the element's <a>reverse property names</a>, run the following substeps:
+            For each <em>predicate</em> in the element's <a>reverse properties</a>, run the following substeps:
             <ol class="algorithm">
-              <li>
-                Let <em>context</em> be a copy of <a>evaluation context</a> with <a>current type</a> set
-                to <em>type</em> and <a>current vocabulary</a> set to <em>vocab</em>.
-              </li>
-              <li>
-                Let <em>predicate</em> be the result of <a href="#generate-predicate-uri">generate predicate URI</a>
-                using <em>context</em> and <em>name</em>.
-              </li>
               <li>
                 Let <em>value</em> be the <a>property value</a> of <em>element</em>.
               </li>
               <li>
                 If <em>value</em> is an <a>item</a>, then <a href="#generate-the-triples">generate the
-                triples</a> for <em>value</em> using <em>context</em>. Replace <em>value</em> by the subject returned
-                from those steps.
+                triples</a> for <em>value</em> using <em>vocab</em> for the <a>current vocabulary</a>.
+                Replace <em>value</em> by the <a>subject</a> returned from those steps.
               </li>
               <li>
                 Otherwise, if <em>value</em> is a <a>literal</a> ignore the <em>value</em>
@@ -1285,7 +974,7 @@ dl.triple dd:after { content: '\A'; white-space: pre; }
 </pre>
 
 <p>The following snippet of HTML has microdata for two people with the same address. This illustrates two
-  <a title="item">items</a> referencing a third item, and how only a single RDF resource definition is created
+  <a>items</a> referencing a third item, and how only a single RDF resource definition is created
   for that third item.</p>
 <pre class="example" data-transform="updateExample">
 <!--
@@ -1410,6 +1099,19 @@ _:a hcard:street-address "Avenue Q" .
     "http://microformats.org/profile/hcard": {}
   }
   </pre>
+</section>
+
+<section class="appendix informative">
+  <h2>Changes since the <a href="https://www.w3.org/TR/2014/NOTE-microdata-rdf-20141216/">Second Edition of 16 December 2014</a></h2>
+  <p>Changes to reflect recent updates to [[MICRODATA]]:</p>
+  <ul>
+    <li>Algorithm simplified to take advantage of more explicit steps described in [[MICRODATA]].</li>
+    <li>The <code class="aref">content</code> attribute is processed on all HTML elements.</li>
+    <li><a>Property Value</a> section is simplified to leverage equivalent in [[MICRODATA]].</li>
+    <li><a href="#property-uri-generation" class="sectionRef"></a> is simplified to leverage concept of <a>current vocabulary</a> from [[MICRODATA]].</li>
+    <li>The <em>evaluation context</em> as been removed, and <a>memory</a> is global.</li>
+    <li>The mechanism for creating document-relative URIs for <a class="aref">itemprop</a> tokens for untyped <a>items</a> has been removed.</li>
+  </ul>
 </section>
 
 <section class="appendix informative">
